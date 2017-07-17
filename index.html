@@ -1,0 +1,226 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<style type="text/css" media="screen">
+	body {
+	position:relative;
+	top:-.25em;
+	left:-.2em;
+	}
+	body.h {
+	    color: #484D4F;
+	}
+	.input {
+	}
+	.select{
+	position:relative;
+	left:-.35em;
+	}
+	.button {
+	max-width: 58px;
+	border:ridge 1.5px #747b7c;
+	background:#999;
+	text-align: center;
+	color: #3f4446;
+	padding: 0;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	margin:0;
+	margin-top: 8px;
+	background:url(formbg.gif) repeat-x left top;
+	}
+	.button2 {
+	border:ridge 1.5px #747b7c;
+	background:#999;
+	color: #3f4446;
+	padding: 0;
+	padding-top: 3.5px;
+	padding-bottom: 3.5px;
+	margin:0;
+	margin-top:3px;
+	background:url(formbg.gif) repeat-x left top;
+	}
+	.button3 {
+	border:ridge 1.5px #747b7c;
+	background:#999;
+	color: #3f4446;
+	padding: 0;
+	padding-top:  .234em;
+	padding-bottom: .359em;
+	margin:0;
+	background:url(formbg.gif) repeat-x left top;
+	}
+	#topper {
+	font-family: sans-serif;
+	margin-top:19px;
+	margin-right:0px;
+	font-size: 10pt;
+	color: #3f4446;
+	}
+	div.hr {
+	margin:1px !important;
+	margin-top:1px !important;
+	padding:0px !important;	
+	width: 100%;
+	background-color:  #6986aa;
+	height: 1px;
+	}
+	div.hr hr {
+	display: none;
+	}
+	</style>
+
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<title>page0mobile</title>
+<link rel="apple-touch-icon" href="exit0.jpg"/>
+<link rel="shortcut icon" href="favicon.ico" >
+<meta name = "viewport" content = "width = 197px">
+        <script type="text/javascript">
+                function focus(){document.input_box.command.focus();}
+                function prepend(arg){
+                        oldVal = document.input_box.command.value;
+                        document.input_box.command.value = arg;
+                        focus();
+                }
+                function dirSnd(arg){
+                		document.input_box.command.value = arg;
+                		chkBox(arg);               
+                }
+                function dirURL(arg){
+                		if (document.input_box.Chk1.checked == false) {
+						window.location=arg;
+						} 
+						else {
+						window.open(arg);
+						}            
+                }   
+                 function chkBox(arg) {
+						var srchURL = '';
+						if(arg.indexOf('gmob')==0){
+								var x = arg.substring(5,arg.length);
+								var srchURL = 'http://www.google.com/cse?cx=013269018370076798483%3A5yo-vo7ng-o&cof=FORID%3A1&q=google+black&sa=Search#gsc.tab=0&gsc.q=' + x;
+						}
+						else if(arg.indexOf('wkm')==0){
+								var x = arg.substring(4,arg.length);
+								var srchURL = 'http://en.m.wikipedia.org/wiki?search=' + x;
+						}
+						else if(arg.indexOf('iig')==0){
+								var x = arg.substring(4,arg.length);
+								var srchURL = 'http://www.google.com/#/m/search?site=images&source=gp&channel=gp1&og=gp&q=' + x + '&source=gp';
+						}
+						else{
+							var	srchURL = 'http://yubnub.org/parser/parse?command=' + arg;
+						}
+						if (document.input_box.Chk1.checked == false) {
+						window.location=srchURL;
+						return true;
+						} 
+						else {
+						return 	window.open(srchURL);
+						}
+				}
+        		function actBox(arg) {
+						var srchURL = '';
+						if(arg.indexOf('gmob')==0){
+								var x = arg.substring(5,arg.length);
+								var srchURL = 'http://m.google.com/m/search?mrestrict=xhtml&q=' + x;
+						}
+						else if(arg.indexOf('wkm')==0){
+								var x = arg.substring(4,arg.length);
+								var srchURL = 'http://en.m.wikipedia.org/wiki?search=' + x;
+						}
+						else if(arg.indexOf('iig')==0){
+								var x = arg.substring(4,arg.length);
+								var srchURL = 'http://www.google.com/#/m/search?site=images&source=gp&channel=gp1&og=gp&q=' + x + '&source=gp';
+						}
+						else{
+							var	srchURL = 'http://yubnub.org/parser/parse?command=' + arg;
+						}
+						window.location=srchURL;
+						return true;
+				}
+              </script>
+</head>
+<body bgcolor="#AAAAAA">
+    <div style="text-align:center;margin:0;">
+        <form action="javascript:document.input_box.Chk1.checked = false;actBox(document.input_box.command.value)" name="input_box" class="input">
+          <select name="searchType" value="gmob " onchange="document.input_box.command.value=this[this.selectedIndex].value;document.input_box.searchType.value=this[this.selectedIndex].value;" class="select">
+              <option value="gmob ">Google</option>
+              <option value="gmap ">Google Maps</option>
+              <option value="gnews ">Google News</option>
+              <option value="mo gim ">Google Image</option>
+              <option value="wkm ">Wikipedia</option>
+              <option value="walf ">Wolfram Alpha</option>
+              <option value="iwund ">Weather Und.</option>
+              <option value="iyt ">YouTube</option>
+              <option value="am ">Amazon</option>
+              <option value="ebay ">eBay</option>
+              <option value="imdb ">IMDb</option>
+              <option value="rotten ">Rotten Tomatoes</option>
+              <option value="ypm -wt   -wr ">Yelp</option>
+          </select>
+          <!--input type="button" onclick="document.input_box.command.value=document.input_box.searchType.value;document.input_box.command.focus();" value="pick" class="button3"--> 
+          <div style="margin-top:3px">
+                <input type="text" name="command" size = "26" value="gmob "/> <br>
+	<input type="checkbox" name="Chk1" value="yes" CHECKED size = "34" class="button2" style="position:relative;top:.32em;left:-1.46em;">new&nbsp;
+                <input type="button" align="		" onclick="document.input_box.command.value='';document.input_box.command.focus();" value="clear" class="button2">
+                <input type="button" value="search" align="texttop" onClick="chkBox(document.input_box.command.value)" class="button2" style="margin-left:.28em;">
+            <div id="topper" >page<b>0</b>mobile - combotechni.ca/page0</div>
+                <div class="hr"><hr /></div>
+          </div>
+          <!--div style="margin-top:0px;">
+                <input type="button" onclick="prepend('gmob ')" value="google" class="button" style="position:relative;left:-.55em;">
+                <input type="button" onclick="prepend('iig ')" value="image" class="button" style="position:relative;left:-.3em;">
+                <input type="button" onclick="dirURL('http://affiliate.zap2it.com/tvlistings/ZCGrid.do?aid=canoe');" value="ZapTV" class="button">
+ 				</div-->
+	<a href="http://feedly.com" target="_blank"><img src="big-feedly.png" alt="RSS"></a>
+	<a href="http://catalogue.halifaxpubliclibraries.ca/ipac20/ipac.jsp?&auth=true" target="_blank"><img src="big-lib.png" alt="Library"></a>
+	<a href="http://netflix.com" target="_blank"><img src="big-flix.png" alt="ZapTV"></a>
+	<a href="http://maps.google.ca" target="_blank"><img src="big-maps.png" alt="gMaps"></a>
+        </form>
+    </div>
+	 <div style="text-align:center;margin:0;">
+	<a href="http://google.ca" target="_blank"><img src="goog.png" alt="Google"></a>
+	<a href="http://mail.google.com" target="_blank"><img src="gmail.png" alt="gMail"></a>
+	<a href="http://mail.yahoo.com" target="_blank"><img src="ymail.png" alt="Y!mail"></a>
+	<a href="http://hotmail.com" target="_blank"><img src="ms.png" alt="Yandex"></a>
+	<a href="http://mail.yandex.com" target="_blank"><img src="yandex.png" alt="HotMail"></a>
+	<a href="http://protonmail.com" target="_blank"><img src="proton.png" alt="ProtonMail"></a>
+	</div><div style="text-align:center;margin:0;">
+	<a href="http://moneysense.ca" target="_blank"><img src="money.png" alt="MoneySense"></a>
+	<a href="http://mint.com" target="_blank"><img src="mint.png" alt="Mint"></a>
+	<a href="http://rbcroyalbank.com/personal.html" target="_blank"><img src="rbc.png" alt="RBC"></a>
+	<a href="http://pcfinancial.ca" target="_blank"><img src="pc.png" alt="PCFin"></a>
+	<a href="http://www.tdwaterhouse.ca"><img src="td.png" alt="TD"></a>
+	<a href="shop.html"><img src="shop.png" alt="Shop"></a>
+	</div><div style="text-align:center;margin:0;">
+	<a href="http://www.cbc.ca/stormcentre/" target="_blank"><img src="weath.png" alt="Weather"></a>
+	<a href="http://nspower.ca/m" target="_blank"><img src="pow.png" alt="NSPC"></a>
+	<a href="http://m.news957.com/Traffic" target="_blank"><img src="traffic.png" alt="Traffic"></a>
+	<a href="http://www.halifax.ca/transit/ServiceDisruptions.php" target="_blank"><img src="bus.png" alt="MetroTrans"></a>
+	<a href="http://511.gov.ns.ca/map/" target="_blank"><img src="car.png" alt="HiwayC"></a>
+	<a href="http://canada411.ca" target="_blank"><img src="c411.png" alt="Can411"></a>
+	</div><div style="text-align:center;margin:0;">
+	<a href="http://news.google.ca" target="_blank"><img src="news.png" alt="gNews"></a>
+	<a href="http://msnbc.com" target="_blank"><img src="nbc.png" alt="MSNBC"></a>
+	<a href="http://wikipedia.org" target="_blank"><img src="wik.png" alt="Wikiped"></a>
+	<a href="http://youtube.com" target="_blank"><img src="ytube.png" alt="YouTube"></a>
+	<a href="media.html"><img src="film.png" alt="Media"></a>
+	<a href="http://www.mameworld.info/ubbthreads/postlist.php?Cat=&Board=artwork" target="_blank"><img src="mame.png" alt="MAME"></a>
+	</div><div style="text-align:center;margin:0;">
+	<a href="http://linkedin.com" target="_blank"><img src="in.png" alt="LinedIn"></a>
+	<a href="http://twitter.com" target="_blank"><img src="tw.png" alt="Twitter"></a>
+	<a href="http://facebook.com" target="_blank"><img src="fb.png" alt="FaceBook"></a>
+	<a href="http://wd2go.com" target="_blank"><img src="myCloud.png" alt="myCloud"></a>
+	<a href="https://combo.dattodrive.com" target="_blank"><img src="datto.png" alt="datto"></a>
+	<a href="http://dropbox.com" target="_blank"><img src="dbox.png" alt="DropBox"></a>
+	</div><div style="text-align:center;margin:0;">
+	<a href="http://google.com/calendar" target="_blank"><img src="cal.png" alt="GooCal"></a>
+	<a href="http://plus.google.com" target="_blank"><img src="gplus.png" alt="G+"></a>
+	<a href="http://bing.ca" target="_blank"><img src="bing.png" alt="Bing"></a>
+	<a href="line-card.html" target="_blank"><img src="line.png" alt="LineCard"></a>
+	<a href="http://del.icio.us" target="_blank"><img src="delic.png" alt="Delicious"></a>
+	</div><div style="text-align:center;margin:0;">
+	<hr><img src="exit0.jpg"></div>
+</body>
+</html>

@@ -5,137 +5,92 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Simple Calculator</title>
   <style>
-    /* Style for the entire body, centering the calculator */
-    body {
-      font-family: Arial, sans-serif;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      background-color: #f0f0f0;
-    }
-
+    /* Style for body, centering the calculator */
+    body {font-family: Arial, sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; background-color: #f0f0f0; }
     /* Style for the calculator container */
-    .calculator {
-      background-color: black;
-      padding: 20px;
-      border-radius: 10px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    }
-
+    .calculator { background-color: black; padding: 20px; border-radius: 10px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); }
     /* Style for the display area */
-    .display {
-      background-color: white;
-      width: 160px;
-      height: 40px;
-      text-align: right;
-      margin-bottom: 10px;
-      font-size: 1.5em;
-      padding: 5px;
-    }
-
-    /* Grid layout for the calculator buttons */
-    .buttons {
-      display: grid;
-      grid-template-columns: repeat(4, 40px);
-      gap: 10px;
-    }
-
+    .display { background-color: lightyellow; width: 220px; height: 40px; text-align: right; margin-bottom: 10px; font-size: 1.5em; padding: 5px; }
+    /* Grid layout for buttons */
+    .buttons { display: grid; grid-template-columns: repeat(5, 40px); gap: 10px; }
     /* Style for the buttons */
-    .buttons button {
-      width: 40px;
-      height: 40px;
-      font-size: 1.2em;
-      border: none;
-      background-color: white; /*#4CAF50;*/
-      color: black;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-
-    /* Hover effect for the buttons */
-    .buttons button:hover {
-      background-color: lightgray; /*#45a049;*/
-    }
-
-    /* Special style for the equals button */
-    .buttons .equals {
-      grid-column: span 2; /* Spans over 2 columns */
-	  width: 90px;
-      background-color: orange;
-    }
-
-    .buttons .functions {
-      background-color: #2196F3;
-    }
-
-    .buttons .equals:hover {
-      background-color: #ff6600;
-    }
-    .buttons .functions:hover {
-      background-color: #0b7dda;
-    }
+    .buttons button { width: 40px; height: 40px; font-size: 1.2em; border: none; background-color: white; color: black; border-radius: 10px; cursor: pointer; }
+    .buttons button:hover { background-color: lightgray; }
+    .buttons .equals {grid-column: span 2; width: 90px; background-color: orange;  }
+    .buttons .equals:hover { background-color: #ff6600;  }
+    .buttons .functions { background-color: #2196F3; }
+    .buttons .functions:hover {background-color: #0b7dda; }
+    .buttons .hot { background-color: red; }
+    .buttons .hot:hover {background-color: darkred; }
+    .buttons .mem { background-color: lightgray; }
+    .buttons .mem:hover {background-color: gray; }
   </style>
 </head>
 <body>
   <div class="calculator">
-    <!-- Input field to display the calculator results -->
-    <input type="text" class="display" id="display" disabled>
-    
-    <!-- Calculator buttons laid out in a grid -->
+    <input type="text" class="display" id="display" disabled>     <!-- Input field to display the calculator results -->
     <div class="buttons">
-      <button onclick="appendNumber('1')">1</button>
-      <button onclick="appendNumber('2')">2</button>
-      <button onclick="appendNumber('3')">3</button>
-      <button onclick="setOperator('+')" class="functions">+</button>
-
-      <button onclick="appendNumber('4')">4</button>
-      <button onclick="appendNumber('5')">5</button>
-      <button onclick="appendNumber('6')">6</button>
-      <button onclick="setOperator('-')" class="functions">-</button>
-
+     <button onclick="memory('sto')" class="mem">STO</button>
       <button onclick="appendNumber('7')">7</button>
       <button onclick="appendNumber('8')">8</button>
       <button onclick="appendNumber('9')">9</button>
+      <button onclick="setOperator('/')" class="functions">÷</button>
+     <button onclick="memory('rcl')" class="mem">RCL</button>
+      <button onclick="appendNumber('4')">4</button>
+      <button onclick="appendNumber('5')">5</button>
+      <button onclick="appendNumber('6')">6</button>
       <button onclick="setOperator('*')" class="functions">×</button>
-
+     <button onclick="memory('sum')" class="mem">SUM</button>
+      <button onclick="appendNumber('1')">1</button>
+      <button onclick="appendNumber('2')">2</button>
+      <button onclick="appendNumber('3')">3</button>
+      <button onclick="setOperator('-')" class="functions">-</button>
+     <button onclick="memory('exc')" class="mem">EXC</button>
       <button onclick="appendNumber('0')">0</button>
       <button onclick="appendNumber('.')">.</button>
-      <button onclick="negate()">±</button>
-      <button onclick="setOperator('/')" class="functions">÷</button>
-
-      <button onclick="appendNumber('3.1415')">π</button>
-      <button onclick="clearDisplay()">C</button>
+      <button onclick="trig('neg')">±</button>
+      <button onclick="setOperator('+')" class="functions">+</button>
+     <button onclick="trig('per')" class="functions">%</button>
+      <button onclick="clearEntry()" class="hot">CE</button>
+      <button onclick="clearDisplay()" class="hot">AC</button>
       <button onclick="calculate()" class="equals">=</button>
-
+     <button onclick="trig('inv')" class="functions">1/x</button>
+     <button onclick="trig('sq')" class="functions">x²</button>
+     <button onclick="trig('sqr')" class="functions">²√x</button>
+     <button onclick="setOperator('^')" class="functions">xⁿ</button>
+     <button onclick="setOperator('r')" class="functions">ⁿ√x</button>
+      <button onclick="trig('pi')">π</button>
      <button onclick="trig('sin')" class="functions">SIN</button>
      <button onclick="trig('cos')" class="functions">COS</button>
      <button onclick="trig('tan')" class="functions">TAN</button>
-
+      <button onclick="trig('e')">e</button>
+     <button onclick="trig('log')" class="functions">LOG</button>
+     <button onclick="trig('ln')" class="functions">LN</button>
     </div>
   </div>
 
   <script>
-    let currentInput = '';
+    let currentInput = '0';
     let operator = '';
+	let prev_op = '';
     let previousInput = '';
-
+	let memoryreg = 0.0;
+	document.getElementById('display').value = 0;
+	
     function appendNumber(number) {
-      currentInput += number; // Append the clicked number to current input
+	  if (currentInput === '0') currentInput = number;
+	  else currentInput += number; // Append the clicked number to current input
       document.getElementById('display').value = currentInput; // Update the display
     }
 
-    function setOperator(op) {
-      operator = op; // Store the chosen operator
-      previousInput = currentInput; // Store the current input as previous
-      currentInput = ''; // Clear the current input for the next number
-    }
-
-    function negate() {
+    function memory(op) {
       let result;
-      result = -1.0 * parseFloat(currentInput);
-      document.getElementById('display').value = result; // Display the result
-      currentInput = result.toString(); // Store the result as the new current input
+	  if(op === 'sto') {result = parseFloat(currentInput); memoryreg=parseFloat(currentInput);}
+	  else if (op === 'rcl') result = memoryreg;
+	  else if (op === 'sum') memoryreg += parseFloat(currentInput);
+	  else if (op === 'exc') {result = memoryreg; memoryreg = parseFloat(currentInput);}
+      document.getElementById('display').value = result; 
+      currentInput = result.toString(); 
     }
 
     function trig(op) {
@@ -143,33 +98,61 @@
 	  if(op === 'sin') result = Math.sin( parseFloat(currentInput));
 	  else if (op === 'cos') result = Math.cos( parseFloat(currentInput));
 	  else if (op === 'tan') result = Math.tan( parseFloat(currentInput));
-      document.getElementById('display').value = result; // Display the result
-      currentInput = result.toString(); // Store the result as the new current input
+	  else if (op === 'asin') result = Math.asin( parseFloat(currentInput));
+	  else if (op === 'acos') result = Math.acos( parseFloat(currentInput));
+	  else if (op === 'atan') result = Math.atan( parseFloat(currentInput));
+	  else if (op === 'asinh') result = Math.asinh( parseFloat(currentInput));
+	  else if (op === 'acosh') result = Math.acosh( parseFloat(currentInput));
+	  else if (op === 'atanh') result = Math.atanh( parseFloat(currentInput));
+	  else if (op === 'sinh') result = Math.sinh( parseFloat(currentInput));
+	  else if (op === 'cosh') result = Math.cosh( parseFloat(currentInput));
+	  else if (op === 'tanh') result = Math.tanh( parseFloat(currentInput));
+	  else if (op === 'log') result = Math.log10( parseFloat(currentInput));
+	  else if (op === 'ilog') result = Math.pow( 10, parseFloat(currentInput));
+	  else if (op === 'ln') result = Math.log( parseFloat(currentInput));
+	  else if (op === 'iln') result = Math.pow( Math.E, parseFloat(currentInput));
+	  else if (op === 'inv') result = 1/parseFloat(currentInput);
+	  else if (op === 'neg') result = -1.0 * parseFloat(currentInput);
+	  else if (op === 'per') result = parseFloat(currentInput)/100.0;
+	  else if (op === 'sq') result = Math.pow( parseFloat(currentInput),2);
+	  else if (op === 'sqr') result = Math.sqrt( parseFloat(currentInput));
+	  else if (op === 'pi') result = Math.PI;
+	  else if (op === 'e') result = Math.E;
+      document.getElementById('display').value = result; 
+      currentInput = result.toString(); 
     }
 
+    function setOperator(op) {
+      prev_op = operator; 
+	  if (prev_op === '')
+		{operator = op; previousInput = currentInput; } 
+	  else {calculate(); operator = op; previousInput = currentInput; }
+	  currentInput = ''; // Clear the current input for the next number
+    }
 
     function calculate() {
       let result;
-      if (operator === '+') {
-        result = parseFloat(previousInput) + parseFloat(currentInput);
-      } else if (operator === '-') {
-        result = parseFloat(previousInput) - parseFloat(currentInput);
-      } else if (operator === '*') {
-        result = parseFloat(previousInput) * parseFloat(currentInput);
-      } else if (operator === '/') {
-        result = parseFloat(previousInput) / parseFloat(currentInput);
-      } else {result = parseFloat(currentInput);}
+      if (operator === '+') result = parseFloat(previousInput) + parseFloat(currentInput);
+      else if (operator === '-') result = parseFloat(previousInput) - parseFloat(currentInput);
+      else if (operator === '*') result = parseFloat(previousInput) * parseFloat(currentInput);
+      else if (operator === '/') result = parseFloat(previousInput) / parseFloat(currentInput);
+      else if (operator === '^') result = Math.pow(parseFloat(previousInput),parseFloat(currentInput));
+      else if (operator === 'r') result = Math.pow(parseFloat(previousInput),(1/parseFloat(currentInput)));
+      else result = parseFloat(currentInput);
       document.getElementById('display').value = result; // Display the result
       currentInput = result.toString(); // Store the result as the new current input
-      operator = ''; // Reset the operator
+      //operator = ''; // Reset the operator
     }
 
     function clearDisplay() {
-      currentInput = '';
-      previousInput = '';
-      operator = '';
-      document.getElementById('display').value = ''; // Clear the display
+      currentInput = '0'; previousInput = ''; operator = '';
+      document.getElementById('display').value = 0; // Clear the display
     }
+
+    function clearEntry() {
+      currentInput = '0'; document.getElementById('display').value = 0; // Clear the display
+    }
+
   </script>
 </body>
 </html>

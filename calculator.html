@@ -10,24 +10,30 @@
     /* Style for the calculator container */
     .calculator { background-color: black; padding: 20px; border-radius: 10px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); }
     /* Style for the display area */
-    .display { background-color: lightyellow; width: 220px; height: 40px; text-align: right; margin-bottom: 10px; font-size: 1.5em; padding: 5px; }
+	.subdisplay { background-color: yellow; width: 229px; height: 10px; text-align: left; margin-bottom: 0px; font-size: 0.6em; padding: 3px;}
+    .display { background-color: lightyellow; width: 225px; height: 40px; text-align: right; margin-bottom: 10px; font-size: 1.5em; padding: 5px; }
     /* Grid layout for buttons */
     .buttons { display: grid; grid-template-columns: repeat(5, 40px); gap: 10px; }
     /* Style for the buttons */
     .buttons button { width: 40px; height: 40px; font-size: 1.2em; border: none; background-color: white; color: black; border-radius: 10px; cursor: pointer; }
     .buttons button:hover { background-color: lightgray; }
-    .buttons .equals {grid-column: span 2; width: 90px; background-color: orange;  }
-    .buttons .equals:hover { background-color: #ff6600;  }
+    .buttons .equals {grid-column: span 2; width: 90px; background-color: lightgreen;  }
+    .buttons .equals:hover { background-color: green;  }
     .buttons .functions { background-color: #2196F3; }
     .buttons .functions:hover {background-color: #0b7dda; }
     .buttons .hot { background-color: red; }
     .buttons .hot:hover {background-color: darkred; }
     .buttons .mem { background-color: lightgray; }
     .buttons .mem:hover {background-color: gray; }
+    .buttons .mode { background-color: orange; }
+    .buttons .mode:hover {background-color: darkorange; }
   </style>
 </head>
 <body>
   <div class="calculator">
+	<div class="sub2display">
+	<input type="text" class="subdisplay" id="subdisplay" disabled>
+	</div>
     <input type="text" class="display" id="display" disabled>     <!-- Input field to display the calculator results -->
     <div class="buttons">
      <button onclick="memory('sto')" class="mem">STO</button>
@@ -50,22 +56,29 @@
       <button onclick="appendNumber('.')">.</button>
       <button onclick="trig('neg')">±</button>
       <button onclick="setOperator('+')" class="functions">+</button>
+	  
      <button onclick="trig('per')" class="functions">%</button>
       <button onclick="clearEntry()" class="hot">CE</button>
       <button onclick="clearDisplay()" class="hot">AC</button>
       <button onclick="calculate()" class="equals">=</button>
+	  
      <button onclick="trig('inv')" class="functions">1/x</button>
      <button onclick="trig('sq')" class="functions">x²</button>
      <button onclick="trig('sqr')" class="functions">²√x</button>
      <button onclick="setOperator('^')" class="functions">xⁿ</button>
      <button onclick="setOperator('r')" class="functions">ⁿ√x</button>
-      <button onclick="trig('pi')">π</button>
+      
+	  <button onclick="trig('pi')">π</button>
      <button onclick="trig('sin')" class="functions">SIN</button>
      <button onclick="trig('cos')" class="functions">COS</button>
      <button onclick="trig('tan')" class="functions">TAN</button>
-      <button onclick="trig('e')">e</button>
+      <button onclick="togdeg()" class="mode">ANG</button>
+	  
      <button onclick="trig('log')" class="functions">LOG</button>
+     <button onclick="trig('ilog')" class="functions">10ⁿ</button>
      <button onclick="trig('ln')" class="functions">LN</button>
+     <button onclick="trig('iln')" class="functions">eⁿ</button>
+      <button onclick="trig('e')">e</button>
     </div>
   </div>
 
@@ -75,7 +88,9 @@
 	let prev_op = '';
     let previousInput = '';
 	let memoryreg = 0.0;
+	let ang = 'DEG'
 	document.getElementById('display').value = 0;
+	document.getElementById('subdisplay').value = ang;
 	
     function appendNumber(number) {
 	  if (currentInput === '0') currentInput = number;
@@ -95,18 +110,18 @@
 
     function trig(op) {
       let result;
-	  if(op === 'sin') result = Math.sin( parseFloat(currentInput));
-	  else if (op === 'cos') result = Math.cos( parseFloat(currentInput));
-	  else if (op === 'tan') result = Math.tan( parseFloat(currentInput));
-	  else if (op === 'asin') result = Math.asin( parseFloat(currentInput));
-	  else if (op === 'acos') result = Math.acos( parseFloat(currentInput));
-	  else if (op === 'atan') result = Math.atan( parseFloat(currentInput));
-	  else if (op === 'asinh') result = Math.asinh( parseFloat(currentInput));
-	  else if (op === 'acosh') result = Math.acosh( parseFloat(currentInput));
-	  else if (op === 'atanh') result = Math.atanh( parseFloat(currentInput));
-	  else if (op === 'sinh') result = Math.sinh( parseFloat(currentInput));
-	  else if (op === 'cosh') result = Math.cosh( parseFloat(currentInput));
-	  else if (op === 'tanh') result = Math.tanh( parseFloat(currentInput));
+	  if(op === 'sin') result = Math.sin(inRad());
+	  else if (op === 'cos') result = Math.cos(inRad());
+	  else if (op === 'tan') result = Math.tan(inRad());
+	  else if (op === 'asin') result = Math.asin(inRad());
+	  else if (op === 'acos') result = Math.acos(inRad());
+	  else if (op === 'atan') result = Math.atan(inRad());
+	  else if (op === 'asinh') result = Math.asinh(inRad());
+	  else if (op === 'acosh') result = Math.acosh(inRad());
+	  else if (op === 'atanh') result = Math.atanh(inRad());
+	  else if (op === 'sinh') result = Math.sinh(inRad());
+	  else if (op === 'cosh') result = Math.cosh(inRad());
+	  else if (op === 'tanh') result = Math.tanh(inRad());
 	  else if (op === 'log') result = Math.log10( parseFloat(currentInput));
 	  else if (op === 'ilog') result = Math.pow( 10, parseFloat(currentInput));
 	  else if (op === 'ln') result = Math.log( parseFloat(currentInput));
@@ -146,12 +161,26 @@
 
     function clearDisplay() {
       currentInput = '0'; previousInput = ''; operator = '';
-      document.getElementById('display').value = 0; // Clear the display
+      document.getElementById('display').value = 0; 
     }
 
     function clearEntry() {
-      currentInput = '0'; document.getElementById('display').value = 0; // Clear the display
+      currentInput = '0'; document.getElementById('display').value = 0; 
     }
+
+    function togdeg() {
+	  let cresult;
+      if (ang === 'DEG') { ang = 'RAD'; cresult=parseFloat(currentInput)*Math.PI/180; }
+	  else { ang = 'DEG'; cresult=parseFloat(currentInput)*180/Math.PI; }
+	  document.getElementById('subdisplay').value = ang; 
+	  document.getElementById('display').value = cresult; 
+	  currentInput = cresult.toString(); 
+    }
+	
+	function inRad() { 
+		if (ang === 'DEG') return parseFloat(currentInput)*Math.PI/180; 
+		else return parseFloat(currentInput);
+	}
 
   </script>
 </body>

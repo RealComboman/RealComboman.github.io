@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Simple Calculator</title>
+  <title>Scientific Calculator</title>
   <style>
     /* Style for body, centering the calculator */
     body {font-family: Arial, sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; background-color: #f0f0f0; }
@@ -15,12 +15,12 @@
     /* Grid layout for buttons */
     .buttons { display: grid; grid-template-columns: repeat(5, 40px); gap: 10px; }
     /* Style for the buttons */
-    .buttons button { width: 40px; height: 40px; font-size: 1.2em; border: none; background-color: white; color: black; border-radius: 10px; cursor: pointer; }
+    .buttons button { width: 40px; height: 40px; font-size: 1.0em; border: none; background-color: white; color: black; border-radius: 10px; cursor: pointer; }
     .buttons button:hover { background-color: lightgray; }
     .buttons .equals {grid-column: span 2; width: 90px; background-color: lightgreen;  }
     .buttons .equals:hover { background-color: green;  }
-    .buttons .functions { background-color: #2196F3; }
-    .buttons .functions:hover {background-color: #0b7dda; }
+    .buttons .functions { background-color: DeepSkyBlue; }
+    .buttons .functions:hover {background-color: CornflowerBlue; }
     .buttons .hot { background-color: red; }
     .buttons .hot:hover {background-color: darkred; }
     .buttons .mem { background-color: lightgray; }
@@ -68,11 +68,17 @@
      <button onclick="setOperator('^')" class="functions">xⁿ</button>
      <button onclick="setOperator('r')" class="functions">ⁿ√x</button>
       
-	  <button onclick="trig('pi')">π</button>
      <button onclick="trig('sin')" class="functions">SIN</button>
      <button onclick="trig('cos')" class="functions">COS</button>
      <button onclick="trig('tan')" class="functions">TAN</button>
+	  <button onclick="trig('pi')">π</button>
       <button onclick="togdeg()" class="mode">ANG</button>
+
+     <button onclick="trig('asin')" class="functions">ASIN</button>
+     <button onclick="trig('acos')" class="functions">ACOS</button>
+     <button onclick="trig('atan')" class="functions">ATAN</button>
+     <button onclick="trig('sinh')" class="functions">SINH</button>
+     <button onclick="trig('cosh')" class="functions">COSH</button>
 	  
      <button onclick="trig('log')" class="functions">LOG</button>
      <button onclick="trig('ilog')" class="functions">10ⁿ</button>

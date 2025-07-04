@@ -91,12 +91,32 @@
   <script>
     let currentInput = '0';
     let operator = '';
-	let prev_op = '';
+	let prev_op = 0;
     let previousInput = '';
 	let memoryreg = 0.0;
 	let ang = 'DEG'
 	document.getElementById('display').value = 0;
 	document.getElementById('subdisplay').value = ang;
+	
+	document.addEventListener('keydown', function(event) {
+    if(event.keyCode == 96 || event.keyCode == 48) { appendNumber('0'); }
+    else if(event.keyCode == 97 || event.keyCode == 49) { appendNumber('1'); }
+    else if(event.keyCode == 98 || event.keyCode == 50) { appendNumber('2'); }
+    else if(event.keyCode == 99 || event.keyCode == 51) { appendNumber('3'); }
+    else if(event.keyCode == 100 || event.keyCode == 52) { appendNumber('4'); }
+    else if(event.keyCode == 101 || event.keyCode == 53) { appendNumber('5'); }
+    else if(event.keyCode == 102 || event.keyCode == 54) { appendNumber('6'); }
+    else if(event.keyCode == 103 || event.keyCode == 55) { appendNumber('7'); }
+    else if(event.keyCode == 104 || event.keyCode == 56) { appendNumber('8'); }
+    else if(event.keyCode == 105 || event.keyCode == 57) { appendNumber('9'); }
+    else if(event.keyCode == 106) { setOperator('*'); }
+    else if(event.keyCode == 107) { setOperator('+'); }
+    else if(event.keyCode == 109) { setOperator('-'); }
+    else if(event.keyCode == 110) { appendNumber('.'); }
+    else if(event.keyCode == 111) { setOperator('/'); }
+    else if(event.keyCode == 13) { calculate(); }
+    else if(event.keyCode == 46) { clearDisplay() }
+	});
 	
     function appendNumber(number) {
 	  if (currentInput === '0') currentInput = number;
@@ -144,10 +164,10 @@
     }
 
     function setOperator(op) {
-      prev_op = operator; 
-	  if (prev_op === '')
-		{operator = op; previousInput = currentInput; } 
-	  else {calculate(); operator = op; previousInput = currentInput; }
+      //prev_op = operator; 
+	  if (operator === '' || prev_op == 0)
+		{operator = op; previousInput = currentInput; prev_op = 1;} 
+	  else {calculate(); operator = op; previousInput = currentInput; prev_op = 1;}
 	  currentInput = ''; // Clear the current input for the next number
     }
 
@@ -162,8 +182,10 @@
       else result = parseFloat(currentInput);
       document.getElementById('display').value = result; // Display the result
       currentInput = result.toString(); // Store the result as the new current input
-      //operator = ''; // Reset the operator
+      prev_op = 0; // Reset the operator
     }
+
+	//.toString(16) for hex
 
     function clearDisplay() {
       currentInput = '0'; previousInput = ''; operator = '';

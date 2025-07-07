@@ -85,6 +85,10 @@
      <button onclick="trig('ln')" class="functions">LN</button>
      <button onclick="trig('iln')" class="functions">eⁿ</button>
       <button onclick="trig('e')">e</button>
+
+     <button onclick="brackOpen()">(</button>
+     <button onclick="brackClose()">)</button>
+
     </div>
   </div>
 
@@ -95,6 +99,9 @@
     let previousInput = '';
 	let memoryreg = 0.0;
 	let ang = 'DEG'
+	let brackInput = '';
+	let brackOp = '';
+	let brackMode = 0;
 	document.getElementById('display').value = 0;
 	document.getElementById('subdisplay').value = ang;
 	
@@ -198,6 +205,16 @@
     function clearEntry() {
       currentInput = '0'; document.getElementById('display').value = 0; 
     }
+	
+	function brackOpen() {
+	brackInput = previousInput; brackOp = operator; brackMode = 1; currentInput = ''; prev_op = 0;
+	document.getElementById('subdisplay').value = ang + "   ( )"; 
+	}
+
+	function brackClose() {
+	calculate(); previousInput = brackInput; operator = brackOp; brackMode = 0; 
+	document.getElementById('subdisplay').value = ang; 
+	}
 
     function togdeg() {
 	  let cresult;

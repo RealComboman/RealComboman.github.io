@@ -5,19 +5,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Scientific Calculator</title>
   <style>
-    /* Style for body, centering the calculator */
-    body {font-family: Arial, sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; background-color: #f0f0f0; }
+    body {font-family: Arial, sans-serif; display: flex; justify-content: center; align-items: center; height: 90vh; background-color: #f0f0f0; }
     /* Style for the calculator container */
-    .calculator { background-color: black; padding: 20px; border-radius: 10px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); }
+    .calculator { background-color: black; padding: 15px; border-radius: 15px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); }
     /* Style for the display area */
-	.subdisplay { background-color: yellow; width: 229px; height: 10px; text-align: left; margin-bottom: 0px; font-size: 0.6em; padding: 3px;}
-    .display { background-color: lightyellow; width: 225px; height: 40px; text-align: right; margin-bottom: 10px; font-size: 1.5em; padding: 5px; }
+	.subdisplay { background-color: yellow; width: 249px; height: 10px; text-align: left; margin-bottom: 0px; font-size: 0.6em; padding: 3px;}
+    .display { background-color: lightyellow; width: 245px; height: 40px; text-align: right; margin-bottom: 10px; font-size: 1.5em; padding: 5px; }
     /* Grid layout for buttons */
-    .buttons { display: grid; grid-template-columns: repeat(5, 40px); gap: 10px; }
+    .buttons { display: grid; grid-template-columns: repeat(5, 42px); gap: 10px; }
     /* Style for the buttons */
-    .buttons button { width: 40px; height: 40px; font-size: 1.0em; border: none; background-color: white; color: black; border-radius: 10px; cursor: pointer; }
+    .buttons button { width: 48px; height: 40px; font-size: 1.0em; border: none; background-color: white; color: black; border-radius: 16px; cursor: pointer; }
     .buttons button:hover { background-color: lightgray; }
-    .buttons .equals {grid-column: span 2; width: 90px; background-color: lightgreen;  }
+    .buttons .equals {grid-column: span 2; width: 95px; background-color: lightgreen;  }
     .buttons .equals:hover { background-color: green;  }
     .buttons .functions { background-color: DeepSkyBlue; }
     .buttons .functions:hover {background-color: CornflowerBlue; }
@@ -57,37 +56,36 @@
       <button onclick="trig('neg')">±</button>
       <button onclick="setOperator('+')" class="functions">+</button>
 	  
-     <button onclick="trig('per')" class="functions">%</button>
       <button onclick="clearEntry()" class="hot">CE</button>
-      <button onclick="clearDisplay()" class="hot">AC</button>
+     <button onclick="brackOpen()">(</button>
+     <button onclick="brackClose()">)</button>
       <button onclick="calculate()" class="equals">=</button>
 	  
+      <button onclick="clearDisplay()" class="hot">AC</button>
      <button onclick="trig('inv')" class="functions">1/x</button>
      <button onclick="trig('sq')" class="functions">x²</button>
      <button onclick="trig('sqr')" class="functions">²√x</button>
-     <button onclick="setOperator('^')" class="functions">xⁿ</button>
-     <button onclick="setOperator('r')" class="functions">ⁿ√x</button>
+     <button onclick="trig('per')" class="functions">%</button>
       
-     <button onclick="trig('sin')" class="functions">SIN</button>
-     <button onclick="trig('cos')" class="functions">COS</button>
-     <button onclick="trig('tan')" class="functions">TAN</button>
-	  <button onclick="trig('pi')">π</button>
       <button onclick="togdeg()" class="mode">ANG</button>
+     <button onclick="trig('sin')" class="functions" id="sinbut")>SIN</button>
+     <button onclick="trig('cos')" class="functions" id="cosbut">COS</button>
+     <button onclick="trig('tan')" class="functions" id="tanbut">TAN</button>
+     <button onclick="setOperator('^')" class="functions">xⁿ</button>
+     <button onclick="hypmode()" class="mode">HYP</button>
+     <button onclick="trig('asin')" class="functions" id="asinbut")>ASIN</button>
+     <button onclick="trig('acos')" class="functions" id="acosbut">ACOS</button>
+     <button onclick="trig('atan')" class="functions" id="atanbut">ATAN</button>
+     <button onclick="setOperator('r')" class="functions">ⁿ√x</button>
 
-     <button onclick="trig('asin')" class="functions">ASIN</button>
-     <button onclick="trig('acos')" class="functions">ACOS</button>
-     <button onclick="trig('atan')" class="functions">ATAN</button>
-     <button onclick="trig('sinh')" class="functions">SINH</button>
-     <button onclick="trig('cosh')" class="functions">COSH</button>
-	  
      <button onclick="trig('log')" class="functions">LOG</button>
      <button onclick="trig('ilog')" class="functions">10ⁿ</button>
      <button onclick="trig('ln')" class="functions">LN</button>
      <button onclick="trig('iln')" class="functions">eⁿ</button>
+      <button onclick="trig('rnd')">RND</button>
       <button onclick="trig('e')">e</button>
+	  <button onclick="trig('pi')">π</button>
 
-     <button onclick="brackOpen()">(</button>
-     <button onclick="brackClose()">)</button>
 
     </div>
   </div>
@@ -102,6 +100,7 @@
 	let brackInput = '';
 	let brackOp = '';
 	let brackMode = 0;
+	let hyp=0;
 	document.getElementById('display').value = 0;
 	document.getElementById('subdisplay').value = ang;
 	
@@ -143,14 +142,34 @@
       currentInput = result.toString(); 
     }
 
+	function hypmode() {
+	if (hyp==1) {hyp = 0;
+		document.getElementById('sinbut').innerHTML = 'SIN';
+		document.getElementById('cosbut').innerHTML = 'COS';
+		document.getElementById('tanbut').innerHTML = 'TAN';
+		document.getElementById('asinbut').innerHTML = 'ASIN';
+		document.getElementById('acosbut').innerHTML = 'ACOS';
+		document.getElementById('atanbut').innerHTML = 'ATAN';
+		}
+	else {
+		hyp=1; 
+		document.getElementById('sinbut').innerHTML = 'SINH';
+		document.getElementById('cosbut').innerHTML = 'COSH';
+		document.getElementById('tanbut').innerHTML = 'TANH';
+		document.getElementById('asinbut').innerHTML = 'ASINH';
+		document.getElementById('acosbut').innerHTML = 'ACOSH';
+		document.getElementById('atanbut').innerHTML = 'ATANH';
+		}
+	}
+	
     function trig(op) {
       let result;
-	  if(op === 'sin') result = Math.sin(inRad());
-	  else if (op === 'cos') result = Math.cos(inRad());
-	  else if (op === 'tan') result = Math.tan(inRad());
-	  else if (op === 'asin') result = Math.asin(inRad());
-	  else if (op === 'acos') result = Math.acos(inRad());
-	  else if (op === 'atan') result = Math.atan(inRad());
+	  if(op === 'sin') {if(hyp==1){result = Math.sinh(inRad());} else {result = Math.sin(inRad());}}
+	  else if (op === 'cos') {if(hyp==1){result = Math.cosh(inRad());} else {result = Math.cos(inRad());}}
+	  else if (op === 'tan') {if(hyp==1){result = Math.tanh(inRad());} else {result = Math.tan(inRad());}}
+	  else if (op === 'asin') {if(hyp==1){result = Math.asinh(inRad());} else {result = Math.asin(inRad());}}
+	  else if (op === 'acos') {if(hyp==1){result = Math.acosh(inRad());} else {result = Math.acos(inRad());}}
+	  else if (op === 'atan') {if(hyp==1){result = Math.atanh(inRad());} else {result = Math.atan(inRad());}}
 	  else if (op === 'asinh') result = Math.asinh(inRad());
 	  else if (op === 'acosh') result = Math.acosh(inRad());
 	  else if (op === 'atanh') result = Math.atanh(inRad());
@@ -168,6 +187,7 @@
 	  else if (op === 'sqr') result = Math.sqrt( parseFloat(currentInput));
 	  else if (op === 'pi') result = Math.PI;
 	  else if (op === 'e') result = Math.E;
+	  else if (op === 'rnd') result = Math.random();
       document.getElementById('display').value = result; 
       currentInput = result.toString(); 
     }
@@ -217,12 +237,12 @@
 	}
 
     function togdeg() {
-	  let cresult;
-      if (ang === 'DEG') { ang = 'RAD'; cresult=parseFloat(currentInput)*Math.PI/180; }
-	  else { ang = 'DEG'; cresult=parseFloat(currentInput)*180/Math.PI; }
-	  document.getElementById('subdisplay').value = ang; 
-	  document.getElementById('display').value = cresult; 
-	  currentInput = cresult.toString(); 
+	 let cresult;
+     if (ang === 'DEG') { ang = 'RAD'; cresult=parseFloat(currentInput)*Math.PI/180; }
+	 else { ang = 'DEG'; cresult=parseFloat(currentInput)*180/Math.PI; }
+	 document.getElementById('subdisplay').value = ang; 
+	 document.getElementById('display').value = cresult; 
+	 currentInput = cresult.toString(); 
     }
 	
 	function inRad() { 

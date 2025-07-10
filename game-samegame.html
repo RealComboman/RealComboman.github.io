@@ -21,6 +21,7 @@
 					<option value="pathetic">Easy (2)</option>
 					<option value="3color">3 Colors</option>
 					<option value="primary">Primary (3)</option>
+					<option value="4prime">Primary (4)</option>
 					<option value="4xx">Elegant (4)</option>
 					<option value="4color">4 Colors</option>
 					<option value="4colora">4 Colorsa</option>
@@ -39,6 +40,7 @@ var schemes = {
 	"pathetic": ["yellow", "magenta"],
 	"3color": ["#1722d6", "#6830b5", "#e731c2"],
 	"primary": ["blue", "red", "green"],
+	"4prime": ["blue", "red", "green","yellow"],
 	"4color": ["#8b1329", "#b83b5f", "#e3a2c2", "#c4f275"],
 	"4colora": ["#89c646", "#fdf122", "#30318d", "#666699"],
 	"4xx": ["#ca98cb", "#5040ae", "#0399cb", "#336799"],
@@ -70,8 +72,8 @@ function keyfunc(i, j){
 
 function SameGame() {
 	var c = document.getElementById("board");
-	this.colors = schemes["3color"];
-	document.getElementById('color_choices').value = "3color";
+	this.colors = schemes["primary"];
+	document.getElementById('color_choices').value = "primary";
 	document.getElementById('board_size').value = "medium";
 
 	this.init = function() {

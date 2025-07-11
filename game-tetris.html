@@ -7,21 +7,37 @@
   html, body { height: 100%; margin: 0; }
   body { background: black; display: flex; align-items: center; justify-content: center; }
   canvas { border: 1px solid white; }
+  .buttons { align-items: center; display: grid; grid-template-columns: repeat(6, 42px); gap: 20px; }
+  .buttons button { width: 48px; height: 48px; font-size: 1.5em; border: none; background-color: white; color: black; border-radius: 16px; cursor: pointer; }
+  .buttons button:hover { background-color: lightgray; }
  #scores { color: white; font-family: Arial, sans-serif; margin-left: 20px;  margin-bottom: 20px;  padding: 5px;  border-color: gray;  border-style: solid;  border-width: 1px;}
   </style>
 </head>
 <body>
+<div>
 <canvas width="320" height="640" id="game"></canvas>
+<br><div class="buttons">
+  <button onclick="slide(37)" class="mem">←</button>
+  <button onclick="rot('cw')">↻</button>
+  <button onclick="down()">↓</button>
+  <button onclick="drop()">↡</button>
+  <button onclick="rot('ccw')">↺</button>
+  <button onclick="slide(39)">→</button>
+</div>
+</div>
 <div id="scores">
 Amanda's Tetris<br>
-Score:  <span id="scoreDsp">0</span><br />
-High Score:  <span id="highScoreDsp">0</span><br />
+Level:  <span id="levelDsp">0</span><br>
+Row:  <span id="rowDsp">0</span><br>
+Score:  <span id="scoreDsp">0</span><br>
+High Score:  <span id="highScoreDsp">0</span><br>
 </div>
 
 <script>
 let score = 0;
 let level = 0;
 let clears = 0;
+let totalClears = 0;
 // https://tetris.fandom.com/wiki/Tetris_Guideline
 
 function getRandomInt(min, max) {
@@ -65,6 +81,45 @@ function rotate(matrix) { // rotate an NxN matrix 90deg
   return result;
 }
 
+function rot(dir){
+    const matrix = rotate(tetromino.matrix);
+	if(dir === 'ccw') { matrix = rotate(matrix);  matrix = rotate(matrix);}
+    if (isValidMove(matrix, tetromino.row, tetromino.col)) {
+      tetromino.matrix = matrix;}
+}
+
+function down() {
+    const row = tetromino.row + 1;
+    if (!isValidMove(tetromino.matrix, row, tetromino.col)) {
+      tetromino.row = row - 1;
+      placeTetromino();
+      return;
+    }
+    tetromino.row = row;
+}
+
+function drop() {//hard drop
+    const row = tetromino.row+1;
+	while(1)
+	{
+		if (!isValidMove(tetromino.matrix, row, tetromino.col)) {
+		  tetromino.row = row - 1;
+		  placeTetromino();
+		  return;
+		}
+		tetromino.row = row; row++;
+	}
+}
+
+function slide(dir){
+    const col = dir === 37
+      ? tetromino.col - 1
+      : tetromino.col + 1;
+    if (isValidMove(tetromino.matrix, tetromino.row, col)) {
+      tetromino.col = col;
+    }
+}
+
 function isValidMove(matrix, cellRow, cellCol) { // check to see if the new matrix/row/col is valid
   for (let row = 0; row < matrix.length; row++) {
     for (let col = 0; col < matrix[row].length; col++) {
@@ -97,7 +152,7 @@ function placeTetromino() { // place the tetromino on the playfield
   // check for line clears starting from the bottom and working our way up
   for (let row = playfield.length - 1; row >= 0; ) {
     if (playfield[row].every(cell => !!cell)) {
-		clears++;
+		clears++; totalClears++;
       // drop every row above this one
       for (let r = row; r >= 0; r--) {
         for (let c = 0; c < playfield[r].length; c++) {
@@ -113,6 +168,7 @@ function placeTetromino() { // place the tetromino on the playfield
   else if (clears==4) score=score+1200*(level+1);
   clears=0;
   tetromino = getNextTetromino();
+  if (totalClears>10) {level++; totalClears=0;}
 }
 
 function showGameOver() { // show the game over screen
@@ -199,6 +255,8 @@ function loop() {
   rAF = requestAnimationFrame(loop);
   let highScore = localStorage.getItem("myHighScore");
   scoreDsp.innerHTML = ""+score;
+  levelDsp.innerHTML = ""+level;
+  rowDsp.innerHTML = ""+tetromino.row;
   if(score>highScore) {highScore = score; localStorage.setItem("myHighScore", highScore);}
   highScoreDsp.innerHTML = ""+highScore;
   context.clearRect(0,0,canvas.width,canvas.height);
@@ -226,8 +284,12 @@ function loop() {
         placeTetromino();
       }
     }
-    context.fillStyle = colors[tetromino.name];
+    drawTetromino();
+  }
+}
 
+function drawTetromino(){
+    context.fillStyle = colors[tetromino.name];
     for (let row = 0; row < tetromino.matrix.length; row++) {
       for (let col = 0; col < tetromino.matrix[row].length; col++) {
         if (tetromino.matrix[row][col]) {
@@ -236,38 +298,17 @@ function loop() {
         }
       }
     }
-  }
 }
 
 // listen to keyboard events to move the active tetromino
 document.addEventListener('keydown', function(e) {
   if (gameOver) return;
   // left and right arrow keys (move)
-  if (e.which === 37 || e.which === 39) {
-    const col = e.which === 37
-      ? tetromino.col - 1
-      : tetromino.col + 1;
-    if (isValidMove(tetromino.matrix, tetromino.row, col)) {
-      tetromino.col = col;
-    }
-  }
+  if (e.which === 37 || e.which === 39) {slide(e.which);}
   // up arrow key (rotate)
-  if (e.which === 38) {
-    const matrix = rotate(tetromino.matrix);
-    if (isValidMove(matrix, tetromino.row, tetromino.col)) {
-      tetromino.matrix = matrix;
-    }
-  }
+  if (e.which === 38) {rot();}
   // down arrow key (drop)
-  if(e.which === 40) {
-    const row = tetromino.row + 1;
-    if (!isValidMove(tetromino.matrix, row, tetromino.col)) {
-      tetromino.row = row - 1;
-      placeTetromino();
-      return;
-    }
-    tetromino.row = row;
-  }
+  if(e.which === 40) {drop();}
 });
 
 // start the game

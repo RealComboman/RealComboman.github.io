@@ -16,24 +16,26 @@
 <body>
 <div>
 <canvas width="320" height="640" id="game"></canvas>
-<br><div class="buttons">
+<br><br><div class="buttons">
   <button onclick="slide(37)" class="mem">←</button>
-  <button onclick="rot('cw')">↻</button>
+  <button onclick="rot()">↻</button>
   <button onclick="down()">↓</button>
-  <button onclick="drop()">↡</button>
-  <button onclick="rot('ccw')">↺</button>
+  <button onclick="ccw()">↺</button>
   <button onclick="slide(39)">→</button>
+  </div>
 </div>
-</div>
+<div id="scores"> NEXT<br>
+<div id="nextpiece"><canvas width="100" height="100" id="next"></canvas></div>
 <div id="scores">
 Amanda's Tetris<br>
 Level:  <span id="levelDsp">0</span><br>
 Row:  <span id="rowDsp">0</span><br>
 Score:  <span id="scoreDsp">0</span><br>
 High Score:  <span id="highScoreDsp">0</span><br>
-</div>
+</div></div>
 
 <script>
+  //<button onclick="drop()">↡</button>
 let score = 0;
 let level = 0;
 let clears = 0;
@@ -59,7 +61,6 @@ function getNextTetromino() { // get the next tetromino in the sequence
   if (tetrominoSequence.length === 0) {
     generateSequence();
   } 
-
   const name = tetrominoSequence.pop();
   const matrix = tetrominos[name];
   const col = playfield[0].length / 2 - Math.ceil(matrix[0].length / 2); // I and O start centered, all others start in left-middle
@@ -75,15 +76,22 @@ function getNextTetromino() { // get the next tetromino in the sequence
 
 function rotate(matrix) { // rotate an NxN matrix 90deg
   const N = matrix.length - 1;
-  const result = matrix.map((row, i) =>
-    row.map((val, j) => matrix[N - j][i])
-  );
+  const result = matrix.map((row, i) => row.map((val, j) => matrix[N - j][i]) );
   return result;
 }
 
-function rot(dir){
+function rot(dr){
     const matrix = rotate(tetromino.matrix);
-	if(dir === 'ccw') { matrix = rotate(matrix);  matrix = rotate(matrix);}
+	const matrix2 = rotate(matrix); 
+	if(dr === 'ccw') { matrix = rotate(matrix2);}
+    if (isValidMove(matrix, tetromino.row, tetromino.col)) {
+      tetromino.matrix = matrix;}
+}
+
+function ccw(){
+    const matrix = rotate(tetromino.matrix);
+	const matrix2 = rotate(matrix); 
+	matrix = rotate(matrix2);
     if (isValidMove(matrix, tetromino.row, tetromino.col)) {
       tetromino.matrix = matrix;}
 }
@@ -99,15 +107,15 @@ function down() {
 }
 
 function drop() {//hard drop
-    const row = tetromino.row+1;
-	while(1)
+    const row2 = tetromino.row+1;
+	for (let i = 0; i < 20; i++)
 	{
-		if (!isValidMove(tetromino.matrix, row, tetromino.col)) {
-		  tetromino.row = row - 1;
+		if (!isValidMove(tetromino.matrix, row2, tetromino.col)) {
+		  tetromino.row = row2 - 1;
 		  placeTetromino();
 		  return;
 		}
-		tetromino.row = row; row++;
+		tetromino.row = row2; drawTetromino(); row2++;
 	}
 }
 
@@ -125,9 +133,7 @@ function isValidMove(matrix, cellRow, cellCol) { // check to see if the new matr
     for (let col = 0; col < matrix[row].length; col++) {
       if (matrix[row][col] && (
           // outside the game bounds
-          cellCol + col < 0 ||
-          cellCol + col >= playfield[0].length ||
-          cellRow + row >= playfield.length ||
+          cellCol + col < 0 || cellCol + col >= playfield[0].length || cellRow + row >= playfield.length ||
           // collides with another piece
           playfield[cellRow + row][cellCol + col])
         ) {
@@ -308,7 +314,7 @@ document.addEventListener('keydown', function(e) {
   // up arrow key (rotate)
   if (e.which === 38) {rot();}
   // down arrow key (drop)
-  if(e.which === 40) {drop();}
+  if(e.which === 40) {down();}
 });
 
 // start the game

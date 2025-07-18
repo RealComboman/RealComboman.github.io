@@ -73,6 +73,21 @@ function getNextTetromino() { // get the next tetromino in the sequence
   };
 }
 
+function getNextNext() { // get the next tetromino in the sequence
+  if (tetrominoSequence.length === 0) {
+    generateSequence();
+  } 
+  const name = tetrominoSequence.pop();
+  const matrix = tetrominos[name];
+  const col = playfield[0].length / 2 - Math.ceil(matrix[0].length / 2); // I and O start centered, all others start in left-middle
+  const row = name === 'I' ? -1 : -2; // I starts on row 21 (-1), all others start on row 22 (-2)
+  return {
+    name: name,      // name of the piece (L, O, etc.)
+    matrix: matrix,  // the current rotation matrix
+    row: row,        // current row (starts offscreen)
+    col: col         // current col
+  };
+}
 
 function rotate(matrix) { // rotate an NxN matrix 90deg
   const N = matrix.length - 1;
@@ -193,6 +208,8 @@ function showGameOver() { // show the game over screen
 
 const canvas = document.getElementById('game');
 const context = canvas.getContext('2d');
+const canvas2 = document.getElementById('next');
+const context2 = canvas2.getContext('2d');
 const grid = 32;
 const tetrominoSequence = [];
 
@@ -208,6 +225,19 @@ for (let row = -2; row < 20; row++) {
     playfield[row][col] = 0;
   }
 }
+
+const nextfield = [];
+
+// populate the empty state
+for (let row = 0; row < 6; row++) {
+  nextfield[row] = [];
+
+  for (let col = 0; col < 6; col++) {
+    nextfield[row][col] = 0;
+  }
+}
+
+
 
 // how to draw each tetromino
 // @see https://tetris.fandom.com/wiki/SRS
@@ -253,6 +283,8 @@ const tetrominos = {
 const colors = {  'I': 'cyan', 'O': 'yellow', 'T': 'purple', 'S': 'green', 'Z': 'red', 'J': 'blue', 'L': 'orange'};
 let count = 0;
 let tetromino = getNextTetromino();
+let nextTetromino = getNextTetromino();
+nextTetromino.row=5; nextTetromino.col=5;
 let rAF = null;  // keep track of the animation frame so we can cancel it
 let gameOver = false;
 
@@ -278,6 +310,21 @@ function loop() {
     }
   }
 
+//next?
+  context2.clearRect(0,0,canvas2.width,canvas2.height);
+  // draw the next
+  for (let row = 0; row < 6; row++) {
+    for (let col = 0; col < 6; col++) {
+      if (nextfield[row][col]) {
+        const name = nextfield[row][col];
+        context2.fillStyle = colors[name];
+        // drawing 1 px smaller than the grid creates a grid effect
+        context2.fillRect(col * grid, row * grid, grid-1, grid-1);
+      }
+    }
+  }
+
+
   // draw the active tetromino
   if (tetromino) {
     // tetromino falls every 35 frames
@@ -291,6 +338,7 @@ function loop() {
       }
     }
     drawTetromino();
+	drawNext();
   }
 }
 
@@ -306,6 +354,17 @@ function drawTetromino(){
     }
 }
 
+function drawNext(){
+    context2.fillStyle = colors[nextTetromino.name];
+    for (let row = 0; row < nextTetromino.matrix.length; row++) {
+      for (let col = 0; col < nextTetromino.matrix[row].length; col++) {
+        if (nextTetromino.matrix[row][col]) {
+          // drawing 1 px smaller than the grid creates a grid effect
+          context2.fillRect((nextTetromino.col + col) * grid, (nextTetromino.row + row) * grid, grid-1, grid-1);
+        }
+      }
+    }
+}
 // listen to keyboard events to move the active tetromino
 document.addEventListener('keydown', function(e) {
   if (gameOver) return;

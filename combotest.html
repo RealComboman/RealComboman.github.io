@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link href='https://fonts.googleapis.com/css?family=Audiowide' rel='stylesheet'>
+<title>Combotechni.ca</title>
+<style>
+h1 {font-family: 'Audiowide', Helvetica, sans-serif; font-size: 40px;}
+body {font-family: 'Arial', Helvetica, sans-serif;}
+</style>
+</head>
+<body><!--bgcolor="#AAAAAA"-->
+<div style="text-align:right;margin:10;"><br>
+Login <a href="index.html" target="_blank"><img src="i\dots.png" alt="apps"></a><br><br><br><br>
+</div>
+<div style="text-align:center;margin:0;">
+<h1><span style="color:blue;">C<span style="color:red;">o<span style="color:orange;">m<span style="color:blue;">b<span style="color:green;">o<span style="color:purple;">t<span style="color:blue;">e<span style="color:red;">c<span style="color:violet;">h<span style="color:lime;">n<span style="color:orange;">i.<span style="color:blue;">c<span style="color:red;">a</h1>
+<br><br>
+<form action="javascript:document.input_box.Chk1.checked = false;actBox(document.input_box.command.value)" name="input_box" class="input">
+          <select name="searchType" value="ddg " onchange="document.input_box.command.value=this[this.selectedIndex].value;document.input_box.searchType.value=this[this.selectedIndex].value;" class="select">
+              <option value="g ">Google</option>
+              <option value="wkm ">Wikipedia</option>
+              <option value="wu ">Weather Und.</option>
+              <option value="yt ">YouTube</option>
+              <option value="am ">Amazon</option>
+              <option value="ebay ">eBay</option>
+              <option value="ascii ">ascii</option>
+              <option value="stock ">Stock</option>
+              <option value="rotten ">Rotten Tomatoes</option>
+          </select>
+          <!--input type="button" onclick="document.input_box.command.value=document.input_box.searchType.value;document.input_box.command.focus();" value="pick" class="button3"--> 
+          <div style="margin-top:3px">
+                <input type="text" name="command" size = "40" value=" "/> <br><br>
+                <input type="button" value="🔍 Search" align="texttop" onClick="Sddg(document.input_box.command.value)" class="button2" style="margin-left:.28em;">
+                <input type="button" value="📰 News" align="texttop" onClick="Snews(document.input_box.command.value)" class="button2" style="margin-left:.28em;">
+                <input type="button" value="🌐 Map" align="texttop" onClick="Smap(document.input_box.command.value)" class="button2" style="margin-left:.28em;">
+                <input type="button" value="🖼️ Image" align="texttop" onClick="Simg(document.input_box.command.value)" class="button2" style="margin-left:.28em;">
+				<br><br>
+	<input type="checkbox" name="Chk1" value="yes" CHECKED size = "34" class="button2" style="position:relative;top:.32em;left:-1.46em;">new&nbsp;
+                <input type="button" align="		" onclick="document.input_box.command.value='';document.input_box.command.focus();" value="clear" class="button2">
+                <div class="hr"><hr /></div>
+          </div></form>
+<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</p>
+<p>123456790</p>
+<p>ABCDEFGHIJKLMNOPQRSTUVWXYZ</p>
+<p>abcdefghijklmnopqrstuvwxyz</p>
+</div>
+</body>
+	<script type="text/javascript">
+                function focus(){document.input_box.command.focus();}
+                function prepend(arg){
+                        oldVal = document.input_box.command.value;
+                        document.input_box.command.value = arg;
+                        focus();
+                }
+                function dirSnd(arg){
+                		document.input_box.command.value = arg;
+                		chkBox(arg);               
+                }
+                function dirURL(arg){
+                		if (document.input_box.Chk1.checked == false) {
+						window.location=arg;
+						} 
+						else {window.open(arg);	}            
+                }   
+                 function chkBox(arg) {
+						var srchURL = '';
+						if(arg.indexOf('wkm')==0){
+								var x = arg.substring(4,arg.length);
+								var srchURL = 'http://en.m.wikipedia.org/wiki?search=' + x;
+						}
+						else if(arg.indexOf('iig')==0){
+								var x = arg.substring(4,arg.length);
+								var srchURL = 'http://www.google.com/#/m/search?site=images&source=gp&channel=gp1&og=gp&q=' + x + '&source=gp';
+						}
+						else{
+							var	srchURL = 'http://yubnub.org/parser/parse?command=' + arg;
+						}
+						if (document.input_box.Chk1.checked == false) {
+						window.location=srchURL;
+						return true;
+						} 
+						else {
+						return 	window.open(srchURL);
+						}
+				}
+                function Simg(arg) {
+						var	srchURL = 'http://yubnub.org/parser/parse?command=gim ' + arg;
+						if (document.input_box.Chk1.checked == false) {	window.location=srchURL; return true;	} 
+						else {	return 	window.open(srchURL);	}
+				}
+                function Smap(arg) {
+						var srchURL = '';
+						var	srchURL = 'http://yubnub.org/parser/parse?command=gmap ' + arg;
+						if (document.input_box.Chk1.checked == false) {	window.location=srchURL; return true;	} 
+						else {	return 	window.open(srchURL);	}
+				}
+                function Snews(arg) {
+						var srchURL = '';
+						var	srchURL = 'http://yubnub.org/parser/parse?command=gnews ' + arg;
+						if (document.input_box.Chk1.checked == false) {	window.location=srchURL; return true;	} 
+						else {	return 	window.open(srchURL);	}
+				}
+                function Sddg(arg) {
+						var srchURL = '';
+						var	srchURL = 'http://yubnub.org/parser/parse?command=ddg ' + arg;
+						if (document.input_box.Chk1.checked == false) {	window.location=srchURL; return true;	} 
+						else {	return 	window.open(srchURL);	}
+				}
+        		function actBox(arg) {
+						var srchURL = '';
+						if(arg.indexOf('wkm')==0){
+								var x = arg.substring(4,arg.length);
+								var srchURL = 'http://en.m.wikipedia.org/wiki?search=' + x;
+						}
+						else if(arg.indexOf('iig')==0){
+								var x = arg.substring(4,arg.length);
+								var srchURL = 'http://www.google.com/#/m/search?site=images&source=gp&channel=gp1&og=gp&q=' + x + '&source=gp';
+						}
+						else{
+							var	srchURL = 'http://yubnub.org/parser/parse?command=' + arg;
+						}
+						window.location=srchURL;
+						return true;
+				}
+</script>
+</html>

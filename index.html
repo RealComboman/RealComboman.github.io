@@ -52,10 +52,10 @@ a:active {color: yellow; background-color: transparent; text-decoration: underli
 </div>
 </body>
 	<script type="text/javascript">
-    const apiKey = 'd94893f5d0fa394f6ec042550b4355db';
+    const rndSeed = 'd94893f5d0fa394f6ec042550b4355db';
     const weatherDiv = document.getElementById('weather');
     const cityInput = document.getElementById('cityInput').value;
-    const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${cityInput}&appid=${apiKey}&units=metric`;
+    const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${cityInput}&appid=${rndSeed}&units=metric`;
       fetch(apiUrl)
         .then(response => response.json())
         .then(data => {

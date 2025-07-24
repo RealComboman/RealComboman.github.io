@@ -1,0 +1,281 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head><!-- 47x47 -->
+	<style type="text/css" media="screen">
+	body {position:relative;top:-.25em;left:-.2em;}
+	body.h {color: #484D4F;}
+	.input {
+	}
+	.select{position:relative;left:-.35em;}
+	.button {max-width: 58px;border:ridge 1.5px #747b7c;background:#999;text-align: center;color: #3f4446;padding: 0;padding-top: 5px;padding-bottom: 5px;margin:0;margin-top: 8px;
+	background:url(formbg.gif) repeat-x left top;}
+	.button2 {border:ridge 1.5px #747b7c;background:#999;color: #3f4446;padding: 0;padding-top: 3.5px;padding-bottom: 3.5px;margin:0;margin-top:3px;
+	background:url(formbg.gif) repeat-x left top;}
+	.button3 {border:ridge 1.5px #747b7c;background:#999;color: #3f4446;padding: 0;padding-top:  .234em;padding-bottom: .359em;margin:0;
+	background:url(formbg.gif) repeat-x left top;	}
+	#topper {font-family: sans-serif;margin-top:19px;margin-right:0px;font-size: 10pt;color: #3f4446;}
+	div.hr {margin:1px !important;margin-top:1px !important;padding:0px !important;	width: 100%;background-color:  #6986aa;height: 1px;}
+	div.hr hr {	display: none;}
+	</style>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<title>exit0</title>
+<link rel="apple-touch-icon" href="exit0.jpg"/><link rel="shortcut icon" href="favicon.ico" >
+<meta name = "viewport" content = "width = 240px">
+	<script type="text/javascript">
+                function focus(){document.input_box.command.focus();}
+                function prepend(arg){
+                        oldVal = document.input_box.command.value;
+                        document.input_box.command.value = arg;
+                        focus();
+                }
+                function dirSnd(arg){
+                		document.input_box.command.value = arg;
+                		chkBox(arg);               
+                }
+                function dirURL(arg){
+                		if (document.input_box.Chk1.checked == false) {
+						window.location=arg;
+						} 
+						else {window.open(arg);	}            
+                }   
+                 function chkBox(arg) {
+						var srchURL = '';
+						/*if(arg.indexOf('gmob')==0){
+								var x = arg.substring(5,arg.length);
+								var srchURL = 'http://www.google.com/cse?cx=013269018370076798483%3A5yo-vo7ng-o&cof=FORID%3A1&q=google+black&sa=Search#gsc.tab=0&gsc.q=' + x;
+						}
+						else */
+						if(arg.indexOf('wkm')==0){
+								var x = arg.substring(4,arg.length);
+								var srchURL = 'http://en.m.wikipedia.org/wiki?search=' + x;
+						}
+						else if(arg.indexOf('iig')==0){
+								var x = arg.substring(4,arg.length);
+								var srchURL = 'http://www.google.com/#/m/search?site=images&source=gp&channel=gp1&og=gp&q=' + x + '&source=gp';
+						}
+						else{
+							var	srchURL = 'http://yubnub.org/parser/parse?command=' + arg;
+						}
+						if (document.input_box.Chk1.checked == false) {
+						window.location=srchURL;
+						return true;
+						} 
+						else {
+						return 	window.open(srchURL);
+						}
+				}
+        		function actBox(arg) {
+						var srchURL = '';
+						/* if(arg.indexOf('gmob')==0){
+								var x = arg.substring(5,arg.length);
+								var srchURL = 'http://m.google.com/m/search?mrestrict=xhtml&q=' + x;
+						}
+						else */ 
+						if(arg.indexOf('wkm')==0){
+								var x = arg.substring(4,arg.length);
+								var srchURL = 'http://en.m.wikipedia.org/wiki?search=' + x;
+						}
+						else if(arg.indexOf('iig')==0){
+								var x = arg.substring(4,arg.length);
+								var srchURL = 'http://www.google.com/#/m/search?site=images&source=gp&channel=gp1&og=gp&q=' + x + '&source=gp';
+						}
+						else{
+							var	srchURL = 'http://yubnub.org/parser/parse?command=' + arg;
+						}
+						window.location=srchURL;
+						return true;
+				}
+</script>
+</head>
+<body bgcolor="#AAAAAA">
+    <div style="text-align:center;margin:0;">
+        <form action="javascript:document.input_box.Chk1.checked = false;actBox(document.input_box.command.value)" name="input_box" class="input">
+          <select name="searchType" value="ddg " onchange="document.input_box.command.value=this[this.selectedIndex].value;document.input_box.searchType.value=this[this.selectedIndex].value;" class="select">
+              <option value="ddg ">DuckDuckGo</option>
+              <option value="g ">Google</option>
+              <option value="gmap ">Google Maps</option>
+              <option value="gnews ">Google News</option>
+              <option value="gim ">Google Image</option>
+              <option value="wkm ">Wikipedia</option>
+              <option value="walf ">Wolfram Alpha</option>
+              <option value="wu ">Weather Und.</option>
+              <option value="yt ">YouTube</option>
+              <option value="am ">Amazon</option>
+              <option value="ebay ">eBay</option>
+              <option value="ascii ">ascii</option>
+              <option value="stock ">Stock</option>
+              <option value="imdb ">IMDb</option>
+              <option value="rotten ">Rotten Tomatoes</option>
+          </select>
+          <!--input type="button" onclick="document.input_box.command.value=document.input_box.searchType.value;document.input_box.command.focus();" value="pick" class="button3"--> 
+          <div style="margin-top:3px">
+                <input type="text" name="command" size = "26" value="ddg "/> <br>
+	<input type="checkbox" name="Chk1" value="yes" CHECKED size = "34" class="button2" style="position:relative;top:.32em;left:-1.46em;">new&nbsp;
+                <input type="button" align="		" onclick="document.input_box.command.value='';document.input_box.command.focus();" value="clear" class="button2">
+                <input type="button" value="search" align="texttop" onClick="chkBox(document.input_box.command.value)" class="button2" style="margin-left:.28em;">
+            <div id="topper" >exit<b>0</b>mobile - combotechni.ca/exit0</div>
+                <div class="hr"><hr /></div>
+          </div></form></div>
+          <!--div style="margin-top:0px;">
+                <input type="button" onclick="prepend('gmob ')" value="google" class="button" style="position:relative;left:-.55em;">
+                <input type="button" onclick="prepend('iig ')" value="image" class="button" style="position:relative;left:-.3em;">
+                <input type="button" onclick="dirURL('http://affiliate.zap2it.com/tvlistings/ZCGrid.do?aid=canoe');" value="ZapTV" class="button">
+ 				</div-->
+	<div style="text-align:center;margin:0;">
+	<a href="https://feedly.com/i/latest" target="_blank"><img src="i\feedly.png" alt="RSS"></a>
+	<a href="txt.html" target="_blank"><img src="i\txt.png" alt="TxtNews"></a>
+	<a href="http://www.cbc.ca/lite/" target="_blank"><img src="i\cbc.png" alt="CBClite"></a>
+	<a href="https://www.theonion.com" target="_blank"><img src="i\onion.png" alt="Onion"></a>
+	<a href="https://bsky.app" target="_blank"><img src="i\bsky.png" alt="BlueSky"></a>
+	<a href="https://www.refdesk.com/" target="_blank"><img src="i\refdesk.png" alt="refdesk"></a>
+	<a href="https://www.bbc.com/news/world" target="_blank"><img src="i\bbc.png" alt="BBC"></a>
+	<a href="http://news.google.com" target="_blank"><img src="i\gnews.png" alt="News"></a>
+	</div><div style="text-align:center;margin:0;">
+	<a href="https://mail.google.com/mail/u/?authuser=dwall0@gmail.com" target="_blank"><img src="i\gmail.png" alt="gMail-h"></a>
+	<!--a href="https://mail.google.com/mail/u/?authuser=darren0@eosense.com" target="_blank"><img src="i\gmailg.png" alt="gMail-w"></a-->
+	<a href="http://mail.yahoo.com" target="_blank"><img src="i\ymail.png" alt="Y!mail"></a>
+	<a href="http://hotmail.com" target="_blank"><img src="i\ms.png" alt="Yandex"></a>
+	<a href="http://mail.yandex.com" target="_blank"><img src="i\yandex.png" alt="HotMail"></a>
+	<a href="http://protonmail.com" target="_blank"><img src="i\proton.png" alt="ProtonMail"></a>
+	<a href="https://app.simplelogin.io" target="_blank"><img src="i\simplog.png" alt="SimpleLogin"></a>
+	<a href="https://selfserve.publicmobile.ca/" target="_blank"><img src="i\public.png" alt="Public"></a>
+	<a href="https://messages.google.com/web" target="_blank"><img src="i\sms.png" alt="SMS"></a>
+	</div><div style="text-align:center;margin:0;">	
+	<a href="http://google.ca" target="_blank"><img src="i\gsearch.png" alt="Google"></a>
+	<a href="http://google.com/calendar" target="_blank"><img src="i\gcal.png" alt="GooCal"></a>
+	<a href="http://contacts.google.com" target="_blank"><img src="i\gcontacts.png" alt="Contacts"></a>
+	<a href="http://photos.google.com" target="_blank"><img src="i\gphotos.png" alt="Photos"></a>
+	<a href="https://google.ca/shopping" target="_blank"><img src="i\gshop.png" alt="Gshop"></a>
+	<a href="https://www.google.com/finance" target="_blank"><img src="i\gfinance.png" alt="GFin"></a>
+	<a href="http://keep.google.com" target="_blank"><img src="i\keep.png" alt="Keep"></a>
+	<a href="http://maps.google.com" target="_blank"><img src="i\gmaps.png" alt="Maps"></a>
+	</div><div style="text-align:center;margin:0;">	
+	<a href="http://www.theweathernetwork.com/ca/weather/nova-scotia/dartmouth" target="_blank"><img src="i\weath.png" alt="Weather"></a>
+	<a href="http://outagemap.nspower.ca" target="_blank"><img src="i\power1.png" alt="NSPC"></a>
+	<a href="https://www.hdbc.ca/macpass/" target="_blank"><img src="i\macpass.png" alt="MacPass"></a>
+	<a href="https://www.halifax.ca/transportation/parking/street-parking" target="_blank"><img src="i\parking.png" alt="parking"></a>
+	<a href="https://511.novascotia.ca" target="_blank"><img src="i\511.png" alt="HiwayCnd"></a>
+	<a href="http://www.halifax.ca/transit/ServiceDisruptions.php" target="_blank"><img src="i\bus.png" alt="MetroTrans"></a>
+	<a href="http://canada411.ca" target="_blank"><img src="i\c411.png" alt="Can411"></a>
+	<a href="https://www.nshealth.ca/edwaittimes" target="_blank"><img src="i\hospital.png" alt="Hospital"></a>
+	</div><div style="text-align:center;margin:0;">
+	<a href="http://catalogue.halifaxpubliclibraries.ca/ipac20/ipac.jsp?&auth=true" target="_blank"><img src="i\lib.png" alt="Library"></a>	
+	<a href="https://archive.org" target="_blank"><img src="i\intarc.png" alt="IntArc"></a>
+	<a href="https://annas-archive.org" target="_blank"><img src="i\annas.png" alt="AnnasArchive"></a>
+	<a href="http://libgen.is" target="_blank"><img src="i\libgen.png" alt="LibGen"></a>
+	<!--a href="https://getcomics.info/" target="_blank"><img src="i\getcomic.png" alt="GetComics"></a--> 
+	<a href="https://www.cygnus-x1.net/links/lcars/blueprints-updates.php" target="_blank"><img src="i\stblue.png" alt="STblue"></a> 
+	<a href="https://solidtorrents.to" target="_blank"><img src="i\solidtor.png" alt="solid"></a> 
+	<a href="https://www.bookfinder.com" target="_blank"><img src="i\bookfinder.png" alt="BookFinder"></a>
+	<a href="http://wikipedia.org" target="_blank"><img src="i\wik.png" alt="Wikiped"></a>
+	</div><div style="text-align:center;margin:0;">
+	<a href="media.html" target="_blank"><img src="i\film.png" alt="Media"></a>
+	<a href="http://showrss.info" target="_blank"><img src="i\srss.png" alt="ShowRSS"></a> 
+	<a href="http://hoopladigital.com" target="_blank"><img src="i\hoopla.png" alt="Hoopla"></a>
+	<a href="https://app.plex.tv/desktop" target="_blank"><img src="i\plex.png" alt="Plex"></a>
+	<a href="http://yts.am" target="_blank"><img src="i\yts.png" alt="YTS"></a>
+	<a href="https://www.pluto.tv" target="_blank"><img src="i\pluto.png" alt="Pluto"></a>
+	<a href="https://netFlix.com" target="_blank"><img src="i\netflix.png" alt="Netflix"></a>
+	<a href="http://youtube.com" target="_blank"><img src="i\ytube.png" alt="YouTube"></a>
+	</div><div style="text-align:center;margin:0;">
+	<a href="line-card.html" target="_blank"><img src="i\line.png" alt="LineCard"></a>
+	<a href="https://www.digikey.ca" target="_blank"><img src="i\digikey.png" alt="Digikey"></a>
+	<a href="https://www.pcbway.com" target="_blank"><img src="i\pcbway.png" alt="PCBway"></a>
+	<a href="http://thingiverse.com" target="_blank"><img src="i\thing.png" alt="Thingiverse"></a>
+	<a href="https://cults3d.com/en" target="_blank"><img src="i\cults.png" alt="Cults"></a>
+	<a href="http://printables.com" target="_blank"><img src="i\printables.png" alt="Printables"></a>
+	<!--a href="http://thangs.com" target="_blank"><img src="i\thangs.png" alt="Thangs"></a-->
+	<a href="https://www.circuitlab.com" target="_blank"><img src="i\cirlab.png" alt="CircuitLab"></a>
+	<a href="https://patents.google.com/advanced" target="_blank"><img src="i\gogpatents.png" alt="Patent"></a>
+	<!-- a href="http://192.168.1.1/" target="_blank"><img src="i\null.png" alt="null"></a -->
+	</div><div style="text-align:center;margin:0;">
+	<a href="https://github.com" target="_blank"><img src="i\git.png" alt="GitHub"></a>
+	<a href="https://stackoverflow.com" target="_blank"><img src="i\stack.png" alt="StackOvrflw"></a>
+	<a href="https://gregstoll.com/~gregstoll/floattohex/" target="_blank"><img src="i\hex.png" alt="HexFlt"></a>
+	<a href="https://www.epochconverter.com/hex" target="_blank"><img src="i\epoch.png" alt="Epoch"></a>
+	<a href="https://patorjk.com/software/taag/#p=display&f=Small Slant&t=Test%20" target="_blank"><img src="i\ascii.png" alt="AsciiFnt"></a>
+	<a href="https://fontgenerator.cool" target="_blank"><img src="i\fontgen.png" alt="FontGen"></a>
+	<!--a href="https://yaytext.com" target="_blank"><img src="i\yaytxt.png" alt="YayText"></a-->
+	<a href="https://copychar.cc/punctuation/" target="_blank"><img src="i\copychar.png" alt="CopyChar"></a>
+	<a href="https://manytools.org" target="_blank"><img src="i\manytools.png" alt="ManyTools"></a>
+	</div><div style="text-align:center;margin:0;">
+	<a href="shop.html" target="_blank"><img src="i\shop.png" alt="Shop"></a>
+	<a href="http://aliexpress.com" target="_blank"><img src="i\aliexpress.png" alt="AliExpress"></a>
+	<a href="http://amazon.ca" target="_blank"><img src="i\amazon-ca.png" alt="Amazon.Ca"></a>
+	<a href="https://www.nytimes.com/wirecutter/" target="_blank"><img src="i\wirecutter.png" alt="Wirecutter"></a>
+	<a href="http://costco.ca" target="_blank"><img src="i\costco.png" alt="Costco"></a> 
+	<a href="https://www.reebee.com/halifax/flyers" target="_blank"><img src="i\flyer.png" alt="Flyers"></a>
+	<a href="https://events.viewbid.ca" target="_blank"><img src="i\viewbid.png" alt="ViewBid"></a>
+	<a href="http://picclick.ca" target="_blank"><img src="i\pic.png" al="PicClick"></a> 
+	</div><div style="text-align:center;margin:0;">	
+	<!--a href="https://www.tangerine.ca/en" target="_blank"><img src="i\tang.png" alt="Tang"></a-->
+	<a href="http://rbcroyalbank.com/personal.html" target="_blank"><img src="i\rbc.png" alt="RBC"></a>
+	<a href="http://simplii.ca" target="_blank"><img src="i\simplii.png" alt="Simplii"></a>
+	<a href="http://pcfinancial.ca/en" target="_blank"><img src="i\pc.png" alt="PC"></a>
+	<a href="http://hometrust.ca" target="_blank"><img src="i\hometrust.png" alt="HomeTrust"></a>
+	<a href="https://www.paypal.com" target="_blank"><img src="i\paypal.png" alt="PayPal"></a>
+	<a href="http://mint.com" target="_blank"><img src="i\mint.png" alt="Mint"></a>
+	<a href="http://moneysense.ca" target="_blank"><img src="i\money.png" alt="MoneySense"></a>
+	<a href="https://webbroker.td.com" target="_blank"><img src="i\TD.png" alt="TD"></a>
+	</div><div style="text-align:center;margin:0;">
+	<a href="calculator.html" target="_blank"><img src="i\calc.png" alt="Calc"></a>
+	<a href="http://docs.google.com" target="_blank"><img src="i\gdoc.png" alt="Docs"></a>
+	<a href="http://sheets.google.com" target="_blank"><img src="i\gsheet.png" alt="Sheets"></a>
+	<a href="http://slides.google.com" target="_blank"><img src="i\gslide.png" alt="Slides"></a>
+	<a href="https://tinywow.com" target="_blank"><img src="i\tinywow.png" alt="TinyWow"></a>
+	<a href="http://travel.google.com" target="_blank"><img src="i\gtravel.png" alt="Travel"></a>
+	<a href="http://translate.google.com" target="_blank"><img src="i\gtrans.png" alt="Translate"></a>
+	<a href="http://earth.google.com" target="_blank"><img src="i\gearth.png" alt="Earth"></a>
+	</div><div style="text-align:center;margin:0;"><!-- GAMES -->
+	<a href="https://next.matchplay.events/dashboard" target="_blank"><img src="i\match.png" alt="MatchPlay"></a>
+	<a href="https://www.nytimes.com/games/" target="_blank"><img src="i\nytgames.png" alt="NYTGames"></a>
+	<a href="https://bracket.city" target="_blank"><img src="i\bracketcity.png" alt="BracketCity"></a>
+	<!--a href="https://wafflegame.net" target="_blank"><img src="i\waffle.png" alt="Waffle"></a-->
+	<a href="https://timeguessr.com" target="_blank"><img src="i\timeguessr.png" alt="TimeGuessr"></a>
+	<a href="https://playpocketpuzzles.com" target="_blank"><img src="i\pockpuz.png" alt="PocketPuzzles"></a>
+	<a href="https://www.puzzmo.com" target="_blank"><img src="i\puzzmo.png" alt="Puzzmo"></a>
+	<a href="https://ev.io" target="_blank"><img src="i\evio.png" alt="EV.IO"></a>
+	<a href="https://csklimowski.itch.io/six-sided-streets" target="_blank"><img src="i\6sidedst.png" alt="6SidedStr"></a>
+	</div><div style="text-align:center;margin:0;">
+	<a href="https://bsky.app" target="_blank"><img src="i\bsky.png" alt="BlueSky"></a>
+	<a href="https://gandersocial.ca" target="_blank"><img src="i\gander.png" alt="Gander"></a>
+	<a href="http://mastodon.social" target="_blank"><img src="i\mastodon.png" alt="Mastodon"></a>
+	<a href="http://slack.com" target="_blank"><img src="i\slack.png" alt="Slack"></a>
+	<a href="https://discord.com" target="_blank"><img src="i\discord.png" alt="Discord"></a>
+	<a href="https://www.reddit.com" target="_blank"><img src="i\reddit.png" alt="Reddit"></a>
+	<a href="https://pxlmo.com" target="_blank"><img src="i\pixelfed.png" alt="Pixelfed"></a>
+	<a href="http://linkedin.com" target="_blank"><img src="i\in.png" alt="LinedIn"></a>
+	<!--a href="http://facebook.com" target="_blank"><img src="i\fb.png" alt="FaceBook"></a-->
+	<!-- a href="http://mewe.com" target="_blank"><img src="i\mewe.png" alt="MeWe"></a -->
+	</div><div style="text-align:center;margin:0;">
+	<a href="http://drive.google.com" target="_blank"><img src="i\gdrive.png" alt="Drive"></a>
+	<a href="https://web.airdroid.com" target="_blank"><img src="i\airdroid.png" alt="AirDroid"></a>
+	<a href="http://dropbox.com" target="_blank"><img src="i\dbox.png" alt="DropBox"></a>
+	<a href="https://play.google.com" target="_blank"><img src="i\gplay.png" alt="Gplay"></a>
+	<a href="https://revanced.app" target="_blank"><img src="i\revanced.png" alt="Revanced"></a>
+	<a href="http://store.steampowered.com" target="_blank"><img src="i\steam.png" alt="Steam"></a> 
+	<!--a href="https://macos8.app/" target="_blank"><img src="i\macos.png" alt="MacOS"></a-->
+	<a href="https://www.portablefreeware.com" target="_blank"><img src="i\portable.png" alt="Portable"></a>
+	<a href="http://www.mameworld.info/ubbthreads/postlist.php?Cat=&Board=artwork" target="_blank"><img src="i\mame.png" alt="MAME"></a>
+	</div><div style="text-align:center;margin:0;">
+	<a href="https://chat.openai.com" target="_blank"><img src="i\GPT.png" alt="GPT"></a>
+	<a href="https://notebooklm.google" target="_blank"><img src="i\notebooklm.png" alt="LM"></a>
+	<a href="https://gemini.google.com/" target="_blank"><img src="i\gemini.png" alt="Gemini"></a>
+	<a href="https://app.leonardo.ai" target="_blank"><img src="i\leonardo.png" alt="Leonardo"></a> 
+	<a href="http://craiyon.com" target="_blank"><img src="i\craiyon.png" alt="Craiyon"></a>
+	<a href="https://www.fotor.com" target="_blank"><img src="i\fotor.png" alt="Fotor"></a>
+	<a href="https://www.canva.com" target="_blank"><img src="i\canva.png" alt="Canvar"></a>
+	<a href="https://thepiratebay.org" target="_blank"><img src="i\pbay.png" alt="pbay"></a> 
+	<!--a href="https://app.hubspot.com" target="_blank"><img src="i\hubspot.png" alt="Hubspot"></a-->
+	</div><div style="text-align:center;margin:0;">
+	<a href="http://duckduckgo.com" target="_blank"><img src="i\duck.png" alt="DuckDuckGo"></a>
+	<a href="http://meet.google.com" target="_blank"><img src="i\gmeet.png" alt="GoogleMeet"></a>
+	<a href="https://www.ancestry.ca" target="_blank"><img src="i\ancestry.png" alt="Ancestry"></a>
+	<a href="https://signal.org" target="_blank"><img src="i\signal.png" alt="Signal"></a>
+	<a href="http://qwant.com" target="_blank"><img src="i\qwant.png" alt="Qwant"></a>
+	</div><div style="text-align:center;margin:0;">
+	<hr><img src="i\exit0.jpg"></div>
+</body>
+</html>
+	<!--a href="http://192.168.1.1/" target="_blank"><img src="i\null.png" alt="null"></a-->
+

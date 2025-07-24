@@ -12,18 +12,14 @@ a:hover { color: green; background-color: transparent; text-decoration: none;}
 a:active {color: yellow; background-color: transparent; text-decoration: underline;}
 </style>
 </head>
-<body><!--bgcolor="#AAAAAA"
- 
-          <button value="🔍 Search" align="texttop" onClick="Sddg(document.input_box.command.value)" class="button2" style="margin-left:.28em;">
-
--->
+<body bgcolor=white>
 <div style="text-align:right;margin:10;"><br>
 <a href="exit0.html" target="_blank"><img src="i\dots.png" alt="apps"></a> <a href="exit0.html" target="_blank"><img src="i\cfg.png" alt="cfg"></a>
 </div>
 <div id="weather" style="text-align:left;">
 </div><br><br><br><br>
 <div style="text-align:center;margin:0;">
-<h1><span style="color:blue;">C<span style="color:red;">o<span style="color:orange;">m<span style="color:blue;">b<span style="color:green;"><a href="txt.html">o</a><span style="color:purple;">t<span style="color:blue;">e<span style="color:red;">c<span style="color:violet;">h<span style="color:lime;">n<span style="color:orange;">i.<span style="color:blue;">c<span style="color:red;">a</h1>
+<h1><span style="color:blue;">C<span style="color:red;"><a id="theme-o"></a><span style="color:orange;">m<span style="color:blue;">b<span style="color:green;"><a href="txt.html">o</a><span style="color:purple;">t<span style="color:blue;">e<span style="color:red;">c<span style="color:violet;">h<span style="color:lime;">n<span style="color:orange;">i.<span style="color:blue;">c<span style="color:red;">a</h1>
 <br>
 <form action="javascript:;" onsumbit=" Sddg(document.input_box.command.value) " name="input_box" >
     <div style="margin-top:3px">
@@ -34,7 +30,7 @@ a:active {color: yellow; background-color: transparent; text-decoration: underli
     <input type="button" value="📰 News" align="texttop" onClick="Snews(document.input_box.command.value)">
 	<input type="button" value="🛒 Shop" align="texttop" onClick="Sshop(document.input_box.command.value)">
 	<select name="searchType" value="wp " onchange="document.input_box.searchType.value=this[this.selectedIndex].value;Smagic(document.input_box.command.value);" class="select">
-    <option value="wp ">🪄 Multi</option>
+    <option value="" selected disabled>🪄 Magic</option>
     <option value="wp ">Wikipedia</option>
     <option value="thes ">Thesaurus</option>
     <option value="yt ">YouTube</option>
@@ -66,10 +62,23 @@ a:active {color: yellow; background-color: transparent; text-decoration: underli
           const { name, main, weather } = data;
           const temperature = main.temp;
           const description = weather[0].description;
-          const weatherContent = `<b>${name}</b><img src="https://openweathermap.org/img/wn/${data.weather[0].icon}.png"}" width="40" /><br>${temperature}°C | ${description}`;
+          const weatherContent = `<b>${name} </b> <img src="https://openweathermap.org/img/wn/${data.weather[0].icon}.png"}" width="40" /><br>${temperature}°C | ${description}`;
           weatherDiv.innerHTML = weatherContent; })
         .catch(error => {console.error('Error fetching weather data:', error); weatherDiv.innerHTML = '<p>Failed to fetch weather data.</p>'; });
 
+		date=new Date();
+		if(date.getMonth()==0 && date.getDate()==1){document.getElementById("theme-o").innerHTML = '🎆️';}
+		else if(date.getMonth()==0 && date.getDate()==13){document.getElementById("theme-o").innerHTML = '🎂';}
+		else if(date.getMonth()==1 && date.getDate()==2){document.getElementById("theme-o").innerHTML = '🐹';}
+		else if(date.getMonth()==1 && date.getDate()==14){document.getElementById("theme-o").innerHTML = '❤️';}
+		else if(date.getMonth()==5 && date.getDate()==21){document.getElementById("theme-o").innerHTML = '🪶';}
+		else if(date.getMonth()==6 && date.getDate()==1){document.getElementById("theme-o").innerHTML = '🍁';}
+		else if(date.getMonth()==6 && date.getDate()==4){document.getElementById("theme-o").innerHTML = '💩';}
+		else if(date.getMonth()==8 && date.getDate()==29){document.getElementById("theme-o").innerHTML = '🎂';}
+		else if(date.getMonth()==9 && date.getDate()==31){document.getElementById("theme-o").innerHTML = '🎃';}
+		else if(date.getMonth()==10 && date.getDate()==11){document.getElementById("theme-o").innerHTML = '🌸';}
+		else if(date.getMonth()==11 && date.getDate()==25){document.getElementById("theme-o").innerHTML = '⛄';}
+		else {document.getElementById("theme-o").innerHTML = 'o';}
 	
                 function focus(){document.input_box.command.focus();}
                 function prepend(arg){

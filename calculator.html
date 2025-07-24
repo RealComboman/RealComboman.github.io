@@ -72,6 +72,7 @@
      <button onclick="trig('cos')" class="functions" id="cosbut">COS</button>
      <button onclick="trig('tan')" class="functions" id="tanbut">TAN</button>
      <button onclick="setOperator('^')" class="functions">xⁿ</button>
+	 
      <button onclick="hypmode()" class="mode">HYP</button>
      <button onclick="trig('asin')" class="functions" id="asinbut")>ASIN</button>
      <button onclick="trig('acos')" class="functions" id="acosbut">ACOS</button>
@@ -82,10 +83,11 @@
      <button onclick="trig('ilog')" class="functions">10ⁿ</button>
      <button onclick="trig('ln')" class="functions">LN</button>
      <button onclick="trig('iln')" class="functions">eⁿ</button>
-      <button onclick="trig('rnd')">RND</button>
-      <button onclick="trig('e')">e</button>
-	  <button onclick="trig('pi')">π</button>
+     <button onclick="trig('e')">e</button>
 
+	<button onclick="trig('pi')">π</button>
+     <button onclick="trig('rnd')">RND</button>
+	<button onclick="trig('rnd1')" class="functions">1⇝x</button>
 
     </div>
   </div>
@@ -188,6 +190,7 @@
 	  else if (op === 'pi') result = Math.PI;
 	  else if (op === 'e') result = Math.E;
 	  else if (op === 'rnd') result = Math.random();
+	  else if (op === 'rnd1') result = Math.round(((currentInput-1)*Math.random())+1);
       document.getElementById('display').value = result; 
       currentInput = result.toString(); 
     }

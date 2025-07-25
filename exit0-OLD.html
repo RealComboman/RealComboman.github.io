@@ -1,10 +1,126 @@
-<html><head><!-- 47x47 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head><!-- 47x47 -->
+	<style type="text/css" media="screen">
+	body {position:relative;top:-.25em;left:-.2em;}
+	body.h {color: #484D4F;}
+	.input {
+	}
+	.select{position:relative;left:-.35em;}
+	.button {max-width: 58px;border:ridge 1.5px #747b7c;background:#999;text-align: center;color: #3f4446;padding: 0;padding-top: 5px;padding-bottom: 5px;margin:0;margin-top: 8px;
+	background:url(formbg.gif) repeat-x left top;}
+	.button2 {border:ridge 1.5px #747b7c;background:#999;color: #3f4446;padding: 0;padding-top: 3.5px;padding-bottom: 3.5px;margin:0;margin-top:3px;
+	background:url(formbg.gif) repeat-x left top;}
+	.button3 {border:ridge 1.5px #747b7c;background:#999;color: #3f4446;padding: 0;padding-top:  .234em;padding-bottom: .359em;margin:0;
+	background:url(formbg.gif) repeat-x left top;	}
+	#topper {font-family: sans-serif;margin-top:19px;margin-right:0px;font-size: 10pt;color: #3f4446;}
+	div.hr {margin:1px !important;margin-top:1px !important;padding:0px !important;	width: 100%;background-color:  #6986aa;height: 1px;}
+	div.hr hr {	display: none;}
+	</style>
 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-<title>Quick Links</title>
+<title>exit0</title>
 <link rel="apple-touch-icon" href="exit0.jpg"/><link rel="shortcut icon" href="favicon.ico" >
 <meta name = "viewport" content = "width = 240px">
+	<script type="text/javascript">
+                function focus(){document.input_box.command.focus();}
+                function prepend(arg){
+                        oldVal = document.input_box.command.value;
+                        document.input_box.command.value = arg;
+                        focus();
+                }
+                function dirSnd(arg){
+                		document.input_box.command.value = arg;
+                		chkBox(arg);               
+                }
+                function dirURL(arg){
+                		if (document.input_box.Chk1.checked == false) {
+						window.location=arg;
+						} 
+						else {window.open(arg);	}            
+                }   
+                 function chkBox(arg) {
+						var srchURL = '';
+						/*if(arg.indexOf('gmob')==0){
+								var x = arg.substring(5,arg.length);
+								var srchURL = 'http://www.google.com/cse?cx=013269018370076798483%3A5yo-vo7ng-o&cof=FORID%3A1&q=google+black&sa=Search#gsc.tab=0&gsc.q=' + x;
+						}
+						else */
+						if(arg.indexOf('wkm')==0){
+								var x = arg.substring(4,arg.length);
+								var srchURL = 'http://en.m.wikipedia.org/wiki?search=' + x;
+						}
+						else if(arg.indexOf('iig')==0){
+								var x = arg.substring(4,arg.length);
+								var srchURL = 'http://www.google.com/#/m/search?site=images&source=gp&channel=gp1&og=gp&q=' + x + '&source=gp';
+						}
+						else{
+							var	srchURL = 'http://yubnub.org/parser/parse?command=' + arg;
+						}
+						if (document.input_box.Chk1.checked == false) {
+						window.location=srchURL;
+						return true;
+						} 
+						else {
+						return 	window.open(srchURL);
+						}
+				}
+        		function actBox(arg) {
+						var srchURL = '';
+						/* if(arg.indexOf('gmob')==0){
+								var x = arg.substring(5,arg.length);
+								var srchURL = 'http://m.google.com/m/search?mrestrict=xhtml&q=' + x;
+						}
+						else */ 
+						if(arg.indexOf('wkm')==0){
+								var x = arg.substring(4,arg.length);
+								var srchURL = 'http://en.m.wikipedia.org/wiki?search=' + x;
+						}
+						else if(arg.indexOf('iig')==0){
+								var x = arg.substring(4,arg.length);
+								var srchURL = 'http://www.google.com/#/m/search?site=images&source=gp&channel=gp1&og=gp&q=' + x + '&source=gp';
+						}
+						else{
+							var	srchURL = 'http://yubnub.org/parser/parse?command=' + arg;
+						}
+						window.location=srchURL;
+						return true;
+				}
+</script>
 </head>
 <body bgcolor="#AAAAAA">
+    <div style="text-align:center;margin:0;">
+        <form action="javascript:document.input_box.Chk1.checked = false;actBox(document.input_box.command.value)" name="input_box" class="input">
+          <select name="searchType" value="ddg " onchange="document.input_box.command.value=this[this.selectedIndex].value;document.input_box.searchType.value=this[this.selectedIndex].value;" class="select">
+              <option value="ddg ">DuckDuckGo</option>
+              <option value="g ">Google</option>
+              <option value="gmap ">Google Maps</option>
+              <option value="gnews ">Google News</option>
+              <option value="gim ">Google Image</option>
+              <option value="wkm ">Wikipedia</option>
+              <option value="walf ">Wolfram Alpha</option>
+              <option value="wu ">Weather Und.</option>
+              <option value="yt ">YouTube</option>
+              <option value="am ">Amazon</option>
+              <option value="ebay ">eBay</option>
+              <option value="ascii ">ascii</option>
+              <option value="stock ">Stock</option>
+              <option value="imdb ">IMDb</option>
+              <option value="rotten ">Rotten Tomatoes</option>
+          </select>
+          <!--input type="button" onclick="document.input_box.command.value=document.input_box.searchType.value;document.input_box.command.focus();" value="pick" class="button3"--> 
+          <div style="margin-top:3px">
+                <input type="text" name="command" size = "26" value="ddg "/> <br>
+	<input type="checkbox" name="Chk1" value="yes" CHECKED size = "34" class="button2" style="position:relative;top:.32em;left:-1.46em;">new&nbsp;
+                <input type="button" align="		" onclick="document.input_box.command.value='';document.input_box.command.focus();" value="clear" class="button2">
+                <input type="button" value="search" align="texttop" onClick="chkBox(document.input_box.command.value)" class="button2" style="margin-left:.28em;">
+            <div id="topper" >exit<b>0</b>mobile - combotechni.ca/exit0</div>
+                <div class="hr"><hr /></div>
+          </div></form></div>
+          <!--div style="margin-top:0px;">
+                <input type="button" onclick="prepend('gmob ')" value="google" class="button" style="position:relative;left:-.55em;">
+                <input type="button" onclick="prepend('iig ')" value="image" class="button" style="position:relative;left:-.3em;">
+                <input type="button" onclick="dirURL('http://affiliate.zap2it.com/tvlistings/ZCGrid.do?aid=canoe');" value="ZapTV" class="button">
+ 				</div-->
 	<div style="text-align:center;margin:0;">
 	<a href="https://feedly.com/i/latest" target="_blank"><img src="i\feedly.png" alt="RSS"></a>
 	<a href="txt.html" target="_blank"><img src="i\txt.png" alt="TxtNews"></a>
@@ -157,8 +273,9 @@
 	<a href="https://www.ancestry.ca" target="_blank"><img src="i\ancestry.png" alt="Ancestry"></a>
 	<a href="https://signal.org" target="_blank"><img src="i\signal.png" alt="Signal"></a>
 	<a href="http://qwant.com" target="_blank"><img src="i\qwant.png" alt="Qwant"></a>
-	<hr>
- <h1><p style="font-family:tahoma"><b> Quick Links </b> <a href="index.html"><img src="i\exit0.jpg"></a></p></h1>
-</div></body></html>
+	</div><div style="text-align:center;margin:0;">
+	<hr><img src="i\exit0.jpg"></div>
+</body>
+</html>
 	<!--a href="http://192.168.1.1/" target="_blank"><img src="i\null.png" alt="null"></a-->
 

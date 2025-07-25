@@ -1,7 +1,5 @@
 <!DOCTYPE html>
-<html>
-<head>
-<link href='https://fonts.googleapis.com/css?family=Audiowide' rel='stylesheet'>
+<html><head><link href='https://fonts.googleapis.com/css?family=Audiowide' rel='stylesheet'>
 <title>Combotechni.ca</title><link rel="shortcut icon" href="combo.ico" >
 <style>
 h1 {font-family: 'Audiowide', Helvetica, sans-serif; font-size: 40px;}
@@ -12,14 +10,12 @@ a:hover { color: red; background-color: transparent; text-decoration: none;}
 a:active {color: yellow; background-color: transparent; text-decoration: underline;}
 </style>
 </head>
-<body bgcolor=white>
-<div style="text-align:right;margin:10;"><br>
-<a href="exit0.html" target="_blank"><img src="i\dots.png" alt="apps"></a> <a href="exit0.html" target="_blank"><img src="i\cfg.png" alt="cfg"></a>
-</div>
+<body bgcolor=white><div style="text-align:right;margin:10; color:black;">
+<a href="exit0.html"  target="_blank" style="color:black;"><h2><b> ⁝⁝⁝ </b></h2></a></div> <!-- <img src="i\dots.png" alt="apps"><img src="i\cfg.png" alt="cfg"> -->
 <div id="weather" style="text-align:left;">
 </div><br><br><br><br>
 <div style="text-align:center;margin:0;">
-<h1><span style="color:blue;">C<span style="color:red;"><a id="theme-o"></a><span style="color:orange;">m<span style="color:green;">b<span style="color:red;"><a href="txt.html">o</a><span style="color:purple;">t<span style="color:red;">e<span style="color:blue;">c<span style="color:violet;">h<span style="color:lime;">n<span style="color:orange;">i.<span style="color:blue;">c<span style="color:red;">a</h1>
+<h1><span style="color:blue;">C<span style="color:red;"><a id="theme-o"></a><span style="color:orange;">m<span style="color:green;">b<span style="color:red;"><a href="txt.html">o</a><span style="color:fuchsia;">t<span style="color:red;">e<span style="color:blue;">c<span style="color:lime;">h<span style="color:turquoise;">n<span style="color:orange;">i<span style="color:red;">.<span style="color:blue;">c<span style="color:red;">a</h1>
 <br>
 <form action="javascript:;" onsumbit=" Sddg(document.input_box.command.value) " name="input_box" >
     <div style="margin-top:3px">
@@ -33,17 +29,31 @@ a:active {color: yellow; background-color: transparent; text-decoration: underli
     <option value="" selected disabled>🪄 Magic</option>
     <option value="wp ">Wikipedia</option>
     <option value="thes ">Thesaurus</option>
+    <option value="dnews">DDG News</option>
+    <option value="dimg">DDG Image</option>
+    <option value="dmap">DDG Map</option>
+    <option value="open">OpenStrMap</option>
     <option value="yt ">YouTube</option>
+    <option value="dshop">DDG Shop</option>
     <option value="am ">Amazon</option>
     <option value="ebay ">eBay</option>
-    <option value="ascii ">ascii</option>
+    <option value="ascii ">Ascii</option>
     <option value="stock ">Stock</option>
-    <option value="wu ">Weather</option>
     <option value="groups ">Usenet</option>
+	<option value="walf ">Wolfram</option>
     <option value="g ">Google</option>
+    <option value="wu ">Weather</option>
     </select></div>
 	<br><br><br><br><br><br>
-                <div class="hr"><hr /></div><br>
+    <div class="hr"><hr /></div><br>
+	<a href="calculator.html" target="_blank"><img src="i\calc.png" alt="Calc"></a>
+	<a href="https://mail.google.com" target="_blank"><img src="i\gmailb.png" alt="gMail-h"></a>
+	<a href="media.html" target="_blank"><img src="i\film.png" alt="Media"></a>
+	<a href="shop.html" target="_blank"><img src="i\shop.png" alt="Shop"></a>
+	<a href="https://feedly.com/i/latest" target="_blank"><img src="i\greader.png" alt="RSS"></a>
+	<a href="https://bsky.app" target="_blank"><img src="i\bsky.png" alt="BlueSky"></a>
+	<br><br>
+    <div class="hr"><hr /></div><br>
 				⚙️ Configuration:<br><br>
 	Open search in new window: <input type="checkbox" name="Chk1" value="yes" CHECKED size = "34" class="button2" style=""><br>
 	Weather location: <input type="text" id="cityInput" value="Halifax"><br>
@@ -62,11 +72,10 @@ a:active {color: yellow; background-color: transparent; text-decoration: underli
           const { name, main, weather } = data;
           const temperature = Math.round(main.temp*10)/10;
           const description = weather[0].description;
-		  var wicon = "❓";
+		  var wicon = "❓"; //use emoji for weather icons
 		  if(data.weather[0].icon==="01d"){wicon = "☀️";}
-		  if(data.weather[0].icon==="01n"){wicon = "️🌙";}
-		  if(data.weather[0].icon==="02d" || data.weather[0].icon==="02n"){wicon = "️🌤";}
-		  if(data.weather[0].icon==="03d" || data.weather[0].icon==="02n"){wicon = "⛅️";}
+		  if(data.weather[0].icon==="01n"){wicon = "️🌙";} //{wicon = "️🌤";}
+		  if(data.weather[0].icon==="02d" || data.weather[0].icon==="02n" ||data.weather[0].icon==="03d" || data.weather[0].icon==="02n"){wicon = "⛅️";}
 		  if(data.weather[0].icon==="04d" || data.weather[0].icon==="04n"){wicon = "☁️";}
 		  if(data.weather[0].icon==="09d" || data.weather[0].icon==="09n"){wicon = "️🌦";}
 		  if(data.weather[0].icon==="10d" || data.weather[0].icon==="10n"){wicon = "️🌧";}
@@ -77,7 +86,7 @@ a:active {color: yellow; background-color: transparent; text-decoration: underli
           weatherDiv.innerHTML = weatherContent; })
         .catch(error => {console.error('Error fetching weather data:', error); weatherDiv.innerHTML = '<p>Failed to fetch weather data.</p>'; });
 
-		date=new Date();
+		date=new Date(); //theme doodle emoji
 		if(date.getMonth()==0 && date.getDate()==1){document.getElementById("theme-o").innerHTML = '🎆️';}
 		else if(date.getMonth()==0 && date.getDate()==13){document.getElementById("theme-o").innerHTML = '🎂';}
 		else if(date.getMonth()==1 && date.getDate()==2){document.getElementById("theme-o").innerHTML = '🐹';}
@@ -85,6 +94,7 @@ a:active {color: yellow; background-color: transparent; text-decoration: underli
 		else if(date.getMonth()==5 && date.getDate()==21){document.getElementById("theme-o").innerHTML = '🪶';}
 		else if(date.getMonth()==6 && date.getDate()==1){document.getElementById("theme-o").innerHTML = '🍁';}
 		else if(date.getMonth()==6 && date.getDate()==4){document.getElementById("theme-o").innerHTML = '💩';}
+		else if(date.getMonth()==6 && date.getDate()==16){document.getElementById("theme-o").innerHTML = '🎂';}
 		else if(date.getMonth()==8 && date.getDate()==29){document.getElementById("theme-o").innerHTML = '🎂';}
 		else if(date.getMonth()==9 && date.getDate()==31){document.getElementById("theme-o").innerHTML = '🎃';}
 		else if(date.getMonth()==10 && date.getDate()==11){document.getElementById("theme-o").innerHTML = '🌸';}
@@ -105,14 +115,18 @@ a:active {color: yellow; background-color: transparent; text-decoration: underli
                 }   
                  function Smagic(arg) {
 						var srchURL = '';
-						var	srchURL = 'http://yubnub.org/parser/parse?command=' + document.input_box.searchType.value + arg;
-						if (document.input_box.Chk1.checked == false) {
-						window.location=srchURL;
-						return true;} 
+						if(document.input_box.searchType.value==="open"){srchURL = 'https://www.openstreetmap.org/search?query=' + arg; }
+						else if(document.input_box.searchType.value==="dmap"){srchURL = 'https://duckduckgo.com/?q='+ arg +'&ia=web&iaxm=maps&source=places'; }
+						else if(document.input_box.searchType.value==="dimg"){srchURL = 'https://duckduckgo.com/?q='+ arg +'&ia=images&iax=images'; }
+						else if(document.input_box.searchType.value==="dshop"){srchURL = 'https://duckduckgo.com/?q='+ arg +'&ia=shopping&iax=shopping'; }
+						else if(document.input_box.searchType.value==="dnews"){srchURL = 'https://duckduckgo.com/?q='+ arg +'&ia=news&iar=news'; }
+						else{ srchURL = 'http://yubnub.org/parser/parse?command=' + document.input_box.searchType.value + arg; }
+
+						if (document.input_box.Chk1.checked == false) { window.location=srchURL; return true; } 
 						else {	return 	window.open(srchURL);	}
 				}
                 function Simg(arg) {
-						var	srchURL = 'http://yubnub.org/parser/parse?command=gim ' + arg;
+						var	srchURL = 'https://www.google.com/search?q=' + arg + '&udm=2';
 						if (document.input_box.Chk1.checked == false) {	window.location=srchURL; return true;	} 
 						else {	return 	window.open(srchURL);	}
 				}
@@ -123,13 +137,13 @@ a:active {color: yellow; background-color: transparent; text-decoration: underli
 				}
                 function Smap(arg) {
 						var srchURL = '';
-						var	srchURL = 'http://yubnub.org/parser/parse?command=gmap ' + arg;
+						var	srchURL = 'https://www.google.com/maps?output=search&q=' + arg + '&entry=mc';
 						if (document.input_box.Chk1.checked == false) {	window.location=srchURL; return true;	} 
 						else {	return 	window.open(srchURL);	}
 				}
                 function Snews(arg) {
 						var srchURL = '';
-						var	srchURL = 'http://yubnub.org/parser/parse?command=gnews ' + arg;
+						var	srchURL = 'https://www.google.com/search?q=' + arg + '&tbm=nws';
 						if (document.input_box.Chk1.checked == false) {	window.location=srchURL; return true;	} 
 						else {	return 	window.open(srchURL);	}
 				}
@@ -139,6 +153,7 @@ a:active {color: yellow; background-color: transparent; text-decoration: underli
 						if (document.input_box.Chk1.checked == false) {	window.location=srchURL; return true;	} 
 						else {	return 	window.open(srchURL);	}
 				}
+
         		function actBox(arg) {
 						var srchURL = '';
 						if(arg.indexOf('wkm')==0){

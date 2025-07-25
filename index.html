@@ -6,9 +6,9 @@
 <style>
 h1 {font-family: 'Audiowide', Helvetica, sans-serif; font-size: 40px;}
 body {font-family: 'Arial', Helvetica, sans-serif;}
-a:link {color:green; text-decoration: none;}
-a:visited {color:green; background-color: transparent; text-decoration: none;}
-a:hover { color: green; background-color: transparent; text-decoration: none;}
+a:link {color:red; text-decoration: none;}
+a:visited {color:red; background-color: transparent; text-decoration: none;}
+a:hover { color: red; background-color: transparent; text-decoration: none;}
 a:active {color: yellow; background-color: transparent; text-decoration: underline;}
 </style>
 </head>
@@ -19,7 +19,7 @@ a:active {color: yellow; background-color: transparent; text-decoration: underli
 <div id="weather" style="text-align:left;">
 </div><br><br><br><br>
 <div style="text-align:center;margin:0;">
-<h1><span style="color:blue;">C<span style="color:red;"><a id="theme-o"></a><span style="color:orange;">m<span style="color:blue;">b<span style="color:green;"><a href="txt.html">o</a><span style="color:purple;">t<span style="color:blue;">e<span style="color:red;">c<span style="color:violet;">h<span style="color:lime;">n<span style="color:orange;">i.<span style="color:blue;">c<span style="color:red;">a</h1>
+<h1><span style="color:blue;">C<span style="color:red;"><a id="theme-o"></a><span style="color:orange;">m<span style="color:green;">b<span style="color:red;"><a href="txt.html">o</a><span style="color:purple;">t<span style="color:red;">e<span style="color:blue;">c<span style="color:violet;">h<span style="color:lime;">n<span style="color:orange;">i.<span style="color:blue;">c<span style="color:red;">a</h1>
 <br>
 <form action="javascript:;" onsumbit=" Sddg(document.input_box.command.value) " name="input_box" >
     <div style="margin-top:3px">
@@ -60,9 +60,20 @@ a:active {color: yellow; background-color: transparent; text-decoration: underli
         .then(response => response.json())
         .then(data => {
           const { name, main, weather } = data;
-          const temperature = main.temp;
+          const temperature = Math.round(main.temp*10)/10;
           const description = weather[0].description;
-          const weatherContent = `<b>${name} </b> <img src="https://openweathermap.org/img/wn/${data.weather[0].icon}.png"}" width="40" /><br>${temperature}°C | ${description}`;
+		  var wicon = "❓";
+		  if(data.weather[0].icon==="01d"){wicon = "☀️";}
+		  if(data.weather[0].icon==="01n"){wicon = "️🌙";}
+		  if(data.weather[0].icon==="02d" || data.weather[0].icon==="02n"){wicon = "️🌤";}
+		  if(data.weather[0].icon==="03d" || data.weather[0].icon==="02n"){wicon = "⛅️";}
+		  if(data.weather[0].icon==="04d" || data.weather[0].icon==="04n"){wicon = "☁️";}
+		  if(data.weather[0].icon==="09d" || data.weather[0].icon==="09n"){wicon = "️🌦";}
+		  if(data.weather[0].icon==="10d" || data.weather[0].icon==="10n"){wicon = "️🌧";}
+		  if(data.weather[0].icon==="11d" || data.weather[0].icon==="11n"){wicon = "🌩️";}
+		  if(data.weather[0].icon==="13d" || data.weather[0].icon==="13n"){wicon = "❄️";}
+		  if(data.weather[0].icon==="50d" || data.weather[0].icon==="50n"){wicon = "️🌫";}
+          const weatherContent = `<b>${name} &nbsp; ${wicon} </b><br>${temperature}°C | ${description}`;
           weatherDiv.innerHTML = weatherContent; })
         .catch(error => {console.error('Error fetching weather data:', error); weatherDiv.innerHTML = '<p>Failed to fetch weather data.</p>'; });
 

@@ -1,6 +1,6 @@
 <!DOCTYPE html><html><head><link href='https://fonts.googleapis.com/css?family=Audiowide' rel='stylesheet'>
 <title>Combotechni.ca</title><link rel="shortcut icon" href="combo.ico" >
-<meta name = "viewport" content = "width = 320px">
+<meta name = "viewport" content = "width = 640px">
 <style>
 h1 {font-family: 'Audiowide', Helvetica, sans-serif; font-size: 40px;}
 body {font-family: 'Arial', Helvetica, sans-serif;}
@@ -13,9 +13,9 @@ a:active {color: yellow; background-color: transparent; text-decoration: underli
 </style>
 </head>
 <body bgcolor=white><div style="text-align:right;">
-<a href="exit0.html"  target="_blank" style="color:black;"><h2><b> ⁝⁝⁝ </b> </h2> </a></div> <!-- <img src="i\dots.png" alt="apps"><img src="i\cfg.png" alt="cfg"> -->
-<div id="weather" style="text-align:left;">
-</div><br><br><br><br>
+<h2><b><a href="exit0.html"  target="_blank" style="color:black;"> ⁝⁝⁝ </b> </h2> </a></div>
+<div id="weather" style="text-align:left;"></div>
+<br><br><br><br>
 <div style="text-align:center;margin:0;">
 <h1><span style="color:blue;">C<span style="color:red;"><a id="Othm"></a><span style="color:orange;">m<span style="color:green;">b<span style="color:red;"><a href="txt.html">o</a><span style="color:fuchsia;">t<span style="color:red;">e<span style="color:blue;">c<span style="color:turquoise;">h<span style="color:orange;">n<span style="color:lime;">i<span style="color:red;">.<span style="color:blue;">c<span style="color:red;">a</h1>
 <form action="javascript:;" onsumbit=" Sddg(document.input_box.command.value) " name="input_box" >
@@ -83,7 +83,7 @@ a:active {color: yellow; background-color: transparent; text-decoration: underli
 		  if(data.weather[0].icon==="11d" || data.weather[0].icon==="11n"){wicon = "🌩️";}
 		  if(data.weather[0].icon==="13d" || data.weather[0].icon==="13n"){wicon = "❄️";}
 		  if(data.weather[0].icon==="50d" || data.weather[0].icon==="50n"){wicon = "️🌫";}
-          const weatherContent = `<b>${name} &nbsp; ${wicon} </b><br>${temperature}°C | ${description}`;
+          const weatherContent = `<b><a href="http://www.theweathernetwork.com" target="_blank" style="color:black;">${name} &nbsp; ${wicon}</a></b><br>${temperature}°C | ${description}`;
           weatherDiv.innerHTML = weatherContent; })
         .catch(error => {console.error('Error fetching weather data:', error); weatherDiv.innerHTML = '<p>Failed to fetch weather data.</p>'; });
 
@@ -140,6 +140,7 @@ a:active {color: yellow; background-color: transparent; text-decoration: underli
 				}
                 function Snews(arg) {
 						var	srchURL = 'https://news.google.com/search?q=' + arg + '&tbm=nws';
+						//var	srchURL = 'http://yubnub.org/parser/parse?command=gnews ' + arg;
 						if (document.input_box.Chk1.checked == false) {	window.location=srchURL; return true;	} 
 						else {	return 	window.open(srchURL);	}
 				}

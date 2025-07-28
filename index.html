@@ -2,9 +2,9 @@
 <title>Combotechni.ca</title><link rel="shortcut icon" href="combo.ico" >
 <meta name = "viewport" content = "width = 550px">
 <style>
-h1 {font-family: 'Audiowide', Helvetica, sans-serif; font-size: 35px;}
-h1 {font-size: 30px;}
-body {font-family: 'Arial', Helvetica, sans-serif; font-size: 18px;}
+h1 {font-family: 'Audiowide', Helvetica, sans-serif; font-size: 36px;}
+h2 {font-size: 30px;}
+body {font-family: 'Arial', Helvetica, sans-serif; font-size: 16px;}
 a:link {color:red; text-decoration: none;}
 a:visited {color:red; background-color: transparent; text-decoration: none;}
 a:hover { color: red; background-color: transparent; text-decoration: none;}
@@ -21,7 +21,7 @@ a:active {color: yellow; background-color: transparent; text-decoration: underli
 <h1><span style="color:blue;">C<span style="color:red;"><a id="Othm"></a><span style="color:orange;">m<span style="color:green;">b<span style="color:red;"><a href="txt.html">o</a><span style="color:fuchsia;">t<span style="color:red;">e<span style="color:blue;">c<span style="color:turquoise;">h<span style="color:orange;">n<span style="color:lime;">i<span style="color:red;">.<span style="color:blue;">c<span style="color:red;">a</h1>
 <form action="javascript:;" onsumbit=" Sddg(document.input_box.command.value) " name="input_box" >
     <div style="margin-top:3px">
-    <input autofocus id="textin" type="text" style="border-radius: 20px; font-size: 16px; padding: 4px" name="command" size = "30" value=" "/> <br><br>
+    <input autofocus id="textin" type="text" style="border-radius: 20px; font-size: 16px; padding: 4px" name="command" size = "32" value=" "/> <br><br>
     <input type="submit" value="🔍 Search" onClick="Sddg(document.input_box.command.value)" >    
     <input type="button" value="🌐 Map" align="texttop" onClick="Smap(document.input_box.command.value)" >
     <input type="button" value="🖼️ Image" align="texttop" onClick="Simg(document.input_box.command.value)">
@@ -84,7 +84,7 @@ a:active {color: yellow; background-color: transparent; text-decoration: underli
 		  if(data.weather[0].icon==="11d" || data.weather[0].icon==="11n"){wicon = "🌩️";}
 		  if(data.weather[0].icon==="13d" || data.weather[0].icon==="13n"){wicon = "❄️";}
 		  if(data.weather[0].icon==="50d" || data.weather[0].icon==="50n"){wicon = "️🌫";}
-          const weatherContent = `<b><a href="http://www.theweathernetwork.com" target="_blank" style="color:black;">${name} &nbsp; ${wicon}</a></b><br>${temperature}°C | ${description}`;
+          const weatherContent = `<b><a href="http://www.theweathernetwork.com" target="_blank" style="font-size:20px; color:black;">${name} &nbsp; ${wicon}</a></b><br>${temperature}°C | ${description}`;
           weatherDiv.innerHTML = weatherContent; })
         .catch(error => {console.error('Error fetching weather data:', error); weatherDiv.innerHTML = '<p>Failed to fetch weather data.</p>'; });
 

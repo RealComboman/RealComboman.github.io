@@ -2,41 +2,21 @@
 <style>
 body {font-family: Arial, Helvetica, sans-serif;}
 
-/* The Modal (background) */
-.modal {
+.modal { /* The Modal (background) */
   display: none; /* Hidden by default */
-  position: fixed; /* Stay in place */
-  z-index: 1; /* Sit on top */
-  left: 0;
-  top: 0;
-  width: 100%; /* Full width */
-  height: 100%; /* Full height */
+  position: fixed; z-index: 1; /* Sit on top */
+  left: 0;  top: 0; width: 100%; height: 100%; 
   overflow: auto; /* Enable scroll if needed */
-  background-color: rgb(0,0,0); /* Fallback color */
-  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-  -webkit-animation-name: fadeIn; /* Fade in the background */
-  -webkit-animation-duration: 0.4s;
-  animation-name: fadeIn;
-  animation-duration: 0.4s
-}
-
-/* Modal Content */
-.modal-content {
-  position: fixed;
-  bottom: 0;
-  background-color: #fefefe;
-  width: 100%;
-  -webkit-animation-name: slideIn;
-  -webkit-animation-duration: 0.4s;
-  animation-name: slideIn;
-  animation-duration: 0.4s
-}
-
-/* The Close Button */
+  background-color: rgb(0,0,0); background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  -webkit-animation-name: fadeIn; -webkit-animation-duration: 0.4s;
+  animation-name: fadeIn; animation-duration: 0.4s }
+.modal-content { position: fixed; bottom: 0;
+  background-color: #fefefe; width: 100%;
+  -webkit-animation-name: slideIn; -webkit-animation-duration: 0.4s;
+  animation-name: slideIn; animation-duration: 0.4s }
 .close { float: right; font-size: 28px; font-weight: bold;}
 .close:hover,
 .close:focus {  color: #000;  text-decoration: none;  cursor: pointer;}
-
 .modal-body {padding: 2px 16px;}
 @-webkit-keyframes slideIn {  from {bottom: -300px; opacity: 0}   to {bottom: 0; opacity: 1}}
 @keyframes slideIn {  from {bottom: -300px; opacity: 0}  to {bottom: 0; opacity: 1}}
@@ -50,11 +30,9 @@ body {font-family: Arial, Helvetica, sans-serif;}
 
 <!-- Trigger/Open The Modal -->
 <button id="myBtn1">Open Modal1</button>
-<button id="myBtn2">Open Modal2</button>
+<span id="mycfg" onClick="extraopen()"><img src="i\calc.png" alt="Calc"></span>
 
-<!-- The Modal -->
 <div id="myModal" class="modal">
-  <!-- Modal content -->
   <div class="modal-content">
     <div class="modal-body">
       <span class="close">🔽</span>
@@ -74,19 +52,20 @@ body {font-family: Arial, Helvetica, sans-serif;}
 
 var modal = document.getElementById("myModal"); // Get the modal
 var btn1 = document.getElementById("myBtn1"); // Get the button that opens the modal
-var btn2 = document.getElementById("myBtn2"); // Get the button that opens the modal
 var span = document.getElementsByClassName("close")[0]; // Get the <span> element that closes the modal
 
 // When the user clicks the button, open the modal 
 btn1.onclick = function() { modal.style.display = "block";extra.innerHTML='';}
-btn2.onclick = function() { const extra = document.getElementById('extra'); extra.innerHTML = 'This is some extra stuff.'; modal.style.display = "block"; }
 
-// When the user clicks on <span> (x), close the modal
-span.onclick = function() { modal.style.display = "none";}
 
-// When the user clicks anywhere outside of the modal, close it
-window.onclick = function(event) { if (event.target == modal) { modal.style.display = "none"; }}
+span.onclick = function() { modal.style.display = "none";} // When user clicks (x), close the modal
+
+window.onclick = function(event) { if (event.target == modal) { modal.style.display = "none"; }} // When user clicks outside of modal, close it
+
+function extraopen() { const extra = document.getElementById('extra'); extra.innerHTML = 'This is some extra stuff.'; modal.style.display = "block"; }
+
 </script>
 
 </body>
 </html>
+

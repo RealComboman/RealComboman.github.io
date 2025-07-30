@@ -11,10 +11,30 @@ a:hover { color: red; background-color: transparent; text-decoration: none;}
 a:active {color: yellow; background-color: transparent; text-decoration: underline;}
 .hide {display: none;}
 .tt:hover + .hide {display: block; color: red;}
+.modal { /* The Modal (background) */
+  display: none; /* Hidden by default */
+  position: fixed; z-index: 1; /* Sit on top */
+  left: 0;  top: 0; width: 100%; height: 100%; 
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  -webkit-animation-name: fadeIn; -webkit-animation-duration: 0.4s;
+  animation-name: fadeIn; animation-duration: 0.4s }
+.modal-content { position: fixed; bottom: 0;
+  background-color: #fefefe; width: 100%;
+  -webkit-animation-name: slideIn; -webkit-animation-duration: 0.4s;
+  animation-name: slideIn; animation-duration: 0.4s }
+.close { float: right; font-size: 28px; font-weight: bold;}
+.close:hover,
+.close:focus {  color: #000;  text-decoration: none;  cursor: pointer;}
+.modal-body {padding: 2px 16px;}
+@-webkit-keyframes slideIn {  from {bottom: -300px; opacity: 0}   to {bottom: 0; opacity: 1}}
+@keyframes slideIn {  from {bottom: -300px; opacity: 0}  to {bottom: 0; opacity: 1}}
+@-webkit-keyframes fadeIn {  from {opacity: 0}   to {opacity: 1}}
+@keyframes fadeIn {  from {opacity: 0}   to {opacity: 1}}
 </style>
 </head>
 <body bgcolor=white><div style="text-align:right;">
-<h2><b>⚙<a href="exit0.html"  target="_blank" style="color:black;"> ⁝⁝⁝ </b> </h2> </a></div>
+<h2><b><span id="mymail" onClick="mailopen()">✉</span> <span id="mycfg" onClick="configopen()">⚙</span> <a href="exit0.html"  target="_blank" style="color:black;"> ⁝⁝⁝ </b> </h2> </a></div>
 <div id="weather" style="text-align:left;"></div>
 <br><br><br><br>
 <div style="text-align:center;margin:0;">
@@ -54,14 +74,24 @@ a:active {color: yellow; background-color: transparent; text-decoration: underli
 	<a href="https://bsky.app" target="_blank"><img src="i\bsky.png" alt="BlueSky"></a>
 	<br><br>
     <div class="hr"><hr /></div><br>
-				⚙️ Configuration:<br><br>
+	<div id="myModal" class="modal">
+    <div class="modal-content">
+    <div class="modal-body">
+      <span class="close">🔽</span>
+	  <div id="extra"></div>
+	⚙️ Configuration:<br><br>
 	Open search in new window: <input type="checkbox" name="Chk1" value="yes" CHECKED size = "34" class="button2" style=""><br>
-	Weather location: <input type="text" id="cityInput" value="Halifax"><br>
+	Weather location: <input type="text" id="cityInput" value="Halifax"><br><br><br>
+    </div>
+  </div>
+</div>
+
 	</div></form>
 
 </div>
 </body>
 	<script type="text/javascript">
+	var modal = document.getElementById("myModal"); // Get the modal
     const rndSeed = 'd94893f5d0fa394f6ec042550b4355db';
     const weatherDiv = document.getElementById('weather');
     const cityInput = document.getElementById('cityInput').value;
@@ -109,6 +139,13 @@ a:active {color: yellow; background-color: transparent; text-decoration: underli
 		else if(date.getMonth()==10 && date.getDate()>1 && date.getDate()<9 && getYear()%2 && getDay()==2){document.getElementById("Othm").innerHTML = '🗳';}
 		else if(date.getMonth()==11 && date.getDate()==25){document.getElementById("Othm").innerHTML = '⛄';}
 		else {document.getElementById("Othm").innerHTML = 'o';}
+
+		window.onclick = function(event) { if (event.target == modal) { modal.style.display = "none"; }} // When user clicks outside of modal, close it
+		var span = document.getElementsByClassName("close")[0]; // Get the <span> element that closes the modal
+		span.onclick = function() { modal.style.display = "none";} // When user clicks (x), close the modal		
+		
+		function configopen() { modal.style.display = "block";extra.innerHTML='';}
+		function mailopen() { const extra = document.getElementById('extra'); extra.innerHTML = '<h2>Email 📨</h2><br>	<a href="https://mail.google.com/mail/u/?authuser=dwall0@gmail.com" target="_blank"><img src="i\gmail.png" alt="Gmail"></a> <a href="http://mail.yahoo.com" target="_blank"><img src="i\ymail.png" alt="Y!mail"></a> <a href="http://hotmail.com" target="_blank"><img src="i\ms.png" alt="Yandex"></a> <a href="http://mail.yandex.com" target="_blank"><img src="i\yandex.png" alt="HotMail"></a> <a href="http://protonmail.com" target="_blank"><img src="i\proton.png" alt="ProtonMail"></a><br><hr><br>'; modal.style.display = "block"; }
 	
         function focus(){document.input_box.command.focus();}
                  function Smagic(arg) {

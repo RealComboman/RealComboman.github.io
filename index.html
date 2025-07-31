@@ -33,8 +33,8 @@ a:active {color: yellow; background-color: transparent; text-decoration: underli
 @keyframes fadeIn {  from {opacity: 0}   to {opacity: 1}}
 </style>
 </head>
-<body bgcolor=white><div style="text-align:right;">
-<h2><b>🂡 <span id="mymail" onClick="mailopen()">✉</span> <span id="mycfg" onClick="configopen()">⚙</span> <a href="exit0.html"  target="_blank" style="color:black;"> ⁝⁝⁝ </b> </h2> </a></div>
+<body bgcolor=white><div class="close"; > <!--style="text-align:right;"-->
+<h2><b>✪ ✇ ✎ ⚛ ⊞ ⌘ ☰ ❒ <span id="myent" onClick="entopen()">☊</span> <span id="mymail" onClick="mailopen()">✉</span> <span id="mycfg" onClick="configopen()">⚙</span> <a href="exit0.html"  target="_blank" style="color:black;"> ⁝⁝⁝ </b> </h2> </a></div>
 <div id="weather" style="text-align:left;"></div>
 <br><br><br><br>
 <div style="text-align:center;margin:0;">
@@ -76,7 +76,6 @@ a:active {color: yellow; background-color: transparent; text-decoration: underli
     <div class="hr"><hr /></div><br>
 
 	<div id="modalCfg" class="modal"><div class="modal-content"><div class="modal-body"><span class="close" onClick="closeModal()">❎</span>
-	<div id="extra"></div>
 	<h3>⚙️ Configuration</h3><br>
 	Open search in new window: <input type="checkbox" name="Chk1" value="yes" CHECKED size = "34" class="button2" style=""><br>
 	Weather location: <input type="text" id="cityInput" value="Halifax"><br><br><br>
@@ -92,9 +91,20 @@ a:active {color: yellow; background-color: transparent; text-decoration: underli
 	<a href="http://mastodon.social" target="_blank"><img src="i\mastodon.png" alt="Mastodon"></a><a href="http://slack.com" target="_blank"><img src="i\slack.png" alt="Slack"></a>
 	<a href="https://discord.com" target="_blank"><img src="i\discord.png" alt="Discord"></a><a href="https://www.reddit.com" target="_blank"><img src="i\reddit.png" alt="Reddit"></a>
 	<a href="http://linkedin.com" target="_blank"><img src="i\in.png" alt="LinedIn"></a>
-
     </div></div>></div>
 
+	<div id="modalEnt" class="modal"><div class="modal-content"><div class="modal-body"><span class="close" onClick="closeModal()">❎</span>
+	<h3>📽️ Media/Games</h3><br>
+	<a href="media.html" target="_blank"><img src="i\film.png" alt="Media"></a><a href="http://showrss.info" target="_blank"><img src="i\srss.png" alt="ShowRSS"></a> 
+	<a href="http://hoopladigital.com" target="_blank"><img src="i\hoopla.png" alt="Hoopla"></a><a href="https://app.plex.tv/desktop" target="_blank"><img src="i\plex.png" alt="Plex"></a>
+	<a href="http://yts.am" target="_blank"><img src="i\yts.png" alt="YTS"></a><a href="https://www.pluto.tv" target="_blank"><img src="i\pluto.png" alt="Pluto"></a>
+	<a href="https://netFlix.com" target="_blank"><img src="i\netflix.png" alt="Netflix"></a><a href="http://youtube.com" target="_blank"><img src="i\ytube.png" alt="YouTube"></a><br><hr>
+	<a href="https://next.matchplay.events/dashboard" target="_blank"><img src="i\match.png" alt="MatchPlay"></a>
+	<a href="https://www.nytimes.com/games/" target="_blank"><img src="i\nytgames.png" alt="NYTGames"></a><a href="https://bracket.city" target="_blank"><img src="i\bracketcity.png" alt="BracketCity"></a>
+	<a href="https://wafflegame.net" target="_blank"><img src="i\waffle.png" alt="Waffle"></a><a href="https://timeguessr.com" target="_blank"><img src="i\timeguessr.png" alt="TimeGuessr"></a>
+	<a href="https://playpocketpuzzles.com" target="_blank"><img src="i\pockpuz.png" alt="PocketPuzzles"></a><a href="https://www.puzzmo.com" target="_blank"><img src="i\puzzmo.png" alt="Puzzmo"></a>
+	<a href="https://ev.io" target="_blank"><img src="i\evio.png" alt="EV.IO"></a><a href="https://csklimowski.itch.io/six-sided-streets" target="_blank"><img src="i\6sidedst.png" alt="6SidedStr"></a>
+    </div></div>></div>
 
 	</div></form>
 
@@ -154,7 +164,8 @@ a:active {color: yellow; background-color: transparent; text-decoration: underli
 		var span = document.getElementsByClassName("close");
 		
 		function configopen() {  modal = document.querySelector("#modalCfg"); modal.style.display = "block"; extra.innerHTML='';}
-		function mailopen() { modal = document.querySelector("#modalMail");extra.innerHTML = ''; modal.style.display = "block"; }
+		function mailopen() { modal = document.querySelector("#modalMail"); modal.style.display = "block"; }
+		function entopen() { modal = document.querySelector("#modalEnt"); modal.style.display = "block"; }
 		function closeModal() {modal.style.display = "none";}
 		
         function focus(){document.input_box.command.focus();}

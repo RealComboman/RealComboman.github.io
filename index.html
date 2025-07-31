@@ -74,17 +74,18 @@ a:active {color: yellow; background-color: transparent; text-decoration: underli
 	<a href="https://bsky.app" target="_blank"><img src="i\bsky.png" alt="BlueSky"></a>
 	<br><br>
     <div class="hr"><hr /></div><br>
-	<div id="myModal" class="modal">
-    <div class="modal-content">
-    <div class="modal-body">
-      <span class="close">🔽</span>
-	  <div id="extra"></div>
-	⚙️ Configuration:<br><br>
+
+	<div id="modalCfg" class="modal"><div class="modal-content"><div class="modal-body"><span class="close">🔽</span>
+	<div id="extra"></div>
+	<h3>⚙️ Configuration</h3><br>
 	Open search in new window: <input type="checkbox" name="Chk1" value="yes" CHECKED size = "34" class="button2" style=""><br>
 	Weather location: <input type="text" id="cityInput" value="Halifax"><br><br><br>
-    </div>
-  </div>
-</div>
+    </div></div>></div>
+
+	<div id="modalMail" class="modal"><div class="modal-content"><div class="modal-body"><span class="close">🔽</span>
+	<h2>Email 📨</h2><br>
+	<a href="https://mail.google.com" target="_blank"><img src="i\gmail.png" alt="Gmail"></a> <a href="http://mail.yahoo.com" target="_blank"><img src="i\ymail.png" alt="Y!mail"></a> <a href="http://hotmail.com" target="_blank"><img src="i\outlook.png" alt="HoTMaiL"></a> <a href="http://mail.yandex.com" target="_blank"><img src="i\yandex.png" alt="Yandex"></a> <a href="http://protonmail.com" target="_blank"><img src="i\proton.png" alt="ProtonMail"></a><br><hr><br>
+    </div></div>></div>
 
 	</div></form>
 
@@ -144,8 +145,8 @@ a:active {color: yellow; background-color: transparent; text-decoration: underli
 		var span = document.getElementsByClassName("close")[0]; // Get the <span> element that closes the modal
 		span.onclick = function() { modal.style.display = "none";} // When user clicks (x), close the modal		
 		
-		function configopen() { modal.style.display = "block";extra.innerHTML='';}
-		function mailopen() { const extra = document.getElementById('extra'); extra.innerHTML = '<h2>Email 📨</h2><br>	<a href="https://mail.google.com/mail/u/?authuser=dwall0@gmail.com" target="_blank"><img src="i\gmail.png" alt="Gmail"></a> <a href="http://mail.yahoo.com" target="_blank"><img src="i\ymail.png" alt="Y!mail"></a> <a href="http://hotmail.com" target="_blank"><img src="i\ms.png" alt="Yandex"></a> <a href="http://mail.yandex.com" target="_blank"><img src="i\yandex.png" alt="HotMail"></a> <a href="http://protonmail.com" target="_blank"><img src="i\proton.png" alt="ProtonMail"></a><br><hr><br>'; modal.style.display = "block"; }
+		function configopen() {  modal = document.querySelector("#modalCfg"); modal.style.display = "block"; extra.innerHTML='';}
+		function mailopen() { modal = document.querySelector("#modalMail");extra.innerHTML = ''; modal.style.display = "block"; }
 	
         function focus(){document.input_box.command.focus();}
                  function Smagic(arg) {

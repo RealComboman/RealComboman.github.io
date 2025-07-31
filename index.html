@@ -34,7 +34,7 @@ a:active {color: yellow; background-color: transparent; text-decoration: underli
 </style>
 </head>
 <body bgcolor=white><div style="text-align:right;">
-<h2><b><span id="mymail" onClick="mailopen()">✉</span> <span id="mycfg" onClick="configopen()">⚙</span> <a href="exit0.html"  target="_blank" style="color:black;"> ⁝⁝⁝ </b> </h2> </a></div>
+<h2><b>🂡 <span id="mymail" onClick="mailopen()">✉</span> <span id="mycfg" onClick="configopen()">⚙</span> <a href="exit0.html"  target="_blank" style="color:black;"> ⁝⁝⁝ </b> </h2> </a></div>
 <div id="weather" style="text-align:left;"></div>
 <br><br><br><br>
 <div style="text-align:center;margin:0;">
@@ -57,7 +57,7 @@ a:active {color: yellow; background-color: transparent; text-decoration: underli
     <option value="yt ">YouTube</option>
     <option value="dshop">DdgShop</option>
     <option value="am ">Amazon</option>
-    <option value="ebay ">eBay</option>
+    <option value="pclk">eBay</option>
     <option value="ascii ">Ascii</option>
     <option value="stock ">Y!Stock</option>
     <option value="groups ">Usenet</option>
@@ -75,17 +75,26 @@ a:active {color: yellow; background-color: transparent; text-decoration: underli
 	<br><br>
     <div class="hr"><hr /></div><br>
 
-	<div id="modalCfg" class="modal"><div class="modal-content"><div class="modal-body"><span class="close">🔽</span>
+	<div id="modalCfg" class="modal"><div class="modal-content"><div class="modal-body"><span class="close" onClick="closeModal()">❎</span>
 	<div id="extra"></div>
 	<h3>⚙️ Configuration</h3><br>
 	Open search in new window: <input type="checkbox" name="Chk1" value="yes" CHECKED size = "34" class="button2" style=""><br>
 	Weather location: <input type="text" id="cityInput" value="Halifax"><br><br><br>
     </div></div>></div>
 
-	<div id="modalMail" class="modal"><div class="modal-content"><div class="modal-body"><span class="close">🔽</span>
-	<h2>Email 📨</h2><br>
-	<a href="https://mail.google.com" target="_blank"><img src="i\gmail.png" alt="Gmail"></a> <a href="http://mail.yahoo.com" target="_blank"><img src="i\ymail.png" alt="Y!mail"></a> <a href="http://hotmail.com" target="_blank"><img src="i\outlook.png" alt="HoTMaiL"></a> <a href="http://mail.yandex.com" target="_blank"><img src="i\yandex.png" alt="Yandex"></a> <a href="http://protonmail.com" target="_blank"><img src="i\proton.png" alt="ProtonMail"></a><br><hr><br>
+	<div id="modalMail" class="modal"><div class="modal-content"><div class="modal-body"><span class="close" onClick="closeModal()">❎</span>
+	<h3>📨 Email/Social</h3><br>
+	<a href="https://mail.google.com" target="_blank"><img src="i\gmail.png" alt="Gmail"></a> <a href="http://mail.yahoo.com" target="_blank"><img src="i\ymail.png" alt="Y!mail"></a> <a href="http://hotmail.com" target="_blank"><img src="i\outlook.png" alt="HoTMaiL"></a> <a href="http://mail.yandex.com" target="_blank"><img src="i\yandex.png" alt="Yandex"></a> <a href="http://protonmail.com" target="_blank"><img src="i\proton.png" alt="ProtonMail"></a><br><hr>
+	<a href="http://google.com/calendar" target="_blank"><img src="i\gcal.png" alt="GooCal"></a><a href="http://contacts.google.com" target="_blank"><img src="i\gcontacts.png" alt="Contacts"></a>
+	<a href="http://photos.google.com" target="_blank"><img src="i\gphotos.png" alt="Photos"></a><a href="http://keep.google.com" target="_blank"><img src="i\keep.png" alt="Keep"></a>
+	<a href="https://messages.google.com/web" target="_blank"><img src="i\sms.png" alt="SMS"></a><br><hr>
+	<a href="https://bsky.app" target="_blank"><img src="i\bsky.png" alt="BlueSky"></a><a href="https://gandersocial.ca" target="_blank"><img src="i\gander.png" alt="Gander"></a>
+	<a href="http://mastodon.social" target="_blank"><img src="i\mastodon.png" alt="Mastodon"></a><a href="http://slack.com" target="_blank"><img src="i\slack.png" alt="Slack"></a>
+	<a href="https://discord.com" target="_blank"><img src="i\discord.png" alt="Discord"></a><a href="https://www.reddit.com" target="_blank"><img src="i\reddit.png" alt="Reddit"></a>
+	<a href="http://linkedin.com" target="_blank"><img src="i\in.png" alt="LinedIn"></a>
+
     </div></div>></div>
+
 
 	</div></form>
 
@@ -142,12 +151,12 @@ a:active {color: yellow; background-color: transparent; text-decoration: underli
 		else {document.getElementById("Othm").innerHTML = 'o';}
 
 		window.onclick = function(event) { if (event.target == modal) { modal.style.display = "none"; }} // When user clicks outside of modal, close it
-		var span = document.getElementsByClassName("close")[0]; // Get the <span> element that closes the modal
-		span.onclick = function() { modal.style.display = "none";} // When user clicks (x), close the modal		
+		var span = document.getElementsByClassName("close");
 		
 		function configopen() {  modal = document.querySelector("#modalCfg"); modal.style.display = "block"; extra.innerHTML='';}
 		function mailopen() { modal = document.querySelector("#modalMail");extra.innerHTML = ''; modal.style.display = "block"; }
-	
+		function closeModal() {modal.style.display = "none";}
+		
         function focus(){document.input_box.command.focus();}
                  function Smagic(arg) {
 						var srchURL = '';
@@ -156,6 +165,7 @@ a:active {color: yellow; background-color: transparent; text-decoration: underli
 						else if(document.input_box.searchType.value==="dimg"){srchURL = 'https://duckduckgo.com/?q='+ arg +'&ia=images&iax=images'; }
 						else if(document.input_box.searchType.value==="dshop"){srchURL = 'https://duckduckgo.com/?q='+ arg +'&ia=shopping&iax=shopping'; }
 						else if(document.input_box.searchType.value==="dnews"){srchURL = 'https://duckduckgo.com/?q='+ arg +'&ia=news&iar=news'; }
+						else if(document.intpu_box.searchType.value==="pclk"){srchURL = 'https://picclick.ca/?q==' + arg; }
 						else{ srchURL = 'http://yubnub.org/parser/parse?command=' + document.input_box.searchType.value + arg; }
 						if (document.input_box.Chk1.checked == false) { window.location=srchURL; return true; } 
 						else {	return 	window.open(srchURL);	}

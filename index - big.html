@@ -29,7 +29,7 @@ a:active {color: yellow; background-color: transparent; text-decoration: underli
 </style>
 </head>
 <body bgcolor=white><div class="close";>
-<h2><b> <span id="test" onClick="mailopen()">✉</span> <span id="test" onClick="infopen()">❒</span> <span id="test" onClick="finopen()">$</span> <span id="test" onClick="prodopen()">✎</span> <span id="test" onClick="techopen()">⌘</span> <span id="test" onClick="entopen()">☊</span> <span id="test" onClick="configopen()">⚙</span> <a href="exit0.html"  target="_blank" style="color:black;"> ⁝⁝⁝</a> ☰ </b></h2></div>
+<h2><b> <span id="test" onClick="finopen()">$</span> <span id="test" onClick="prodopen()">✎</span> <span id="test" onClick="techopen()">⌘</span> <span id="test" onClick="infopen()">❒</span> <span id="test" onClick="entopen()">☊</span> <span id="test" onClick="mailopen()">✉</span> <span id="test" onClick="configopen()">⚙</span> <a href="exit0.html"  target="_blank" style="color:black;"> ⁝⁝⁝</a> ☰ </b></h2></div>
 <div id="weather" style="text-align:left;"></div>
 <br><br><br><br>
 <div style="text-align:center;margin:0;">
@@ -163,28 +163,27 @@ a:active {color: yellow; background-color: transparent; text-decoration: underli
           weatherDiv.innerHTML = weatherContent; })
         .catch(error => {console.error('Error fetching weather data:', error); weatherDiv.innerHTML = '<p>Failed to fetch weather data.</p>'; });
 
-		document.getElementById("Othm").innerHTML = 'X';
 		date=new Date(); //theme doodle emoji
 		if(date.getMonth()==0 && date.getDate()==1){document.getElementById("Othm").innerHTML = '️🎇';}
 		else if(date.getMonth()==0 && date.getDate()==13){document.getElementById("Othm").innerHTML = '🎂';}
 		else if(date.getMonth()==1 && date.getDate()==2){document.getElementById("Othm").innerHTML = '🐹';}
 		else if(date.getMonth()==1 && date.getDate()==14){document.getElementById("Othm").innerHTML = '❤️';}
 		else if(date.getMonth()==2 && date.getDate()==14){document.getElementById("Othm").innerHTML = '️🥧';}
-		else if(date.getMonth()==2 && date.getDate()>7 && date.getDate()<15 && date.getDay()==0){document.getElementById("Othm").innerHTML = '⏰⤸';}
+		else if(date.getMonth()==2 && date.getDate()>7 && date.getDate()<15 && getDay()==0){document.getElementById("Othm").innerHTML = '⏰⤸';}
 		else if(date.getMonth()==4 && date.getDate()==4){document.getElementById("Othm").innerHTML = '️🚀';}
 		else if(date.getMonth()==4 && date.getDate()==5){document.getElementById("Othm").innerHTML = '️🌮';}
-		else if(date.getMonth()==4 && date.getDate()>17 && date.getDate()<25 && date.getDay()==1){document.getElementById("Othm").innerHTML = '👑';}
+		else if(date.getMonth()==4 && date.getDate()>17 && date.getDate()<25 && getDay()==1){document.getElementById("Othm").innerHTML = '👑';}
 		else if(date.getMonth()==5 && date.getDate()==21){document.getElementById("Othm").innerHTML = '🪶';}
 		else if(date.getMonth()==6 && date.getDate()==1){document.getElementById("Othm").innerHTML = '🍁';}
 		else if(date.getMonth()==6 && date.getDate()==4){document.getElementById("Othm").innerHTML = '💩';}
 		else if(date.getMonth()==6 && date.getDate()==16){document.getElementById("Othm").innerHTML = '🎂';}
-		else if(date.getMonth()==7 && date.getDate()<8 && date.getDay()==1){document.getElementById("Othm").innerHTML = '🌉';}
+		else if(date.getMonth()==7 && date.getDate()<8 && getDay()==1){document.getElementById("Othm").innerHTML = '🌉';}
 		else if(date.getMonth()==8 && date.getDate()==29){document.getElementById("Othm").innerHTML = '🎂';}
-		else if(date.getMonth()==9 && date.getDate()>7 && date.getDate()<15 && date.getDay()==1){document.getElementById("Othm").innerHTML = '🦃';}
+		else if(date.getMonth()==9 && date.getDate()>7 && date.getDate()<15 && getDay()==1){document.getElementById("Othm").innerHTML = '🦃';}
 		else if(date.getMonth()==9 && date.getDate()==31){document.getElementById("Othm").innerHTML = '🎃';}
-		else if(date.getMonth()==10 && date.getDate()<8 && date.getDay()==0){document.getElementById("Othm").innerHTML = '⤹🕰';}
+		else if(date.getMonth()==10 && date.getDate()<8 && getDay()==0){document.getElementById("Othm").innerHTML = '⤹🕰';}
 		else if(date.getMonth()==10 && date.getDate()==11){document.getElementById("Othm").innerHTML = '🌸';}
-		else if(date.getMonth()==10 && date.getDate()>1 && date.getDate()<9 && getYear()%2 && date.getDay()==2){document.getElementById("Othm").innerHTML = '🗳';}
+		else if(date.getMonth()==10 && date.getDate()>1 && date.getDate()<9 && getYear()%2 && getDay()==2){document.getElementById("Othm").innerHTML = '🗳';}
 		else if(date.getMonth()==11 && date.getDate()==25){document.getElementById("Othm").innerHTML = '⛄';}
 		else {document.getElementById("Othm").innerHTML = 'o';}
 

@@ -208,7 +208,7 @@ a:active {color: yellow; background-color: transparent; text-decoration: underli
 						else if(document.input_box.searchType.value==="dimg"){srchURL = 'https://duckduckgo.com/?q='+ arg +'&ia=images&iax=images'; }
 						else if(document.input_box.searchType.value==="dshop"){srchURL = 'https://duckduckgo.com/?q='+ arg +'&ia=shopping&iax=shopping'; }
 						else if(document.input_box.searchType.value==="dnews"){srchURL = 'https://duckduckgo.com/?q='+ arg +'&ia=news&iar=news'; }
-						else if(document.intpu_box.searchType.value==="pclk"){srchURL = 'https://picclick.ca/?q==' + arg; }
+						else if(document.input_box.searchType.value==="pclk"){srchURL = 'https://picclick.ca/?q==' + arg; }
 						else{ srchURL = 'http://yubnub.org/parser/parse?command=' + document.input_box.searchType.value + arg; }
 						if (document.input_box.Chk1.checked == false) { window.location=srchURL; return true; } 
 						else {	return 	window.open(srchURL);	}

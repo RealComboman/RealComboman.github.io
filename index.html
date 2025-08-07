@@ -41,7 +41,7 @@ a:active {color:yellow; background-color:transparent; text-decoration:underline;
     <input type="button" value="📰 News" align="texttop" onClick="Snews(document.input_box.command.value)">
 	<input type="button" value="🛒 Shop" align="texttop" onClick="Sshop(document.input_box.command.value)">
 	<select name="searchType" value="wp " onchange="document.input_box.searchType.value=this[this.selectedIndex].value;Smagic(document.input_box.command.value);" class="select">
-    <option value="" selected disabled>🪄 Multi</option>
+    <option value="null" selected>🪄 Multi</option>
     <option value="wp ">Wikipedia</option>
     <option value="thes ">Thesaurus</option>
     <option value="dnews">DdgNews</option>
@@ -201,40 +201,41 @@ a:active {color:yellow; background-color:transparent; text-decoration:underline;
         function focus(){document.input_box.command.focus();}
                  function Smagic(arg) {
 						var srchURL = '';
-						if(document.input_box.searchType.value==="open"){srchURL = 'https://www.openstreetmap.org/search?query=' + arg; }
-						else if(document.input_box.searchType.value==="dmap"){srchURL = 'https://duckduckgo.com/?q='+ arg +'&ia=web&iaxm=maps&source=places'; }
-						else if(document.input_box.searchType.value==="dimg"){srchURL = 'https://duckduckgo.com/?q='+ arg +'&ia=images&iax=images'; }
-						else if(document.input_box.searchType.value==="dshop"){srchURL = 'https://duckduckgo.com/?q='+ arg +'&ia=shopping&iax=shopping'; }
-						else if(document.input_box.searchType.value==="dnews"){srchURL = 'https://duckduckgo.com/?q='+ arg +'&ia=news&iar=news'; }
-						else if(document.input_box.searchType.value==="pclk"){srchURL = 'https://picclick.ca/?q==' + arg; }
-						else if(document.input_box.searchType.value==="amz"){srchURL = 'https://www.amazon.ca/s?k=' + arg; }
-						else{srchURL = 'http://yubnub.org/parser/parse?command=' + document.input_box.searchType.value + arg; }
+						if(document.input_box.searchType.value==="null"){return;}
+						else if(document.input_box.searchType.value==="open"){srchURL='https://www.openstreetmap.org/search?query=' + arg; }
+						else if(document.input_box.searchType.value==="dmap"){srchURL='https://duckduckgo.com/?q='+ arg +'&ia=web&iaxm=maps&source=places'; }
+						else if(document.input_box.searchType.value==="dimg"){srchURL='https://duckduckgo.com/?q='+ arg +'&ia=images&iax=images'; }
+						else if(document.input_box.searchType.value==="dshop"){srchURL='https://duckduckgo.com/?q='+ arg +'&ia=shopping&iax=shopping'; }
+						else if(document.input_box.searchType.value==="dnews"){srchURL='https://duckduckgo.com/?q='+ arg +'&ia=news&iar=news'; }
+						else if(document.input_box.searchType.value==="pclk"){srchURL='https://picclick.ca/?q==' + arg; }
+						else if(document.input_box.searchType.value==="amz"){srchURL='https://www.amazon.ca/s?k=' + arg; }
+						else{srchURL='http://yubnub.org/parser/parse?command=' + document.input_box.searchType.value + arg; }
 						if (document.input_box.Chk1.checked == false) {window.location=srchURL; return true;} 
 						else {return window.open(srchURL);}
 				}
                 function Simg(arg) {
-						var	srchURL = 'https://www.google.com/search?q=' + arg + '&udm=2';
+						var	srchURL='https://www.google.com/search?q=' + arg + '&udm=2';
 						if (document.input_box.Chk1.checked == false) {	window.location=srchURL; return true;	} 
 						else {	return 	window.open(srchURL);	}
 				}
                 function Sshop(arg) {
-						var	srchURL = 'https://www.google.com/search?q=' + arg + '&udm=28';
+						var	srchURL='https://www.google.com/search?q=' + arg + '&udm=28';
 						if (document.input_box.Chk1.checked == false) {	window.location=srchURL; return true;	} 
 						else {	return 	window.open(srchURL);	}
 				}
                 function Smap(arg) {
-						var	srchURL = 'https://www.google.com/maps?output=search&q=' + arg + '&entry=mc';
+						var	srchURL='https://www.google.com/maps?output=search&q=' + arg + '&entry=mc';
 						if (document.input_box.Chk1.checked == false) {	window.location=srchURL; return true;	} 
 						else {	return 	window.open(srchURL);	}
 				}
                 function Snews(arg) {
-						var	srchURL = 'https://news.google.com/search?q=' + arg + '&tbm=nws';
+						var	srchURL='https://news.google.com/search?q=' + arg + '&tbm=nws';
 						//var	srchURL = 'http://yubnub.org/parser/parse?command=gnews ' + arg;
 						if (document.input_box.Chk1.checked == false) {	window.location=srchURL; return true;	} 
 						else {	return 	window.open(srchURL);	}
 				}
                 function Sddg(arg) {
-						var	srchURL = 'https://duckduckgo.com/?q= ' + arg;
+						var	srchURL='https://duckduckgo.com/?q= ' + arg;
 						if (document.input_box.Chk1.checked == false) {	window.location=srchURL; return true;	} 
 						else {	return 	window.open(srchURL);	}
 				}

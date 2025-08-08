@@ -70,8 +70,8 @@ a:active {color:yellow; background-color:transparent; text-decoration:underline;
 	<a href="http://google.com/calendar" target="_blank"><img src="i\gcal.png" alt="GooCal"></a> <a href="http://contacts.google.com" target="_blank"><img src="i\gcontacts.png" alt="Contacts"></a>
 	<a href="http://photos.google.com" target="_blank"><img src="i\gphotos.png" alt="Photos"></a> <a href="http://keep.google.com" target="_blank"><img src="i\keep.png" alt="Keep"></a>
 	<a href="https://messages.google.com/web" target="_blank"><img src="i\sms.png" alt="SMS"></a><br><hr>
-	<a href="https://bsky.app" target="_blank"><img src="i\bsky.png" alt="BlueSky"></a> <a href="https://gandersocial.ca" target="_blank"><img src="i\gander.png" alt="Gander"></a>
-	<a href="http://mastodon.social" target="_blank"><img src="i\mastodon.png" alt="Mastodon"></a> <a href="http://slack.com" target="_blank"><img src="i\slack.png" alt="Slack"></a>
+	<a href="https://bsky.app" target="_blank"><img src="i\bsky.png" alt="BlueSky"></a> <!--a href="https://gandersocial.ca" target="_blank"><img src="i\gander.png" alt="Gander"></a>
+	<a href="http://mastodon.social" target="_blank"><img src="i\mastodon.png" alt="Mastodon"></a--> <a href="http://slack.com" target="_blank"><img src="i\slack.png" alt="Slack"></a>
 	<a href="https://discord.com" target="_blank"><img src="i\discord.png" alt="Discord"></a> <a href="https://www.reddit.com" target="_blank"><img src="i\reddit.png" alt="Reddit"></a>
 	<a href="http://linkedin.com" target="_blank"><img src="i\in.png" alt="LinedIn"></a>
     </div></div></div>
@@ -149,14 +149,15 @@ a:active {color:yellow; background-color:transparent; text-decoration:underline;
           const description = weather[0].description;
 		  var wicon = "❓"; //use emoji for weather icons
 		  if(data.weather[0].icon==="01d"){wicon = "☀️";}
-		  if(data.weather[0].icon==="01n"){wicon = "️🌙";}
-		  if(data.weather[0].icon==="02d" || data.weather[0].icon==="02n" ||data.weather[0].icon==="03d" || data.weather[0].icon==="02n"){wicon = "⛅️";}
-		  if(data.weather[0].icon==="04d" || data.weather[0].icon==="04n"){wicon = "☁️";}
-		  if(data.weather[0].icon==="09d" || data.weather[0].icon==="09n"){wicon = "️🌦";}
-		  if(data.weather[0].icon==="10d" || data.weather[0].icon==="10n"){wicon = "️🌧";}
-		  if(data.weather[0].icon==="11d" || data.weather[0].icon==="11n"){wicon = "🌩️";}
-		  if(data.weather[0].icon==="13d" || data.weather[0].icon==="13n"){wicon = "❄️";}
-		  if(data.weather[0].icon==="50d" || data.weather[0].icon==="50n"){wicon = "️🌫";}
+		  else if(data.weather[0].icon==="01n"){wicon = "️🌙";}
+		  else if(data.weather[0].icon==="02d" || data.weather[0].icon==="02n" ||data.weather[0].icon==="03d" || data.weather[0].icon==="03n"){wicon = "⛅️";}
+		  else if(data.weather[0].icon==="04d" || data.weather[0].icon==="04n"){wicon = "☁️";}
+		  else if(data.weather[0].icon==="09d" || data.weather[0].icon==="09n"){wicon = "️🌦";}
+		  else if(data.weather[0].icon==="10d" || data.weather[0].icon==="10n"){wicon = "️🌧";}
+		  else if(data.weather[0].icon==="11d" || data.weather[0].icon==="11n"){wicon = "🌩️";}
+		  else if(data.weather[0].icon==="13d" || data.weather[0].icon==="13n"){wicon = "❄️";}
+		  else if(data.weather[0].icon==="50d" || data.weather[0].icon==="50n"){wicon = "️🌫";}
+		  else {wicon=data.weather[0].icon;}
           const weatherContent = `<b><a href="http://www.theweathernetwork.com" target="_blank" style="font-size:20px; color:black;">${name} &nbsp; ${wicon}</a></b><br>${temperature}°C | ${description}`;
           weatherDiv.innerHTML = weatherContent; })
         .catch(error => {console.error('Error fetching weather data:', error); weatherDiv.innerHTML = '<p>Failed to fetch weather data.</p>'; });

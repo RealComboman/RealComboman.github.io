@@ -32,35 +32,35 @@ a:active {color:yellow; background-color:transparent; text-decoration:underline;
 <br><br><br><br>
 <div style="text-align:center;margin:0;">
 <h1><span style="color:blue;">C<span style="color:red;"><a id="Othm"></a><span style="color:orange;">m<span style="color:green;">b<span style="color:red;"><a href="txt.html">o</a><span style="color:fuchsia;">t<span style="color:red;">e<span style="color:blue;">c<span style="color:turquoise;">h<span style="color:orange;">n<span style="color:lime;">i<span style="color:red;">.<span style="color:blue;">c<span style="color:red;">a</h1>
-<form action="javascript:;" onsumbit=" Sddg(document.input_box.command.value) " name="input_box" >
+<form action="javascript:;" onsumbit=" Sweb(document.input_box.command.value) " name="input_box" >
 <div style="margin-top:3px">
 <input autofocus id="textin" type="text" style="border-radius: 20px; font-size: 16px; padding: 4px" name="command" size="33" value=" "/> <br><br>
-<input type="submit" value="🔍 Search" onClick="Sddg(document.input_box.command.value)" >
+<input type="submit" value="🔍 Web" onClick="Sweb(document.input_box.command.value)" >
 <input type="button" value="🌐 Map" align="texttop" onClick="Smap(document.input_box.command.value)" >
-<input type="button" value="🖼️ Image" align="texttop" onClick="Simg(document.input_box.command.value)">
 <input type="button" value="📰 News" align="texttop" onClick="Snews(document.input_box.command.value)">
+<input type="button" value="🖼️ Image" align="texttop" onClick="Simg(document.input_box.command.value)">
 <input type="button" value="🛒 Shop" align="texttop" onClick="Sshop(document.input_box.command.value)">
 <select name="searchType" value="wp " onchange="document.input_box.searchType.value=this[this.selectedIndex].value;Smagic(document.input_box.command.value);" class="select">
 <option value="null" selected>🪄 Multi</option>
 <option value="wp ">Wikipedia</option>
 <option value="thes ">Thesaurus</option>
-<option value="dnews">DdgNews</option>
-<option value="dimg">DdgImage</option>
-<option value="dmap">DdgMap</option><!--option value="open">OpnStMap</option-->
 <option value="yt ">YouTube</option>
-<option value="dshop">DdgShop</option>
 <option value="pclk">eBay</option>
 <option value="amz">Amazon</option>
 <option value="ascii ">Ascii</option>
 <option value="stock ">Y!Stock</option>
 <option value="groups ">Usenet</option>
 <option value="walf ">Wolfram</option>
-<option value="g ">Google</option><!--option value="wu ">Weather</option-->
 </select></div>
 <br><br><br>
 <div id="modalCfg" class="modal"><div class="modal-content"><div class="modal-body"><span class="close" onClick="closeModal()">❎</span>
 <h3>⚙️ Configuration</h3><br>
 Open search in new window: <input type="checkbox" name="Chk1" value="yes" CHECKED size="34" class="button2" style=""><br>
+Web search: <input type="radio" id="web2" name="web" value="ddg" checked><label for="web2">Duck Duck Go</label> <input type="radio" id="web1" name="web" value="goo"><label for="web1">Google</label> <input type="radio" id="web3" name="web" value="quant"><label for="web3">Quant</label><br>
+Map search: <input type="radio" id="map1" name="map" value="goo" checked><label for="map1">Google</label> <input type="radio" id="map2" name="map" value="ddg"><label for="map2">Duck Duck Go</label> <input type="radio" id="map3" name="map" value="open"><label for="map3">Open Street Map</label><br>
+News search: <input type="radio" id="nws1" name="nws" value="goo" checked><label for="nws1">Google</label> <input type="radio" id="nws2" name="nws" value="ddg"><label for="nws2">Duck Duck Go</label> <input type="radio" id="nws3" name="nws" value="quant"><label for="nws3">Quant</label><br>
+Image search: <input type="radio" id="img1" name="img" value="goo" checked><label for="img1">Google</label> <input type="radio" id="img2" name="img" value="ddg"><label for="img2">Duck Duck Go</label> <input type="radio" id="img3" name="img" value="quant"><label for="img3">Quant</label><br>
+Shopping search: <input type="radio" id="shp1" name="shp" value="goo" checked><label for="shp1">Google</label> <input type="radio" id="shp2" name="shp" value="ddg"><label for="shp2">Duck Duck Go</label><br>
 Weather location: <input type="text" id="cityInput" value="Halifax"><br><br><br>
 </div></div></div>
 <div id="modalMail" class="modal"><div class="modal-content"><div class="modal-body"><span class="close" onClick="closeModal()">❎</span>
@@ -199,40 +199,44 @@ function focus(){document.input_box.command.focus();}
 
 function Smagic(arg) {var srchURL='';
 if(document.input_box.searchType.value==="null"){return;}
-else if(document.input_box.searchType.value==="open"){srchURL='https://www.openstreetmap.org/search?query='+arg;}
-else if(document.input_box.searchType.value==="dmap"){srchURL='https://duckduckgo.com/?q='+arg+'&ia=web&iaxm=maps&source=places';}
-else if(document.input_box.searchType.value==="dimg"){srchURL='https://duckduckgo.com/?q='+arg+'&ia=images&iax=images';}
-else if(document.input_box.searchType.value==="dshop"){srchURL='https://duckduckgo.com/?q='+arg+'&ia=shopping&iax=shopping';}
-else if(document.input_box.searchType.value==="dnews"){srchURL='https://duckduckgo.com/?q='+arg+'&ia=news&iar=news';}
 else if(document.input_box.searchType.value==="pclk"){srchURL='https://picclick.ca/?q=='+arg;}
 else if(document.input_box.searchType.value==="amz"){srchURL='https://www.amazon.ca/s?k='+arg;}
 else{srchURL='http://yubnub.org/parser/parse?command=' + document.input_box.searchType.value+arg;}
 if (document.input_box.Chk1.checked==false) {window.location=srchURL; return true;} 
 else {return window.open(srchURL);}
 }
-function Simg(arg) {
-var srchURL='https://www.google.com/search?q='+arg+'&udm=2';
+function Simg(arg) {var srchURL='';
+if(document.input_box.img.value==="ddg"){srchURL='https://duckduckgo.com/?q='+arg+'&ia=images&iax=images';}
+else if(document.input_box.img.value==="goo"){srchURL='https://www.google.com/search?q='+arg+'&udm=2';}
+else {srchURL='https://www.qwant.com/?t=images&q='+arg;}
 if (document.input_box.Chk1.checked==false) {window.location=srchURL; return true;} 
 else {return window.open(srchURL);}
 }
-function Sshop(arg) {
-var srchURL='https://www.google.com/search?q='+arg+'&udm=28';
+function Sshop(arg) {var srchURL='';
+if(document.input_box.shp.value==="ddg"){srchURL='https://duckduckgo.com/?q='+arg+'&ia=shopping&iax=shopping';}
+else if(document.input_box.shp.value==="goo"){srchURL='https://www.google.com/search?q='+arg+'&udm=28';}
+//else {srchURL='https://www.qwant.com/?t=news&q= '+arg;}
 if (document.input_box.Chk1.checked==false) {window.location=srchURL; return true;} 
 else {return window.open(srchURL);}
 }
-function Smap(arg) {
-var srchURL='https://www.google.com/maps?output=search&q='+arg+'&entry=mc';
+function Smap(arg) {var srchURL='';
+if(document.input_box.map.value==="ddg"){srchURL='https://duckduckgo.com/?q='+arg+'&ia=web&iaxm=maps&source=places';}
+else if(document.input_box.map.value==="goo"){srchURL='https://www.google.com/maps?output=search&q='+arg+'&entry=mc';}
+else {srchURL='https://www.openstreetmap.org/search?query='+arg;}
 if (document.input_box.Chk1.checked==false) {window.location=srchURL; return true;} 
 else {return window.open(srchURL);}
 }
-function Snews(arg) {
-var srchURL='https://news.google.com/search?q='+arg+'&tbm=nws';
-//varsrchURL='http://yubnub.org/parser/parse?command=gnews '+arg;
+function Snews(arg) {var srchURL='';
+if(document.input_box.nws.value==="ddg"){srchURL='https://duckduckgo.com/?q='+arg+'&ia=news&iar=news';}
+else if(document.input_box.nws.value==="goo"){srchURL='https://news.google.com/search?q='+arg+'&tbm=nws';}
+else {srchURL='https://www.qwant.com/?t=news&q= '+arg;}
 if (document.input_box.Chk1.checked==false) {window.location=srchURL; return true;} 
 else {return window.open(srchURL);}
 }
-function Sddg(arg) {
-var srchURL='https://duckduckgo.com/?q= '+arg;
+function Sweb(arg) {var srchURL='';
+if(document.input_box.web.value==="ddg"){srchURL='https://duckduckgo.com/?q= '+arg;}
+else if(document.input_box.web.value==="goo"){srchURL='https://google.com/search?q='+arg;}
+else {srchURL='https://www.qwant.com/?t=web&q='+arg;}
 if (document.input_box.Chk1.checked==false) {window.location=srchURL; return true;} 
 else {return window.open(srchURL);}
 }

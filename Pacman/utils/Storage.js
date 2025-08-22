@@ -1,18 +1,14 @@
-/**
- * Creates a new Storage. A storage uses local storage capabilities to save JSON data
- */
+/* Creates a new Storage. A storage uses local storage capabilities to save JSON data */
 var Storage = (function () {
     "use strict";
     
-    /**
-     * Returns true if local storage is supported
+    /* Returns true if local storage is supported
      */
     function supportsStorage() {
         return window.localStorage !== "undefined" && window.localStorage !== null;
     }
     
-    /**
-     * Returns true if the string is an integer
+    /* Returns true if the string is an integer
      * @param {string} string
      * @return {boolean}
      */
@@ -29,8 +25,7 @@ var Storage = (function () {
     }
     
     
-    /**
-     * @constructor
+    /* @constructor
      * Creates a new storage
      * @param {string} name  The name of the storage
      * @param {boolean=} single  True to have a storage for a single value
@@ -41,8 +36,7 @@ var Storage = (function () {
         this.supports = supportsStorage();
     }
     
-    /**
-     * Returns the data in the saved format
+    /* Returns the data in the saved format
      * @param {string} name
      * @return {(boolean|number|string|Object)}
      */
@@ -62,8 +56,7 @@ var Storage = (function () {
         return content;
     };
     
-    /**
-     * Saves the given data as a JSON object
+    /* Saves the given data as a JSON object
      * @param {(boolean|number|string|Object)} name  If this is a single value Storage use this param for the value
      * @param {(boolean|number|string|Object)} value
      */
@@ -77,8 +70,7 @@ var Storage = (function () {
         }
     };
     
-    /**
-     * Removes the data with the given name
+    /* Removes the data with the given name
      * @param {string=} name
      */
     Storage.prototype.remove = function (name) {
@@ -88,8 +80,7 @@ var Storage = (function () {
     };
     
     
-    /**
-     * Returns the key for the given name
+    /* Returns the key for the given name
      * @param {string=} name
      * @return {string}
      */
@@ -97,8 +88,7 @@ var Storage = (function () {
         return this.name + (name ? "." + name : "");
     };
     
-    /**
-     * Returns true if local storage is supported
+    /* Returns true if local storage is supported
      */
     Storage.prototype.isSupported = function () {
         return this.supports;

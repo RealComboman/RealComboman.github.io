@@ -2,8 +2,7 @@ let Utils = (function () {
     "use strict";
 
     return {
-        /**
-         * Returns a random value between from and to
+        /* Returns a random value between from and to
          * @param {number} from
          * @param {number} to
          * @return {number}
@@ -12,8 +11,7 @@ let Utils = (function () {
             return Math.floor(Math.random() * (to - from + 1) + from);
         },
         
-        /**
-         * Returns the value higher than the min and lower than the max
+        /* Returns the value higher than the min and lower than the max
          * @param {number} value
          * @param {number} min
          * @param {number} max
@@ -23,8 +21,7 @@ let Utils = (function () {
             return Math.max(min, Math.min(max, value));
         },
     
-        /**
-         * Adds the separator every 3 decimals
+        /* Adds the separator every 3 decimals
          * @param {number} number
          * @param {string} separator
          * @return {string}
@@ -46,8 +43,7 @@ let Utils = (function () {
             return result;
         },
         
-        /**
-         * Returns the angle between two values
+        /* Returns the angle between two values
          * @param {number} x
          * @param {number} y
          * @return {number}
@@ -65,8 +61,7 @@ let Utils = (function () {
         },
         
         
-        /**
-         * Returns the closest element with an action
+        /* Returns the closest element with an action
          * @param {Event}
          * @return {DOMElement}
          */
@@ -78,8 +73,7 @@ let Utils = (function () {
             return element;
         },
         
-        /**
-         * Returns the position of an Element in the document
+        /* Returns the position of an Element in the document
          * @param {DOMElement} element
          * @return {{top: number, left: number}}
          */
@@ -101,8 +95,7 @@ let Utils = (function () {
             return { top, left };
         },
         
-        /**
-         * Sets the position of the given element or elements
+        /* Sets the position of the given element or elements
          * @param {DOMElement} element
          * @param {number} top
          * @param {number} lefet
@@ -112,8 +105,7 @@ let Utils = (function () {
             element.style.left = left + "px";
         },
         
-        /**
-         * Removes the Element from the DOM
+        /* Removes the Element from the DOM
          * @param {DOMElement} element
          */
         removeElement(element) {
@@ -122,8 +114,7 @@ let Utils = (function () {
         },
     
     
-        /**
-         * Returns the Mouse Position
+        /* Returns the Mouse Position
          * @param {Event} event
          * @return {{top: number, left: number}}
          */
@@ -142,8 +133,7 @@ let Utils = (function () {
             return { top, left };
         },
     
-        /**
-         * Unselects the elements
+        /* Unselects the elements
          */
         unselect() {
             if (window.getSelection) {

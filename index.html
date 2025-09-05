@@ -157,7 +157,7 @@ if(data.weather[0].icon==="13d" || data.weather[0].icon==="13n"){wicon="❄️";
 if(data.weather[0].icon==="50d" || data.weather[0].icon==="50n"){wicon="️🌫";}
 const weatherContent=`<b><a href="http://www.theweathernetwork.com" target="_blank" style="font-size:20px; color:black;">${name} &nbsp; ${wicon}</a></b><br>${temperature}°C | ${description}`;
 weatherDiv.innerHTML=weatherContent;})
-.catch(error => {console.error('Error fetching weather data:', error); weatherDiv.innerHTML='<p>Failed to fetch weather data.</p>';});
+.catch(error => {console.error('Error fetching weather data:', error); weatherDiv.innerHTML='<p>Failed to get weather data</p>';});
 
 document.getElementById("Othm").innerHTML='X';
 date=new Date(); //theme doodle emoji
@@ -167,24 +167,28 @@ else if(date.getMonth()==1 && date.getDate()==2){document.getElementById("Othm")
 else if(date.getMonth()==1 && date.getDate()==14){document.getElementById("Othm").innerHTML='❤️';}
 else if(date.getMonth()==2 && date.getDate()==14){document.getElementById("Othm").innerHTML='️🥧';}
 else if(date.getMonth()==2 && date.getDate()>7 && date.getDate()<15 && date.getDay()==0){document.getElementById("Othm").innerHTML='⏰⤸';}
+else if(date.getMonth()==2 && date.getDate()>18 && date.getDate()>22){document.getElementById("Othm").innerHTML='🌻';}
 else if(date.getMonth()==4 && date.getDate()==4){document.getElementById("Othm").innerHTML='️🚀';}
 else if(date.getMonth()==4 && date.getDate()==5){document.getElementById("Othm").innerHTML='️🌮';}
 else if(date.getMonth()==4 && date.getDate()>17 && date.getDate()<25 && date.getDay()==1){document.getElementById("Othm").innerHTML='👑';}
-else if(date.getMonth()==5 && date.getDate()==21){document.getElementById("Othm").innerHTML='🪶';}
+else if(date.getMonth()==5 && date.getDate()>19 && date.getDate()>22){document.getElementById("Othm").innerHTML='🌞';}
 else if(date.getMonth()==6 && date.getDate()==1){document.getElementById("Othm").innerHTML='🍁';}
 else if(date.getMonth()==6 && date.getDate()==4){document.getElementById("Othm").innerHTML='💩';}
 else if(date.getMonth()==6 && date.getDate()==16){document.getElementById("Othm").innerHTML='🎂';}
 else if(date.getMonth()==7 && date.getDate()<8 && date.getDay()==1){document.getElementById("Othm").innerHTML='🌉';}
 else if(date.getMonth()==8 && date.getDate()==29){document.getElementById("Othm").innerHTML='🎂';}
+else if(date.getMonth()==8 && date.getDate()<8 && date.getDay()==1){document.getElementById("Othm").innerHTML='✊';}
+else if(date.getMonth()==8 && date.getDate()>21 && date.getDate()>24){document.getElementById("Othm").innerHTML='🍂';}
 else if(date.getMonth()==9 && date.getDate()>7 && date.getDate()<15 && date.getDay()==1){document.getElementById("Othm").innerHTML='🦃';}
 else if(date.getMonth()==9 && date.getDate()==31){document.getElementById("Othm").innerHTML='🎃';}
 else if(date.getMonth()==10 && date.getDate()<8 && date.getDay()==0){document.getElementById("Othm").innerHTML='⤹🕰';}
 else if(date.getMonth()==10 && date.getDate()==11){document.getElementById("Othm").innerHTML='🌸';}
 else if(date.getMonth()==10 && date.getDate()>1 && date.getDate()<9 && getYear()%2 && date.getDay()==2){document.getElementById("Othm").innerHTML='🗳';}
+else if(date.getMonth()==11 && date.getDate()>19 && date.getDate()>22){document.getElementById("Othm").innerHTML='❄️';}
 else if(date.getMonth()==11 && date.getDate()==25){document.getElementById("Othm").innerHTML='⛄';}
 else {document.getElementById("Othm").innerHTML='o';}
 
-window.onclick=function(event){if (event.target==modal){modal.style.display="none";}} // When user clicks outside of modal, close it
+window.onclick=function(event){if (event.target==modal){modal.style.display="none";}} // if user clicks outside modal, close it
 var span=document.getElementsByClassName("close");
 
 function configopen(){modal=document.querySelector("#modalCfg"); modal.style.display="block"; extra.innerHTML='';}

@@ -35,8 +35,8 @@ a:active {color:yellow; background-color:transparent; text-decoration:underline;
 <form action="javascript:;" onsumbit=" Sweb(document.input_box.command.value) " name="input_box" >
 <div style="margin-top:3px">
 <input autofocus id="textin" type="text" style="border-radius: 20px; font-size: 16px; padding: 4px" name="command" size="33" value=" "/> <br><br>
-<input type="submit" value="🔍 Web" onClick="Sweb(document.input_box.command.value)" >
-<input type="button" value="🌐 Map" align="texttop" onClick="Smap(document.input_box.command.value)" >
+<input type="submit" value="🔍 Web" onClick="Sweb(document.input_box.command.value)">
+<input type="button" value="🌐 Map" align="texttop" onClick="Smap(document.input_box.command.value)">
 <input type="button" value="📰 News" align="texttop" onClick="Snews(document.input_box.command.value)">
 <input type="button" value="🖼️ Image" align="texttop" onClick="Simg(document.input_box.command.value)">
 <input type="button" value="🛒 Shop" align="texttop" onClick="Sshop(document.input_box.command.value)">
@@ -48,7 +48,7 @@ a:active {color:yellow; background-color:transparent; text-decoration:underline;
 <option value="pclk">eBay</option>
 <option value="amz">Amazon</option>
 <option value="ascii ">Ascii</option>
-<option value="stock ">Y!Stock</option>
+<option value="y ">Yahoo!</option>
 <option value="walf ">Wolfram</option>
 <option value="groups ">Usenet</option>
 </select></div>
@@ -203,7 +203,7 @@ function focus(){document.input_box.command.focus();}
 
 function Smagic(arg) {var srchURL='';
 if(document.input_box.searchType.value==="null"){return;}
-else if(document.input_box.searchType.value==="pclk"){srchURL='https://picclick.ca/?q=='+arg;}
+else if(document.input_box.searchType.value==="pclk"){srchURL='https://picclick.ca/?q='+arg;}
 else if(document.input_box.searchType.value==="amz"){srchURL='https://www.amazon.ca/s?k='+arg;}
 else{srchURL='http://yubnub.org/parser/parse?command=' + document.input_box.searchType.value+arg;}
 if (document.input_box.Chk1.checked==false) {window.location=srchURL; return true;} 

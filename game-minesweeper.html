@@ -7,24 +7,17 @@
 body {font-family: Arial, sans-serif; text-align: center;}
 .board {display: inline-block; margin: 20px;}
 .cell {    width: 30px;    height: 30px;    border: 1px solid #ccc;    display: inline-block;    text-align: center;    vertical-align: middle;    font-size: 20px;    cursor: pointer;
-    /* Default color for unrevealed tiles */
-    background-color: #eee;
-    /* Default color for unrevealed tile text */
-    color: #333;}
-.revealed {
-    /* Color for revealed tiles */
-    background-color: #ccc;
-    /* Color for revealed tile text */
-    color: #000;}
-.mine {
-    /* Color for mines */
-    background-color: #ff3333;
-}
+    background-color: #eee; color: #333;}
+.revealed { background-color: #ccc; color: #000;}
+.revealmid { background-color: #ccc; color: green;}
+.revealbig { background-color: #ccc; color: #EE4B2B;}
+.mine {background-color: #ff3333;}
 </style>
 </head>
 <body>
     <h1>Minesweeper</h1>
     <div id="gameBoard"></div>
+	<div id="score"></div>
 </body>
 <script>
 const numRows = 8;
@@ -41,10 +34,9 @@ function initializeBoard() {
     for (let i = 0; i < numRows; i++) {
         board[i] = [];
         for ( let j = 0; j < numCols; j++) {
-            board[i][j] = { isMine: false, revealed: false, count: 0, };
+            board[i][j] = { isMine: false, revealed: false, revealbig: false, revealmid: false, count: 0, };
         }
     }
-
     // Place mines randomly
     let minesPlaced = 0;
     while (minesPlaced < numMines) {
@@ -55,7 +47,6 @@ function initializeBoard() {
             minesPlaced++;
         }
     }
-
     // Calculate counts
     for (let i = 0; i < numRows; i++) {
         for ( let j = 0; j < numCols; j++) {
@@ -90,8 +81,7 @@ function revealCell(row, col) {
     } else if (
         board[row][col].count === 0
     ) {
-        // If cell has no mines nearby,
-        // Reveal adjacent cells
+        // If cell has no mines nearby, reveal adjacent cells
         for ( let dx = -1; dx <= 1;  dx++ ) {
             for (let dy = -1; dy <= 1; dy++ ) {
                 revealCell( row + dx, col + dy );
@@ -104,23 +94,31 @@ function revealCell(row, col) {
 
 function renderBoard() {
     gameBoard.innerHTML = "";
+	let foundmines = 0;
+	let revealedcells = 0;
 
     for (let i = 0; i < numRows; i++) {
         for (let j = 0; j < numCols; j++) {
             const cell = document.createElement("div" );
             cell.className = "cell";
             if (board[i][j].revealed) {
-                cell.classList.add( "revealed" );
+                cell.classList.add("revealed"); revealedcells++;
                 if (board[i][j].isMine) {
                     cell.classList.add("mine");
-                    cell.textContent = "💣";
-                } else if (board[i][j].count > 0) {cell.textContent = board[i][j].count; }
+                    cell.textContent = "💣"; foundmines++; revealedcells--;
+                } else if (board[i][j].count > 0) {
+					cell.textContent = board[i][j].count; 
+					if(board[i][j].count>1){board[i][j].revealmid;cell.classList.add("revealmid");}
+					if(board[i][j].count>2){board[i][j].revealbig;cell.classList.add("revealbig");}
+				}
             }
             cell.addEventListener( "click", () => revealCell(i, j));
             gameBoard.appendChild(cell);
         }
         gameBoard.appendChild(document.createElement("br"));
     }
+	score.innerHTML = "Revealed: "+revealedcells+"/"+((numRows*numCols)-numMines)+"   Mines: "+foundmines+"/"+numMines;
+    if (revealedcells==((numRows*numCols)-numMines)) {alert("Congrats! You cleared all the spaces." );}
 }
 
 initializeBoard();

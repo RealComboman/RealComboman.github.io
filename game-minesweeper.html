@@ -17,7 +17,16 @@ body {font-family: Arial, sans-serif; text-align: center;}
 <body>
     <h1>Minesweeper</h1>
     <div id="gameBoard"></div>
-	<div id="score"></div>
+	<br><div id="score"></div>
+	<div id="gamesize">
+	<br>
+	<select id="board_size"> 
+	<option value=8>Small (8x8)</option>
+	<option value=10>Medium (10x10)</option>
+	<option value=15>Large (15x15)</option>
+	</select><br><br>
+	<input type="button" value="New Game" onclick="document.initializeBoard()">
+	</div>
 </body>
 <script>
 const numRows = 8;
@@ -25,12 +34,12 @@ const numCols = 8;
 const numMines = 10;
 
 const gameBoard =
-    document.getElementById(
-        "gameBoard"
-    );
+    document.getElementById("gameBoard");
 let board = [];
 
 function initializeBoard() {
+	//document.getElementById('color_choices').value = "primary";
+	//numRows = document.getElementById('board_size').value;
     for (let i = 0; i < numRows; i++) {
         board[i] = [];
         for ( let j = 0; j < numCols; j++) {
@@ -117,7 +126,7 @@ function renderBoard() {
         }
         gameBoard.appendChild(document.createElement("br"));
     }
-	score.innerHTML = "Revealed: "+revealedcells+"/"+((numRows*numCols)-numMines)+"   Mines: "+foundmines+"/"+numMines;
+	score.innerHTML = "Revealed: "+revealedcells+"/"+((numRows*numCols)-numMines)+"     Mines: "+foundmines+"/"+numMines;
     if (revealedcells==((numRows*numCols)-numMines)) {alert("Congrats! You cleared all the spaces." );}
 }
 

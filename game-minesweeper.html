@@ -18,20 +18,18 @@ body {font-family: Arial, sans-serif; text-align: center;}
     <h1>Minesweeper</h1>
     <div id="gameBoard"></div>
 	<br><div id="score"></div>
-	<div id="gamesize">
 	<br>
 	<select id="board_size"> 
-	<option value=8>Small (8x8)</option>
-	<option value=10>Medium (10x10)</option>
-	<option value=15>Large (15x15)</option>
+	<option value="sm">Small (8x8)</option>
+	<option value="md">Medium (10x10)</option>
+	<option value="lr">Large (15x15)</option>
 	</select><br><br>
-	<input type="button" value="New Game" onclick="document.initializeBoard()">
-	</div>
+	<input type="button" value="New Game" onclick="newGame()">
 </body>
 <script>
-const numRows = 8;
-const numCols = 8;
-const numMines = 10;
+var numRows = 8;
+var numCols = 8;
+var numMines = 10;
 
 const gameBoard =
     document.getElementById("gameBoard");
@@ -39,7 +37,11 @@ let board = [];
 
 function initializeBoard() {
 	//document.getElementById('color_choices').value = "primary";
-	//numRows = document.getElementById('board_size').value;
+	var size = document.getElementById('board_size').value;
+		numRows = {"sm": 8, "md": 10, "lr": 15}[size];
+		numCols = {"sm": 8, "md": 10, "lr": 15}[size];
+		numMines = {"sm": 10, "md": 15, "lr": 20}[size];
+	
     for (let i = 0; i < numRows; i++) {
         board[i] = [];
         for ( let j = 0; j < numCols; j++) {
@@ -126,8 +128,13 @@ function renderBoard() {
         }
         gameBoard.appendChild(document.createElement("br"));
     }
-	score.innerHTML = "Revealed: "+revealedcells+"/"+((numRows*numCols)-numMines)+"     Mines: "+foundmines+"/"+numMines;
+	score.innerHTML = "Revealed: "+revealedcells+"/"+((numRows*numCols)-numMines)+" | Mines: "+foundmines+"/"+numMines;
     if (revealedcells==((numRows*numCols)-numMines)) {alert("Congrats! You cleared all the spaces." );}
+}
+
+function newGame(){
+	initializeBoard();
+	renderBoard();
 }
 
 initializeBoard();

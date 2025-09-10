@@ -1,16 +1,12 @@
-<!DOCTYPE html>
-<html>
-
-<head>
-    <title>Minesweeper Game</title>
-	  <style>
+<!DOCTYPE html><html><head>
+<title>Minesweeper</title>
+<style>
 body {font-family: Arial, sans-serif; text-align: center;}
 .board {display: inline-block; margin: 20px;}
-.cell {    width: 30px;    height: 30px;    border: 1px solid #ccc;    display: inline-block;    text-align: center;    vertical-align: middle;    font-size: 20px;    cursor: pointer;
-    background-color: #eee; color: #333;}
-.revealed { background-color: #ccc; color: #000;}
+.cell {width: 30px; height: 30px;  border: 1px solid #ccc;  display: inline-block; text-align: center; vertical-align: middle; font-size: 20px; cursor: pointer; background-color: #eee; color: #333;}
+.revealed { background-color: #ccc; color: blue;}
 .revealmid { background-color: #ccc; color: green;}
-.revealbig { background-color: #ccc; color: #EE4B2B;}
+.revealbig { background-color: #ccc; color: red;}
 .mine {background-color: #ff3333;}
 </style>
 </head>
@@ -18,8 +14,7 @@ body {font-family: Arial, sans-serif; text-align: center;}
     <h1>Minesweeper</h1>
     <div id="gameBoard"></div>
 	<br><div id="score"></div>
-	<br>
-	<select id="board_size"> 
+	<br><select id="board_size"> 
 	<option value="sm">Small (8x8)</option>
 	<option value="md">Medium (10x10)</option>
 	<option value="lr">Large (15x15)</option>
@@ -36,7 +31,6 @@ const gameBoard =
 let board = [];
 
 function initializeBoard() {
-	//document.getElementById('color_choices').value = "primary";
 	var size = document.getElementById('board_size').value;
 		numRows = {"sm": 8, "md": 10, "lr": 15}[size];
 		numCols = {"sm": 8, "md": 10, "lr": 15}[size];
@@ -51,8 +45,8 @@ function initializeBoard() {
     // Place mines randomly
     let minesPlaced = 0;
     while (minesPlaced < numMines) {
-        const row = Math.floor( Math.random() * numRows );
-        const col = Math.floor(Math.random() * numCols );
+        const row = Math.floor(Math.random() * numRows);
+        const col = Math.floor(Math.random() * numCols);
         if (!board[row][col].isMine) {
             board[row][col].isMine = true;
             minesPlaced++;
@@ -83,23 +77,18 @@ function revealCell(row, col) {
         row < 0 || row >= numRows || col < 0 || col >= numCols || board[row][col].revealed ) {
         return;
     }
-
     board[row][col].revealed = true;
-
     if (board[row][col].isMine) {
-        // Handle game over
-        alert("Game Over! You stepped on a mine." );
+        alert("Game Over! You stepped on a mine.");
     } else if (
         board[row][col].count === 0
-    ) {
-        // If cell has no mines nearby, reveal adjacent cells
+    ) { // If cell has no mines nearby, reveal adjacent cells
         for ( let dx = -1; dx <= 1;  dx++ ) {
             for (let dy = -1; dy <= 1; dy++ ) {
                 revealCell( row + dx, col + dy );
             }
         }
     }
-
     renderBoard();
 }
 
@@ -128,8 +117,8 @@ function renderBoard() {
         }
         gameBoard.appendChild(document.createElement("br"));
     }
-	score.innerHTML = "Revealed: "+revealedcells+"/"+((numRows*numCols)-numMines)+" | Mines: "+foundmines+"/"+numMines;
-    if (revealedcells==((numRows*numCols)-numMines)) {alert("Congrats! You cleared all the spaces." );}
+	score.innerHTML = "Open: "+revealedcells+" / "+((numRows*numCols)-numMines)+" | Mines: "+foundmines+" / "+numMines;
+    if (revealedcells==((numRows*numCols)-numMines)) {alert("Congrats! You cleared all the spaces.");}
 }
 
 function newGame(){
@@ -137,10 +126,8 @@ function newGame(){
 	renderBoard();
 }
 
-initializeBoard();
-renderBoard();
+newGame();
 </script>
-
 </html>
 
 

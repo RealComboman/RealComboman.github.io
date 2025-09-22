@@ -7,27 +7,11 @@
 .blue {background-color: blue;}
 .purple {background-color: purple;}
 .pink {background-color: pink;}
-#game-table {margin: 0px;
-    border: 0px;
-    padding: 0px;
-    border-spacing: 0px;
-    width: 392;
-    height: 448;
-    background: goldenrod;
-    table-layout: fixed;}
-#status {width: 120px;
-    height: 228px;}
-.piece {width: 28px;
-    height: 30px;
-    border: 0px;
-    padding: 0px;
-    margin: 0px;}
-.button {width: 30px;
-    height: 30px;
-    border: 0px;
-    border-radius: 15px;}
-#button-table {border-spacing: 4px;
-    vertical-align: top;}
+#game-table {margin: 0px; border: 0px; padding: 0px; border-spacing: 0px; width: 392; height: 448; background: goldenrod; table-layout: fixed;}
+#status {width: 120px; height: 228px;}
+.piece {width: 28px; height: 30px; border: 0px; padding: 0px; margin: 0px;}
+.button {width: 30px; height: 30px; border: 0px; border-radius: 15px;}
+#button-table {border-spacing: 4px; vertical-align: top;}
 #turn-counter {font-family: sans-serif;}
 @media screen and (min-width: 600px) {#game-board { display: grid;  grid-template-columns: 120px max-content;  grid-template-rows: 80px 140px max-content; }
     #game-table { grid-column-start: 2; grid-column-end: 3; grid-row-start: 1; grid-row-end: 4; }
@@ -50,20 +34,14 @@
   <div id="colour-buttons">
     <table id="button-table">
       <tr>
-        <td class="button blue" onclick="choose('blue')">
-        </td>
-        <td class="button red" onclick="choose('red')">
-        </td>
-        <td class="button green" onclick="choose('green')">
-        </td>
+        <td class="button blue" onclick="choose('blue')"></td>
+        <td class="button red" onclick="choose('red')"></td>
+        <td class="button green" onclick="choose('green')"></td>
       </tr>
       <tr>
-        <td class="button yellow" onclick="choose('yellow')">
-        </td>
-        <td class="button pink" onclick="choose('pink')">
-        </td>
-        <td class="button purple" onclick="choose('purple')">
-        </td>
+        <td class="button yellow" onclick="choose('yellow')"></td>
+        <td class="button pink" onclick="choose('pink')"></td>
+        <td class="button purple" onclick="choose('purple')"></td>
       </tr>
     </table>
   </div> <!-- colour-buttons -->
@@ -71,13 +49,11 @@
     <table>
       <tr valign="top">
         <td id="turn-counter" valign="top">
-          Turn: <span id="moves"></span>/<span id="max-moves"></span>
-        </td>
+          Turn: <span id="moves"></span>/<span id="max-moves"></span></td>
       </tr>
       <tr valign="top">
         <td valign="top">
-          <input type="submit" value="New game" onclick="newGame()">
-        </td>
+          <input type="submit" value="New game" onclick="newGame()"></td>
       </tr>
       <tr valign="top">
         <td valign="top">
@@ -113,9 +89,7 @@ for (var row = 0; row < n_rows; row++) {
     start_table[row] = new Array (n_cols);
 }
 var colours = "blue red green yellow pink purple".split (/\s+/);
-
 var userReact = true;
-/* DOM functions. */
 
 function create_node (type, parent)
 {
@@ -854,5 +828,6 @@ function load() {
     }
 }
 
-
+newGame();
+help();
 </script></body></html>

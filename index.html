@@ -136,8 +136,6 @@ var modal=document.getElementById("myModal");
 const rndSeed='d94893f5d0fa394f6ec042550b4355db';
 const weatherDiv=document.getElementById('weather');
 let cityInput = localStorage.getItem("myCity");
-//cityDsp.innerHTML = ""+cityInput;
-//const cityInput=document.getElementById('cityInput').value;
 GetWeather();
 
 document.getElementById("Othm").innerHTML='X';
@@ -154,7 +152,7 @@ else if(date.getMonth()==4 && date.getDate()==5){document.getElementById("Othm")
 else if(date.getMonth()==4 && date.getDate()>17 && date.getDate()<25 && date.getDay()==1){document.getElementById("Othm").innerHTML='👑';}
 else if(date.getMonth()==5 && date.getDate()>19 && date.getDate()<22){document.getElementById("Othm").innerHTML='🌞';} //sum
 else if(date.getMonth()==6 && date.getDate()==1){document.getElementById("Othm").innerHTML='🍁';}
-else if(date.getMonth()==6 && date.getDate()==4){document.getElementById("Othm").innerHTML='💩';}
+else if(date.getMonth()==6 && date.getDate()==4){document.getElementById("Othm").innerHTML='🗽';}
 else if(date.getMonth()==6 && date.getDate()==16){document.getElementById("Othm").innerHTML='🎂';}
 else if(date.getMonth()==7 && date.getDate()<8 && date.getDay()==1){document.getElementById("Othm").innerHTML='🌉';} //ntl
 else if(date.getMonth()==8 && date.getDate()==29){document.getElementById("Othm").innerHTML='🎂';}
@@ -184,7 +182,6 @@ function focus(){document.input_box.command.focus();}
 
 function SetCity(arg){
 cityInput = arg; localStorage.setItem("myCity", arg);
-//cityDsp.innerHTML = ""+cityInput;
 GetWeather();
 }
 

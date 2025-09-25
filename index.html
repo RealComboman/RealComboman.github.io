@@ -59,7 +59,7 @@ Web search: <input type="radio" id="web1" name="web" value="goo"><label for="web
 News search: <input type="radio" id="nws1" name="nws" value="goo" checked><label for="nws1">Google </label> <input type="radio" id="nws2" name="nws" value="ddg"><label for="nws2">DuckDuckGo </label> <input type="radio" id="nws3" name="nws" value="quant"><label for="nws3">Quant </label> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <br>
 Image search: <input type="radio" id="img1" name="img" value="goo" checked><label for="img1">Google </label> <input type="radio" id="img2" name="img" value="ddg"><label for="img2">DuckDuckGo </label> <input type="radio" id="img3" name="img" value="quant"><label for="img3">Quant </label> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <br>
 Shopping search: <input type="radio" id="shp1" name="shp" value="goo" checked><label for="shp1">Google </label> <input type="radio" id="shp2" name="shp" value="ddg"><label for="shp2">DuckDuckGo </label> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <br>
-Weather location: <input type="text" id="cityInput" value="Halifax"><br><br>
+Weather location: <input type="text" name="city" value=""> <input type="button" value="Set City" align="texttop" onClick="SetCity(document.input_box.city.value)"><br><br>
 </div></div></div>
 <div id="mdMail" class="modal"><div class="modal-content"><div class="modal-body"><span class="close" onClick="closeModal()">❎</span>
 <h3>📧 Email / Social ☎️</h3><br>
@@ -135,27 +135,10 @@ Weather location: <input type="text" id="cityInput" value="Halifax"><br><br>
 var modal=document.getElementById("myModal");
 const rndSeed='d94893f5d0fa394f6ec042550b4355db';
 const weatherDiv=document.getElementById('weather');
-const cityInput=document.getElementById('cityInput').value;
-const apiUrl=`https://api.openweathermap.org/data/2.5/weather?q=${cityInput}&appid=${rndSeed}&units=metric`;
-fetch(apiUrl)
-.then(response => response.json())
-.then(data => {
-const{name, main, weather }=data;
-const temperature=Math.round(main.temp*10)/10;
-const description=weather[0].description;
-var wicon="❓"; //use emoji for weather icons
-if(data.weather[0].icon==="01d"){wicon="☀️";}
-if(data.weather[0].icon==="01n"){wicon="️🌙";}
-if(data.weather[0].icon==="02d"||data.weather[0].icon==="02n"||data.weather[0].icon==="03d"||data.weather[0].icon==="03n"){wicon="⛅️";}
-if(data.weather[0].icon==="04d"||data.weather[0].icon==="04n"){wicon="☁️";}
-if(data.weather[0].icon==="09d"||data.weather[0].icon==="09n"){wicon="️🌦";}
-if(data.weather[0].icon==="10d"||data.weather[0].icon==="10n"){wicon="️🌧";}
-if(data.weather[0].icon==="11d"||data.weather[0].icon==="11n"){wicon="🌩️";}
-if(data.weather[0].icon==="13d"||data.weather[0].icon==="13n"){wicon="❄️";}
-if(data.weather[0].icon==="50d"||data.weather[0].icon==="50n"){wicon="️🌫";}
-const weatherContent=`<b><a href="http://www.theweathernetwork.com" target="_blank" style="font-size:20px; color:black;">${name} &nbsp; ${wicon}</a></b><br>${temperature}°C | ${description}`;
-weatherDiv.innerHTML=weatherContent;})
-.catch(error => {console.error('Err:', error); weatherDiv.innerHTML='<p>Failed to get weather data</p>';});
+let cityInput = localStorage.getItem("myCity");
+//cityDsp.innerHTML = ""+cityInput;
+//const cityInput=document.getElementById('cityInput').value;
+GetWeather();
 
 document.getElementById("Othm").innerHTML='X';
 date=new Date(); //theme doodle
@@ -198,6 +181,35 @@ function prodopen(){modal=document.querySelector("#mdProd"); modal.style.display
 function finopen(){modal=document.querySelector("#mdFin"); modal.style.display="block";}
 function closeModal() {modal.style.display="none";}
 function focus(){document.input_box.command.focus();}
+
+function SetCity(arg){
+cityInput = arg; localStorage.setItem("myCity", arg);
+//cityDsp.innerHTML = ""+cityInput;
+GetWeather();
+}
+
+function GetWeather(){
+const apiUrl=`https://api.openweathermap.org/data/2.5/weather?q=${cityInput}&appid=${rndSeed}&units=metric`;
+fetch(apiUrl)
+.then(response => response.json())
+.then(data => {
+const{name, main, weather }=data;
+const temperature=Math.round(main.temp*10)/10;
+const description=weather[0].description;
+var wicon="❓"; //use emoji for weather icons
+if(data.weather[0].icon==="01d"){wicon="☀️";}
+if(data.weather[0].icon==="01n"){wicon="️🌙";}
+if(data.weather[0].icon==="02d"||data.weather[0].icon==="02n"||data.weather[0].icon==="03d"||data.weather[0].icon==="03n"){wicon="⛅️";}
+if(data.weather[0].icon==="04d"||data.weather[0].icon==="04n"){wicon="☁️";}
+if(data.weather[0].icon==="09d"||data.weather[0].icon==="09n"){wicon="️🌦";}
+if(data.weather[0].icon==="10d"||data.weather[0].icon==="10n"){wicon="️🌧";}
+if(data.weather[0].icon==="11d"||data.weather[0].icon==="11n"){wicon="🌩️";}
+if(data.weather[0].icon==="13d"||data.weather[0].icon==="13n"){wicon="❄️";}
+if(data.weather[0].icon==="50d"||data.weather[0].icon==="50n"){wicon="️🌫";}
+const weatherContent=`<b><a href="http://www.theweathernetwork.com" target="_blank" style="font-size:20px; color:black;">${name} &nbsp; ${wicon}</a></b><br>${temperature}°C | ${description}`;
+weatherDiv.innerHTML=weatherContent;})
+.catch(error => {console.error('Err:', error); weatherDiv.innerHTML='<p>Failed to get weather data</p>';});
+}
 
 function Smagic(arg) {var srchURL='';
 if(document.input_box.searchType.value==="null"){return;}

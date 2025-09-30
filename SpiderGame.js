@@ -243,49 +243,31 @@ var SimpleGame = (function()
 	SimpleGame.prototype.update = function()
 		{
 		if (SimpleGame.gameEngineStarted == false)
-			{
-			return;
-			}
-
+			{return;}
 		this.ticks++;
-
 		var i = Card.cardArray.length;
-
 		while (i-- > 0)
-			{
-			Card.cardArray[i].update();
-			}
-
+			{Card.cardArray[i].update();}
 		GameUI.update();
 		SimpleGame.myGame.input.update();
 		BoardManager.update();
-
 		if (this.lastMouseCoordX != SimpleGame.myGame.input.x || this.lastMouseCoordY != SimpleGame.myGame.input.y)
-			{
-			this.mouseMovedWithinGameTicks++;
-			}
+			{this.mouseMovedWithinGameTicks++;}
 			else
-			{
-			this.mouseMovedWithinGameTicks = 0;
-			}
-
+			{this.mouseMovedWithinGameTicks = 0;}
 		this.lastMouseCoordX = SimpleGame.myGame.input.x;
 		this.lastMouseCoordY = SimpleGame.myGame.input.y;
 		};
-
 	SimpleGame.fontsLoadedFlag = false;
 	SimpleGame.gameEngineStarted = false;
 	SimpleGame.unselectAllCards = false;
 	SimpleGame.isReleaseVersion = false;
 	SimpleGame.pointerDown = false;
-
 	return SimpleGame;
 	}());
 
 window.addEventListener("load", function()
-	{
-	new SimpleGame();
-	});
+	{new SimpleGame();});
 
 var GameUI = (function()
 	{
@@ -318,7 +300,6 @@ var GameUI = (function()
 		GameUI.menuButton.input.useHandCursor = true;
 		GameUI.menuButton.events.onInputDown.add(GameUI.onMenuButtonPressed, this);
 		GameUI.menuButton.alpha = 0.01;
-
 		GameUI.hintBigBut = SimpleGame.myGame.make.graphics(0, 0);
 		GameUI.hintBigBut.beginFill(0xffffff);
 		GameUI.hintBigBut.drawRect(340, 460, 200, 105);
@@ -341,10 +322,8 @@ var GameUI = (function()
 		GameUI.stepsText.x = Math.round(GameUI.stepsText.x);
 		GameUI.scoreTxt.y = Math.round(GameUI.scoreTxt.y);
 		GameUI.stepsText.y = Math.round(GameUI.stepsText.y);
-
 		this.update();
 		this.reinitData();
-
 		GameUI.buttonRestartShadow = SimpleGame.myGame.add.sprite(29, 29, "restart");
 		GameUI.buttonRestartShadow.anchor.set(0.5);
 		GameUI.buttonRestartShadow.tint = 0x000000;
@@ -352,22 +331,17 @@ var GameUI = (function()
 		GameUI.buttonRestartShadow.x = 29;
 		GameUI.buttonRestartShadow.y = 545;
 		GameUI.buttonRestartShadow.visible = false;
-
 		GameUI.buttonRestart = SimpleGame.myGame.add.button(3, 519, "restart", null, this, 2, 1, 0);
 		GameUI.buttonRestart.onInputUp.add(function()
 			{
 			if (showRestartGame == true)
-				{
-				GameUI.restartGame();
-				}
+				{GameUI.restartGame();}
 			}, this);
 		GameUI.buttonRestart.visible = false;
 		};
 
 	GameUI.restartGame = function ()
-		{
-		new NewGamePrompt(true);
-		}
+		{new NewGamePrompt(true);}
 
 	GameUI.resetMenuButton = function()
 		{
@@ -379,9 +353,7 @@ var GameUI = (function()
 		};
 
 	GameUI.resetUI = function()
-		{
-		GameUI.reinitData();
-		};
+		{GameUI.reinitData();};
 
 	GameUI.reinitData = function()
 		{
@@ -398,22 +370,15 @@ var GameUI = (function()
 
 		var bonus = 750 - GameUI.time;
 		if (bonus < 0)
-			{
-			bonus = 0;
-			}
-
+			{bonus = 0;}
 		GameUI.bonus = bonus;
-
 		var currentTime = GameUI.gameTime - GameUI.time;
 		if (currentTime <= 0)
 			{
 			currentTime = 0;
 			if (GameUI.gameStarted)
-				{
-				new GameWonPrompt(false);
-				}
+				{new GameWonPrompt(false);}
 			}
-
 		GameUI.scoreTxt.text = STRING_SCORE + GameUI.scoreTotal;
 		GameUI.scoreTxtBold.text = STRING_SCORE + GameUI.scoreTotal;
 		GameUI.stepsText.text = STRING_MOVES + GameUI.moves;
@@ -423,10 +388,7 @@ var GameUI = (function()
 	GameUI.onMenuButtonPressed = function()
 		{
 		if (GameUI.gameStarted == false)
-			{
-			return;
-			}
-
+			{return;}
 		new MainMenu();
 		GameUI.menuButton.input.reset();
 		SimpleGame.myGame.canvas.style.cursor = "default";
@@ -442,12 +404,10 @@ var GameWonAnim = (function()
 		{
 		this.colornum = 0;
 		this.loopEvent1 = SimpleGame.myGame.time.events.loop(10, this.update1, this);
-
 		this.text = SimpleGame.myGame.make.bitmapText(x, y + 3, "ArialBlackWhiteBig", STRING_WIN, 51.5);
 		this.text.height = 60;
 		this.text.tint = 0xFFFFFF;
 		this.text.anchor.set(0.5, 0.5);
-
 		parent.add(this.text);
 		}
 
@@ -510,17 +470,11 @@ var BoardData = (function()
 		{
 		var cardData = new CardData(card.suitIdx, card.cardIdx, card.turned, card.deckIdx);
 		if (card.myState == Card.STATE_STOCK)
-			{
-			this.stockPile[card.myStockIdx] = cardData;
-			}
+			{this.stockPile[card.myStockIdx] = cardData;}
 		else if (card.myState == Card.STATE_TABLEU)
-			{
-			this.tableuPile[card.tableuIdx][card.tableuPosition] = cardData;
-			}
+			{this.tableuPile[card.tableuIdx][card.tableuPosition] = cardData;}
 		else if (card.myState == Card.STATE_FOUNDATION)
-			{
-			this.foundationPile[card.foundationIdx][card.foundationPosition] = cardData;
-			}
+			{this.foundationPile[card.foundationIdx][card.foundationPosition] = cardData;}
 		};
 
 	BoardData.prototype.fromSnapshotToBoard = function(skiplayerfixes)
@@ -530,9 +484,7 @@ var BoardData = (function()
 		this.manageTableu();
 		this.manageFoundation();
 		if (!skiplayerfixes)
-			{
-			this.fixPostUndoLayering();
-			}
+			{this.fixPostUndoLayering();}
 		};
 
 	BoardData.prototype.manageFoundation = function()
@@ -546,19 +498,12 @@ var BoardData = (function()
 				{
 				var cData = this.foundationPile[i][j];
 				if (cData == undefined)
-					{
-					continue;
-					}
-
+					{continue;}
 				var card = CardUtil.getByCardAndSuitIdx(cData.suitIdx, cData.cardIdx, cData.deckIdx);
 				if (card.myState == Card.STATE_FOUNDATION && card.foundationIdx == i && card.foundationPosition == j && card.turned == cData.turned)
-					{
-					}
+					{	}
 					else
-					{
-					this.justUndoedArray.push(card);
-					}
-
+					{this.justUndoedArray.push(card);}
 				card.myState = Card.STATE_FOUNDATION;
 				card.foundationIdx = i;
 				card.foundationPosition = j;
@@ -576,15 +521,10 @@ var BoardData = (function()
 			{
 			var cdata = this.stockPile[i];
 			if (cdata == null)
-				{
-				continue;
-				}
-
+				{continue;}
 			var card = CardUtil.getByCardAndSuitIdx(cdata.suitIdx, cdata.cardIdx, cdata.deckIdx);
 			if (!(card.myState == Card.STATE_STOCK && card.myStockIdx == i && card.turned == cdata.turned))
-				{
-				this.justUndoedArray.push(card);
-				}
+				{this.justUndoedArray.push(card);}
 			card.myState = Card.STATE_STOCK;
 			card.myStockIdx = i;
 			card.turned = cdata.turned;
@@ -605,9 +545,7 @@ var BoardData = (function()
 				var cData = this.tableuPile[i][j];
 				var card = CardUtil.getByCardAndSuitIdx(cData.suitIdx, cData.cardIdx, cData.deckIdx);
 				if (!(card.myState == Card.STATE_TABLEU && card.tableuIdx == i && card.tableuPosition == j && card.turned == cData.turned))
-					{
-					this.justUndoedArray.push(card);
-					}
+					{this.justUndoedArray.push(card);}
 				card.myState = Card.STATE_TABLEU;
 				card.tableuIdx = i;
 				card.tableuPosition = j;
@@ -623,17 +561,11 @@ var BoardData = (function()
 		this.justUndoedArray.sort(function(x, y)
 			{
 			if (x.foundationPosition > y.foundationPosition)
-				{
-				return 1;
-				}
+				{return 1;}
 			else if (x.foundationPosition == y.foundationPosition)
-				{
-				return 0;
-				}
+				{return 0;}
 			else
-				{
-				return -1;
-				}
+				{return -1;}
 			});
 		};
 
@@ -664,22 +596,14 @@ var BoardData = (function()
 	BoardData.isFreeCellArrayIdentical = function(arr1, arr2)
 		{
 		if (arr1.length != arr2.length)
-			{
-			return false;
-			}
-
+			{return false;}
 		var i = arr1.length;
-
 		while (i-- > 0)
 			{
 			if (arr1[i] == null || arr2[i] == null)
-				{
-				return false;
-				}
+				{return false;}
 			if (arr1[i].cardIdx != arr2[i].cardIdx || arr1[i].suitIdx != arr2[i].suitIdx || arr1[i].turned != arr2[i].turned)
-				{
-				return false;
-				}
+				{return false;}
 			}
 		return true;
 		};
@@ -687,21 +611,14 @@ var BoardData = (function()
 	BoardData.isArrayIdentical = function(arr1, arr2)
 		{
 		if (arr1.length != arr2.length)
-			{
-			return false;
-			}
-
+			{return false;}
 		var i = arr1.length;
 		while (i-- > 0)
 			{
 			if (arr1[i] == null || arr2[i] == null)
-				{
-				return false;
-				}
+				{return false;}
 			if (arr1[i].deckIdx != arr2[i].deckIdx || arr1[i].cardIdx != arr2[i].cardIdx || arr1[i].suitIdx != arr2[i].suitIdx || arr1[i].turned != arr2[i].turned)
-				{
-				return false;
-				}
+				{return false;}
 			}
 		return true;
 		};
@@ -737,25 +654,15 @@ var BoardManager = (function()
 	BoardManager.Hint = function()
 		{
 		if (cardsAreMoving == true)
-			{
-			return;
-			}
-
+			{return;}
 		if (BoardManager.currentObservedColumn == -1)
-			{
-			BoardManager.currentObservedColumn = BoardManager.NUM_TABLEU_COLUMNS;
-			}
-
+			{BoardManager.currentObservedColumn = BoardManager.NUM_TABLEU_COLUMNS;	}
 		var isInitialHint = false;
 		if (BoardManager.hintState == 0 && BoardManager.currentObservedColumn == BoardManager.NUM_TABLEU_COLUMNS)
-			{
-			isInitialHint = true;
-			}
-
+			{isInitialHint = true;}
 		BoardManager.hintSuccess = false;
 		BoardManager.currentObservedColumn = BoardManager.NUM_TABLEU_COLUMNS;
 		isInitialHint = true;
-
 		if (BoardManager.hintState == BoardManager.HINT_STATE_TRY_FIRST_CARD_ONLY_HINT)
 			{
 			var i = BoardManager.currentObservedColumn;
@@ -765,9 +672,7 @@ var BoardManager = (function()
 				BoardManager.TryToHintColumn(i, true, true);
 				BoardManager.currentObservedColumn = i;
 				if(BoardManager.hintSuccess)
-					{
-					return;
-					}
+					{return;}
 				}
 			BoardManager.hintState++;
 			BoardManager.currentObservedColumn = BoardManager.NUM_TABLEU_COLUMNS;
@@ -782,9 +687,7 @@ var BoardManager = (function()
 				BoardManager.TryToHintColumn(i, false, true);
 				BoardManager.currentObservedColumn = i;
 				if (BoardManager.hintSuccess)
-					{
-					return;
-					}
+					{return;}
 				}
 			BoardManager.hintState++;
 			BoardManager.currentObservedColumn = BoardManager.NUM_TABLEU_COLUMNS;
@@ -799,9 +702,7 @@ var BoardManager = (function()
 				BoardManager.TryToHintColumn(i, true);
 				BoardManager.currentObservedColumn = i;
 				if (BoardManager.hintSuccess)
-					{
-					return;
-					}
+					{return;}
 				}
 			BoardManager.hintState++;
 			BoardManager.currentObservedColumn = BoardManager.NUM_TABLEU_COLUMNS;
@@ -816,9 +717,7 @@ var BoardManager = (function()
 				BoardManager.TryToHintColumn(i, false);
 				BoardManager.currentObservedColumn = i;
 				if (BoardManager.hintSuccess)
-					{
-					return;
-					}
+					{return;}
 				}
 			BoardManager.hintState++;
 			BoardManager.currentObservedColumn = BoardManager.NUM_TABLEU_COLUMNS;
@@ -833,9 +732,7 @@ var BoardManager = (function()
 				BoardManager.TryToHintToEmptyColumn(i);
 				BoardManager.currentObservedColumn = i;
 				if (BoardManager.hintSuccess)
-					{
-					return;
-					}
+					{return;}
 				}
 			BoardManager.hintState = 0;
 			BoardManager.currentObservedColumn = BoardManager.NUM_TABLEU_COLUMNS;
@@ -868,14 +765,10 @@ var BoardManager = (function()
 				}
 			}
 		if (!emptyExists)
-			{
-			return;
-			}
+			{return;}
 		var cardOnTopOfInitialColumn = CardUtil.getCardOnTop(tabIdx);
 		if (cardOnTopOfInitialColumn == null)
-			{
-			return;
-			}
+			{return;}
 		cardOnTopOfInitialColumn.invertFrontColors();
 		BoardManager.hintSuccess = true;
 		var hintMarker = SimpleGame.myGame.make.graphics(0, 0);
@@ -909,20 +802,12 @@ var BoardManager = (function()
 				}
 			}
 		if (!emptyExists)
-			{
-			return;
-			}
-
+			{return;}
 		var cardOnBotOfInitialColumn = CardUtil.getByTabIdxAndPos(tabIdx, 0);
 		if (cardOnBotOfInitialColumn == null)
-			{
-			return;
-			}
+			{return;}
 		if (CardUtil.isValidMoveStack(cardOnBotOfInitialColumn))
-			{
-			return;
-			}
-
+			{return;}
 		var c2 = null;
 		var deltaPos = 0;
 		do
@@ -930,15 +815,11 @@ var BoardManager = (function()
 			deltaPos++;
 			c2 = CardUtil.getByTabIdxAndPos(tabIdx, deltaPos);
 			if (CardUtil.isValidMoveStack(c2))
-				{
-				break;
-				}
+				{break;}
 			}
 		while (c2 != null);
 		if (c2 == null)
-			{
-			return;
-			}
+			{return;}
 		c2.invertFrontColors();
 		BoardManager.hintSuccess = true;
 		var hintMarker = SimpleGame.myGame.make.graphics(0, 0);
@@ -961,7 +842,6 @@ var BoardManager = (function()
 		var i = BoardManager.NUM_TABLEU_COLUMNS;
 		var emptyExists = false;
 		var emptyIdx = -1;
-
 		while (i-- > 0)
 			{
 			var idx = 9 - i;
@@ -973,32 +853,19 @@ var BoardManager = (function()
 				break;
 				}
 			}
-
 		if (!emptyExists)
-			{
-			return;
-			}
-
+			{return;}
 		var cardOnTopOfInitialColumn = CardUtil.getCardOnTop(tabIdx);
 		if (cardOnTopOfInitialColumn == null)
-			{
-			return;
-			}
-
+			{return;}
 		var cardOnTopOfInitialMinusOne = CardUtil.getByTabIdxAndPos(tabIdx, cardOnTopOfInitialColumn.tableuPosition - 1);
 		if (cardOnTopOfInitialMinusOne == null)
-			{
-			return;
-			}
-
+			{return;}
 		if (cardOnTopOfInitialMinusOne.turned == true)
 			{
 			if (CardUtil.isCardIdxFollowing(cardOnTopOfInitialMinusOne, cardOnTopOfInitialColumn))
-				{
-				return;
-				}
+				{return;}
 			}
-
 		cardOnTopOfInitialColumn.invertFrontColors();
 		BoardManager.hintSuccess = true;
 		var hintMarker = SimpleGame.myGame.make.graphics(0, 0);
@@ -1019,19 +886,13 @@ var BoardManager = (function()
 	BoardManager.TryToHintColumn = function(tabIdx, firstCardOnly, respectSuit)
 		{
 		if (respectSuit === void 0)
-			{
-			respectSuit = false;
-			}
-
+			{respectSuit = false;}
 		var initPos = CardUtil.getFirstTurnedCardIdx(tabIdx);
 		do
 			{
 			var cardPlaced = CardUtil.getByTabIdxAndPos(tabIdx, initPos);
 			if (cardPlaced == null)
-				{
-				return;
-				}
-
+				{return;}
 			if (CardUtil.isValidMoveStack(cardPlaced))
 				{
 				var cardPlacedMinusOne = CardUtil.getByTabIdxAndPos(tabIdx, initPos - 1);
@@ -1041,23 +902,15 @@ var BoardManager = (function()
 					{
 					tabIdxCurrent++;
 					if (tabIdxCurrent % BoardManager.NUM_TABLEU_COLUMNS == tabIdx)
-						{
-						continue;
-						}
-
+						{continue;}
 					var cardTableu = CardUtil.getCardOnTop(tabIdxCurrent % BoardManager.NUM_TABLEU_COLUMNS);
 					if (cardTableu == null)
-						{
-						continue;
-						}
+						{continue;}
 					if (respectSuit)
 						{
 						if (cardTableu.suitIdx != cardPlaced.suitIdx)
-							{
-							continue;
-							}
+							{continue;}
 						}
-
 					if (cardTableu.cardIdx != CardUtil.CARD_IDX_A && (cardPlaced.cardIdx == CardUtil.CARD_IDX_A && cardTableu.cardIdx == CardUtil.CARD_IDX_02 || cardPlaced.cardIdx + 1 == cardTableu.cardIdx))
 						{
 						if (cardPlacedMinusOne != null)
@@ -1070,9 +923,7 @@ var BoardManager = (function()
 									break;
 									}
 									else
-									{
-									continue;
-									}
+									{continue;}
 								}
 								else
 								{
@@ -1081,10 +932,7 @@ var BoardManager = (function()
 								}
 							}
 							else
-							{
-							BoardManager.hintSuccess = true;
-							break;
-							}
+							{BoardManager.hintSuccess = true; break;}
 						}
 					}
 				}
@@ -1100,13 +948,9 @@ var BoardManager = (function()
 				}
 
 			if (firstCardOnly)
-				{
-				return;
-				}
+				{return;}
 				else
-				{
-				initPos++;
-				}
+				{initPos++;}
 			}
 		while (cardPlaced != null);
 		};
@@ -1114,41 +958,24 @@ var BoardManager = (function()
 	BoardManager.resultsInFullstackDownwards = function(cardObserved)
 		{
 		if (cardObserved.cardIdx == CardUtil.CARD_IDX_A)
-			{
-			return true;
-			}
-
+			{return true;}
 		var cminusone = CardUtil.getByTabIdxAndPos(cardObserved.tableuIdx, cardObserved.tableuPosition + 1);
 		if (cminusone == null)
-			{
-			return false;
-			}
-
+			{return false;}
 		if (CardUtil.isCardIdxFollowing(cardObserved, cminusone, true) == false)
-			{
-			return false;
-			}
-
+			{return false;}
 		return BoardManager.resultsInFullstackDownwards(cminusone);
 		};
 
 	BoardManager.resultsInFullstack = function(cardObserved)
 		{
 		if (cardObserved.cardIdx == CardUtil.CARD_IDX_K)
-			{
-			return true;
-			}
-
+			{return true;}
 		var cminusone = CardUtil.getByTabIdxAndPos(cardObserved.tableuIdx, cardObserved.tableuPosition - 1);
 		if (cminusone == null)
-			{
-			return false;
-			}
-
+			{return false;}
 		if (CardUtil.isCardIdxFollowing(cminusone, cardObserved, true) == false)
-			{
-			return false;
-			}
+			{return false;}
 		return BoardManager.resultsInFullstack(cminusone);
 		};
 
@@ -1179,9 +1006,7 @@ var BoardManager = (function()
 			{
 			var c = arr[i];
 			if (c.myState == Card.STATE_TABLEU && c.turned)
-				{
-				c.initTween(initTweenIdx++);
-				}
+				{c.initTween(initTweenIdx++);}
 			}
 		};
 
@@ -1211,9 +1036,7 @@ var BoardManager = (function()
 		{
 		BoardManager.sort();
 		if (BoardManager.checkForGameOver() && GameUI.gameStarted)
-			{
-			new GameWonPrompt2();
-			}
+			{new GameWonPrompt2();}
 		};
 
 	BoardManager.checkForGameOver = function()
@@ -1221,16 +1044,12 @@ var BoardManager = (function()
 		var arr = Card.cardArray;
 		var i = arr.length;
 		if (arr.length <= 0)
-			{
-			return false;
-			}
+			{return false;}
 		while (i-- > 0)
 			{
 			var c = arr[i];
 			if (c.myState != Card.STATE_FOUNDATION)
-				{
-				return false;
-				}
+				{return false;}
 			}
 		return true;
 		};
@@ -1238,9 +1057,7 @@ var BoardManager = (function()
 	BoardManager.sort = function()
 		{
 		SimpleGame.myGame.time.events.add(50, function()
-			{
-			BoardManager.sortImmediately();
-			});
+			{BoardManager.sortImmediately();});
 		};
 
 	BoardManager.sortImmediately = function()
@@ -1252,9 +1069,7 @@ var BoardManager = (function()
 			{
 			var c = arr[i];
 			if (c.selectedFlag || c.myState == Card.STATE_DRAGGED)
-				{
-				c.cardImgFront.z = 3000 + c.tableuPosition;
-				}
+				{c.cardImgFront.z = 3000 + c.tableuPosition;}
 			else if (c.isMoving)
 				{
 				c.cardImgFront.z = 2000 + c.tableuPosition;
@@ -1263,18 +1078,13 @@ var BoardManager = (function()
 					{
 					var c1 = CardUtil.getByTabIdxAndPos(c.tableuIdx, c.tableuPosition + j);
 					if (c1 != null)
-						{
-						c1.cardImgFront.z = 2000 + c1.tableuPosition;
-						}
+						{c1.cardImgFront.z = 2000 + c1.tableuPosition;}
 					}
 				}
 			else if (c.myState == Card.STATE_TABLEU)
-				{
-				}
+				{ }
 			else if (c.myState == Card.STATE_STOCK)
-				{
-				c.cardImgBack.z = c.myStockIdx;
-				}
+				{c.cardImgBack.z = c.myStockIdx;}
 			}
 
 		if (BoardManager.areAllCardsStatic())
@@ -1288,9 +1098,7 @@ var BoardManager = (function()
 				var c = arr[i];
 
 				if (c.myState == Card.STATE_TABLEU)
-					{
-					c.cardImgBack.z = c.cardImgFront.z = c.tableuPosition;
-					}
+					{c.cardImgBack.z = c.cardImgFront.z = c.tableuPosition;}
 				if (c.myState == Card.STATE_STOCK)
 					{
 					c.cardImgBack.z = c.myStockIdx;
@@ -1300,9 +1108,7 @@ var BoardManager = (function()
 					{
 					c.foundationPosition = 11 - c.cardIdx;
 					if (c.foundationPosition < 0)
-						{
-						c.foundationPosition = 12;
-						}
+						{c.foundationPosition = 12;}
 					c.cardImgFront.z = 10000 + c.foundationPosition + 13 * c.foundationIdx;
 					}
 				}
@@ -1320,9 +1126,7 @@ var BoardManager = (function()
 			{
 			var c = arr[i];
 			if (c.isMoving == true || c.myState == Card.STATE_DRAGGED || c.selectedFlag)
-				{
-				return false;
-				}
+				{return false;}
 			}
 		return true;
 		};
@@ -1330,35 +1134,24 @@ var BoardManager = (function()
 	BoardManager.generateBoardSnapshot = function(skipundoenable)
 		{
 		if (skipundoenable === void 0)
-			{
-			skipundoenable = false;
-			}
+			{skipundoenable = false;}
 		SimpleGame.myGame.time.events.add(100, function()
-			{
-			BoardManager.actuallyGenerateSnapshot();
-			});
+			{BoardManager.actuallyGenerateSnapshot();});
 		};
 
 	BoardManager.actuallyGenerateSnapshot = function()
 		{
 		if (CardUtil.getCompletedStack() != null)
-			{
-			return;
-			}
-
+			{return;}
 		if (BoardData.boardDataArray == null)
 			{
 			BoardData.boardDataArray = new Array();
 			BoardData.boardDataIdx = 0;
 			}
-
 		var bData = new BoardData();
 		var i = Card.cardArray.length;
 		while (i-- > 0)
-			{
-			bData.addToBdata(Card.cardArray[i]);
-			}
-
+			{bData.addToBdata(Card.cardArray[i]);}
 		if (BoardData.boardDataArray.length >= 2)
 			{
 			if (BoardManager.isBdataChanged(bData, BoardData.boardDataArray[BoardData.boardDataArray.length - 1]))
@@ -1375,22 +1168,14 @@ var BoardManager = (function()
 		};
 
 	BoardManager.isBdataChanged = function(bData, boardData)
-		{
-		return BoardData.isBdataChanged(bData, boardData);
-		};
+		{return BoardData.isBdataChanged(bData, boardData);};
 
 	BoardManager.Undo = function()
 		{
 		if (BoardData.boardDataIdx == -1)
-			{
-			return;
-			}
-
+			{return;}
 		if (this.undoDisabled)
-			{
-			return;
-			}
-
+			{return;}
 		if (BoardData.boardDataArray.length > 1)
 			{
 			BoardData.boardDataArray.pop();
@@ -1399,18 +1184,11 @@ var BoardManager = (function()
 			GameUI.moves++;
 			}
 			else
-			{
-			BoardManager.fromSnapshotToBoard(BoardData.boardDataArray[0]);
-			}
-
+			{BoardManager.fromSnapshotToBoard(BoardData.boardDataArray[0]);}
 		BoardManager.sort();
-
 		var i = Card.cardArray.length;
 		while (i-- > 0)
-			{
-			Card.cardArray[i].update();
-			}
-
+			{Card.cardArray[i].update();}
 		BoardManager.sortImmediately();
 		this.undoDisabled = true;
 		};
@@ -1418,9 +1196,7 @@ var BoardManager = (function()
 	BoardManager.fromSnapshotToBoard = function(bData, skiplayerfixes)
 		{
 		if (skiplayerfixes === void 0)
-			{
-			skiplayerfixes = false;
-			}
+			{skiplayerfixes = false;}
 		bData.fromSnapshotToBoard(skiplayerfixes);
 		};
 
@@ -1432,9 +1208,7 @@ var BoardManager = (function()
 			{
 			var j = CardUtil.NUM_CARDS_PER_SUIT;
 			while (j-- > 0)
-				{
-				new Card((i % CardUtil.NUM_SUIT_COLORS), j, i);
-				}
+				{new Card((i % CardUtil.NUM_SUIT_COLORS), j, i);}
 			}
 		Phaser.ArrayUtils.shuffle(Card.cardArray);
 		};
@@ -1473,9 +1247,7 @@ var BoardManager = (function()
 			{
 			var c = arr[i];
 			if (c.myState == Card.STATE_TABLEU)
-				{
-				c.setToTableu(true);
-				}
+				{c.setToTableu(true);}
 			}
 		};
 
@@ -1557,7 +1329,6 @@ var Card = (function()
 			pixel.b = 255 - pixel.b;
 			return pixel;
 			}, this);
-
 		this.invertedSprite = SimpleGame.myGame.make.sprite(this.cardImgFront.x, this.cardImgFront.y + 50, bmd);
 		this.invertedSprite.z = this.cardImgFront.z;
 		this.invertedSprite.visible = false;
@@ -1567,9 +1338,7 @@ var Card = (function()
 	Card.prototype.invertFrontColors = function()
 		{
 		if (this.invertedSprite == null)
-			{
-			this.createInvertedSprite();
-			}
+			{this.createInvertedSprite();}
 		this.colorInvertedFlag = true;
 		this.invertedSprite.z = this.cardImgFront.z;
 		this.invertedSprite.y = -400;
@@ -1579,35 +1348,25 @@ var Card = (function()
 			}, this);
 		var nextCard = CardUtil.getByTabIdxAndPos(this.tableuIdx, this.tableuPosition + 1);
 		if (nextCard != null)
-			{
-			nextCard.invertFrontColors();
-			}
+			{nextCard.invertFrontColors();}
 		};
 
 	Card.prototype.onCardImgBackDown = function()
 		{
 		if (Card.disableSelect == true)
-			{
-			return;
-			}
+			{return;}
 		if (this.myState != Card.STATE_STOCK)
-			{
-			return;
-			}
+			{return;}
 		if (CardUtil.canUncoverStock())
 			{
 			cardsAreMoving = true;
 			SimpleGame.myGame.time.events.add(1000, function()
-				{
-				cardsAreMoving = false;
-				});
+				{cardsAreMoving = false;});
 			CardUtil.uncoverStock(this.stockPosition);
 			GameUI.gameStarted = true;
 			}
 			else
-			{
-			new CannotUncoverStock();
-			}
+			{new CannotUncoverStock();}
 		};
 
 	Card.prototype.update = function()
@@ -1621,22 +1380,16 @@ var Card = (function()
 		if (this.selectedFlag)
 			{
 			if (Math.abs(this.lastSelectedPosX - this.cardImgFront.x) > 10)
-				{
-				this.autoclickEnabled = false;
-				}
+				{this.autoclickEnabled = false;}
 			this.cardImgFront.x = SimpleGame.myGame.input.activePointer.x - this.dragDeltaX;
 			this.cardImgFront.y = SimpleGame.myGame.input.activePointer.y - this.dragDeltaY;
 
 			if (SimpleGame.myGame.device.tridentVersion > 0 || window.navigator.userAgent.indexOf("Edge") > -1)
 				{
 				if (this.cardImgFront.x + this.cardImgFront.width / 2 > SimpleGame.myGame.width)
-					{
-					this.cardImgFront.x = SimpleGame.myGame.width - this.cardImgFront.width / 2;
-					}
+					{this.cardImgFront.x = SimpleGame.myGame.width - this.cardImgFront.width / 2;}
 				if (this.cardImgFront.x < this.cardImgFront.width / 2)
-					{
-					this.cardImgFront.x = this.cardImgFront.width / 2;
-					}
+					{this.cardImgFront.x = this.cardImgFront.width / 2;}
 				}
 
 			var i = Card.cardArray.length;
@@ -1644,9 +1397,7 @@ var Card = (function()
 				{
 				var c = Card.cardArray[i];
 				if (c.myState == Card.STATE_DRAGGED)
-					{
-					c.update();
-					}
+					{c.update();}
 				}
 
 			this.lastSelectedPosX = this.cardImgFront.x;
@@ -1656,9 +1407,7 @@ var Card = (function()
 		this.cardImgFront.alpha = 1;
 
 		if (SimpleGame.myGame.input.activePointer.withinGame == false && (this.selectedFlag))
-			{
-			this.lastFrameWasOutsideOfScreen = true;
-			}
+			{this.lastFrameWasOutsideOfScreen = true;}
 
 		if (this.selectedFlag && SimpleGame.pointerDown == false && (((SimpleGame.myGame.device.tridentVersion != 0 || window.navigator.userAgent.indexOf("Edge") > -1) && SimpleGame.myGame.input.activePointer.targetObject != null) || SimpleGame.myGame.input.activePointer.withinGame || SimpleGame.myGame.input.mousePointer.withinGame) && SimpleGame.myGame.input.activePointer.isUp)
 			{
@@ -1705,33 +1454,19 @@ var Card = (function()
 			this.cardImgFront.scale.x = 1;
 			this.cardImgFront.scale.y = 1;
 			}
-
 		if (this.initTweenFlag)
-			{
-			return;
-			}
-
+			{return;}
 		if (this.myState == Card.STATE_STOCK)
-			{
-			this.updateStock();
-			}
-
+			{this.updateStock();}
 		if (this.myState == Card.STATE_TABLEU)
 			{
 			this.updateTableu();
 			this.initFoundationTweenFlag = false;
 			}
-
 		if (this.myState == Card.STATE_DRAGGED)
-			{
-			this.updateDragged();
-			}
-
+			{this.updateDragged();}
 		if (this.myState == Card.STATE_STOCK_TO_TAB)
-			{
-			return;
-			}
-
+			{return;}
 		if (this.turned == false)
 			{
 			this.cardImgBack.visible = true;
@@ -1752,9 +1487,7 @@ var Card = (function()
 					this.invertedSprite.visible = true;
 					}
 					else
-					{
-					this.invertedSprite.visible = false;
-					}
+					{this.invertedSprite.visible = false;}
 				}
 			}
 
@@ -1765,9 +1498,7 @@ var Card = (function()
 			}
 
 		if (this.myState == Card.STATE_FOUNDATION)
-			{
-			this.updateFoundation();
-			}
+			{this.updateFoundation();}
 		this.setIsMovingFlag();
 		};
 
@@ -1793,9 +1524,7 @@ var Card = (function()
 		SimpleGame.myGame.add.tween(this.cardImgFront).to({ x: Card.CARD_FOUND_POS_X_INIT + Card.CARD_FOUND_POS_X_DELTA * this.foundationIdx }, 200, Phaser.Easing.Default, true).onComplete.add(function()
 			{
 			if (this.cardIdx != CardUtil.CARD_IDX_K)
-				{
-				this.cardImgFront.y = 1000;
-				}
+				{this.cardImgFront.y = 1000;}
 			}, this);
 		};
 
@@ -1813,9 +1542,7 @@ var Card = (function()
 		{
 		this.cardImgBack.position.set(this.cardImgFront.x, this.cardImgFront.y);
 		if (this.selectedFlag == false)
-			{
-			this.setToTableu();
-			}
+			{this.setToTableu();}
 		};
 
 	Card.prototype.updateStock = function()
@@ -1826,42 +1553,26 @@ var Card = (function()
 			this.cardImgBack.position.set(this.cardImgBack.x + deltaX, Card.CARD_STOCK_POSITION_Y_INIT);
 			}
 			else
-			{
-			this.cardImgBack.position.set(Card.CARD_STOCK_POSITION_X_INIT + 0 * Card.CARD_STOCK_POSITION_X_DELTA, Card.CARD_STOCK_POSITION_Y_INIT);
-			}
+			{this.cardImgBack.position.set(Card.CARD_STOCK_POSITION_X_INIT + 0 * Card.CARD_STOCK_POSITION_X_DELTA, Card.CARD_STOCK_POSITION_Y_INIT);}
 		this.cardImgFront.position.set(this.cardImgBack.x, this.cardImgBack.y);
 		};
 
 	Card.prototype.manageInvalidMovingStackSelection = function()
-		{
-		this.peekedFlag = true;
-		};
+		{this.peekedFlag = true;};
 
 	Card.prototype.onCardImgFrontDown = function()
 		{
 		if (cardsAreMoving == true)
-			{
-			return;
-			}
-
+			{return;}
 		BoardManager.HintReset();
-
 		if (CardUtil.checkIfSelectedCardExists())
-			{
-			return;
-			}
+			{return;}
 		if (Card.disableSelect == true)
-			{
-			return;
-			}
+			{return;}
 		if (this.myState == Card.STATE_FOUNDATION)
-			{
-			return;
-			}
+			{return;}
 		if (this.banInputDown)
-			{
-			return;
-			}
+			{return;}
 		if (CardUtil.isValidMoveStack(this) == false)
 			{
 			this.manageInvalidMovingStackSelection();
@@ -1918,26 +1629,14 @@ var Card = (function()
 	Card.prototype.onCardImgFrontUp = function()
 		{
 		if (this.peekedFlag == true)
-			{
-			this.peekedFlag = false;
-			}
-
+			{this.peekedFlag = false;}
 		this.lastFrameWasOutsideOfScreen = false;
-
 		if (this.selectedFlag == false)
-			{
-			return;
-			}
-
+			{return;}
 		this.cardImgFront.input.disableDrag();
-
 		CardUtil.cardDeselected(this);
-
 		if (this.autoclickEnabled == true && CardUtil.droppedOnTableuSuccess == false)
-			{
-			this.selectedFlag = false;
-			}
-
+			{this.selectedFlag = false;}
 		CardUtil.returnUnplacedTabCards();
 		CardUtil.tryToPlaceCardsOnFoundation();
 		BoardManager.generateBoardSnapshot();
@@ -1951,40 +1650,26 @@ var Card = (function()
 			{
 			var newX = Card.CARD_TAB_POS_X_INIT + this.tableuIdx * Card.CARD_TAB_POS_X_DELTA;
 			if (Math.abs(newX - this.cardImgFront.x) > 3 || Math.abs(this.newY - this.cardImgFront.y) > 3)
-				{
-				this.isMoving = true;
-				}
+				{this.isMoving = true;}
 				else
-				{
-				this.isMoving = false;
-				}
+				{this.isMoving = false;}
 			}
 		else if (this.myState == Card.STATE_STOCK || this.myState == Card.STATE_FOUNDATION)
-			{
-			this.isMoving = false;
-			}
+			{this.isMoving = false;}
 		};
 
 	Card.prototype.setToTableu = function(immediately)
 		{
 		if (immediately === void 0)
-			{
-			immediately = false;
-			}
-
+			{immediately = false;}
 		var closedCardsDelta = 21;
 		var firstTurnedCardIdx = CardUtil.getFirstTurnedCardIdx(this.tableuIdx);
 		var newX = Card.CARD_TAB_POS_X_INIT + this.tableuIdx * Card.CARD_TAB_POS_X_DELTA;
 		this.newX = newX;
-
 		if (firstTurnedCardIdx <= this.tableuPosition)
-			{
-			var newY = Card.CARD_TAB_POS_Y_INIT + firstTurnedCardIdx * (Card.CARD_TAB_POS_Y_DELTA - closedCardsDelta) + (this.tableuPosition - firstTurnedCardIdx) * Card.CARD_TAB_POS_Y_DELTA;
-			}
+			{var newY = Card.CARD_TAB_POS_Y_INIT + firstTurnedCardIdx * (Card.CARD_TAB_POS_Y_DELTA - closedCardsDelta) + (this.tableuPosition - firstTurnedCardIdx) * Card.CARD_TAB_POS_Y_DELTA;}
 			else
-			{
-			var newY = Card.CARD_TAB_POS_Y_INIT + this.tableuPosition * (Card.CARD_TAB_POS_Y_DELTA - closedCardsDelta);
-			}
+			{var newY = Card.CARD_TAB_POS_Y_INIT + this.tableuPosition * (Card.CARD_TAB_POS_Y_DELTA - closedCardsDelta);}
 
 		if (Math.abs(newX - this.cardImgFront.x) > 5)
 			{
@@ -1993,25 +1678,17 @@ var Card = (function()
 			if (cMinusOne != null)
 				{
 				if (cMinusOne.isMoving)
-					{
-					this.isMoving = false;
-					}
+					{this.isMoving = false;}
 				}
 			}
 			else
-			{
-			this.isMoving = false;
-			}
-
+			{this.isMoving = false;}
 		var peekedPosition = CardUtil.getPeekedPosition(this.tableuIdx);
 		var peekDelta = this.tableuPosition - peekedPosition;
 		if (peekedPosition < 0)
-			{
-			peekDelta = -1;
-			}
+			{peekDelta = -1;}
 		var deltaMultiplier = 1.8;
 		var deltaReducer = 0.961;
-
 		var maxIdx = CardUtil.getMaxTableuPosition(this.tableuIdx);
 		if (maxIdx > 14)
 			{
@@ -2019,24 +1696,16 @@ var Card = (function()
 			if (firstTurnedCardIdx <= this.tableuPosition)
 				{
 				if (peekDelta > 0)
-					{
-					var newY = Card.CARD_TAB_POS_Y_INIT + firstTurnedCardIdx * (Card.CARD_TAB_POS_Y_DELTA - closedCardsDelta) + (deltaMultiplier * delta * (Math.pow(deltaReducer, delta))) + (this.tableuPosition - firstTurnedCardIdx) * (Card.CARD_TAB_POS_Y_DELTA - deltaMultiplier * delta * (Math.pow(deltaReducer, delta)));
-					}
+					{var newY = Card.CARD_TAB_POS_Y_INIT + firstTurnedCardIdx * (Card.CARD_TAB_POS_Y_DELTA - closedCardsDelta) + (deltaMultiplier * delta * (Math.pow(deltaReducer, delta))) + (this.tableuPosition - firstTurnedCardIdx) * (Card.CARD_TAB_POS_Y_DELTA - deltaMultiplier * delta * (Math.pow(deltaReducer, delta)));}
 					else
-					{
-					var newY = Card.CARD_TAB_POS_Y_INIT + firstTurnedCardIdx * (Card.CARD_TAB_POS_Y_DELTA - closedCardsDelta) + (this.tableuPosition - firstTurnedCardIdx) * (Card.CARD_TAB_POS_Y_DELTA - deltaMultiplier * delta * (Math.pow(deltaReducer, delta)));
-					}
+					{var newY = Card.CARD_TAB_POS_Y_INIT + firstTurnedCardIdx * (Card.CARD_TAB_POS_Y_DELTA - closedCardsDelta) + (this.tableuPosition - firstTurnedCardIdx) * (Card.CARD_TAB_POS_Y_DELTA - deltaMultiplier * delta * (Math.pow(deltaReducer, delta)));}
 				}
 				else
-				{
-				var newY = Card.CARD_TAB_POS_Y_INIT + this.tableuPosition * (Card.CARD_TAB_POS_Y_DELTA - closedCardsDelta);
-				}
+				{var newY = Card.CARD_TAB_POS_Y_INIT + this.tableuPosition * (Card.CARD_TAB_POS_Y_DELTA - closedCardsDelta);}
 			}
 
 		if (this.selectedFlag || this.myState == Card.STATE_DRAGGED)
-			{
-			var newY = Card.CARD_TAB_POS_Y_INIT + this.tableuPosition * (Card.CARD_TAB_POS_Y_DELTA - closedCardsDelta);
-			}
+			{var newY = Card.CARD_TAB_POS_Y_INIT + this.tableuPosition * (Card.CARD_TAB_POS_Y_DELTA - closedCardsDelta);}
 
 		newY = Math.round(newY);
 		if (immediately)
@@ -2049,32 +1718,20 @@ var Card = (function()
 			var deltaX = (newX - this.cardImgFront.x) * 0.4;
 			var deltaY = (newY - this.cardImgFront.y) * 0.4;
 			if (Math.abs(deltaX) < 20)
-				{
-				this.cardImgFront.x = newX;
-				}
+				{this.cardImgFront.x = newX;}
 				else
-				{
-				this.cardImgFront.x += deltaX;
-				}
+				{this.cardImgFront.x += deltaX;}
 			if (Math.abs(deltaY) < 20)
-				{
-				this.cardImgFront.y = newY;
-				}
+				{this.cardImgFront.y = newY;}
 				else
-				{
-				this.cardImgFront.y += deltaY;
-				}
+				{this.cardImgFront.y += deltaY;}
 			}
 
 		if (Math.abs(newX - this.cardImgFront.x) < 0.3 && Math.abs(newX - this.cardImgFront.x) >= 0)
-			{
-			this.cardImgFront.x = Math.round(this.cardImgFront.x);
-			}
+			{this.cardImgFront.x = Math.round(this.cardImgFront.x);}
 
 		if (Math.abs(newY - this.cardImgFront.y) < 0.3 && Math.abs(newY - this.cardImgFront.y) >= 0)
-			{
-			this.cardImgFront.y = Math.round(this.cardImgFront.y);
-			}
+			{this.cardImgFront.y = Math.round(this.cardImgFront.y);}
 
 		if (this.turned)
 			{
@@ -2116,10 +1773,7 @@ var Card = (function()
 	Card.prototype.flipcard = function(withAnim)
 		{
 		if (this.turned)
-			{
-			return;
-			}
-
+			{return;}
 		this.turned = true;
 		};
 
@@ -2136,12 +1790,10 @@ var Card = (function()
 		this.cardImgBack.visible = true;
 		this.myStockIdx = stockIdx;
 		this.stockPosition = Math.floor(stockIdx / 10);
-
 		Card.items.add(this.cardImgBack);
 		Card.items.add(this.cardImgFront);
 		this.cardImgFront.z = stockIdx;
 		this.cardImgBack.z = stockIdx;
-
 		this.updateStock();
 		};
 
@@ -2159,17 +1811,13 @@ var Card = (function()
 		this.cardImgFront.y += +650;
 		this.cardImgBack.y += +650;
 		this.cardImgBack.x = this.cardImgFront.x = 880;
-
 		SimpleGame.myGame.time.events.add(160 + 80 * idx, function()
 			{
 			this.isMoving = true;
 			this.tweenComplete();
 			}, this);
-
 		if (CardUtil.isOnTableuTop(this) == false)
-			{
-			this.cardImgBack.visible = true;
-			}
+			{this.cardImgBack.visible = true;}
 		};
 
 	Card.prototype.tweenComplete = function()
@@ -2177,9 +1825,7 @@ var Card = (function()
 		if (this.tweenIdx == 9)
 			{
 			SimpleGame.myGame.time.events.add(500, function()
-				{
-				Card.initTweenFlag = false;
-				});
+				{Card.initTweenFlag = false;});
 			}
 		this.initTweenFlag = false;
 		this.isMoving = false;
@@ -2190,14 +1836,9 @@ var Card = (function()
 	Card.prototype.remove = function()
 		{
 		if (this.cardImgFront.parent)
-			{
-			this.cardImgFront.parent.removeChild(this.cardImgFront);
-			}
+			{this.cardImgFront.parent.removeChild(this.cardImgFront);}
 		if (this.cardImgBack.parent)
-			{
-			this.cardImgBack.parent.removeChild(this.cardImgBack);
-			}
-
+			{this.cardImgBack.parent.removeChild(this.cardImgBack);}
 		Card.items.remove(this.cardImgFront);
 		Card.items.remove(this.cardImgBack);
 		Card.cardArray.slice(Card.cardArray.indexOf(this, 0), 1);
@@ -2218,9 +1859,7 @@ var Card = (function()
 		SimpleGame.myGame.load.image("backside", "data:image/png;base64,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");
 		var i = CardUtil.NUM_CARDS_PER_SUIT * 4;
 		while (i-- > 0)
-			{
-			SimpleGame.myGame.load.image(CardUtil.cardNameArray[i], CardUtil.getCardNameURLs()[i]);
-			}
+			{SimpleGame.myGame.load.image(CardUtil.cardNameArray[i], CardUtil.getCardNameURLs()[i]);}
 		};
 
 	Card.FOUNDATION_SCALE = 1;
@@ -2228,13 +1867,9 @@ var Card = (function()
 	Card.CARD_STOCK_POSITION_Y_INIT = 513;
 	Card.CARD_STOCK_POSITION_X_DELTA = -15;
 	if (isWebGLAvailable()==false)
-		{
-		Card.CARD_TAB_POS_X_INIT = 51;
-		}
+		{Card.CARD_TAB_POS_X_INIT = 51;}
 		else
-		{
-		Card.CARD_TAB_POS_X_INIT = 52;
-		}
+		{Card.CARD_TAB_POS_X_INIT = 52;}
 	Card.CARD_TAB_POS_X_DELTA = 86;
 	Card.CARD_TAB_POS_Y_INIT = 57;
 	Card.CARD_TAB_POS_Y_DELTA = 28;
@@ -2266,9 +1901,7 @@ var CardUtil = (function()
 			{
 			var c = arr[i];
 			if (c.suitIdx == suitidx && c.cardIdx == cardidx && c.deckIdx == deckidx)
-				{
-				return c;
-				}
+				{return c;}
 			}
 		return null;
 		};
@@ -2281,9 +1914,7 @@ var CardUtil = (function()
 			i++;
 			var c = CardUtil.getByTabIdxAndPos(tabIdx, i);
 			if (c == null)
-				{
-				break;
-				}
+				{break;}
 			}
 		while (c.turned == false);
 		return i;
@@ -2304,9 +1935,7 @@ var CardUtil = (function()
 			GameUI.moves++;
 			BoardManager.undoDisabled = false;
 			SimpleGame.myGame.time.events.add(150, function()
-				{
-				GameUI.score--;
-				});
+				{GameUI.score--;});
 			}
 		};
 
@@ -2317,9 +1946,7 @@ var CardUtil = (function()
 		while (i-- > 0)
 			{
 			if (arr[i].myState == Card.STATE_DRAGGED || arr[i].selectedFlag)
-				{
-				Card.items.add(arr[i].cardImgFront);
-				}
+				{Card.items.add(arr[i].cardImgFront);}
 			}
 		};
 
@@ -2332,22 +1959,13 @@ var CardUtil = (function()
 			i++;
 			var c = CardUtil.getByTabIdxAndPos(tabIdx, i);
 			if (c == null)
-				{
-				return null;
-				}
-
+				{return null;}
 			if (c.myState != Card.STATE_TABLEU)
-				{
-				continue;
-				}
-
+				{continue;}
 			if (CardUtil.isOnTableuTop(c))
-				{
-				return c;
-				}
+				{return c;}
 			}
 		while (c != null);
-
 		return null;
 		};
 
@@ -2364,9 +1982,7 @@ var CardUtil = (function()
 			{
 			CardUtil.tabIdxCurrent++;
 			if (CardUtil.tabIdxCurrent >= 10)
-				{
-				CardUtil.tabIdxCurrent = 0;
-				}
+				{CardUtil.tabIdxCurrent = 0;}
 			CardUtil.droppedOnTableuSuccess = false;
 
 			var arr = Card.cardArray;
@@ -2378,20 +1994,14 @@ var CardUtil = (function()
 				if (CardUtil.isOnTableuTop(c) && c.tableuIdx == CardUtil.tabIdxCurrent && c.suitIdx == card.suitIdx)
 					{
 					if (c.tableuIdx != card.tableuIdx)
-						{
-						CardUtil.droppedOnTableu(card, c);
-						}
+						{CardUtil.droppedOnTableu(card, c);}
 					if (CardUtil.droppedOnTableuSuccess)
-						{
-						break;
-						}
+						{break;}
 					}
 				}
 
 			if (CardUtil.droppedOnTableuSuccess)
-				{
-				break;
-				}
+				{break;}
 			}
 
 		if (CardUtil.droppedOnTableuSuccess == false)
@@ -2402,9 +2012,7 @@ var CardUtil = (function()
 				{
 				CardUtil.tabIdxCurrent++;
 				if (CardUtil.tabIdxCurrent >= 10)
-					{
-					CardUtil.tabIdxCurrent = 0;
-					}
+					{CardUtil.tabIdxCurrent = 0;}
 				CardUtil.droppedOnTableuSuccess = false;
 
 				var arr = Card.cardArray;
@@ -2416,20 +2024,14 @@ var CardUtil = (function()
 					if (CardUtil.isOnTableuTop(c) && c.tableuIdx == CardUtil.tabIdxCurrent)
 						{
 						if (c.tableuIdx != card.tableuIdx)
-							{
-							CardUtil.droppedOnTableu(card, c);
-							}
+							{CardUtil.droppedOnTableu(card, c);}
 						if (CardUtil.droppedOnTableuSuccess)
-							{
-							break;
-							}
+							{break;}
 						}
 					}
 
 				if (CardUtil.droppedOnTableuSuccess)
-					{
-					break;
-					}
+					{break;}
 				}
 			}
 
@@ -2471,9 +2073,7 @@ var CardUtil = (function()
 			{
 			var c = arr[i];
 			if (c.myState == Card.STATE_DRAGGED)
-				{
-				c.myState = Card.STATE_TABLEU;
-				}
+				{c.myState = Card.STATE_TABLEU;}
 			}
 		};
 
@@ -2488,9 +2088,7 @@ var CardUtil = (function()
 			if (c.myState == Card.STATE_FOUNDATION)
 				{
 				if (c.foundationIdx >= freeFoundPos)
-					{
-					freeFoundPos = c.foundationIdx + 1;
-					}
+					{freeFoundPos = c.foundationIdx + 1;}
 				}
 			}
 		return freeFoundPos;
@@ -2502,14 +2100,9 @@ var CardUtil = (function()
 			{
 			var stack = CardUtil.getCompletedStack();
 			if (stack == null)
-				{
-				return;
-				}
-
+				{return;}
 			GameUI.score++;
-
 			var freeFoundPos = CardUtil.getFreeFoundationIdx();
-
 			var i = stack.length;
 			while (i-- > 0)
 				{
@@ -2518,11 +2111,8 @@ var CardUtil = (function()
 				c.foundationIdx = freeFoundPos;
 				c.foundationPosition = 11 - c.cardIdx;
 				if (c.foundationPosition < 0)
-					{
-					c.foundationPosition = 12;
-					}
+					{c.foundationPosition = 12;}
 				}
-
 			CardUtil.uncoverTableu(c);
 			BoardManager.generateBoardSnapshot();
 			BoardManager.undoDisabled = true;
@@ -2539,29 +2129,22 @@ var CardUtil = (function()
 		while (i-- > 0)
 			{
 			var c = arr[i];
-
 			if (c.cardIdx == CardUtil.CARD_IDX_K && c.turned && c.myState == Card.STATE_TABLEU)
 				{
 				var j = CardUtil.NUM_CARDS_PER_SUIT;
 				retArr = [];
 				retArr.push(c);
-
 				do
 					{
 					var c1 = CardUtil.getByTabIdxAndPos(c.tableuIdx, c.tableuPosition + 1);
 					if (c1 == null || CardUtil.isCardIdxFollowing(c, c1, true) == false)
-						{
-						break;
-						}
+						{break;}
 					retArr.push(c1);
 					c = c1;
 					}
 					while (j-- > 1);
-
 				if (retArr.length == CardUtil.NUM_CARDS_PER_SUIT)
-					{
-					return retArr;
-					}
+					{return retArr;}
 				}
 			}
 		return null;
@@ -2573,22 +2156,14 @@ var CardUtil = (function()
 		if (c != null)
 			{
 			if (c.suitIdx != card.suitIdx)
-				{
-				return false;
-				}
+				{return false;}
 			else if (CardUtil.isCardIdxFollowing(card, c) == false)
-				{
-				return false;
-				}
+				{return false;}
 			else
-				{
-				return CardUtil.isValidMoveStack(c);
-				}
+				{return CardUtil.isValidMoveStack(c);}
 			}
 			else
-			{
-			return true;
-			}
+			{return true;}
 		};
 
 	CardUtil.getPeekedPosition = function(tabidx)
@@ -2599,9 +2174,7 @@ var CardUtil = (function()
 			{
 			var c = arr[i];
 			if (c.tableuIdx == tabidx && c.peekedFlag)
-				{
-				return c.tableuPosition;
-				}
+				{return c.tableuPosition;}
 			}
 		return -1;
 		};
@@ -2609,25 +2182,17 @@ var CardUtil = (function()
 	CardUtil.isCardIdxFollowing = function(card1, card2, respectSuit)
 		{
 		if (respectSuit === void 0)
-			{
-			respectSuit = false;
-			}
+			{respectSuit = false;}
 		if (respectSuit)
 			{
 			if (card1.suitIdx != card2.suitIdx)
-				{
-				return false;
-				}
+				{return false;}
 			}
 
 		if (card2.cardIdx <= CardUtil.CARD_IDX_Q && card1.cardIdx == card2.cardIdx + 1)
-			{
-			return true;
-			}
+			{return true;}
 		else if (card2.cardIdx == CardUtil.CARD_IDX_A && card1.cardIdx == CardUtil.CARD_IDX_02)
-			{
-			return true;
-			}
+			{return true;}
 		return false;
 		};
 
@@ -2639,9 +2204,7 @@ var CardUtil = (function()
 			{
 			var c = arr[i];
 			if (c.myState == Card.STATE_TABLEU && c.tableuIdx == tabIdx && c.tableuPosition == tabPos)
-				{
-				return c;
-				}
+				{return c;}
 			}
 		return null;
 		};
@@ -2656,9 +2219,7 @@ var CardUtil = (function()
 			{
 			var c = arr[i];
 			if (c.stockPosition > stockPos && c.myState == Card.STATE_STOCK)
-				{
-				stockPos = c.stockPosition;
-				}
+				{stockPos = c.stockPosition;}
 			}
 
 		var arr = Card.cardArray;
@@ -2668,9 +2229,7 @@ var CardUtil = (function()
 			{
 			var c = arr[i];
 			if (c.myState == Card.STATE_STOCK)
-				{
-				totalCardsOnStock++;
-				}
+				{totalCardsOnStock++;}
 			if (c.myState == Card.STATE_STOCK && stockPos == c.stockPosition)
 				{
 				var myTabIdx = c.myStockIdx % 10;
@@ -2701,9 +2260,7 @@ var CardUtil = (function()
 			{
 			var c = arr[i];
 			if (c.myState == Card.STATE_TABLEU && c.tableuIdx == idx && c.tableuPosition > size)
-				{
-				size = c.tableuPosition;
-				}
+				{size = c.tableuPosition;}
 			}
 		return size;
 		};
@@ -2724,9 +2281,7 @@ var CardUtil = (function()
 		{
 		var myTableuoIdx = Math.ceil((card.cardImgFront.x - card.cardImgFront.width - Card.CARD_TAB_POS_X_INIT) / Card.CARD_TAB_POS_X_DELTA);
 		if (myTableuoIdx < 0 || myTableuoIdx > 9)
-			{
-			return;
-			}
+			{return;}
 		if (CardUtil.checkIfTabEmpty(myTableuoIdx))
 			{
 			CardUtil.dropOnEmptyTableu(card, myTableuoIdx);
@@ -2755,9 +2310,7 @@ var CardUtil = (function()
 			{
 			var c = arr[i];
 			if (c.tableuIdx == idx && c.myState == Card.STATE_TABLEU)
-				{
-				tabEmpty = false;
-				}
+				{tabEmpty = false;}
 			}
 		return tabEmpty;
 		};
@@ -2771,13 +2324,9 @@ var CardUtil = (function()
 			arr.sort(function(a, b)
 				{
 				if (a.tableuIdx > b.tableuIdx)
-					{
-					return -1;
-					}
+					{return -1;}
 				else if (a.tableuIdx < b.tableuIdx)
-					{
-					return 1;
-					}
+					{return 1;}
 				return 0;
 				});
 			}
@@ -2786,13 +2335,9 @@ var CardUtil = (function()
 			arr.sort(function(a, b)
 				{
 				if (a.tableuIdx > b.tableuIdx)
-					{
-					return 1;
-					}
+					{return 1;}
 				else if (a.tableuIdx < b.tableuIdx)
-					{
-					return -1;
-					}
+					{return -1;}
 				return 0;
 				});
 			}
@@ -2807,21 +2352,16 @@ var CardUtil = (function()
 		while (i-- > 0)
 			{
 			var c = arr[i];
-
 			if (CardUtil.overlapping(c.cardImgFront, card.cardImgFront))
 				{
 				if (arr[i].myState == Card.STATE_TABLEU)
 					{
 					if (CardUtil.droppedOnTableuSuccess == false)
-						{
-						CardUtil.droppedOnTableu(card, c);
-						}
+						{CardUtil.droppedOnTableu(card, c);}
 					}
 				}
 			if (CardUtil.droppedOnTableuSuccess)
-				{
-				break;
-				}
+				{break;}
 			}
 		card.selectedFlag = false;
 		};
@@ -2829,9 +2369,7 @@ var CardUtil = (function()
 	CardUtil.overlapsMouse = function(card)
 		{
 		if (card.getBounds().contains(SimpleGame.myGame.input.x, SimpleGame.myGame.input.y))
-			{
-			return true;
-			}
+			{return true;}
 		return false;
 		};
 
@@ -2842,9 +2380,7 @@ var CardUtil = (function()
 		while (i-- > 0)
 			{
 			if (Card.cardArray[i].selectedFlag)
-				{
-				return Card.cardArray[i];
-				}
+				{return Card.cardArray[i];}
 			}
 		return null;
 		};
@@ -2852,17 +2388,13 @@ var CardUtil = (function()
 	CardUtil.droppedOnTableu = function(cardPlaced, cardTableu)
 		{
 		if (CardUtil.isOnTableuTop(cardTableu))
-			{
-			return CardUtil.tryToPlaceonTableu(cardPlaced, cardTableu);
-			}
+			{return CardUtil.tryToPlaceonTableu(cardPlaced, cardTableu);}
 		};
 
 	CardUtil.tryToPlaceonTableu = function(cardPlaced, cardTableu)
 		{
 		if (cardTableu.cardIdx != CardUtil.CARD_IDX_A && (cardPlaced.cardIdx == CardUtil.CARD_IDX_A && cardTableu.cardIdx == CardUtil.CARD_IDX_02 || cardPlaced.cardIdx + 1 == cardTableu.cardIdx))
-			{
-			return CardUtil.placeOnTableu(cardPlaced, cardTableu);
-			}
+			{return CardUtil.placeOnTableu(cardPlaced, cardTableu);}
 		return null;
 		};
 
@@ -2870,15 +2402,12 @@ var CardUtil = (function()
 		{
 		CardUtil.droppedOnTableuSuccess = true;
 		CardUtil.uncoverTableu(cardPlaced);
-
 		cardPlaced.myState = Card.STATE_TABLEU;
 		cardPlaced.tableuIdx = cardTableu.tableuIdx;
 		cardPlaced.tableuPosition = cardTableu.tableuPosition + 1;
 		cardPlaced.selectedFlag = false;
 		cardPlaced.setToTableu(true);
-
 		Card.items.add(cardPlaced.cardImgFront);
-
 		CardUtil.manageDragged(cardPlaced);
 		BoardManager.sort();
 		};
@@ -2888,16 +2417,13 @@ var CardUtil = (function()
 		var arr = Card.cardArray;
 		var i = arr.length;
 		var minPos = 999;
-
 		while (i-- > 0)
 			{
 			var c = arr[i];
 			if (c.myState == Card.STATE_DRAGGED)
 				{
 				if (c.tableuPosition < minPos)
-					{
-					minPos = c.tableuPosition;
-					}
+					{minPos = c.tableuPosition;}
 				}
 			}
 
@@ -2909,9 +2435,7 @@ var CardUtil = (function()
 			if (c.myState == Card.STATE_DRAGGED)
 				{
 				if (minPos == c.tableuPosition)
-					{
-					CardUtil.placeOnTableu(c, cardTableu);
-					}
+					{CardUtil.placeOnTableu(c, cardTableu);}
 				}
 			}
 		};
@@ -2930,8 +2454,7 @@ var CardUtil = (function()
 					if (arr[i].tableuPosition + 1 == cardPlaced.tableuPosition)
 						{
 						if (arr[i].flipcard(true))
-							{
-							}
+							{ }
 						}
 					}
 				}
@@ -2941,32 +2464,23 @@ var CardUtil = (function()
 	CardUtil.overlapping = function(rect1, rect2)
 		{
 		if (rect1 == rect2)
-			{
-			return false;
-			}
+			{return false;}
 		if (rect1.x < rect2.x + rect2.width + 1 && rect1.x + rect1.width + 1 > rect2.x && rect1.y < rect2.y + rect2.height + 1 && rect1.height + 1 + rect1.y > rect2.y)
-			{
-			return true;
-			}
+			{return true;}
 		return false;
 		};
 
 	CardUtil.getCardImgName = function(suitidx, cardidx)
-		{
-		return CardUtil.cardNameArray[suitidx * CardUtil.NUM_CARDS_PER_SUIT + cardidx];
-		};
+		{return CardUtil.cardNameArray[suitidx * CardUtil.NUM_CARDS_PER_SUIT + cardidx];};
 
 	CardUtil.getCardNameURLs = function()
 		{
 		CardUtil.cardNameArrayUrl = new Array();
-
 		var i = CardUtil.cardNameArray.length;
-
 		while (i-- > 0)
 			{
 			var str = CardUtil.cardNameArray[i];
 			var strURL = "";
-
 			if(str=="spades2"){strURL="data:image/gif;base64,R0lGODlhRwBgAKIEAISEhBQUFAAAAP///////wAAAAAAAAAAACH/C1hNUCBEYXRhWE1QPD94cGFja2V0IGJlZ2luPSLvu78iIGlkPSJXNU0wTXBDZWhpSHpyZVN6TlRjemtjOWQiPz4gPHg6eG1wbWV0YSB4bWxuczp4PSJhZG9iZTpuczptZXRhLyIgeDp4bXB0az0iQWRvYmUgWE1QIENvcmUgNS42LWMxMzggNzkuMTU5ODI0LCAyMDE2LzA5LzE0LTAxOjA5OjAxICAgICAgICAiPiA8cmRmOlJERiB4bWxuczpyZGY9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkvMDIvMjItcmRmLXN5bnRheC1ucyMiPiA8cmRmOkRlc2NyaXB0aW9uIHJkZjphYm91dD0iIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtbG5zOnhtcD0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wLyIgeG1wTU06T3JpZ2luYWxEb2N1bWVudElEPSJ4bXAuZGlkOjAzQjI0RTIxNEYyM0U2MTE4RjI3RUFBNzJDNEQ2NDM0IiB4bXBNTTpEb2N1bWVudElEPSJ4bXAuZGlkOjg4NzUzMjNERUNCMDExRTZCOEUxOEI2NTBCQzFCODJFIiB4bXBNTTpJbnN0YW5jZUlEPSJ4bXAuaWlkOjg4NzUzMjNDRUNCMDExRTZCOEUxOEI2NTBCQzFCODJFIiB4bXA6Q3JlYXRvclRvb2w9IkFkb2JlIFBob3Rvc2hvcCBDUzYgKFdpbmRvd3MpIj4gPHhtcE1NOkRlcml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6OTg1OWQyZTktNzgxNC1kMDRkLTk5NjYtYjAwYjM2MmNjOGY1IiBzdFJlZjpkb2N1bWVudElEPSJhZG9iZTpkb2NpZDpwaG90b3Nob3A6NDlhNzRjMDAtZWM4OC0xMWU2LWFhYTktOTgyNDcwNzg3OTJlIi8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+Af/+/fz7+vn49/b19PPy8fDv7u3s6+rp6Ofm5eTj4uHg397d3Nva2djX1tXU09LR0M/OzczLysnIx8bFxMPCwcC/vr28u7q5uLe2tbSzsrGwr66trKuqqainpqWko6KhoJ+enZybmpmYl5aVlJOSkZCPjo2Mi4qJiIeGhYSDgoGAf359fHt6eXh3dnV0c3JxcG9ubWxramloZ2ZlZGNiYWBfXl1cW1pZWFdWVVRTUlFQT05NTEtKSUhHRkVEQ0JBQD8+PTw7Ojk4NzY1NDMyMTAvLi0sKyopKCcmJSQjIiEgHx4dHBsaGRgXFhUUExIREA8ODQwLCgkIBwYFBAMCAQAAIfkEAQAABAAsAAAAAEcAYAAAA/9Istz+MMpJmQIj6827/2AoDkAgjGiqqubqvm+rOXBtywNk7yu+zCeeUITj/IZITxEYTDozy9zx+VwykE3qoHgddrW+4xRGAzenY5eOGi6/JOzzgzypZoWVOy+6yzv5NXlpO1F6KYKGNVaDKIhJXA1vNCdzSG2Ral1BmJabEX2MnRlwgZx2o59aoqg5UqqPd1+vQ4uJszCAt6u6Zryqub6EtsE3w8S4xscuwMrLyc0pzNDRz9NE1dYg0tkh29wf3t8d4eIb5OVQ2Ojp6z3q6+fo8eXz4vXf99z52fvW/dP/oAVsNlBZwWMHiSUMttBXQ14PdUW8NRFLmopeLr5T9oOFUhOMNkg1dCNpzUNZJSsVxOQpVIg1WzaCmOPR1CFTAx2V5JBTUKBxMj/opBVUaIU/RT34gfWEAh03CUml/LIQpiQgGkbazITqY1IRKEOOifiVCc+yusKCFGtobSlwaGeh8drOSKWYde3Kcnsq7wgTGPyCKEEggOHDiBMrXsy4sePHhwkkAAA7"}
 			else if(str=="spades3"){strURL="data:image/gif;base64,R0lGODlhRwBgAKIEAISEhBQUFAAAAP///////wAAAAAAAAAAACH/C1hNUCBEYXRhWE1QPD94cGFja2V0IGJlZ2luPSLvu78iIGlkPSJXNU0wTXBDZWhpSHpyZVN6TlRjemtjOWQiPz4gPHg6eG1wbWV0YSB4bWxuczp4PSJhZG9iZTpuczptZXRhLyIgeDp4bXB0az0iQWRvYmUgWE1QIENvcmUgNS42LWMxMzggNzkuMTU5ODI0LCAyMDE2LzA5LzE0LTAxOjA5OjAxICAgICAgICAiPiA8cmRmOlJERiB4bWxuczpyZGY9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkvMDIvMjItcmRmLXN5bnRheC1ucyMiPiA8cmRmOkRlc2NyaXB0aW9uIHJkZjphYm91dD0iIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtbG5zOnhtcD0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wLyIgeG1wTU06T3JpZ2luYWxEb2N1bWVudElEPSJ4bXAuZGlkOjAzQjI0RTIxNEYyM0U2MTE4RjI3RUFBNzJDNEQ2NDM0IiB4bXBNTTpEb2N1bWVudElEPSJ4bXAuZGlkOjg4NzUzMjQxRUNCMDExRTZCOEUxOEI2NTBCQzFCODJFIiB4bXBNTTpJbnN0YW5jZUlEPSJ4bXAuaWlkOjg4NzUzMjQwRUNCMDExRTZCOEUxOEI2NTBCQzFCODJFIiB4bXA6Q3JlYXRvclRvb2w9IkFkb2JlIFBob3Rvc2hvcCBDUzYgKFdpbmRvd3MpIj4gPHhtcE1NOkRlcml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6OTg1OWQyZTktNzgxNC1kMDRkLTk5NjYtYjAwYjM2MmNjOGY1IiBzdFJlZjpkb2N1bWVudElEPSJhZG9iZTpkb2NpZDpwaG90b3Nob3A6NDlhNzRjMDAtZWM4OC0xMWU2LWFhYTktOTgyNDcwNzg3OTJlIi8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+Af/+/fz7+vn49/b19PPy8fDv7u3s6+rp6Ofm5eTj4uHg397d3Nva2djX1tXU09LR0M/OzczLysnIx8bFxMPCwcC/vr28u7q5uLe2tbSzsrGwr66trKuqqainpqWko6KhoJ+enZybmpmYl5aVlJOSkZCPjo2Mi4qJiIeGhYSDgoGAf359fHt6eXh3dnV0c3JxcG9ubWxramloZ2ZlZGNiYWBfXl1cW1pZWFdWVVRTUlFQT05NTEtKSUhHRkVEQ0JBQD8+PTw7Ojk4NzY1NDMyMTAvLi0sKyopKCcmJSQjIiEgHx4dHBsaGRgXFhUUExIREA8ODQwLCgkIBwYFBAMCAQAAIfkEAQAABAAsAAAAAEcAYAAAA/9Istz+MMpJmQIj6827/2AoDkAgjGiqqubqvm+bQXBdywNt7+w5+wueEIXTBIdIUDHnSzo5RcdzOohKeU3q0piFMaiZ7W93neKOTJvueX7UJOZs2UVhd7EVp1idT+69FWhCW3cpgYI8S18vh4U3cg2MUiduSG1zhotAi5aba4COQzJwb5FanpVgg01BlKGqLoqIsDuyr7Qrf7iru2C6vTa/wDDCw7G3xsfJfsjLKcXOI9DRIdPUH9bXHdl0sNwqnHFgmMxUn+VPpHrNK3XrToHvSfHoQ431Qved84f4eJGuTIlil+kIKnnmZvnjFw6hthgEH0KJKFHDN4kXH2bUtvGXWkdqH6OFdDZyWUlYDU+qSkkxWas0YVoOI6WSS8N2EWKuVAguZxWZIEwdpJOqpJuAN0fMMdpPUhem9BhtA+pB30B4ffYxnODQHldQgmqqI1qmJhNyPblYpCoCbVoPZn+whTkVZb6lc3fhrdj2aV69d+JiHaOTb4c1gpEg/kuSsUkBGAyjKEEggOXLmDNr3sy5s+fPlwkkAAA7"}
 			else if(str=="spades4"){strURL="data:image/gif;base64,R0lGODlhRwBgAKIEAISEhBQUFAAAAP///////wAAAAAAAAAAACH/C1hNUCBEYXRhWE1QPD94cGFja2V0IGJlZ2luPSLvu78iIGlkPSJXNU0wTXBDZWhpSHpyZVN6TlRjemtjOWQiPz4gPHg6eG1wbWV0YSB4bWxuczp4PSJhZG9iZTpuczptZXRhLyIgeDp4bXB0az0iQWRvYmUgWE1QIENvcmUgNS42LWMxMzggNzkuMTU5ODI0LCAyMDE2LzA5LzE0LTAxOjA5OjAxICAgICAgICAiPiA8cmRmOlJERiB4bWxuczpyZGY9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkvMDIvMjItcmRmLXN5bnRheC1ucyMiPiA8cmRmOkRlc2NyaXB0aW9uIHJkZjphYm91dD0iIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtbG5zOnhtcD0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wLyIgeG1wTU06T3JpZ2luYWxEb2N1bWVudElEPSJ4bXAuZGlkOjAzQjI0RTIxNEYyM0U2MTE4RjI3RUFBNzJDNEQ2NDM0IiB4bXBNTTpEb2N1bWVudElEPSJ4bXAuZGlkOjg4NzUzMjQ1RUNCMDExRTZCOEUxOEI2NTBCQzFCODJFIiB4bXBNTTpJbnN0YW5jZUlEPSJ4bXAuaWlkOjg4NzUzMjQ0RUNCMDExRTZCOEUxOEI2NTBCQzFCODJFIiB4bXA6Q3JlYXRvclRvb2w9IkFkb2JlIFBob3Rvc2hvcCBDUzYgKFdpbmRvd3MpIj4gPHhtcE1NOkRlcml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6OTg1OWQyZTktNzgxNC1kMDRkLTk5NjYtYjAwYjM2MmNjOGY1IiBzdFJlZjpkb2N1bWVudElEPSJhZG9iZTpkb2NpZDpwaG90b3Nob3A6NDlhNzRjMDAtZWM4OC0xMWU2LWFhYTktOTgyNDcwNzg3OTJlIi8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+Af/+/fz7+vn49/b19PPy8fDv7u3s6+rp6Ofm5eTj4uHg397d3Nva2djX1tXU09LR0M/OzczLysnIx8bFxMPCwcC/vr28u7q5uLe2tbSzsrGwr66trKuqqainpqWko6KhoJ+enZybmpmYl5aVlJOSkZCPjo2Mi4qJiIeGhYSDgoGAf359fHt6eXh3dnV0c3JxcG9ubWxramloZ2ZlZGNiYWBfXl1cW1pZWFdWVVRTUlFQT05NTEtKSUhHRkVEQ0JBQD8+PTw7Ojk4NzY1NDMyMTAvLi0sKyopKCcmJSQjIiEgHx4dHBsaGRgXFhUUExIREA8ODQwLCgkIBwYFBAMCAQAAIfkEAQAABAAsAAAAAEcAYAAAA/9Istz+MMpJmQIj6827/2AoDkAgjGiqqubqvm/bLXBtyxtj7y6eNbwgyucQGkE4He3I3Mh0g2Wz+YyETkEsrAoBQW3fnjY3ngFrxVj5t9Z0X++Vjy0lx1MSsblOt+Incm0fFYIchCyFe4AjhylzXoSJUZGOa22RkpiVhnyTjZCfIkRnbkUnDyKop2kjSah2WLFhoLF9iH2sezyzt56vipJXpIG4w1NBrlGTx0xzvMw8zp3QO4/UVMHX1dnaNdbdQt/g0dzjxObN5ehD6uui7e5I8PEe4vS99zfz+Rr2/O//vO375y/gh4IGOyBM6GQgv4UMM0CMOJFhxYQXDWYMuJG+oMN8HR9+vBcS5Eh6JUmejJcS5Up3LVm+pDYr5rWaM4/RWNUvZ5M8AzLmcjG01JuNz1Yk9ZUG4hlZ0xT9sAXry0JVTDOZysopzFVKwkLR4fBVLLBFhhRy0xS2wqY/FFCYladi7tk7AOuiZbSXakOifvTi9dsTzi+lhznVm1dUcFQ2i9E8hkur6cCTiYDahLYEymZmO6V81jls9BRjpn92Ss1kGmttr6+ZwBBxRAkCAXLr3s27t+/fwIML100gAQA7"}
@@ -3022,19 +2536,15 @@ var CardUtil = (function()
 			else if(str=="heatsj"){strURL="data:image/gif;base64,R0lGODlhRwBgALMIAP8A/4SEhAAA/xQUFP//AP8AAAAAAP///////wAAAAAAAAAAAAAAAAAAAAAAAAAAACH/C1hNUCBEYXRhWE1QPD94cGFja2V0IGJlZ2luPSLvu78iIGlkPSJXNU0wTXBDZWhpSHpyZVN6TlRjemtjOWQiPz4gPHg6eG1wbWV0YSB4bWxuczp4PSJhZG9iZTpuczptZXRhLyIgeDp4bXB0az0iQWRvYmUgWE1QIENvcmUgNS42LWMxMzggNzkuMTU5ODI0LCAyMDE2LzA5LzE0LTAxOjA5OjAxICAgICAgICAiPiA8cmRmOlJERiB4bWxuczpyZGY9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkvMDIvMjItcmRmLXN5bnRheC1ucyMiPiA8cmRmOkRlc2NyaXB0aW9uIHJkZjphYm91dD0iIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtbG5zOnhtcD0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wLyIgeG1wTU06T3JpZ2luYWxEb2N1bWVudElEPSJ4bXAuZGlkOjAzQjI0RTIxNEYyM0U2MTE4RjI3RUFBNzJDNEQ2NDM0IiB4bXBNTTpEb2N1bWVudElEPSJ4bXAuZGlkOjg4NkYwMTVERUNCMDExRTZCOEUxOEI2NTBCQzFCODJFIiB4bXBNTTpJbnN0YW5jZUlEPSJ4bXAuaWlkOjg4NkYwMTVDRUNCMDExRTZCOEUxOEI2NTBCQzFCODJFIiB4bXA6Q3JlYXRvclRvb2w9IkFkb2JlIFBob3Rvc2hvcCBDUzYgKFdpbmRvd3MpIj4gPHhtcE1NOkRlcml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6OTg1OWQyZTktNzgxNC1kMDRkLTk5NjYtYjAwYjM2MmNjOGY1IiBzdFJlZjpkb2N1bWVudElEPSJhZG9iZTpkb2NpZDpwaG90b3Nob3A6NDlhNzRjMDAtZWM4OC0xMWU2LWFhYTktOTgyNDcwNzg3OTJlIi8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+Af/+/fz7+vn49/b19PPy8fDv7u3s6+rp6Ofm5eTj4uHg397d3Nva2djX1tXU09LR0M/OzczLysnIx8bFxMPCwcC/vr28u7q5uLe2tbSzsrGwr66trKuqqainpqWko6KhoJ+enZybmpmYl5aVlJOSkZCPjo2Mi4qJiIeGhYSDgoGAf359fHt6eXh3dnV0c3JxcG9ubWxramloZ2ZlZGNiYWBfXl1cW1pZWFdWVVRTUlFQT05NTEtKSUhHRkVEQ0JBQD8+PTw7Ojk4NzY1NDMyMTAvLi0sKyopKCcmJSQjIiEgHx4dHBsaGRgXFhUUExIREA8ODQwLCgkIBwYFBAMCAQAAIfkEAQAACAAsAAAAAEcAYAAABP8QmUmrvTjrzakMRyiOZGmeaKoewWCscCzL7mzfdz0WfIH/QJ2o5wMaZ8Jh8chcJUO8pjT1PESnWFL1mu1ul13sV9QpmzMq3ZX7OhmiPavVR4e3YfeTushuU0ZvdXJwc1ZtPQAiAHEheSZ7RGQFfgR5gUM7QxNziAeLkQeOJUKgjZONBJWSRKxEm611rKFpoiRvlKqNZy+wvbNUtYAVoal3BpXIx46Hva2/KHuJn42DqMbJybq/zc7BIjWRkbxy2sTK2ZsvbZ/cBYneIeC+6r/K1tiiAortic96vPOGHct1rqCJdfyoAfME690pYrnM4XMDpVk/f4+YyQr1cOC1ghH/NwnYVBEWIFpKGHGkZAmfqj8YOZVSCC2PypWhSOYEac+WiY0nF2YC9BBQqko8hQVTaQxlilu2iuHrGfSnrkn0hKKAatQjvpsXDvbIWlMFVzLFvE5gRUFqMbF+nG4tivaoskCwPFLdyRXegSq26OqykDbvwLc0+8p1Q3etoaOQL9hNS3NwTC1++1rwMQGy58+vYKab5RcwUZg8KnDu/DktQKwkLVweYVrSJSWqDWWIpbojtdKZe++A/aYaHU7CB/8BbtbuWjCpKRCXnhzK8soZmyMrDB120VvPh8eOq9XN9u3hcUMFz2VOZ3qjyx9sO5B4e6yT8Is/bEnnP7N1YeUc/xf4OabJYW+pA1NZTxkjoGe36VZcRQjapdRiB/323m6aLDFdBS/xhWEJ/nkkVhGoCWbNhfKROJqJsj3nIFZ8qRPiMC3aUuJLrim4U058JRjRjzkqBR+PSGmDl485CQnfgv81+CKS43GUGpBN8vikipiZtaONSKWjoI8gannVkNlJeeSYYl5pCo0xulYAYgxu9eWJlrl3UGGUFUnGdXdh4OGEEkq2lmsj6tgSaARKhxtob/SYqJGkQUiobvpRyF+kYfqXpp2LInXfWuztd2iYdEa5FZA2pqfpKex1x1pbqX5KEZauukeqbblG5xWao2Sm4aW+grdZdbpuOCkZNd5RbP8cx0WLbLHMPVXPm73RoYG20snKJW3CysZXHLS29od9KO7q52+k+eEYa61BWmhs334TrqfuptUjvJFxe9qyCp11TWR4jaWXuP+uWw9xXW36nMHnAXuWqrdOXFc2f0aHnokJ10nRkvMxKYxLGNsGcLs0kpMhiS5xbLLCTZXkhqdTWRiYI2D8JSwJQFWFFk86LUfXTbVhZ5JPP/I0ZE9nAVW0P838KbLSA/vx0NFP38HO0cFQXZfVL2zdSdYhiN1KP7V4DRGbrzlDNkPcXCSK2kyTJpMsZJvdELvptFxONW3LpDOA7YDCpNrmQCEHM9JcQXbhjCzjNyov4ehxhpBHsUuE1aZUu6pJJj3cDuc4pbTE26w0Lg6h0OHWVeemO74zJxexY0ohguTeWJUV9T64tTEUBy3unOh5ayHIZ7358hwoEWwYXbQXj1/Q3yD979VLcf3T2c+wPfXdx/B9+EzMhD35P5jPPfo4rM++DS6A8L4ULSAwwP3456///vz37///AMQfAiIAADs="}
 			else if(str=="heatsk"){strURL="data:image/gif;base64,R0lGODlhRwBgAKIHAP8A/4SEhBQUFP//AP8AAAAAAP///////yH/C1hNUCBEYXRhWE1QPD94cGFja2V0IGJlZ2luPSLvu78iIGlkPSJXNU0wTXBDZWhpSHpyZVN6TlRjemtjOWQiPz4gPHg6eG1wbWV0YSB4bWxuczp4PSJhZG9iZTpuczptZXRhLyIgeDp4bXB0az0iQWRvYmUgWE1QIENvcmUgNS42LWMxMzggNzkuMTU5ODI0LCAyMDE2LzA5LzE0LTAxOjA5OjAxICAgICAgICAiPiA8cmRmOlJERiB4bWxuczpyZGY9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkvMDIvMjItcmRmLXN5bnRheC1ucyMiPiA8cmRmOkRlc2NyaXB0aW9uIHJkZjphYm91dD0iIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtbG5zOnhtcD0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wLyIgeG1wTU06T3JpZ2luYWxEb2N1bWVudElEPSJ4bXAuZGlkOjAzQjI0RTIxNEYyM0U2MTE4RjI3RUFBNzJDNEQ2NDM0IiB4bXBNTTpEb2N1bWVudElEPSJ4bXAuZGlkOjg4NzE0QzYwRUNCMDExRTZCOEUxOEI2NTBCQzFCODJFIiB4bXBNTTpJbnN0YW5jZUlEPSJ4bXAuaWlkOjg4NzE0QzVGRUNCMDExRTZCOEUxOEI2NTBCQzFCODJFIiB4bXA6Q3JlYXRvclRvb2w9IkFkb2JlIFBob3Rvc2hvcCBDUzYgKFdpbmRvd3MpIj4gPHhtcE1NOkRlcml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6OTg1OWQyZTktNzgxNC1kMDRkLTk5NjYtYjAwYjM2MmNjOGY1IiBzdFJlZjpkb2N1bWVudElEPSJhZG9iZTpkb2NpZDpwaG90b3Nob3A6NDlhNzRjMDAtZWM4OC0xMWU2LWFhYTktOTgyNDcwNzg3OTJlIi8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+Af/+/fz7+vn49/b19PPy8fDv7u3s6+rp6Ofm5eTj4uHg397d3Nva2djX1tXU09LR0M/OzczLysnIx8bFxMPCwcC/vr28u7q5uLe2tbSzsrGwr66trKuqqainpqWko6KhoJ+enZybmpmYl5aVlJOSkZCPjo2Mi4qJiIeGhYSDgoGAf359fHt6eXh3dnV0c3JxcG9ubWxramloZ2ZlZGNiYWBfXl1cW1pZWFdWVVRTUlFQT05NTEtKSUhHRkVEQ0JBQD8+PTw7Ojk4NzY1NDMyMTAvLi0sKyopKCcmJSQjIiEgHx4dHBsaGRgXFhUUExIREA8ODQwLCgkIBwYFBAMCAQAAIfkEAQAABwAsAAAAAEcAYAAAA/94tdz+MMpJmQom6827/2AoGoFQjGiqqubqvm9LzIRB13AOy7Td60DWyZeZBY+pFtGIbIaUN6f0A2VOr5qqFTutEjWVsDgi8n4NQ1RhsB6w3W93G87+pKlDKzNNA2gAPwxsC4NrgoR3HIkdPEZReTd+gFFodJZwbQsZmoplJ1GPPjc1o3ulNJZDmZ1Pi52nsJsSo6pynGieIp+wpZt2EnVoqrk+knuivIF2uCe1zrityNInk8kEfg7CDMzatojQII29Q9Ww2Nroms3dg77geMij0OWn52l36/lyYO7h1PXg6Mnj1o/bOm0NCnrQQukOL373NuRzV+DGsGhFKL2LZ+X/IDqIBiFsZORwy6KBvlzxC0mgosuWKrMkwrGSww+J+W6lZHZqG0YQKmlmGzlRVUWLCknqCsEA5s6dHo269BEzgxKgHiDAHJbzXtQFM3QurLqxqdGwwp42Ewv2ATGssja1BHOUk7pm+6C9NOTT39Jtzeae3dqO0D5VBNgQFquUaRvBaCBHhvnGcF65ih0E88t0AA27c+mG5ZvqnmeXhRhzuGpntM+piF1fMt0SZuJCb1s7EIx27ejZKWtvzUSWdVa+R3mHntyytN66TW8XJ7tmRqHen4U1pzNVluvkiafrsu5muG+nlm15N2+9uXimtxV7kxrmO9gbl+F1lrM44QZr/1oltp1qGxjXwRwVcbeZDWEgBF58BMqkCyaLLagIUnTddxomEVpFHYUKurJNdmuB5Rl5qeV2HIipibTbXS9y2B1nQKUnAV3OIRQWd229BxRlmnGHI2pcXTIfWj+1NpyRdTjjnmk8HjKjfjUSRuFwsuToYANRqniglZm51SNgE5SHoI+/WIaKeYEZ0ZdEcZiJiZeKWJagfWBgmFVlbc2Z5IrlWTRGU3DOsWF+Y+mSiYBsPtgLTlKihmhjQAX62W6N3oiQnGbSWSijmNplaGHQORgfkjTaceJ3o+U5qkttKieIdWjueWIDrTLzanZyKdefpzimFpZkow7SapuBvQisLP+PtRUeGLPdF1qyzN5X64FcvrRZeoMY65Sr6z3754EtNrdcJRzyiSS1gak3bp3XVVekeohYyxVkgC276V4UHbbWerd0F7C+D3yboV7PTQbamyOtRh10EQWsDkFmuXUgwW5iGTFBFMNa1bWsPGiXQRc7qAFNrKR6nKP4ljUxYzdJZJPDita210QNg3SyRjWJUiB1W77M8Uccn5IySgaGjCFX72yckdErQZ20zEFD1bTOyfjhi0DXGDD1SlAWdfVOXEfiy0NfU5QlbjmlM3HZfZwdS9rMpOZNSGRuA7fZuzjSA914PUOySpBY42ZGxuAAeFyVTLAMRw+BTDU7sV1KBuSJsUjeM7q10MFL4aCMI00Ui9e5drHAxZO4MqEbUfqe9SJXCG6iaG1ANVHTxMTrisyGye9yWMjUzhl5qOigyFfwHymKk8VFDpTQ/Tz0uzs/vQvRW399Cn4bv/0RTFT/PRCt1yD9+CCU77X26K9wfvvuF4AB/EiUcIAA+Oev//789+///wAMYP4OkAAAOw=="}
 			else if(str=="heatsq"){strURL="data:image/gif;base64,R0lGODlhRwBgAKIHAP8A/4SEhBQUFP//AP8AAAAAAP///////yH/C1hNUCBEYXRhWE1QPD94cGFja2V0IGJlZ2luPSLvu78iIGlkPSJXNU0wTXBDZWhpSHpyZVN6TlRjemtjOWQiPz4gPHg6eG1wbWV0YSB4bWxuczp4PSJhZG9iZTpuczptZXRhLyIgeDp4bXB0az0iQWRvYmUgWE1QIENvcmUgNS42LWMxMzggNzkuMTU5ODI0LCAyMDE2LzA5LzE0LTAxOjA5OjAxICAgICAgICAiPiA8cmRmOlJERiB4bWxuczpyZGY9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkvMDIvMjItcmRmLXN5bnRheC1ucyMiPiA8cmRmOkRlc2NyaXB0aW9uIHJkZjphYm91dD0iIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtbG5zOnhtcD0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wLyIgeG1wTU06T3JpZ2luYWxEb2N1bWVudElEPSJ4bXAuZGlkOjAzQjI0RTIxNEYyM0U2MTE4RjI3RUFBNzJDNEQ2NDM0IiB4bXBNTTpEb2N1bWVudElEPSJ4bXAuZGlkOjg4NzE0QzVDRUNCMDExRTZCOEUxOEI2NTBCQzFCODJFIiB4bXBNTTpJbnN0YW5jZUlEPSJ4bXAuaWlkOjg4NzE0QzVCRUNCMDExRTZCOEUxOEI2NTBCQzFCODJFIiB4bXA6Q3JlYXRvclRvb2w9IkFkb2JlIFBob3Rvc2hvcCBDUzYgKFdpbmRvd3MpIj4gPHhtcE1NOkRlcml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6OTg1OWQyZTktNzgxNC1kMDRkLTk5NjYtYjAwYjM2MmNjOGY1IiBzdFJlZjpkb2N1bWVudElEPSJhZG9iZTpkb2NpZDpwaG90b3Nob3A6NDlhNzRjMDAtZWM4OC0xMWU2LWFhYTktOTgyNDcwNzg3OTJlIi8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+Af/+/fz7+vn49/b19PPy8fDv7u3s6+rp6Ofm5eTj4uHg397d3Nva2djX1tXU09LR0M/OzczLysnIx8bFxMPCwcC/vr28u7q5uLe2tbSzsrGwr66trKuqqainpqWko6KhoJ+enZybmpmYl5aVlJOSkZCPjo2Mi4qJiIeGhYSDgoGAf359fHt6eXh3dnV0c3JxcG9ubWxramloZ2ZlZGNiYWBfXl1cW1pZWFdWVVRTUlFQT05NTEtKSUhHRkVEQ0JBQD8+PTw7Ojk4NzY1NDMyMTAvLi0sKyopKCcmJSQjIiEgHx4dHBsaGRgXFhUUExIREA8ODQwLCgkIBwYFBAMCAQAAIfkEAQAABwAsAAAAAEcAYAAAA/94tdz+MMpJmQom6827/2AoGoFQjGiqqubqvm+bETQN37gh13zusyeDbUb4GUW7IvHI9CQ1w6ZUF4xGp8znEtvUCpWVsDiCrCq/mSBoYTgFGYSBXK5G1Z1mKDjEdrfbC3EFdHoEABoANRp3HUk8ex8NgIuBcwNmNYeJPX8hMl+KaWuXnWqVg5g9jzaMHJ+Foh4Ll3V9BTSEoKurnSCverEdgwStDXGkurs9rRu/wrLDkgyAt8cnyru9H0maQ8UDNNPixoIGm9g0h8waLaqKjLPhixtugWrnyofaeMnLwuDlgv2RhAidIYH8sO1rAxCZtjfTCu3St9DVCXyZFg4LGFH/lIMNCud5ShXqzsZcstIQJPKIw7oMn1oiPDnOFLKPEs+I9FUn1EyAs94sQvkA1rORHHTui0bLIUNapooKiVRGhElSUKEOyhp1JVWkfFwOYsjAUgNSXWvV27nt5UNU4AxodRAXKtuteBE2cmtzzli8ZQnN7ciwhqmqYak1HfaUkDXCD8HlcuvMZWNLl+YUueV37cBJZ9FWbMb3bODQdMr2oReuMyo/YEdh7qxSdVC1rSejGs2u9O2gA+m+Dh4O51PYPK3OTk0NYmY2bQz7bb6bN8zSz39PCk5rYGvD0T1bp6J8uZ9b0G+n+R6H2Fro4yvTC7q4D9A0oqttdH8+FmW+/8t1N8t9EenXkHug+YfYGq+pRx84OBnIQz0QCRVbJObV05R7qQVCjGTyIIdefNgNOA6EcvDX2YfFUQiIYf+V5xd/hW3UIGBwIJjjhAtGolqIZG314VZNXVJDfqvA15aM1egIF4r7QYVLh9HB6BQ/fNDCY2BAxYMLKtYI2CSRMfLRJHhuAPRhkc89huSQkO1lVZK2tGjij4KUAweRKC1pJozUUPMlhx1aIwiFqXV3YUojelSlZPqdxpmDfE636FEF9sGDkcTUVkl2gGilaHKJCVVnQ/rV9qiYAZa5hoIUHplqmm98qRh9cVpkFSWgcTZop6GmN2Ka5vWYkkrhVZlnp/8artZrg6BealmQ4swoT7CKSlOppaS+mpenHq6G60e02qYklt5ma62Sv82lUoBXyhlWu3Rc69GNZkl6o6tUEavtZ71qdo1frZK461MBzRTYZmYJkZ1dBiemrFMRDNBYaCdkxi2/x+LVZ1cWHwpByNHqpavEtswHX7kDdojVuRwfxeBK0IpaFlnTdvtVB2BIpRjFiyWMkFLysWUUdX0dFqSt9IB0RdF6yQQufl0pxvROUkO9TzaUFCjb1bFwrXVPyqjsrKqFCS0KRumQJzHbnHgqkE1gi6LQ2BnAzQNFzT00VN1/3M1X3gZRhN7ZvVQz6jzu2IC33o+o02VNgqod9kGjm1y3q0HLpEhjTZMWY+wznJeUoleLWH45ulSV7o3nKVOyeNOgyPtqNlzDRWMpOO+c9eDJdMMJn7s/uw5JQ+DNEkXnDJXZ55+dO60VSiifQqW7nwc89ZqbOcb3YmyBhttcHME9+eX/cL7W6auwvlvtp/B+/OqfkTz89IsgNv75h/B7/1NgHwBdYAIMDNAIJTiAABbIwAY68IEQjKAEJ0hBBh4gAQA7"}
-
 			CardUtil.cardNameArrayUrl[i] = strURL;
 			}
-
 		return CardUtil.cardNameArrayUrl;
 		};
 
 	CardUtil.isOnTableuTop = function(card)
 		{
 		if (card.myState != Card.STATE_TABLEU)
-			{
-			return false;
-			}
+			{return false;}
 
 		var arr = Card.cardArray;
 		var i = arr.length;
@@ -3042,21 +2552,16 @@ var CardUtil = (function()
 			{
 			var c = arr[i];
 			if (c == card)
-				{
-				continue;
-				}
+				{continue;}
 			if (c.myState == Card.STATE_TABLEU)
 				{
 				if (c.tableuIdx == card.tableuIdx)
 					{
 					if (c.tableuPosition > card.tableuPosition)
-						{
-						return false;
-						}
+						{return false;}
 					}
 				}
 			}
-
 		return true;
 		};
 
@@ -3066,9 +2571,7 @@ var CardUtil = (function()
 		while (i-- > 0)
 			{
 			if (CardUtil.checkIfTabEmpty(i))
-				{
-				return false;
-				}
+				{return false;}
 			}
 		return true;
 		};
@@ -3080,9 +2583,7 @@ var CardUtil = (function()
 			{
 			var c = Card.cardArray[i];
 			if (c.selectedFlag)
-				{
-				return true;
-				}
+				{return true;}
 			}
 		return false;
 		};
@@ -3097,9 +2598,7 @@ var CardUtil = (function()
 			if (c != card && c.isMoving)
 				{
 				if (c.tableuPosition < card.tableuPosition)
-					{
-					return false;
-					}
+					{return false;}
 				}
 			}
 		return true;
@@ -3145,10 +2644,7 @@ var GameWonPrompt2 = (function()
 	function GameWonPrompt2(gameWon)
 		{
 		if (gameWon === void 0)
-			{
-			gameWon = true;
-			}
-
+			{gameWon = true;}
 		GameUI.gameStarted = false;
 		this.blackbg = SimpleGame.myGame.make.graphics(0, 0);
 		this.blackbg.beginFill(0x000000);
@@ -3156,9 +2652,7 @@ var GameWonPrompt2 = (function()
 		this.blackbg.endFill();
 		this.blackbg.alpha = 0.00001;
 		this.blackbg.inputEnabled = true;
-
 		GameUI.promptLayer.add(this.blackbg);
-
 		new GameWonAnim(GameUI.promptLayer, 440, 300);
 		}
 	return GameWonPrompt2;
@@ -3169,16 +2663,10 @@ var NewGamePrompt = (function()
 	function NewGamePrompt(showXBut)
 		{
 		showRestartGame = false;
-
 		document.getElementById("loading").style.display = "none";
-
 		if (showXBut === void 0)
-			{
-			showXBut = false;
-			}
-
+			{showXBut = false;}
 		SimpleGame.myGame.renderer.renderSession.roundPixels = true;
-
 		this.blackbg = SimpleGame.myGame.make.graphics(0, 0);
 		this.blackbg.beginFill(0xffffff);
 		this.blackbg.drawRect(0, 0, 880, 600);
@@ -3186,32 +2674,26 @@ var NewGamePrompt = (function()
 		this.blackbg.alpha = 0.000001;
 		this.blackbg.inputEnabled = true;
 		GameUI.promptLayer.add(this.blackbg);
-
 		this.menuBG = SimpleGame.myGame.add.sprite(0, 0, "prompt_difficulty");
 		this.menuBG.x = (SimpleGame.myGame.width - this.menuBG.width) * 0.5;
 		this.menuBG.y = -20;
 		GameUI.promptLayer.add(this.menuBG);
-
 		this.menuText = SimpleGame.myGame.make.bitmapText(0, 0, "ArialBlackWhite", STRING_NEWGAME, 15);
 		this.menuText.width = 96;
 		this.menuText.height = 17;
 		this.menuText.tint = 0xFFFFFF;
 		this.menuText.y = this.menuBG.y + 222;
 		GameUI.promptLayer.add(this.menuText);
-
 		this.menuText.wordWrap = true;
 		this.menuText.wordWrapWidth = 380;
 		this.menuText.x = this.menuBG.x + (this.menuBG.width) * 0.5 - 160 + 5;
 		this.menuText.anchor.set(0, 0);
-
 		this.menuText = SimpleGame.myGame.make.bitmapText(0, 0, "ArialWhite", STRING_SELECTDIFFICULTY, 14.3);
 		this.menuText.height = 15;
 		this.menuText.tint = 0x000000;
 		this.menuText.x = this.menuBG.x + (this.menuBG.width - this.menuText.width) * 0.5;
 		this.menuText.y = this.menuBG.y + 264;
-
 		GameUI.promptLayer.add(this.menuText);
-
 		new ButtonTextOnly(GameUI.promptLayer, this.menuBG.x + (this.menuBG.width - 80) * 0.5, this.menuBG.y + 310, 0, 0, STRING_EASY, function()
 			{
 			GameUI.promptLayer.removeAll(true);
@@ -3221,7 +2703,6 @@ var NewGamePrompt = (function()
 			GameUI.buttonRestart.visible = true;
 			showRestartGame = true;
 			});
-
 		new ButtonTextOnly(GameUI.promptLayer, this.menuBG.x + (this.menuBG.width - 80) * 0.5, this.menuBG.y + 342, 0, 0, STRING_MEDIUM, function()
 			{
 			GameUI.promptLayer.removeAll(true);
@@ -3231,7 +2712,6 @@ var NewGamePrompt = (function()
 			GameUI.buttonRestart.visible = true;
 			showRestartGame = true;
 			});
-
 		new ButtonTextOnly(GameUI.promptLayer, this.menuBG.x + (this.menuBG.width - 80) * 0.5, this.menuBG.y + 374, 0, 0, STRING_HARD, function()
 			{
 			GameUI.promptLayer.removeAll(true);
@@ -3241,7 +2721,6 @@ var NewGamePrompt = (function()
 			GameUI.buttonRestart.visible = true;
 			showRestartGame = true;
 			});
-
 		if (showXBut)
 			{
 			new ButtonWithOverState(GameUI.promptLayer, "prompt_close", "prompt_close_over", 576, 199, function()
@@ -3249,9 +2728,7 @@ var NewGamePrompt = (function()
 				showRestartGame = true;
 				GameUI.promptLayer.removeAll(true);
 				if (BoardManager.checkForGameOver())
-					{
-					new GameWonPrompt2();
-					}
+					{new GameWonPrompt2();}
 				});
 			}
 		}
@@ -3265,8 +2742,7 @@ var ButtonTextOnly = (function()
 		if (onClickFunction === void 0)
 			{
 			onClickFunction = function()
-				{
-				};
+				{ };
 			}
 
 		this.disabled = false;
@@ -3299,14 +2775,9 @@ var ButtonTextOnly = (function()
 	ButtonTextOnly.prototype.executeOnClickFunction = function()
 		{
 		if (this.disabled)
-			{
-			return;
-			}
+			{return;}
 		if (this.isVisible == false)
-			{
-			return;
-			}
-
+			{return;}
 		this.onClickFunction();
 		SimpleGame.myGame.input.reset();
 		};
@@ -3314,22 +2785,14 @@ var ButtonTextOnly = (function()
 	ButtonTextOnly.prototype.addUnderline = function()
 		{
 		if (this.disabled)
-			{
-			return;
-			}
-
+			{return;}
 		if (SimpleGame.myGame.device.touch)
-			{
-			return;
-			}
-
+			{return;}
 		this.underline.visible = true;
 		};
 
 	ButtonTextOnly.prototype.removeUnderline = function()
-		{
-		this.underline.visible = false;
-		};
+		{this.underline.visible = false;};
 
 	ButtonTextOnly.prototype.disable = function()
 		{
@@ -3372,8 +2835,7 @@ var ButtonWithOverState = (function()
 		if (onClickFunction === void 0)
 			{
 			onClickFunction = function()
-				{
-				};
+				{ };
 			}
 
 		this.onClickExecuted = false;
@@ -3410,38 +2872,28 @@ var ButtonWithOverState = (function()
 		if (this.imgNormal.input != null)
 			{
 			if (this.skipMouseOver)
-				{
-				this.imgOver.visible = false;
-				}
+				{this.imgOver.visible = false;}
 			}
 		if (!this.imgOver.parent)
-			{
-			SimpleGame.myGame.time.events.remove(this.loopEvent);
-			}
+			{SimpleGame.myGame.time.events.remove(this.loopEvent);}
 		this.setXY(this.x, this.y);
 		};
 
 	ButtonWithOverState.prototype.update1 = function()
-		{
-		this.setXY(this.x, this.y);
-		};
+		{this.setXY(this.x, this.y);};
 
 	ButtonWithOverState.prototype.banInput = function()
 		{
 		this.onClickExecuted = true;
 
 		SimpleGame.myGame.time.events.add(50, function()
-			{
-			this.onClickExecuted = false;
-			}, this);
+			{this.onClickExecuted = false;}, this);
 		};
 
 	ButtonWithOverState.prototype.onButtonOver = function()
 		{
 		if (this.skipMouseOver)
-			{
-			return;
-			}
+			{return;}
 
 		this.imgOver.visible = true;
 		this.imgNormal.alpha = 0.00001;

@@ -1,6 +1,5 @@
-<!DOCTYPE html><html><head>
-  <title>Title</title><meta charset="UTF-8">
-  <style>
+<!DOCTYPE html><html><head><title>Pac-Man</title><link rel="shortcut icon" href="combo.ico"><meta charset="UTF-8">
+<style>
 .grid { display: flex; flex-wrap: wrap; width: 560px; height: 560px;border: solid black;}
 .grid div { width: 20px; height: 20px;}
 .pac-dot { background-color: white; border: 5px solid black; box-sizing: border-box;}
@@ -12,11 +11,9 @@
 .clyde { background-color: orange; }
 .pac-man { background-color: yellow; border-radius: 10px;}
 .scared-ghost { background-color: aquamarine;} 
-  </style>
-</head>
-<body>
-    <div class="grid"></div>
-    <h3>Score:<span id="score"></span></h3>
+</style></head>
+<body><div class="grid"></div>
+<h3>Score:<span id="score"></span></h3>
 <script>
 document.addEventListener("DOMContentLoaded", () => {
     const scoreDisplay = document.getElementById("score")

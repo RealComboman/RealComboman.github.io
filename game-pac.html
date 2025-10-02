@@ -1,65 +1,49 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="utf-8" />
-	<link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>
-    <title>Pacman</title>
-    <link rel="stylesheet" href="Pacman/pacstyle.css" />
-    
-    <script src="Pacman/source/Data.js"></script>
-    <script src="Pacman/source/Display.js"></script>
-    <script src="Pacman/source/Food.js"></script>
-    <script src="Pacman/source/Fruit.js"></script>
-    <script src="Pacman/source/Blob.js"></script>
-    <script src="Pacman/source/HighScores.js"></script>
-    
-    <script src="Pacman/source/board/Board.js"></script>
-    <script src="Pacman/source/board/Canvas.js"></script>
-    <script src="Pacman/source/board/BoardCanvas.js"></script>
-    <script src="Pacman/source/board/GameCanvas.js"></script>
-    
-    <script src="Pacman/source/score/ScoreBlob.js"></script>
-    <script src="Pacman/source/score/Score.js"></script>
-    
-    <script src="Pacman/source/ghosts/Ghosts.js"></script>
-    <script src="Pacman/source/ghosts/Ghost.js"></script>
-    <script src="Pacman/source/ghosts/Blinky.js"></script>
-    <script src="Pacman/source/ghosts/Clyde.js"></script>
-    <script src="Pacman/source/ghosts/Inky.js"></script>
-    <script src="Pacman/source/ghosts/Pinky.js"></script>
-    
-    <script src="Pacman/source/animations/Animations.js"></script>
-    <script src="Pacman/source/animations/Animation.js"></script>
-    <script src="Pacman/source/animations/DeathAnimation.js"></script>
-    <script src="Pacman/source/animations/EndLevelAnimation.js"></script>
-    <script src="Pacman/source/animations/FruitScoreAnimation.js"></script>
-    <script src="Pacman/source/animations/GameOverAnimation.js"></script>
-    <script src="Pacman/source/animations/GhostScoreAnimation.js"></script>
-    <script src="Pacman/source/animations/NewLevelAnimation.js"></script>
-    <script src="Pacman/source/animations/PausedAnimation.js"></script>
-    <script src="Pacman/source/animations/ReadyAnimation.js"></script>
-    
-    <script src="Pacman/source/demo/Demo.js"></script>
-    <script src="Pacman/source/demo/DemoData.js"></script>
-    <script src="Pacman/source/demo/BigBlob.js"></script>
-    <script src="Pacman/source/demo/DemoBlob.js"></script>
-    <script src="Pacman/source/demo/DemoFood.js"></script>
-    <script src="Pacman/source/demo/DemoGhost.js"></script>
-    
-    <script src="Pacman/source/Init.js"></script>
-    
-    <script src="Pacman/utils/Sounds.js"></script>
-    <script src="Pacman/utils/Storage.js"></script>
-    <script src="Pacman/utils/Utils.js"></script>
+<!DOCTYPE html><html lang="es"><head><meta charset="utf-8" /><link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'><title>Pacman</title><link rel="shortcut icon" href="combo.ico"><link rel="stylesheet" href="Pacman/pacstyle.css" />
+<script src="Pacman/source/Data.js"></script>
+<script src="Pacman/source/Display.js"></script>
+<script src="Pacman/source/Food.js"></script>
+<script src="Pacman/source/Fruit.js"></script>
+<script src="Pacman/source/Blob.js"></script>
+<script src="Pacman/source/HighScores.js"></script>
+<script src="Pacman/source/board/Board.js"></script>
+<script src="Pacman/source/board/Canvas.js"></script>
+<script src="Pacman/source/board/BoardCanvas.js"></script>
+<script src="Pacman/source/board/GameCanvas.js"></script>
+<script src="Pacman/source/score/ScoreBlob.js"></script>
+<script src="Pacman/source/score/Score.js"></script>
+<script src="Pacman/source/ghosts/Ghosts.js"></script>
+<script src="Pacman/source/ghosts/Ghost.js"></script>
+<script src="Pacman/source/ghosts/Blinky.js"></script>
+<script src="Pacman/source/ghosts/Clyde.js"></script>
+<script src="Pacman/source/ghosts/Inky.js"></script>
+<script src="Pacman/source/ghosts/Pinky.js"></script>
+<script src="Pacman/source/animations/Animations.js"></script>
+<script src="Pacman/source/animations/Animation.js"></script>
+<script src="Pacman/source/animations/DeathAnimation.js"></script>
+<script src="Pacman/source/animations/EndLevelAnimation.js"></script>
+<script src="Pacman/source/animations/FruitScoreAnimation.js"></script>
+<script src="Pacman/source/animations/GameOverAnimation.js"></script>
+<script src="Pacman/source/animations/GhostScoreAnimation.js"></script>
+<script src="Pacman/source/animations/NewLevelAnimation.js"></script>
+<script src="Pacman/source/animations/PausedAnimation.js"></script>
+<script src="Pacman/source/animations/ReadyAnimation.js"></script>
+<script src="Pacman/source/demo/Demo.js"></script>
+<script src="Pacman/source/demo/DemoData.js"></script>
+<script src="Pacman/source/demo/BigBlob.js"></script>
+<script src="Pacman/source/demo/DemoBlob.js"></script>
+<script src="Pacman/source/demo/DemoFood.js"></script>
+<script src="Pacman/source/demo/DemoGhost.js"></script>
+<script src="Pacman/source/Init.js"></script>
+<script src="Pacman/utils/Sounds.js"></script>
+<script src="Pacman/utils/Storage.js"></script>
+<script src="Pacman/utils/Utils.js"></script>
 </head>
-
 <body>
-    <div id="container" class="mainScreen">
-        <canvas class="board"></canvas>
-        <canvas class="game"></canvas>
-        <canvas class="screen"></canvas>
-        
-        <div class="main display">
+<div id="container" class="mainScreen">
+<canvas class="board"></canvas>
+<canvas class="game"></canvas>
+<canvas class="screen"></canvas>
+<div class="main display">
             <ul>
                 <li><a href="#" data-action="play"><u>S</u>tart Game</a></li>
                 <li><a href="#" data-action="highScores"><u>H</u>igh Scores</a></li>

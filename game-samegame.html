@@ -1,41 +1,37 @@
-<html>
-	<head>
-	<title>Same Game</title>
-  <style> #board {  border-style: solid;  border-width: 5px;}
-	#main {  display: block;}
-	#board, #score, #gamesize {  float: left;}
-	#score, #gamesize {  margin-left: 20px;  margin-bottom: 20px;  padding: 5px;  border-color: gray;  border-style: solid;  border-width: 1px;}
-	#gameover {color: red;}   </style>
-	</head>
-	<body onload="game_load()">
-		<h1>Same Game</h1>
-		<div id="main">
-			<canvas id="board" width="800" height="600"></canvas>
-			<div id="score">
-				Score:  <span id="total">0</span><br />
-				Recent:  <span id="recent">+0</span><br />
-				<span id="gameover"></span><br />
-			</div>
-			<div id="gamesize">
-				<select id="color_choices">
-					<option value="pathetic">Easy (2)</option>
-					<option value="3color">3 Colors</option>
-					<option value="primary">Primary (3)</option>
-					<option value="4prime">Primary (4)</option>
-					<option value="4xx">Elegant (4)</option>
-					<option value="4color">4 Colors</option>
-					<option value="4colora">4 Colorsa</option>
-				</select><br /><br />
-				<select id="board_size"> 
-					<option value="small">Small</option>
-					<option value="medium">Medium</option>
-					<option value="large">Large</option>
-				</select><br /><br />
-				<input type="button" value="New Game" onclick="document.game.on_new()">
-			</div>
-		</div>
+<html><head><title>Same Game</title><link rel="shortcut icon" href="combo.ico">
+<style> #board {  border-style: solid;  border-width: 5px;}
+#main {  display: block;}
+#board, #score, #gamesize {  float: left;}
+#score, #gamesize {  margin-left: 20px;  margin-bottom: 20px;  padding: 5px;  border-color: gray;  border-style: solid;  border-width: 1px;}
+#gameover {color: red;}   </style>
+</head>
+<body onload="game_load()">
+<h1>Same Game</h1>
+<div id="main">
+<canvas id="board" width="800" height="600"></canvas>
+<div id="score">
+	Score:  <span id="total">0</span><br />
+	Recent:  <span id="recent">+0</span><br />
+	<span id="gameover"></span><br />
+</div>
+<div id="gamesize">
+	<select id="color_choices">
+		<option value="pathetic">Easy (2)</option>
+		<option value="3color">3 Colors</option>
+		<option value="primary">Primary (3)</option>
+		<option value="4prime">Primary (4)</option>
+		<option value="4xx">Elegant (4)</option>
+		<option value="4color">4 Colors</option>
+		<option value="4colora">4 Colorsa</option>
+	</select><br /><br />
+	<select id="board_size"> 
+		<option value="small">Small</option>
+		<option value="medium">Medium</option>
+		<option value="large">Large</option>
+	</select><br /><br />
+	<input type="button" value="New Game" onclick="document.game.on_new()">
+</div></div>
 <script>
-
 var schemes = {
 	"pathetic": ["yellow", "magenta"],
 	"3color": ["#1722d6", "#6830b5", "#e731c2"],

@@ -1,21 +1,14 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <title>Amanda's Tetris</title>
-  <meta charset="UTF-8">
-  <style>
-  html, body { height: 100%; margin: 0; }
-  body { background: black; display: flex; align-items: center; justify-content: center; }
-  canvas { border: 1px solid white; }
-  .buttons { align-items: center; display: grid; grid-template-columns: repeat(6, 42px); gap: 20px; }
-  .buttons button { width: 48px; height: 48px; font-size: 1.5em; border: none; background-color: white; color: black; border-radius: 16px; cursor: pointer; }
-  .buttons button:hover { background-color: lightgray; }
- #scores { color: white; font-family: Arial, sans-serif; margin-left: 20px;  margin-bottom: 20px;  padding: 5px;  border-color: gray;  border-style: solid;  border-width: 1px;}
-  </style>
-</head>
-<body>
-<div>
-<canvas width="320" height="640" id="game"></canvas>
+<!DOCTYPE html><html><head><title>Amanda's Tetris</title><link rel="shortcut icon" href="combo.ico"><meta charset="UTF-8">
+<style>
+html, body { height: 100%; margin: 0; }
+body { background: black; display: flex; align-items: center; justify-content: center; }
+canvas { border: 1px solid white; }
+.buttons { align-items: center; display: grid; grid-template-columns: repeat(6, 42px); gap: 20px; }
+.buttons button { width: 48px; height: 48px; font-size: 1.5em; border: none; background-color: white; color: black; border-radius: 16px; cursor: pointer; }
+.buttons button:hover { background-color: lightgray; }
+#scores { color: white; font-family: Arial, sans-serif; margin-left: 20px;  margin-bottom: 20px;  padding: 5px;  border-color: gray;  border-style: solid;  border-width: 1px;}
+</style></head>
+<body><div><canvas width="320" height="640" id="game"></canvas>
 <br><br><div class="buttons">
   <button onclick="slide(37)" class="mem">←</button>
   <button onclick="rot()">↻</button>
@@ -31,7 +24,6 @@ Level:  <span id="levelDsp">0</span><br>
 Score:  <span id="scoreDsp">0</span><br>
 High Score:  <span id="highScoreDsp">0</span><br>
 </div></div>
-
 <script>
   //<button onclick="drop()">↡</button>
 let score = 0;

@@ -1,5 +1,5 @@
 <!DOCTYPE html><html><head><link href='https://fonts.googleapis.com/css?family=Audiowide' rel='stylesheet'>
-<title>Combotechni.ca</title><link rel="shortcut icon" href="combo.ico" >
+<title>Combotechni.ca</title><link rel="shortcut icon" href="combo.ico">
 <meta name="viewport" content="width=520px">
 <style>
 h1 {font-family: 'Audiowide', Helvetica, sans-serif; font-size:36px;}
@@ -9,14 +9,12 @@ a:link {color:red; text-decoration:none;}
 a:visited {color:red; background-color:transparent; text-decoration:none;}
 a:hover{color:red; background-color:transparent; text-decoration:none;}
 a:active {color:yellow; background-color:transparent; text-decoration:underline;}
-.hide {display: none;}
-/* .tt:hover + .hide {display:block; color:red;} */
-.modal{/*Modal (background)*/
+.hide {display: none;}  /* .tt:hover + .hide {display:block; color:red;} */
+.modal{/*Modal bg*/
   display:none; position:fixed; z-index:1; left:0; top:0; width:100%; height:100%; overflow:auto; /* Enable scroll if needed */
   background-color: rgb(0,0,0); background-color:rgba(0,0,0,0.4); /* Black w/ opacity */
-  -webkit-animation-name:fadeIn; -webkit-animation-duration:0.4s; animation-name:fadeIn; animation-duration:0.4s }
-.modal-content{ position:fixed; bottom:0; background-color:#fefefe; width:100%;
-  -webkit-animation-name:slideIn; -webkit-animation-duration:0.4s; animation-name:slideIn; animation-duration:0.4s }
+  -webkit-animation-name:fadeIn; -webkit-animation-duration:0.4s; animation-name:fadeIn; animation-duration:0.4s}
+.modal-content{position:fixed; bottom:0; background-color:#fefefe; width:100%; -webkit-animation-name:slideIn; -webkit-animation-duration:0.4s; animation-name:slideIn; animation-duration:0.4s }
 .close{float:right; font-size:28px;}
 .close:hover{color:grey; text-decoration:none; cursor:pointer;}
 .modal-body {padding: 2px 16px;}
@@ -28,11 +26,10 @@ a:active {color:yellow; background-color:transparent; text-decoration:underline;
 </head>
 <body bgcolor=white><div class="close";><!--☰-->
 <h2><b> <span id="test" onClick="mailopen()">✉</span> <span id="test" onClick="infopen()">❒</span> <span id="test" onClick="finopen()">$</span> <span id="test" onClick="prodopen()">✎</span> <span id="test" onClick="techopen()">⌘</span> <span id="test" onClick="entopen()">☊</span> <span id="test" onClick="configopen()">⚙</span> <a href="exit0.html"  target="_blank" style="color:black;"> ⁝⁝⁝</a> </b></h2></div>
-<div id="weather" style="text-align:left;"></div>
-<br><br><br><br>
+<div id="weather" style="text-align:left;"></div><br><br><br><br>
 <div style="text-align:center;margin:0;">
-<h1><span style="color:blue;">C<span style="color:red;"><a id="Othm"></a><span style="color:orange;">m<span style="color:green;">b<span style="color:red;"><a href="txt.html">o</a><span style="color:fuchsia;">t<span style="color:red;">e<span style="color:blue;">c<span style="color:turquoise;">h<span style="color:orange;">n<span style="color:lime;">i<span style="color:red;">.<span style="color:blue;">c<span style="color:red;">a</h1>
-<form action="javascript:;" onsumbit=" Sweb(document.input_box.command.value) " name="input_box" >
+<h1><span style="color:blue;">C<span style="color:red;"><a id="Othm"></a><span style="color:orange;">m<span style="color:fuchsia;">b<span style="color:red;"><a href="txt.html" target="_blank">o</a><span style="color:green;">T<span style="color:red;">e<span style="color:blue;">c<span style="color:turquoise;">h<span style="color:orange;">n<span style="color:lime;">i<a href="game-0.html" target="_blank">.</a><span style="color:blue;">c<span style="color:red;">a</h1>
+<form action="javascript:;" onsumbit=" Sweb(document.input_box.command.value) " name="input_box">
 <div style="margin-top:3px">
 <input autofocus id="textin" type="text" style="border-radius: 20px; font-size: 16px; padding: 4px" name="command" size="33" value=" "/> <br><br>
 <input type="submit" value="🔍 Web" onClick="Sweb(document.input_box.command.value)">
@@ -53,7 +50,7 @@ a:active {color:yellow; background-color:transparent; text-decoration:underline;
 <option value="groups ">Usenet</option>
 </select></div>
 <br><br><br>
-<div id="modalCfg" class="modal"><div class="modal-content"><div class="modal-body"><span class="close" onClick="closeModal()">❎</span>
+<div id="mdCfg" class="modal"><div class="modal-content"><div class="modal-body"><span class="close" onClick="closeModal()">❎</span>
 <h3>⚙️ Configuration</h3>
 Open search in new window: <input type="checkbox" name="Chk1" value="yes" CHECKED size="34" class="button2" style=""> <br>
 Web search: <input type="radio" id="web1" name="web" value="goo"><label for="web1">Google </label> <input type="radio" id="web2" name="web" value="ddg" checked><label for="web2">DuckDuckGo </label> <input type="radio" id="web3" name="web" value="quant"><label for="web3">Quant </label> &nbsp; &nbsp; &nbsp; &nbsp; <br>
@@ -61,21 +58,20 @@ Web search: <input type="radio" id="web1" name="web" value="goo"><label for="web
 News search: <input type="radio" id="nws1" name="nws" value="goo" checked><label for="nws1">Google </label> <input type="radio" id="nws2" name="nws" value="ddg"><label for="nws2">DuckDuckGo </label> <input type="radio" id="nws3" name="nws" value="quant"><label for="nws3">Quant </label> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <br>
 Image search: <input type="radio" id="img1" name="img" value="goo" checked><label for="img1">Google </label> <input type="radio" id="img2" name="img" value="ddg"><label for="img2">DuckDuckGo </label> <input type="radio" id="img3" name="img" value="quant"><label for="img3">Quant </label> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <br>
 Shopping search: <input type="radio" id="shp1" name="shp" value="goo" checked><label for="shp1">Google </label> <input type="radio" id="shp2" name="shp" value="ddg"><label for="shp2">DuckDuckGo </label> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <br>
-Weather location: <input type="text" id="cityInput" value="Halifax"><br><br>
+Weather location: <input type="text" name="city" value=""> <input type="button" value="Set City" align="texttop" onClick="SetCity(document.input_box.city.value)"><br><br>
 </div></div></div>
-<div id="modalMail" class="modal"><div class="modal-content"><div class="modal-body"><span class="close" onClick="closeModal()">❎</span>
+<div id="mdMail" class="modal"><div class="modal-content"><div class="modal-body"><span class="close" onClick="closeModal()">❎</span>
 <h3>📧 Email / Social ☎️</h3><br>
 <a href="https://mail.google.com" target="_blank"><img src="i\gmail.png" alt="Gmail"></a> <a href="http://mail.yahoo.com" target="_blank"><img src="i\ymail.png" alt="Y!mail"></a> <a href="http://hotmail.com" target="_blank"><img src="i\outlook.png" alt="HoTMaiL"></a> <a href="http://mail.yandex.com" target="_blank"><img src="i\yandex.png" alt="Yandex"></a> <a href="http://protonmail.com" target="_blank"><img src="i\proton.png" alt="ProtonMail"></a><br><hr>
 <a href="http://google.com/calendar" target="_blank"><img src="i\gcal.png" alt="GooCal"></a> <a href="http://contacts.google.com" target="_blank"><img src="i\gcontacts.png" alt="Contacts"></a>
 <a href="http://photos.google.com" target="_blank"><img src="i\gphotos.png" alt="Photos"></a> <a href="http://keep.google.com" target="_blank"><img src="i\keep.png" alt="Keep"></a>
 <a href="https://messages.google.com/web" target="_blank"><img src="i\sms.png" alt="SMS"></a><br><hr>
-<a href="https://bsky.app" target="_blank"><img src="i\bsky.png" alt="BlueSky"></a> <!--a href="https://gandersocial.ca" target="_blank"><img src="i\gander.png" alt="Gander"></a>
-<a href="http://mastodon.social" target="_blank"><img src="i\mastodon.png" alt="Mastodon"></a--> <a href="http://slack.com" target="_blank"><img src="i\slack.png" alt="Slack"></a>
+<a href="https://bsky.app" target="_blank"><img src="i\bsky.png" alt="BlueSky"></a> <!--a href="https://gandersocial.ca" target="_blank"><img src="i\gander.png" alt="Gander"></a-->
+<a href="http://slack.com" target="_blank"><img src="i\slack.png" alt="Slack"></a>
 <a href="https://discord.com" target="_blank"><img src="i\discord.png" alt="Discord"></a> <a href="https://www.reddit.com" target="_blank"><img src="i\reddit.png" alt="Reddit"></a>
 <a href="http://linkedin.com" target="_blank"><img src="i\in.png" alt="LinedIn"></a>
 </div></div></div>
-
-<div id="modalEnt" class="modal"><div class="modal-content"><div class="modal-body"><span class="close" onClick="closeModal()">❎</span>
+<div id="mdEnt" class="modal"><div class="modal-content"><div class="modal-body"><span class="close" onClick="closeModal()">❎</span>
 <h3>📽️ Media / Games 🎮</h3><br>
 <a href="media.html" target="_blank"><img src="i\film.png" alt="Media"></a> <a href="http://showrss.info" target="_blank"><img src="i\srss.png" alt="ShowRSS"></a> 
 <a href="http://hoopladigital.com" target="_blank"><img src="i\hoopla.png" alt="Hoopla"></a> <a href="https://app.plex.tv/desktop" target="_blank"><img src="i\plex.png" alt="Plex"></a>
@@ -84,13 +80,12 @@ Weather location: <input type="text" id="cityInput" value="Halifax"><br><br>
 <a href="https://next.matchplay.events/dashboard" target="_blank"><img src="i\match.png" alt="MatchPlay"></a>
 <a href="https://www.nytimes.com/games/" target="_blank"><img src="i\nytgames.png" alt="NYTGames"></a> <a href="https://bracket.city" target="_blank"><img src="i\bracketcity.png" alt="BracketCity"></a>
 <a href="https://wafflegame.net" target="_blank"><img src="i\waffle.png" alt="Waffle"></a> <a href="https://timeguessr.com" target="_blank"><img src="i\timeguessr.png" alt="TimeGuessr"></a>
-<a href="https://playpocketpuzzles.com" target="_blank"><img src="i\pockpuz.png" alt="PocketPuzzles"></a> <a href="https://www.puzzmo.com" target="_blank"><img src="i\puzzmo.png" alt="Puzzmo"></a>
-<a href="https://csklimowski.itch.io/six-sided-streets" target="_blank"><img src="i\6sidedst.png" alt="6SidedStr"></a>
+<a href="https://playpocketpuzzles.com" target="_blank"><img src="i\pockpuz.png" alt="PocketPuzzles"></a> <a href="https://csklimowski.itch.io/six-sided-streets" target="_blank"><img src="i\6sidedst.png" alt="6SidedStr"></a>
+<a href="https://www.puzzmo.com" target="_blank"><img src="i\puzzmo.png" alt="Puzzmo"></a>
 </div></div></div>
-
-<div id="modalInfo" class="modal"><div class="modal-content"><div class="modal-body"><span class="close" onClick="closeModal()">❎</span>
+<div id="mdInf" class="modal"><div class="modal-content"><div class="modal-body"><span class="close" onClick="closeModal()">❎</span>
 <h3>📰 News / Research 📚</h3><br>
-<a href="https://feedly.com/i/latest" target="_blank"><img src="i\greader.png" alt="RSS"></a> <a href="txt.html" target="_blank"><img src="i\txt.png" alt="TxtNews"></a>
+<a href="https://feedly.com/i/latest" target="_blank"><img src="i\greader.png" alt="RSS"></a> <a href="https://bsky.app" target="_blank"><img src="i\bsky.png" alt="BlueSky"></a>
 <a href="http://www.cbc.ca/lite/" target="_blank"><img src="i\cbc.png" alt="CBClite"></a> <a href="https://www.theonion.com" target="_blank"><img src="i\onion.png" alt="Onion"></a>
 <a href="https://www.refdesk.com/" target="_blank"><img src="i\refdesk.png" alt="refdesk"></a>
 <a href="https://www.bbc.com/news/world" target="_blank"><img src="i\bbc.png" alt="BBC"></a> <a href="http://news.google.com" target="_blank"><img src="i\gnews.png" alt="News"></a><br><hr>
@@ -98,9 +93,8 @@ Weather location: <input type="text" id="cityInput" value="Halifax"><br><br>
 <a href="https://annas-archive.org" target="_blank"><img src="i\annas.png" alt="AnnasArchive"></a> <a href="http://libgen.is" target="_blank"><img src="i\libgen.png" alt="LibGen"></a>
 <a href="https://www.cygnus-x1.net/links/lcars/blueprints-updates.php" target="_blank"><img src="i\stblue.png" alt="STblue"></a> <a href="https://solidtorrents.to" target="_blank"><img src="i\solidtor.png" alt="solid"></a> 
 <a href="http://wikipedia.org" target="_blank"><img src="i\wik.png" alt="Wikiped"></a>
-   </div></div></div>
-
-<div id="modalTech" class="modal"><div class="modal-content"><div class="modal-body"><span class="close" onClick="closeModal()">❎</span>
+</div></div></div>
+<div id="mdTek" class="modal"><div class="modal-content"><div class="modal-body"><span class="close" onClick="closeModal()">❎</span>
 <h3>💻 Tech 🖱</h3><br>
 <a href="line-card.html" target="_blank"><img src="i\line.png" alt="LineCard"></a> <a href="https://www.digikey.ca" target="_blank"><img src="i\digikey.png" alt="Digikey"></a>
 <a href="https://www.pcbway.com" target="_blank"><img src="i\pcbway.png" alt="PCBway"></a> <a href="http://thingiverse.com" target="_blank"><img src="i\thing.png" alt="Thingiverse"></a>
@@ -109,8 +103,7 @@ Weather location: <input type="text" id="cityInput" value="Halifax"><br><br>
 <a href="https://gregstoll.com/~gregstoll/floattohex/" target="_blank"><img src="i\hex.png" alt="HexFlt"></a> <a href="https://www.epochconverter.com/hex" target="_blank"><img src="i\epoch.png" alt="Epoch"></a>
 <a href="https://fontgenerator.cool" target="_blank"><img src="i\fontgen.png" alt="FontGen"></a> <a href="https://copychar.cc/punctuation/" target="_blank"><img src="i\copychar.png" alt="CopyChar"></a> <a href="https://manytools.org" target="_blank"><img src="i\manytools.png" alt="ManyTools"></a>
 </div></div></div>
-
-<div id="modalProd" class="modal"><div class="modal-content"><div class="modal-body"><span class="close" onClick="closeModal()">❎</span>
+<div id="mdProd" class="modal"><div class="modal-content"><div class="modal-body"><span class="close" onClick="closeModal()">❎</span>
 <h3>📝 Productivity 📊</h3><br>
 <a href="calculator.html" target="_blank"><img src="i\calc.png" alt="Calc"></a> <a href="http://docs.google.com" target="_blank"><img src="i\gdoc.png" alt="Docs"></a>
 <a href="http://sheets.google.com" target="_blank"><img src="i\gsheet.png" alt="Sheets"></a> <a href="http://slides.google.com" target="_blank"><img src="i\gslide.png" alt="Slides"></a>
@@ -120,8 +113,7 @@ Weather location: <input type="text" id="cityInput" value="Halifax"><br><br>
 <a href="https://web.airdroid.com" target="_blank"><img src="i\airdroid.png" alt="AirDroid"></a> <a href="http://dropbox.com" target="_blank"><img src="i\dbox.png" alt="DropBox"></a>
 <a href="https://play.google.com" target="_blank"><img src="i\gplay.png" alt="Gplay"></a> <a href="http://drive.google.com" target="_blank"><img src="i\gdrive.png" alt="Drive"> </a>
 </div></div></div>
-
-<div id="modalFin" class="modal"><div class="modal-content"><div class="modal-body"><span class="close" onClick="closeModal()">❎</span>
+<div id="mdFin" class="modal"><div class="modal-content"><div class="modal-body"><span class="close" onClick="closeModal()">❎</span>
 <h3>💰 Finance / Shopping 🛒</h3><br>
 <a href="http://rbcroyalbank.com/personal.html" target="_blank"><img src="i\rbc.png" alt="RBC"></a> <a href="http://simplii.ca" target="_blank"><img src="i\simplii.png" alt="Simplii"></a>
 <a href="http://pcfinancial.ca/en" target="_blank"><img src="i\pc.png" alt="PC"></a> <a href="http://hometrust.ca" target="_blank"><img src="i\hometrust.png" alt="HomeTrust"></a>
@@ -131,76 +123,79 @@ Weather location: <input type="text" id="cityInput" value="Halifax"><br><br>
 <a href="http://amazon.ca" target="_blank"><img src="i\amazon-ca.png" alt="Amazon.Ca"></a> <a href="https://www.nytimes.com/wirecutter/" target="_blank"><img src="i\wirecutter.png" alt="Wirecutter"></a>
 <a href="http://costco.ca" target="_blank"><img src="i\costco.png" alt="Costco"></a> <a href="https://www.flipp.com" target="_blank"><img src="i\flipp.png" alt="Flyers"></a>
 <a href="https://events.viewbid.ca" target="_blank"><img src="i\viewbid.png" alt="ViewBid"></a> <a href="http://picclick.ca" target="_blank"><img src="i\pic.png" al="PicClick"></a> 
-</div></div></div>   
-</div></form></div></body>
+</div></div></div></div></form></div></body>
 <script type="text/javascript">
 var modal=document.getElementById("myModal");
-const rndSeed='d94893f5d0fa394f6ec042550b4355db';
-const weatherDiv=document.getElementById('weather');
-const cityInput=document.getElementById('cityInput').value;
+const rndSeed='d94893f5d0fa394f6ec042550b4355db', weatherDiv=document.getElementById('weather');
+let cityInput = localStorage.getItem("myCity");
+GetWeather();
+document.getElementById("Othm").innerHTML='X';
+date=new Date(); //theme doodle
+if(date.getMonth()==0 && date.getDate()==1){document.getElementById("Othm").innerHTML='️🎇';}
+else if(date.getMonth()==0 && date.getDate()==13){document.getElementById("Othm").innerHTML='🎂';}
+else if(date.getMonth()==1 && date.getDate()==2){document.getElementById("Othm").innerHTML='🐹';} //ghog
+else if(date.getMonth()==1 && date.getDate()==14){document.getElementById("Othm").innerHTML='❤️';}
+else if(date.getMonth()==2 && date.getDate()==14){document.getElementById("Othm").innerHTML='️🥧';} //pi
+else if(date.getMonth()==2 && date.getDate()>7 && date.getDate()<15 && date.getDay()==0){document.getElementById("Othm").innerHTML='⏰⤸';} //fwd
+else if(date.getMonth()==2 && date.getDate()>18 && date.getDate()<22){document.getElementById("Othm").innerHTML='🌻';} //spr
+else if(date.getMonth()==4 && date.getDate()==4){document.getElementById("Othm").innerHTML='️🚀';}
+else if(date.getMonth()==4 && date.getDate()==5){document.getElementById("Othm").innerHTML='️🌮';}
+else if(date.getMonth()==4 && date.getDate()>17 && date.getDate()<25 && date.getDay()==1){document.getElementById("Othm").innerHTML='👑';}
+else if(date.getMonth()==5 && date.getDate()>19 && date.getDate()<22){document.getElementById("Othm").innerHTML='🌞';} //sum
+else if(date.getMonth()==6 && date.getDate()==1){document.getElementById("Othm").innerHTML='🍁';}
+else if(date.getMonth()==6 && date.getDate()==4){document.getElementById("Othm").innerHTML='🗽';}
+else if(date.getMonth()==6 && date.getDate()==16){document.getElementById("Othm").innerHTML='🎂';}
+else if(date.getMonth()==7 && date.getDate()<8 && date.getDay()==1){document.getElementById("Othm").innerHTML='🌉';} //ntl
+else if(date.getMonth()==8 && date.getDate()==29){document.getElementById("Othm").innerHTML='🎂';}
+else if(date.getMonth()==8 && date.getDate()<8 && date.getDay()==1){document.getElementById("Othm").innerHTML='✊';} //lbr
+else if(date.getMonth()==8 && date.getDate()>21 && date.getDate()<24){document.getElementById("Othm").innerHTML='🍂';} //fall
+else if(date.getMonth()==9 && date.getDate()>7 && date.getDate()<15 && date.getDay()==1){document.getElementById("Othm").innerHTML='🦃';}
+else if(date.getMonth()==9 && date.getDate()==31){document.getElementById("Othm").innerHTML='🎃';}
+else if(date.getMonth()==10 && date.getDate()<8 && date.getDay()==0){document.getElementById("Othm").innerHTML='⤹🕰';} //bk
+else if(date.getMonth()==10 && date.getDate()==11){document.getElementById("Othm").innerHTML='🌸';}
+else if(date.getMonth()==10 && date.getDate()>1 && date.getDate()<9 && getYear()%2 && date.getDay()==2){document.getElementById("Othm").innerHTML='🗳';} //USel
+else if(date.getMonth()==11 && date.getDate()>19 && date.getDate()<22){document.getElementById("Othm").innerHTML='❄️';} //winter
+else if(date.getMonth()==11 && date.getDate()==25){document.getElementById("Othm").innerHTML='⛄';}
+else {document.getElementById("Othm").innerHTML='o';}
+
+window.onclick=function(event){if (event.target==modal){modal.style.display="none";}} //close if user clicks outside modal
+var span=document.getElementsByClassName("close");
+
+function configopen(){modal=document.querySelector("#mdCfg"); modal.style.display="block"; extra.innerHTML='';}
+function mailopen(){modal=document.querySelector("#mdMail"); modal.style.display="block";}
+function entopen(){modal=document.querySelector("#mdEnt"); modal.style.display="block";}
+function infopen(){modal=document.querySelector("#mdInf"); modal.style.display="block";}
+function techopen(){modal=document.querySelector("#mdTek"); modal.style.display="block";}
+function prodopen(){modal=document.querySelector("#mdProd"); modal.style.display="block";}
+function finopen(){modal=document.querySelector("#mdFin"); modal.style.display="block";}
+function closeModal() {modal.style.display="none";}
+function focus(){document.input_box.command.focus();}
+
+function SetCity(arg){
+cityInput = arg; localStorage.setItem("myCity", arg); GetWeather();
+}
+
+function GetWeather(){
 const apiUrl=`https://api.openweathermap.org/data/2.5/weather?q=${cityInput}&appid=${rndSeed}&units=metric`;
 fetch(apiUrl)
 .then(response => response.json())
 .then(data => {
-const{name, main, weather }=data;
-const temperature=Math.round(main.temp*10)/10;
-const description=weather[0].description;
+const{name, main, weather}=data;
+const temperature=Math.round(main.temp*10)/10, description=weather[0].description;
 var wicon="❓"; //use emoji for weather icons
 if(data.weather[0].icon==="01d"){wicon="☀️";}
 if(data.weather[0].icon==="01n"){wicon="️🌙";}
-if(data.weather[0].icon==="02d" || data.weather[0].icon==="02n" ||data.weather[0].icon==="03d" || data.weather[0].icon==="03n"){wicon="⛅️";}
-if(data.weather[0].icon==="04d" || data.weather[0].icon==="04n"){wicon="☁️";}
-if(data.weather[0].icon==="09d" || data.weather[0].icon==="09n"){wicon="️🌦";}
-if(data.weather[0].icon==="10d" || data.weather[0].icon==="10n"){wicon="️🌧";}
-if(data.weather[0].icon==="11d" || data.weather[0].icon==="11n"){wicon="🌩️";}
-if(data.weather[0].icon==="13d" || data.weather[0].icon==="13n"){wicon="❄️";}
-if(data.weather[0].icon==="50d" || data.weather[0].icon==="50n"){wicon="️🌫";}
+if(data.weather[0].icon==="02d"||data.weather[0].icon==="02n"||data.weather[0].icon==="03d"||data.weather[0].icon==="03n"){wicon="⛅️";}
+if(data.weather[0].icon==="04d"||data.weather[0].icon==="04n"){wicon="☁️";}
+if(data.weather[0].icon==="09d"||data.weather[0].icon==="09n"){wicon="️🌦";}
+if(data.weather[0].icon==="10d"||data.weather[0].icon==="10n"){wicon="️🌧";}
+if(data.weather[0].icon==="11d"||data.weather[0].icon==="11n"){wicon="🌩️";}
+if(data.weather[0].icon==="13d"||data.weather[0].icon==="13n"){wicon="❄️";}
+if(data.weather[0].icon==="50d"||data.weather[0].icon==="50n"){wicon="️🌫";}
 const weatherContent=`<b><a href="http://www.theweathernetwork.com" target="_blank" style="font-size:20px; color:black;">${name} &nbsp; ${wicon}</a></b><br>${temperature}°C | ${description}`;
 weatherDiv.innerHTML=weatherContent;})
-.catch(error => {console.error('Error fetching weather data:', error); weatherDiv.innerHTML='<p>Failed to get weather data</p>';});
-
-document.getElementById("Othm").innerHTML='X';
-date=new Date(); //theme doodle emoji
-if(date.getMonth()==0 && date.getDate()==1){document.getElementById("Othm").innerHTML='️🎇';}
-else if(date.getMonth()==0 && date.getDate()==13){document.getElementById("Othm").innerHTML='🎂';}
-else if(date.getMonth()==1 && date.getDate()==2){document.getElementById("Othm").innerHTML='🐹';}
-else if(date.getMonth()==1 && date.getDate()==14){document.getElementById("Othm").innerHTML='❤️';}
-else if(date.getMonth()==2 && date.getDate()==14){document.getElementById("Othm").innerHTML='️🥧';}
-else if(date.getMonth()==2 && date.getDate()>7 && date.getDate()<15 && date.getDay()==0){document.getElementById("Othm").innerHTML='⏰⤸';}
-else if(date.getMonth()==2 && date.getDate()>18 && date.getDate()>22){document.getElementById("Othm").innerHTML='🌻';}
-else if(date.getMonth()==4 && date.getDate()==4){document.getElementById("Othm").innerHTML='️🚀';}
-else if(date.getMonth()==4 && date.getDate()==5){document.getElementById("Othm").innerHTML='️🌮';}
-else if(date.getMonth()==4 && date.getDate()>17 && date.getDate()<25 && date.getDay()==1){document.getElementById("Othm").innerHTML='👑';}
-else if(date.getMonth()==5 && date.getDate()>19 && date.getDate()>22){document.getElementById("Othm").innerHTML='🌞';}
-else if(date.getMonth()==6 && date.getDate()==1){document.getElementById("Othm").innerHTML='🍁';}
-else if(date.getMonth()==6 && date.getDate()==4){document.getElementById("Othm").innerHTML='💩';}
-else if(date.getMonth()==6 && date.getDate()==16){document.getElementById("Othm").innerHTML='🎂';}
-else if(date.getMonth()==7 && date.getDate()<8 && date.getDay()==1){document.getElementById("Othm").innerHTML='🌉';}
-else if(date.getMonth()==8 && date.getDate()==29){document.getElementById("Othm").innerHTML='🎂';}
-else if(date.getMonth()==8 && date.getDate()<8 && date.getDay()==1){document.getElementById("Othm").innerHTML='✊';}
-else if(date.getMonth()==8 && date.getDate()>21 && date.getDate()>24){document.getElementById("Othm").innerHTML='🍂';}
-else if(date.getMonth()==9 && date.getDate()>7 && date.getDate()<15 && date.getDay()==1){document.getElementById("Othm").innerHTML='🦃';}
-else if(date.getMonth()==9 && date.getDate()==31){document.getElementById("Othm").innerHTML='🎃';}
-else if(date.getMonth()==10 && date.getDate()<8 && date.getDay()==0){document.getElementById("Othm").innerHTML='⤹🕰';}
-else if(date.getMonth()==10 && date.getDate()==11){document.getElementById("Othm").innerHTML='🌸';}
-else if(date.getMonth()==10 && date.getDate()>1 && date.getDate()<9 && getYear()%2 && date.getDay()==2){document.getElementById("Othm").innerHTML='🗳';}
-else if(date.getMonth()==11 && date.getDate()>19 && date.getDate()>22){document.getElementById("Othm").innerHTML='❄️';}
-else if(date.getMonth()==11 && date.getDate()==25){document.getElementById("Othm").innerHTML='⛄';}
-else {document.getElementById("Othm").innerHTML='o';}
-
-window.onclick=function(event){if (event.target==modal){modal.style.display="none";}} // if user clicks outside modal, close it
-var span=document.getElementsByClassName("close");
-
-function configopen(){modal=document.querySelector("#modalCfg"); modal.style.display="block"; extra.innerHTML='';}
-function mailopen(){modal=document.querySelector("#modalMail"); modal.style.display="block";}
-function entopen(){modal=document.querySelector("#modalEnt"); modal.style.display="block";}
-function infopen(){modal=document.querySelector("#modalInfo"); modal.style.display="block";}
-function techopen(){modal=document.querySelector("#modalTech"); modal.style.display="block";}
-function prodopen(){modal=document.querySelector("#modalProd"); modal.style.display="block";}
-function finopen(){modal=document.querySelector("#modalFin"); modal.style.display="block";}
-function closeModal() {modal.style.display="none";}
-function focus(){document.input_box.command.focus();}
-
+.catch(error => {console.error('Err:', error); weatherDiv.innerHTML='<p>Failed to get weather data</p>';});
+}
 function Smagic(arg) {var srchURL='';
 if(document.input_box.searchType.value==="null"){return;}
 else if(document.input_box.searchType.value==="pclk"){srchURL='https://picclick.ca/?q='+arg;}
@@ -219,7 +214,7 @@ else {return window.open(srchURL);}
 function Sshop(arg) {var srchURL='';
 if(document.input_box.shp.value==="ddg"){srchURL='https://duckduckgo.com/?q='+arg+'&ia=shopping&iax=shopping';}
 else if(document.input_box.shp.value==="goo"){srchURL='https://www.google.com/search?q='+arg+'&udm=28';}
-//else {srchURL='https://www.qwant.com/?t=news&q= '+arg;}
+//else {srchURL='https://'+arg;}
 if (document.input_box.Chk1.checked==false) {window.location=srchURL; return true;} 
 else {return window.open(srchURL);}
 }
@@ -244,4 +239,5 @@ else {srchURL='https://www.qwant.com/?t=web&q='+arg;}
 if (document.input_box.Chk1.checked==false) {window.location=srchURL; return true;} 
 else {return window.open(srchURL);}
 }
+//https://metasearx.com/?q=giant%20robot%20comics&categories=it&language=en-CA
 </script></html>

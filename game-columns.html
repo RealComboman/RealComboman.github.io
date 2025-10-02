@@ -1,39 +1,17 @@
-<!DOCTYPE html>
-<html lang="it">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Colmuns</title>
-    <style>
-        body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            background-color: #222;
-            margin: 0;
-        }
-        canvas {
-            background-color: black;
-            border: 2px solid white;
-        }
-    </style>
-</head>
-<body>
-    <canvas id="thegame"></canvas>
-    <script>
-    
-        // get canvas
+<!DOCTYPE html><html lang="it"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Colmuns</title><link rel="shortcut icon" href="combo.ico">
+<style>
+body {display: flex; justify-content: center; align-items: center;height: 100vh; background-color: #222; margin: 0;}
+canvas { background-color: black; border: 2px solid white;}
+</style></head>
+<body><canvas id="thegame"></canvas>
+<script>
         const canvas = document.getElementById('thegame');
         const context = canvas.getContext('2d');   
-        
-        // global constants
         const boardRows     = 13;   // board rows
         const boardColumns  = 7;    // board column
         const tileSize      = 32;   // tile size, in pixels 
         const columnHeight  = 3     // column height
         const board         = [];   // game board 
-        
         let dropInterval    = 500;  // drop interval, in milliseconds
         
         // size and scale canvas according to tile and board size

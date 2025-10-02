@@ -1,5 +1,4 @@
-<!DOCTYPE html><html><head>
-<title>Minesweeper</title>
+<!DOCTYPE html><html><head><title>Minesweeper</title><link rel="shortcut icon" href="combo.ico">
 <style>
 body {font-family: Arial, sans-serif; text-align: center;}
 .board {display: inline-block; margin: 20px;}
@@ -8,18 +7,17 @@ body {font-family: Arial, sans-serif; text-align: center;}
 .revealmid { background-color: #ccc; color: green;}
 .revealbig { background-color: #ccc; color: red;}
 .mine {background-color: #ff3333;}
-</style>
-</head>
+</style></head>
 <body>
-    <h1>Minesweeper</h1>
-    <div id="gameBoard"></div>
-	<br><div id="score"></div>
-	<br><select id="board_size"> 
-	<option value="sm">Small (8x8)</option>
-	<option value="md">Medium (10x10)</option>
-	<option value="lr">Large (15x15)</option>
-	</select><br><br>
-	<input type="button" value="New Game" onclick="newGame()">
+<h1>Minesweeper</h1>
+<div id="gameBoard"></div>
+<br><div id="score"></div>
+<br><select id="board_size"> 
+<option value="sm">Small (8x8)</option>
+<option value="md">Medium (10x10)</option>
+<option value="lr">Large (15x15)</option>
+</select><br><br>
+<input type="button" value="New Game" onclick="newGame()">
 </body>
 <script>
 var numRows = 8;

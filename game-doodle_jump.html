@@ -1,27 +1,10 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <title>Basic Doodle Jump HTML Game</title>
-  <meta charset="UTF-8">
-  <style>
-  html, body {
-    height: 100%;
-    margin: 0;
-  }
-
-  body {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  canvas {
-    border: 1px solid black;
-  }
-  </style>
-</head>
-<body>
-<canvas width="375" height="667" id="game"></canvas>
+<!DOCTYPE html><html><head><title>Basic Doodle Jump HTML Game</title><link rel="shortcut icon" href="combo.ico"><meta charset="UTF-8">
+<style>
+html, body {height: 100%;margin: 0;}
+body {display: flex; align-items: center; justify-content: center;}
+canvas {border: 1px solid black;}
+</style></head>
+<body><canvas width="375" height="667" id="game"></canvas>
 <script>
 const canvas = document.getElementById('game');
 const context = canvas.getContext('2d');

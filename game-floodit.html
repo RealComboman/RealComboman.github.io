@@ -1,6 +1,5 @@
-<!DOCTYPE html><html><head>
-  <title>Flood-It</title><meta charset="UTF-8">
-  <style>
+<!DOCTYPE html><html><head><title>Flood-It</title><link rel="shortcut icon" href="combo.ico"><meta charset="UTF-8">
+<style>
 .red {background-color: red;}
 .yellow {background-color: gold;}
 .green {background-color: green;}
@@ -27,55 +26,50 @@
     .button { width: 6vmin; height: 6vmin; border-radius: 3vmin; }
     .piece { width: 6.75vmin; height: 6.75vmin; }
 }  
-  </style>
-</head>
-<body>
-<div id="game-board">
-  <div id="colour-buttons">
-    <table id="button-table">
-      <tr>
-        <td class="button blue" onclick="choose('blue')"></td>
-        <td class="button red" onclick="choose('red')"></td>
-        <td class="button green" onclick="choose('green')"></td>
-      </tr>
-      <tr>
-        <td class="button yellow" onclick="choose('yellow')"></td>
-        <td class="button pink" onclick="choose('pink')"></td>
-        <td class="button purple" onclick="choose('purple')"></td>
-      </tr>
-    </table>
-  </div> <!-- colour-buttons -->
-  <div id="flood-controls">
-    <table>
-      <tr valign="top">
-        <td id="turn-counter" valign="top">
-          Turn: <span id="moves"></span>/<span id="max-moves"></span></td>
-      </tr>
-      <tr valign="top">
-        <td valign="top">
-          <input type="submit" value="New game" onclick="newGame()"></td>
-      </tr>
-      <tr valign="top">
-        <td valign="top">
-          <input type="submit" value="Help" onclick="help()">
-          <input type="submit" value="Undo" onclick="undo()">
-        </td>
-      </tr>
-      <tr valign="top">
-        <td valign="top">
-          <input type="submit" value="Start again" onclick="startAgain()">
-        </td>
-      </tr>
-      <tr valign="top">
-        <td valign="top">
-          <input type="submit" value="Solve" onclick="solve()">
-          <input type="submit" value="Save" onclick="save()">
-        </td>
-      </tr>
-    </table>
-  </div>  <!-- flood-controls -->
-  <div id="status">
-  </div> <!-- status -->
+</style></head>
+<body><div id="game-board">
+<div id="colour-buttons">
+<table id="button-table">
+ <tr>
+   <td class="button blue" onclick="choose('blue')"></td>
+   <td class="button red" onclick="choose('red')"></td>
+   <td class="button green" onclick="choose('green')"></td>
+ </tr>
+ <tr>
+   <td class="button yellow" onclick="choose('yellow')"></td>
+   <td class="button pink" onclick="choose('pink')"></td>
+   <td class="button purple" onclick="choose('purple')"></td>
+ </tr>
+</table></div> <!-- colour-buttons -->
+<div id="flood-controls">
+  <table>
+    <tr valign="top">
+      <td id="turn-counter" valign="top">
+        Turn: <span id="moves"></span>/<span id="max-moves"></span></td>
+    </tr>
+    <tr valign="top">
+      <td valign="top">
+        <input type="submit" value="New game" onclick="newGame()"></td>
+    </tr>
+    <tr valign="top">
+      <td valign="top">
+        <input type="submit" value="Help" onclick="help()">
+        <input type="submit" value="Undo" onclick="undo()">
+      </td>
+    </tr>
+    <tr valign="top">
+      <td valign="top">
+        <input type="submit" value="Start again" onclick="startAgain()">
+      </td>
+    </tr>
+    <tr valign="top">
+      <td valign="top">
+        <input type="submit" value="Solve" onclick="solve()">
+        <input type="submit" value="Save" onclick="save()">
+      </td>
+    </tr>
+  </table></div>  <!-- flood-controls -->
+<div id="status"></div> <!-- status -->
   <table id="game-table">
     <tbody id="game-table-tbody">
     </tbody>

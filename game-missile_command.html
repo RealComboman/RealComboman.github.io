@@ -1,29 +1,18 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <title>Basic Missile Command HTML Game</title>
-  <meta charset="UTF-8">
-  <style>
-  html, body {
-    height: 100%;
-    margin: 0;
-  }
-
-  body {
+<!DOCTYPE html><html><head><title>Basic Missile Command HTML Game</title><link rel="shortcut icon" href="combo.ico"><meta charset="UTF-8">
+<style>
+html, body {height: 100%; margin: 0;}
+body {
     background: black;
     display: flex;
     align-items: center;
     justify-content: center;
-  }
-
-  canvas {
+}
+canvas {
     cursor: crosshair;
     border: 1px solid white;
-  }
-  </style>
-</head>
-<body>
-<canvas width="800" height="550" id="game"></canvas>
+}
+</style></head>
+<body><canvas width="800" height="550" id="game"></canvas>
 <script>
 const canvas = document.getElementById('game');
 const context = canvas.getContext('2d');
@@ -33,10 +22,8 @@ const cityHeight = 25;  // how tall a city rect is
 const cityY = groundY - cityHeight;  // y position of the city
 const siloY = groundY - 30;  // y position of the top of the silo
 const missileSize = 4;  // the radius/size of a missile
-
 const missileSpeed = 1;  // how fast a missile moves
 const counterMissileSpeed = 15;  // how fast a counter-missile moves
-
 // information about each missile
 let missiles = [];
 let counterMissiles = [];

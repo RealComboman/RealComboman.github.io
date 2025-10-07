@@ -57,7 +57,7 @@ const SHIP_TURN_SPEED = 0.1;
 const BASE_SHIP_THRUST = 0.1;
 const FRICTION = 0.99;
 const BULLET_SPEED = 5;
-const BULLET_LIFETIME = 60;
+const BULLET_LIFETIME = 70;
 const ASTEROID_SPEED = 1;
 const ASTEROID_SIZE_LARGE = 40;
 const ASTEROID_SIZE_MEDIUM = 20;
@@ -358,12 +358,7 @@ class Bullet {
   draw() {
     // Use radial gradient for hotter core
     const grad = ctx.createRadialGradient(
-      this.x,
-      this.y,
-      0,
-      this.x,
-      this.y,
-      this.radius
+      this.x, this.y, 0, this.x, this.y, this.radius
     );
     grad.addColorStop(0, 'rgba(255, 255, 255, 1)'); // White hot center
     grad.addColorStop(0.5, 'rgba(255, 255, 0, 1)'); // Yellow mid
@@ -375,11 +370,11 @@ class Bullet {
     ctx.fill();
 
     // Optional: Add a subtle glow effect (can impact performance)
-    // ctx.shadowColor = '#ffff00';
-    // ctx.shadowBlur = 6;
-    // ctx.fill();
-    // ctx.shadowColor = 'transparent';
-    // ctx.shadowBlur = 0;
+    ctx.shadowColor = '#ffff00';
+    ctx.shadowBlur = 6;
+    ctx.fill();
+    ctx.shadowColor = 'transparent';
+    ctx.shadowBlur = 0;
   }
 }
 
@@ -442,20 +437,17 @@ class Asteroid {
     grad.addColorStop(0, '#A0A0A0'); // Lighter grey highlight
     grad.addColorStop(0.7, '#707070'); // Mid grey
     grad.addColorStop(1, '#404040'); // Darker grey shadow
-
     ctx.beginPath();
     ctx.moveTo(this.vertices[0].x, this.vertices[0].y);
     for (let i = 1; i < this.vertices.length; i++) {
       ctx.lineTo(this.vertices[i].x, this.vertices[i].y);
     }
     ctx.closePath();
-
     ctx.fillStyle = grad; // Fill with gradient
     ctx.strokeStyle = '#303030'; // Darker outline
     ctx.lineWidth = 1.5;
     ctx.fill(); // Fill first
     ctx.stroke(); // Then draw outline
-
     ctx.restore();
   }
 }
@@ -524,9 +516,9 @@ class PowerUp {
     ctx.fillStyle = grad;
     ctx.fill();
     // Optional subtle outline
-    // ctx.strokeStyle = `rgba(${darkColor}, 0.9)`;
-    // ctx.lineWidth = 1;
-    // ctx.stroke();
+    ctx.strokeStyle = `rgba(${darkColor}, 0.9)`;
+    ctx.lineWidth = 1;
+    ctx.stroke();
 
     // Draw letter inside
     ctx.fillStyle = 'white';

@@ -326,6 +326,17 @@ function drawNext(){
       }
     }
 }
+
+function swapTet(){
+	let tempTet = tetromino;
+	//let tempRow = tetromino.row; 
+	//let tempCol = tetromin.col;
+	tetromino = nextTetromino;
+	tetromino.row = tempTet.row; 
+	tetromino.col = tempTet.col;
+	nextTetromino = tempTet;
+}
+
 // listen to keyboard events to move the active tetromino
 document.addEventListener('keydown', function(e) {
   if (gameOver) return;
@@ -335,6 +346,8 @@ document.addEventListener('keydown', function(e) {
   if (e.which === 38) {rot();}
   // down arrow key (drop)
   if(e.which === 40) {down();}
+  // Z key (swap)
+  if(e.which === 90) {swapTet();}
 });
 
 // start the game

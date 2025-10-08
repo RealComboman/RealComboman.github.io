@@ -6,7 +6,7 @@ h2 {font-size: 30px;}
 body {font-family:'Arial',Helvetica,sans-serif; font-size:16px;}
 a:link {color:red; text-decoration:none;}
 a:visited {color:red; background-color:transparent; text-decoration:none;}
-a:hover{color:red; background-color:transparent; text-decoration:none;}
+a:hover{color:red; background-color:transparent; text-decoration:underline;}
 a:active {color:yellow; background-color:transparent; text-decoration:underline;}
 .hide {display: none;}  /* .tt:hover + .hide {display:block; color:red;} */
 .modal{
@@ -194,20 +194,19 @@ fetch("https://api.thenewsapi.com/v1/news/top?api_token=dZaXaOu3iHCayAZKwcspB8U3
 .then(response => response.json())
 .then(data1 => {
 const{data}=data1;
-const newsContent=`<b><a href="${data[0].url}" style="color:black;">${data[0].title}</a> [${data[0].source}]<br><br>
-<a href="${data[1].url}"  style="color:black;">${data[1].title}</a> [${data[1].source}]<br><br>
-<a href="${data[2].url}"  style="color:black;">${data[2].title}</a> [${data[2].source}]</b><br>`;
+const newsContent=`<a href="${data[0].url}" style="color:black;">${data[0].title}</a> <i> — ${data[0].source}</i><br>
+<a href="${data[1].url}"  style="color:black;">${data[1].title}</a> <i> — ${data[1].source}</i><br>
+<a href="${data[2].url}"  style="color:black;">${data[2].title}</a> <i> — ${data[2].source}</i><br>`;
 newsDiv.innerHTML=newsContent;})
 .catch(error => {console.error('Err:', error); newsDiv.innerHTML='<p>Failed to get news data</p>';});
 fetch("https://api.thenewsapi.com/v1/news/top?api_token=dZaXaOu3iHCayAZKwcspB8U3cvpsKhz0c3b4fXZt&locale=ca,us&limit=3&language=en&categories=science&exclude_domains=foxnews.com", requestOptions)
 .then(response => response.json())
 .then(data1 => {
 const{data}=data1;
-const sciContent=`<b><a href="${data[0].url}" style="color:black;">${data[0].title}</a> [${data[0].source}]<br><br>
-<a href="${data[1].url}"  style="color:black;">${data[1].title}</a> [${data[1].source}]<br><br>
-<a href="${data[2].url}"  style="color:black;">${data[2].title}</a> [${data[2].source}]</b><br>`;
+const sciContent=`<a href="${data[0].url}" style="color:black;">${data[0].title}</a> <i> — ${data[0].source}</i><br>
+<a href="${data[1].url}"  style="color:black;">${data[1].title}</a> <i> — ${data[1].source}</i><br>
+<a href="${data[2].url}"  style="color:black;">${data[2].title}</a> <i> — ${data[2].source}</i><br>`;
 sciDiv.innerHTML=sciContent;})
-.catch(error => {console.error('Err:', error); sciDiv.innerHTML='<p>Failed to get news data</p>';});
 }
 function Smagic(arg) {var srchURL='';
 if(document.input_box.searchType.value==="null"){return;}

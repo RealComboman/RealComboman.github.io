@@ -45,7 +45,7 @@ background-color: rgb(0,0,0); background-color:rgba(0,0,0,0.4);
 <option value="y ">Yahoo!</option>
 <option value="walf ">Wolfram</option>
 <option value="groups ">Usenet</option>
-</select></div><br><br><br>
+</select></div><br><br><br><u>Recent News</u></u><div id="news"></div><br><u>Science News</u></u><div id="sci"></div>
 <div id="mdCfg" class="modal"><div class="modal-content"><div class="modal-body"><span class="close" onClick="closeModal()">❎</span>
 <h3>⚙️ Configuration 🛠</h3>
 Open search in new window: <input type="checkbox" name="Chk1" value="yes" CHECKED size="34" class="button2" style=""> <br>
@@ -122,9 +122,9 @@ Weather location: <input type="text" name="city" value=""> <input type="button" 
 </div></div></div></div></form></div></body>
 <script type="text/javascript">
 var modal=document.getElementById("myModal");
-const rndSeed='d94893f5d0fa394f6ec042550b4355db', weatherDiv=document.getElementById('weather');
+const rndSeed='d94893f5d0fa394f6ec042550b4355db', weatherDiv=document.getElementById('weather'); newsDiv=document.getElementById('news'); sciDiv=document.getElementById('sci');
 let cityInput = localStorage.getItem("myCity"); //document.getElementById('city').value = cityInput; 
-GetWeather();
+GetWeather(); GetNews();
 document.getElementById("Othm").innerHTML='X'; date=new Date(); //theme doodle
 if(date.getMonth()==0 && date.getDate()==1){document.getElementById("Othm").innerHTML='️🎇';}
 else if(date.getMonth()==0 && date.getDate()==13){document.getElementById("Othm").innerHTML='🎂';}
@@ -184,9 +184,30 @@ if(data.weather[0].icon==="10d"||data.weather[0].icon==="10n"){wicon="️🌧";}
 if(data.weather[0].icon==="11d"||data.weather[0].icon==="11n"){wicon="🌩️";}
 if(data.weather[0].icon==="13d"||data.weather[0].icon==="13n"){wicon="❄️";}
 if(data.weather[0].icon==="50d"||data.weather[0].icon==="50n"){wicon="️🌫";}
-const weatherContent=`<b><a href="http://www.theweathernetwork.com" target="_blank" style="font-size:20px; color:black;">${name} &nbsp; ${wicon}</a></b><br>${temperature}°C<br>${description}`;
+const weatherContent=`<b><a href="http://www.theweathernetwork.com" target="_blank" style="font-size:20px; color:black;">${name} &nbsp; ${wicon}</a></b><br>${temperature}°C<br>${description}</b>`;
 weatherDiv.innerHTML=weatherContent;})
 .catch(error => {console.error('Err:', error); weatherDiv.innerHTML='<p>Failed to get weather data</p>';});
+}
+function GetNews(){
+var requestOptions = {method: 'GET'};
+fetch("https://api.thenewsapi.com/v1/news/top?api_token=dZaXaOu3iHCayAZKwcspB8U3cvpsKhz0c3b4fXZt&locale=ca,us&limit=3&language=en&categories=general&exclude_domains=foxnews.com", requestOptions)
+.then(response => response.json())
+.then(data1 => {
+const{data}=data1;
+const newsContent=`<b><a href="${data[0].url}" style="color:black;">${data[0].title}</a> [${data[0].source}]<br><br>
+<a href="${data[1].url}"  style="color:black;">${data[1].title}</a> [${data[1].source}]<br><br>
+<a href="${data[2].url}"  style="color:black;">${data[2].title}</a> [${data[2].source}]</b><br>`;
+newsDiv.innerHTML=newsContent;})
+.catch(error => {console.error('Err:', error); newsDiv.innerHTML='<p>Failed to get news data</p>';});
+fetch("https://api.thenewsapi.com/v1/news/top?api_token=dZaXaOu3iHCayAZKwcspB8U3cvpsKhz0c3b4fXZt&locale=ca,us&limit=3&language=en&categories=science&exclude_domains=foxnews.com", requestOptions)
+.then(response => response.json())
+.then(data1 => {
+const{data}=data1;
+const sciContent=`<b><a href="${data[0].url}" style="color:black;">${data[0].title}</a> [${data[0].source}]<br><br>
+<a href="${data[1].url}"  style="color:black;">${data[1].title}</a> [${data[1].source}]<br><br>
+<a href="${data[2].url}"  style="color:black;">${data[2].title}</a> [${data[2].source}]</b><br>`;
+sciDiv.innerHTML=sciContent;})
+.catch(error => {console.error('Err:', error); sciDiv.innerHTML='<p>Failed to get news data</p>';});
 }
 function Smagic(arg) {var srchURL='';
 if(document.input_box.searchType.value==="null"){return;}

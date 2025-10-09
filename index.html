@@ -54,7 +54,8 @@ Open search in new window: <input type="checkbox" name="Chk1" value="yes" CHECKE
 News search: <input type="radio" id="n1" name="nws" value="goo" checked><label>Google </label> <input type="radio" id="n2" name="nws" value="ddg"><label>DuckDuckGo </label> <input type="radio" id="n3" name="nws" value="quant"><label>Quant </label> <input type="radio" id="n4" name="nws" value="sx"><label>Searx </label> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <br>
 Image search: <input type="radio" id="i1" name="img" value="goo" checked><label>Google </label> <input type="radio" id="i2" name="img" value="ddg"><label>DuckDuckGo </label> <input type="radio" id="i3" name="img" value="quant"><label>Quant </label> <input type="radio" id="i4" name="img" value="sx"><label>Searx </label> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <br>
 Shopping search: <input type="radio" id="s1" name="shp" value="goo" checked><label>Google </label> <input type="radio" id="s2" name="shp" value="ddg"><label>DuckDuckGo </label> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <br>
-Weather location: <input type="text" name="city" value=""> <input type="button" value="Set City" align="texttop" onClick="SetCity(document.input_box.city.value)"><br><br>
+Weather location: <input type="text" name="city" value=""> <input type="button" value="Set City" align="texttop" onClick="SetCity(document.input_box.city.value)"><br>
+News loc (ca/us/gb/0): <input type="text" name="newsloc" value=""> <input type="button" value="Set Country" align="texttop" onClick="SetNews(document.input_box.newsloc.value)"><br><br>
 </div></div></div>
 <div id="mdMail" class="modal"><div class="modal-content"><div class="modal-body"><span class="close" onClick="closeModal()">❎</span>
 <h3>📧 Email / Social ☎️</h3><br>
@@ -124,7 +125,8 @@ Weather location: <input type="text" name="city" value=""> <input type="button" 
 var modal=document.getElementById("myModal");
 const rndSeed='d94893f5d0fa394f6ec042550b4355db', weatherDiv=document.getElementById('weather'); newsDiv=document.getElementById('news'); news2Div=document.getElementById('news2'); sciDiv=document.getElementById('sci');
 let cityInput = localStorage.getItem("myCity"); //document.getElementById('city').value = cityInput; 
-GetWeather(); GetNews();
+let newsInput = localStorage.getItem("myNews");
+GetWeather(); if (newsInput!='0'){GetNews();}
 document.getElementById("Othm").innerHTML='X'; date=new Date(); //theme doodle
 if(date.getMonth()==0 && date.getDate()==1){document.getElementById("Othm").innerHTML='️🎇';}
 else if(date.getMonth()==0 && date.getDate()==13){document.getElementById("Othm").innerHTML='🎂';}
@@ -166,6 +168,7 @@ function finopen(){modal=document.querySelector("#mdFin"); modal.style.display="
 function closeModal() {modal.style.display="none";}
 function focus(){document.input_box.command.focus();}
 function SetCity(arg){cityInput = arg; localStorage.setItem("myCity", arg); GetWeather();}
+function SetNews(arg){newsInput = arg; localStorage.setItem("myNews", arg); GetNews();}
 
 function GetWeather(){
 const apiUrl=`https://api.openweathermap.org/data/2.5/weather?q=${cityInput}&appid=${rndSeed}&units=metric`;
@@ -190,7 +193,7 @@ weatherDiv.innerHTML=weatherContent;})
 }
 function GetNews(){
 var requestOptions = {method: 'GET'};
-fetch("https://api.thenewsapi.com/v1/news/top?api_token=dZaXaOu3iHCayAZKwcspB8U3cvpsKhz0c3b4fXZt&locale=ca&limit=3&language=en&categories=general&exclude_domains=foxnews.com", requestOptions)
+fetch("https://api.thenewsapi.com/v1/news/top?api_token=dZaXaOu3iHCayAZKwcspB8U3cvpsKhz0c3b4fXZt&limit=3&language=en&categories=general&domains=apnews.com", requestOptions)
 .then(response => response.json())
 .then(data1 => {
 const{data}=data1;
@@ -199,7 +202,7 @@ const newsContent=`<u>Recent News</u><br><a href="${data[0].url}" style="color:b
 <a href="${data[2].url}"  style="color:black;">${data[2].title}</a> <i> — ${data[2].source}</i><br>`;
 newsDiv.innerHTML=newsContent;})
 .catch(error => {console.error('Err:', error); newsDiv.innerHTML='<p>Failed to get news data</p>';});
-fetch("https://api.thenewsapi.com/v1/news/top?api_token=dZaXaOu3iHCayAZKwcspB8U3cvpsKhz0c3b4fXZt&limit=3&language=en&categories=general&domains=apnews.com", requestOptions)
+fetch(`https://api.thenewsapi.com/v1/news/top?api_token=dZaXaOu3iHCayAZKwcspB8U3cvpsKhz0c3b4fXZt&locale=${newsInput}&limit=3&language=en&categories=general&exclude_domains=foxnews.com`, requestOptions)
 .then(response => response.json())
 .then(data1 => {
 const{data}=data1;

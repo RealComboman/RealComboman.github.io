@@ -45,7 +45,7 @@ background-color: rgb(0,0,0); background-color:rgba(0,0,0,0.4);
 <option value="y ">Yahoo!</option>
 <option value="walf ">Wolfram</option>
 <option value="groups ">Usenet</option>
-</select></div><br><br><br><div id="news"></div><div id="news2"></div><br><div id="sci"></div>
+</select></div><br><br><br><div id="news"></div><div id="news2"></div><br><div id="sci"></div><br><div id="ent"></div>
 <div id="mdCfg" class="modal"><div class="modal-content"><div class="modal-body"><span class="close" onClick="closeModal()">❎</span>
 <h3>⚙️ Configuration 🛠</h3>
 Open search in new window: <input type="checkbox" name="Chk1" value="yes" CHECKED size="34" class="button2" style=""> <br>
@@ -123,7 +123,7 @@ News loc (ca/us/gb/0): <input type="text" name="newsloc" value=""> <input type="
 </div></div></div></div></form></div></body>
 <script type="text/javascript">
 var modal=document.getElementById("myModal");
-const rndSeed='d94893f5d0fa394f6ec042550b4355db', weatherDiv=document.getElementById('weather'); newsDiv=document.getElementById('news'); news2Div=document.getElementById('news2'); sciDiv=document.getElementById('sci');
+const rndSeed='d94893f5d0fa394f6ec042550b4355db', weatherDiv=document.getElementById('weather'); newsDiv=document.getElementById('news'); news2Div=document.getElementById('news2'); sciDiv=document.getElementById('sci'); entDiv=document.getElementById('ent');
 let cityInput = localStorage.getItem("myCity"); //document.getElementById('city').value = cityInput; 
 let newsInput = localStorage.getItem("myNews");
 GetWeather(); if (newsInput!='0'){GetNews();}
@@ -191,13 +191,13 @@ const weatherContent=`<b><a href="http://www.theweathernetwork.com" target="_bla
 weatherDiv.innerHTML=weatherContent;})
 .catch(error => {console.error('Err:', error); weatherDiv.innerHTML='<p>Failed to get weather data</p>';});
 }
-function GetNews(){
+function GetNews(){ //general,science,sports,business,health,entertainment,tech,politics,food,travel
 var requestOptions = {method: 'GET'};
 fetch("https://api.thenewsapi.com/v1/news/top?api_token=dZaXaOu3iHCayAZKwcspB8U3cvpsKhz0c3b4fXZt&limit=3&language=en&categories=general&domains=apnews.com", requestOptions)
 .then(response => response.json())
 .then(data1 => {
 const{data}=data1;
-const newsContent=`<u>Recent News</u><br><a href="${data[0].url}" style="color:black;">${data[0].title}</a> <i> — ${data[0].source}</i><br>
+const newsContent=`📰<u>Headlines</u><br><a href="${data[0].url}" style="color:black;">${data[0].title}</a> <i> — ${data[0].source}</i><br>
 <a href="${data[1].url}"  style="color:black;">${data[1].title}</a> <i> — ${data[1].source}</i><br>
 <a href="${data[2].url}"  style="color:black;">${data[2].title}</a> <i> — ${data[2].source}</i><br>`;
 newsDiv.innerHTML=newsContent;})
@@ -214,11 +214,19 @@ fetch("https://api.thenewsapi.com/v1/news/top?api_token=dZaXaOu3iHCayAZKwcspB8U3
 .then(response => response.json())
 .then(data1 => {
 const{data}=data1;
-const sciContent=`<u>Science News</u><br><a href="${data[0].url}" style="color:black;">${data[0].title}</a> <i> — ${data[0].source}</i><br>
+const sciContent=`🧪<u>Science News</u><br><a href="${data[0].url}" style="color:black;">${data[0].title}</a> <i> — ${data[0].source}</i><br>
 <a href="${data[1].url}"  style="color:black;">${data[1].title}</a> <i> — ${data[1].source}</i><br>
 <a href="${data[2].url}"  style="color:black;">${data[2].title}</a> <i> — ${data[2].source}</i><br>`;
 sciDiv.innerHTML=sciContent;});
-}
+fetch(
+"https://api.thenewsapi.com/v1/news/top?api_token=dZaXaOu3iHCayAZKwcspB8U3cvpsKhz0c3b4fXZt&locale=ca,us&limit=3&language=en&categories=entertainment", requestOptions)
+.then(response => response.json())
+.then(data1 => {
+const{data}=data1;
+const entContent=`🎬<u>Entertainment News</u><br><a href="${data[0].url}" style="color:black;">${data[0].title}</a> <i> — ${data[0].source}</i><br>
+<a href="${data[1].url}"  style="color:black;">${data[1].title}</a> <i> — ${data[1].source}</i><br>
+<a href="${data[2].url}"  style="color:black;">${data[2].title}</a> <i> — ${data[2].source}</i><br>`;
+entDiv.innerHTML=entContent;});}
 function Smagic(arg) {var srchURL='';
 if(document.input_box.searchType.value==="null"){return;}
 else if(document.input_box.searchType.value==="pclk"){srchURL='https://picclick.ca/?q='+arg;}

@@ -418,20 +418,12 @@ function Lane(index) {
   }
 }
 
-document.querySelector("#retry").addEventListener("click", () => {
-  lanes.forEach(lane => scene.remove( lane.mesh ));
-  initaliseValues();
-  endDOM.style.visibility = 'hidden';
-});
+document.querySelector("#retry").addEventListener("click", () => retry());
 
 document.getElementById('forward').addEventListener("click", () => move('forward'));
-
 document.getElementById('backward').addEventListener("click", () => move('backward'));
-
 document.getElementById('left').addEventListener("click", () => move('left'));
-
 document.getElementById('right').addEventListener("click", () => move('right'));
-
 window.addEventListener("keydown", event => {
   if (event.keyCode == '38') {
     // up arrow
@@ -449,9 +441,20 @@ window.addEventListener("keydown", event => {
     // right arrow
     move('right');
   }
+  else if (event.keyCode == '13') {
+    // enter
+    retry();
+  }
 });
 
+function retry(){
+  lanes.forEach(lane => scene.remove( lane.mesh ));
+  initaliseValues();
+  endDOM.style.visibility = 'hidden';
+}
+
 function move(direction) {
+	if(endDOM.style.visibility == 'visible') return;
   const finalPositions = moves.reduce((position,move) => {
     if(move === 'forward') return {lane: position.lane+1, column: position.column};
     if(move === 'backward') return {lane: position.lane-1, column: position.column};

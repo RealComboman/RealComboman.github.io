@@ -57,7 +57,7 @@ const SHIP_TURN_SPEED = 0.1;
 const BASE_SHIP_THRUST = 0.1;
 const FRICTION = 0.99;
 const BULLET_SPEED = 5;
-const BULLET_LIFETIME = 70;
+const BULLET_LIFETIME = 80;
 const ASTEROID_SPEED = 1;
 const ASTEROID_SIZE_LARGE = 40;
 const ASTEROID_SIZE_MEDIUM = 20;
@@ -75,7 +75,7 @@ const RAPID_FIRE_DELAY = 5;
 const MIN_THRUST_MULTIPLIER = 0.5;
 const MAX_THRUST_MULTIPLIER = 2.0;
 const THRUST_ADJUST_STEP = 0.1;
-const NUM_STARS = 150; // Number of stars for the background
+const NUM_STARS = 150; // stars in background
 
 const PowerUpType = {
   SHIELD: 'shield',
@@ -88,7 +88,7 @@ let ship;
 let bullets = [];
 let asteroids = [];
 let powerUps = [];
-let stars = []; // Array for starfield background
+let stars = []; // Array for background
 let score = 0;
 let lives = 3;
 let keys = {
@@ -109,11 +109,9 @@ let powerUpTimer = 0;
 let thrustMultiplier = 1.0;
 
 // --- Classes ---
-
 class Ship {
   constructor(x, y) {
-    this.x = x;
-    this.y = y;
+    this.x = x; this.y = y;
     this.angle = -Math.PI / 2;
     this.vel = { x: 0, y: 0 };
     this.radius = SHIP_SIZE / 2;
@@ -131,10 +129,8 @@ class Ship {
     this.isThrusting = true;
   }
   update() {
-    this.vel.x *= FRICTION;
-    this.vel.y *= FRICTION;
-    this.x += this.vel.x;
-    this.y += this.vel.y;
+    this.vel.x *= FRICTION; this.vel.y *= FRICTION;
+    this.x += this.vel.x; this.y += this.vel.y;
     // Screen wrapping
     if (this.x < -this.radius) this.x = canvasWidth + this.radius;
     if (this.x > canvasWidth + this.radius) this.x = -this.radius;
@@ -230,17 +226,14 @@ class Ship {
     ctx.lineWidth = 1.5; // Slightly thinner outline
     ctx.fill();
     ctx.stroke();
-
     ctx.restore();
 
     // Draw shield if active
     if (this.shieldActive) {
       const shieldGrad = ctx.createRadialGradient(
-        this.x,
-        this.y,
+        this.x, this.y,
         this.radius,
-        this.x,
-        this.y,
+        this.x, this.y,
         this.radius + 5
       );
       shieldGrad.addColorStop(0, 'rgba(0, 180, 255, 0.1)');
@@ -265,24 +258,21 @@ class Ship {
       const spreadAngle = 0.25;
       bullets.push(
         new Bullet(
-          noseX,
-          noseY,
+          noseX, noseY,
           BULLET_SPEED * Math.cos(this.angle),
           BULLET_SPEED * Math.sin(this.angle)
         )
       );
       bullets.push(
         new Bullet(
-          noseX,
-          noseY,
+          noseX, noseY,
           BULLET_SPEED * Math.cos(this.angle - spreadAngle),
           BULLET_SPEED * Math.sin(this.angle - spreadAngle)
         )
       );
       bullets.push(
         new Bullet(
-          noseX,
-          noseY,
+          noseX, noseY,
           BULLET_SPEED * Math.cos(this.angle + spreadAngle),
           BULLET_SPEED * Math.sin(this.angle + spreadAngle)
         )
@@ -290,8 +280,7 @@ class Ship {
     } else {
       bullets.push(
         new Bullet(
-          noseX,
-          noseY,
+          noseX, noseY,
           BULLET_SPEED * Math.cos(this.angle),
           BULLET_SPEED * Math.sin(this.angle)
         )
@@ -344,15 +333,13 @@ class Ship {
 
 class Bullet {
   constructor(x, y, velX, velY) {
-    this.x = x;
-    this.y = y;
+    this.x = x; this.y = y;
     this.vel = { x: velX, y: velY };
     this.radius = 3;
     this.lifetime = BULLET_LIFETIME;
   }
   update() {
-    this.x += this.vel.x;
-    this.y += this.vel.y;
+    this.x += this.vel.x; this.y += this.vel.y;
     this.lifetime--;
   }
   draw() {
@@ -363,12 +350,10 @@ class Bullet {
     grad.addColorStop(0, 'rgba(255, 255, 255, 1)'); // White hot center
     grad.addColorStop(0.5, 'rgba(255, 255, 0, 1)'); // Yellow mid
     grad.addColorStop(1, 'rgba(255, 200, 0, 0.5)'); // Orange transparent edge
-
     ctx.fillStyle = grad;
     ctx.beginPath();
     ctx.arc(this.x, this.y, this.radius * 1.2, 0, Math.PI * 2); // Slightly larger arc for gradient effect
     ctx.fill();
-
     // Optional: Add a subtle glow effect (can impact performance)
     ctx.shadowColor = '#ffff00';
     ctx.shadowBlur = 6;
@@ -380,8 +365,7 @@ class Bullet {
 
 class Asteroid {
   constructor(x, y, size, velX, velY) {
-    this.x = x;
-    this.y = y;
+    this.x = x; this.y = y;
     this.size = size;
     this.radius = size / 2;
     this.vel = { x: velX, y: velY };
@@ -401,15 +385,13 @@ class Asteroid {
       const angle = (i / numVertices) * Math.PI * 2;
       const radius = this.radius * (0.7 + Math.random() * 0.6); // More variation for rougher look
       vertices.push({
-        x: radius * Math.cos(angle),
-        y: radius * Math.sin(angle),
+        x: radius * Math.cos(angle), y: radius * Math.sin(angle),
       });
     }
     return vertices;
   }
   update() {
-    this.x += this.vel.x;
-    this.y += this.vel.y;
+    this.x += this.vel.x; this.y += this.vel.y;
     this.angle += this.rotationSpeed;
     // Screen wrapping
     if (this.x < -this.radius) this.x = canvasWidth + this.radius;
@@ -421,17 +403,14 @@ class Asteroid {
     ctx.save();
     ctx.translate(this.x, this.y);
     ctx.rotate(this.angle);
-
     // Create radial gradient for rocky texture/shading
     // Offset the gradient center slightly for a non-uniform lighting effect
     const gradX = this.gradientOffset.x;
     const gradY = this.gradientOffset.y;
     const grad = ctx.createRadialGradient(
-      gradX,
-      gradY,
+      gradX, gradY,
       this.radius * 0.1,
-      gradX,
-      gradY,
+      gradX, gradY,
       this.radius * 1.2
     );
     grad.addColorStop(0, '#A0A0A0'); // Lighter grey highlight
@@ -454,8 +433,7 @@ class Asteroid {
 
 class PowerUp {
   constructor(x, y, type) {
-    this.x = x;
-    this.y = y;
+    this.x = x; this.y = y;
     this.type = type;
     this.radius = 8;
     this.lifetime = POWERUP_LIFETIME;
@@ -510,7 +488,6 @@ class PowerUp {
     grad.addColorStop(0, `rgba(${lightColor}, 0.9)`); // Highlight
     grad.addColorStop(0.7, `rgba(${baseColor}, 0.8)`); // Base color
     grad.addColorStop(1, `rgba(${darkColor}, 0.7)`); // Shadow
-
     ctx.beginPath();
     ctx.arc(0, 0, this.radius, 0, Math.PI * 2);
     ctx.fillStyle = grad;
@@ -519,7 +496,6 @@ class PowerUp {
     ctx.strokeStyle = `rgba(${darkColor}, 0.9)`;
     ctx.lineWidth = 1;
     ctx.stroke();
-
     // Draw letter inside
     ctx.fillStyle = 'white';
     ctx.shadowColor = 'black'; // Shadow for better readability
@@ -528,7 +504,6 @@ class PowerUp {
     ctx.textAlign = 'center';
     ctx.textBaseline = 'middle';
     ctx.fillText(symbol, 0, 1);
-
     ctx.restore();
   }
 }
@@ -607,8 +582,7 @@ function createAsteroids(
   for (let i = 0; i < count; i++) {
     let x, y, velX, velY;
     if (sourceAsteroid) {
-      x = sourceAsteroid.x;
-      y = sourceAsteroid.y;
+      x = sourceAsteroid.x; y = sourceAsteroid.y;
       const angle = Math.random() * Math.PI * 2;
       velX = (Math.random() * ASTEROID_SPEED * 1.5 + 0.5) * Math.cos(angle);
       velY = (Math.random() * ASTEROID_SPEED * 1.5 + 0.5) * Math.sin(angle);
@@ -793,11 +767,8 @@ function gameLoop() {
 
   // --- Check Collisions ---
   checkCollisions();
-
-  // --- Draw ---
   // Draw background first
   drawStars();
-
   // Draw game objects
   ship.draw();
   bullets.forEach((bullet) => bullet.draw());
@@ -830,6 +801,8 @@ document.addEventListener('keydown', (e) => {
       buttonToActivate = thrustBtn;
       break;
     case 'Space':
+    case 'ArrowDown':
+    case 'KeyZ':
       keys.space = true;
       buttonToActivate = fireBtn;
       break;
@@ -865,6 +838,8 @@ document.addEventListener('keyup', (e) => {
       buttonToDeactivate = thrustBtn;
       break;
     case 'Space':
+    case 'ArrowDown':
+    case 'KeyZ':
       keys.space = false;
       buttonToDeactivate = fireBtn;
       break;
@@ -929,8 +904,7 @@ restartBtn.addEventListener('click', initGame);
 window.addEventListener('resize', resizeCanvas);
 
 // --- Initial Setup ---
-resizeCanvas(); // Sets initial size and creates stars
-initGame(); // Starts the game
+resizeCanvas();
+initGame();
 </script>
-
 </body></html>

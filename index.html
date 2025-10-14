@@ -197,35 +197,27 @@ fetch("https://api.thenewsapi.com/v1/news/top?api_token=dZaXaOu3iHCayAZKwcspB8U3
 .then(response => response.json())
 .then(data1 => {
 const{data}=data1;
-const newsContent=`📰<u>Headlines</u><br><a href="${data[0].url}" style="color:black;">${data[0].title}</a> <i> — ${data[0].source}</i><br>
-<a href="${data[1].url}"  style="color:black;">${data[1].title}</a> <i> — ${data[1].source}</i><br>
-<a href="${data[2].url}"  style="color:black;">${data[2].title}</a> <i> — ${data[2].source}</i><br>`;
+const newsContent=`📰<u>Headlines</u><br><a href="${data[0].url}" style="color:black;">${data[0].title}</a> <i> — ${data[0].source}</i><br><a href="${data[1].url}"  style="color:black;">${data[1].title}</a> <i> — ${data[1].source}</i><br><a href="${data[2].url}"  style="color:black;">${data[2].title}</a> <i> — ${data[2].source}</i><br>`;
 newsDiv.innerHTML=newsContent;})
 .catch(error => {console.error('Err:', error); newsDiv.innerHTML='<p>Failed to get news data</p>';});
 fetch(`https://api.thenewsapi.com/v1/news/top?api_token=dZaXaOu3iHCayAZKwcspB8U3cvpsKhz0c3b4fXZt&locale=${newsInput}&limit=3&language=en&categories=general&exclude_domains=foxnews.com`, requestOptions)
 .then(response => response.json())
 .then(data1 => {
 const{data}=data1;
-const news2Content=`<a href="${data[0].url}" style="color:black;">${data[0].title}</a> <i> — ${data[0].source}</i><br>
-<a href="${data[1].url}"  style="color:black;">${data[1].title}</a> <i> — ${data[1].source}</i><br>
-<a href="${data[2].url}"  style="color:black;">${data[2].title}</a> <i> — ${data[2].source}</i><br>`;
+const news2Content=`<a href="${data[0].url}" style="color:black;">${data[0].title}</a> <i> — ${data[0].source}</i><br><a href="${data[1].url}"  style="color:black;">${data[1].title}</a> <i> — ${data[1].source}</i><br><a href="${data[2].url}"  style="color:black;">${data[2].title}</a> <i> — ${data[2].source}</i><br>`;
 news2Div.innerHTML=news2Content;});
 fetch("https://api.thenewsapi.com/v1/news/top?api_token=dZaXaOu3iHCayAZKwcspB8U3cvpsKhz0c3b4fXZt&locale=ca,us&limit=3&language=en&categories=science", requestOptions)
 .then(response => response.json())
 .then(data1 => {
 const{data}=data1;
-const sciContent=`🧪<u>Science News</u><br><a href="${data[0].url}" style="color:black;">${data[0].title}</a> <i> — ${data[0].source}</i><br>
-<a href="${data[1].url}"  style="color:black;">${data[1].title}</a> <i> — ${data[1].source}</i><br>
-<a href="${data[2].url}"  style="color:black;">${data[2].title}</a> <i> — ${data[2].source}</i><br>`;
+const sciContent=`🧪<u>Science News</u><br><a href="${data[0].url}" style="color:black;">${data[0].title}</a> <i> — ${data[0].source}</i><br><a href="${data[1].url}"  style="color:black;">${data[1].title}</a> <i> — ${data[1].source}</i><br><a href="${data[2].url}"  style="color:black;">${data[2].title}</a> <i> — ${data[2].source}</i><br>`;
 sciDiv.innerHTML=sciContent;});
 fetch(
 "https://api.thenewsapi.com/v1/news/top?api_token=dZaXaOu3iHCayAZKwcspB8U3cvpsKhz0c3b4fXZt&locale=ca,us&limit=3&language=en&categories=entertainment", requestOptions)
 .then(response => response.json())
 .then(data1 => {
 const{data}=data1;
-const entContent=`🎬<u>Entertainment News</u><br><a href="${data[0].url}" style="color:black;">${data[0].title}</a> <i> — ${data[0].source}</i><br>
-<a href="${data[1].url}"  style="color:black;">${data[1].title}</a> <i> — ${data[1].source}</i><br>
-<a href="${data[2].url}"  style="color:black;">${data[2].title}</a> <i> — ${data[2].source}</i><br>`;
+const entContent=`🎬<u>Entertainment News</u><br><a href="${data[0].url}" style="color:black;">${data[0].title}</a> <i> — ${data[0].source}</i><br><a href="${data[1].url}"  style="color:black;">${data[1].title}</a> <i> — ${data[1].source}</i><br><a href="${data[2].url}"  style="color:black;">${data[2].title}</a> <i> — ${data[2].source}</i><br>`;
 entDiv.innerHTML=entContent;});}
 function Smagic(arg) {var srchURL='';
 if(document.input_box.searchType.value==="null"){return;}

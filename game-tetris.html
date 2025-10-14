@@ -18,7 +18,6 @@ canvas { border: 1px solid white; }
 </div>
 <div id="scores">Next Piece<br>
 <div id="nextpiece"><canvas width="170" height="140" id="next"></canvas></div>
-<div id="scores">
 Amanda's Tetris<br>
 Level:  <span id="levelDsp">0</span><br>
 Score:  <span id="scoreDsp">0</span><br>
@@ -183,31 +182,23 @@ const tetrominoSequence = [];
 // keep track of what is in every cell of the game using a 2d array
 // tetris playfield is 10x20, with a few rows offscreen
 const playfield = [];
-
 // populate the empty state
 for (let row = -2; row < 20; row++) {
   playfield[row] = [];
-
   for (let col = 0; col < 10; col++) {
     playfield[row][col] = 0;
   }
 }
-
 const nextfield = [];
-
 // populate the empty state
 for (let row = 0; row < 6; row++) {
   nextfield[row] = [];
-
   for (let col = 0; col < 6; col++) {
     nextfield[row][col] = 0;
   }
 }
 
-
-
-// how to draw each tetromino
-// @see https://tetris.fandom.com/wiki/SRS
+// how to draw each tetromino https://tetris.fandom.com/wiki/SRS
 const tetrominos = {
   'I': [
     [0,0,0,0],
@@ -261,7 +252,6 @@ function loop() {
   let highScore = localStorage.getItem("myHighScore");
   scoreDsp.innerHTML = ""+score;
   levelDsp.innerHTML = ""+level;
-  //rowDsp.innerHTML = ""+tetromino.row;
   if(score>highScore) {highScore = score; localStorage.setItem("myHighScore", highScore);}
   highScoreDsp.innerHTML = ""+highScore;
   context.clearRect(0,0,canvas.width,canvas.height);
@@ -271,8 +261,7 @@ function loop() {
       if (playfield[row][col]) {
         const name = playfield[row][col];
         context.fillStyle = colors[name];
-        // drawing 1 px smaller than the grid creates a grid effect
-        context.fillRect(col * grid, row * grid, grid-1, grid-1);
+        context.fillRect(col * grid, row * grid, grid-1, grid-1);// drawing 1 px smaller than the grid creates a grid effect
       }
     }
   }
@@ -285,12 +274,10 @@ function loop() {
       if (nextfield[row][col]) {
         const name = nextfield[row][col];
         context2.fillStyle = colors[name];
-        // drawing 1 px smaller than the grid creates a grid effect
-        context2.fillRect(col * grid, row * grid, grid-1, grid-1);
+        context2.fillRect(col * grid, row * grid, grid-1, grid-1);// drawing 1 px smaller than the grid creates a grid effect
       }
     }
   }
-
 
   // draw the active tetromino
   if (tetromino) {// tetromino falls every 35 frames
@@ -329,8 +316,6 @@ function drawNext(){
 
 function swapTet(){
 	let tempTet = tetromino;
-	//let tempRow = tetromino.row; 
-	//let tempCol = tetromin.col;
 	tetromino = nextTetromino;
 	tetromino.row = tempTet.row; 
 	tetromino.col = tempTet.col;
@@ -352,6 +337,4 @@ document.addEventListener('keydown', function(e) {
 
 // start the game
 rAF = requestAnimationFrame(loop);
-</script>
-</body>
-</html>
+</script></body></html>

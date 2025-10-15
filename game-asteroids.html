@@ -781,7 +781,7 @@ function gameLoop() {
 
 // --- Event Listeners ---
 document.addEventListener('keydown', (e) => {
-  if (isGameOver) return;
+  //if (isGameOver) return;
   let buttonToActivate = null;
   let handled = true;
   switch (e.code) {
@@ -811,6 +811,10 @@ document.addEventListener('keydown', (e) => {
       break;
     case 'Equal':
       keys.equal = true;
+      break;
+    case 'KeyQ':
+    case 'Enter':
+      if (isGameOver){initGame();}
       break;
     default:
       handled = false;

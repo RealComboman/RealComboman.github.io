@@ -201,20 +201,11 @@ function drawBoard() {
 // function to draw the column
 function drawColumn() {
     for (let i = 0; i < columnHeight; i ++) {
-<<<<<<< HEAD
-        //context.fillStyle = blockColors[randomColumn[i]];
-		const grd = context.createRadialGradient(columnPosition.column, columnPosition.row, columnPosition.column+1, columnPosition.row+1);
-		grd.addColorStop(1, "black"); //randomColumn[i]);
-		grd.addColorStop(0, "white");
-		context.fillStyle = grd;
-        //context.fillRect(columnPosition.column, columnPosition.row + i, 1, 1);
-=======
         context.fillStyle = blockColors[randomColumn[i]];
 		//const grd = context.createRadialGradient(columnPosition.column+0.5,columnPosition.row+i+0.5,1,columnPosition.column+0.5,columnPosition.row+i+0.5,tileSize/2);
 		//grd.addColorStop(1, randomColumn[i]);
 		//grd.addColorStop(0, "white");
 		//context.fillStyle = grd;
->>>>>>> 0af810c044737fd29bc280b32dfb90bd4c62b6d7
 		context.beginPath();context.arc( columnPosition.column+0.5,columnPosition.row+i+0.5,0.5,0,2*Math.PI);context.fill();
         //context.fillRect(columnPosition.column, columnPosition.row + i, 1, 1);
     }

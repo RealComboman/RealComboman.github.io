@@ -69,7 +69,7 @@ function revealCell(row, col) {
         return;
     }
     board[row][col].revealed = true;
-    if (board[row][col].isMine) {alert("Game Over! You stepped on a mine.");} 
+    if (board[row][col].isMine) {alert("☠️ Game Over! You stepped on a mine. 💥");} 
 	else if (board[row][col].count === 0) 
 	{ // If cell has no mines nearby, reveal adjacent cells
         for ( let dx = -1; dx <= 1;  dx++ ) {
@@ -104,8 +104,8 @@ function renderBoard() {
         }
         gameBoard.appendChild(document.createElement("br"));
     }
-	score.innerHTML = "Open: "+revealedcells+" / "+((numRows*numCols)-numMines)+" | Mines: "+foundmines+" / "+numMines;
-    if (revealedcells==((numRows*numCols)-numMines)) {alert("Congrats! You cleared all the spaces.");}
+	score.innerHTML = "Open: "+revealedcells+" / "+((numRows*numCols)-numMines)+" ― Mines: "+foundmines+" / "+numMines;
+    if (revealedcells==((numRows*numCols)-numMines)) {alert("🥳 Congrats! You cleared all the spaces. 🎉");}
 }
 
 function newGame(){

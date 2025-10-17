@@ -70,7 +70,7 @@ const FPS = 60;
 const POWERUP_CHANCE = 0.15;
 const POWERUP_LIFETIME = 480;
 const POWERUP_EFFECT_DURATION = 600;
-const BASE_FIRE_DELAY = 15;
+const BASE_FIRE_DELAY = 20; //15;
 const RAPID_FIRE_DELAY = 5;
 const MIN_THRUST_MULTIPLIER = 0.5;
 const MAX_THRUST_MULTIPLIER = 2.0;
@@ -207,12 +207,7 @@ class Ship {
     }
 
     // Draw main ship body with gradient for depth
-    const shipGrad = ctx.createLinearGradient(
-      -SHIP_SIZE / 2,
-      -SHIP_SIZE / 3,
-      SHIP_SIZE / 2,
-      SHIP_SIZE / 3
-    );
+    const shipGrad = ctx.createLinearGradient( -SHIP_SIZE/2, -SHIP_SIZE/3, SHIP_SIZE/2, SHIP_SIZE/3);
     shipGrad.addColorStop(0, '#50a0ff'); // Lighter cyan/blue highlight
     shipGrad.addColorStop(1, '#0050cc'); // Darker cyan/blue shadow
 
@@ -231,10 +226,8 @@ class Ship {
     // Draw shield if active
     if (this.shieldActive) {
       const shieldGrad = ctx.createRadialGradient(
-        this.x, this.y,
-        this.radius,
-        this.x, this.y,
-        this.radius + 5
+        this.x, this.y, this.radius,
+        this.x, this.y, this.radius + 5
       );
       shieldGrad.addColorStop(0, 'rgba(0, 180, 255, 0.1)');
       shieldGrad.addColorStop(1, 'rgba(0, 220, 255, 0.7)');

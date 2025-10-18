@@ -2,10 +2,10 @@
 <style>
 body {display: flex; justify-content: center; align-items: center;height: 100vh; background-color: #222; margin: 0;}
 canvas { background-color: black; border: 2px solid white;}
-#scores { color: white; font-family: Times, serif; padding: 5px; border-color: gray; border-style: solid; border-width: 2px; text-align: center;}
+#scores { color: yellow; font-family: Times, serif; padding: 5px; border-color: gray; border-style: solid; border-width: 2px; text-align: center;}
 </style></head>
-<body><div><canvas id="thegame"></canvas><br>
-<div id="scores"><H2><span id="gameOver">---</span></H2><H3><span id="scoreDsp">---</span></H3></div></div>
+<body><div><canvas id="thegame"></canvas>
+<div id="scores"><H2>₪₪₪₪₪₪₪₪₪₪₪₪<br><span id="gameOver">---</span><br>₪₪₪₪₪₪₪₪₪₪₪₪</H2><H3><span id="scoreDsp">---</span></H3></div></div>
 <script>
 const canvas = document.getElementById('thegame');
 const context = canvas.getContext('2d');   
@@ -47,7 +47,7 @@ function update(time = 0) {
     if (freeze) {return;}
     const deltaTime = time - lastTime; // elapsed time since previous time
     lastTime = time;
-	 gameOver.innerHTML=".‖‖‖. <⋄ㄥ∨ʍꈤ𐌔 .‖‖‖."
+	 gameOver.innerHTML="<⋄ㄥ∨ʍꈤ𐌔"
 	if(score>highScore) {highScore = score; localStorage.setItem("myHighScore", highScore);}
 	scoreDsp.innerHTML = " Score: "+score+" — High Score: "+highScore;
     dropTimer += deltaTime;
@@ -232,7 +232,7 @@ document.addEventListener('keydown', (event) => {
             dropInterval = 50;
             break;
 		case 'Enter' :
-			if(freeze){freeze=0; gameOver.innerHTML=" ‖‖‖ <⋄ㄥ∨ʍꈤ𐌔 ‖‖‖ "; score=0; initializeBoard(); update();}
+			if(freeze){freeze=0; score=0; initializeBoard(); update();}
 			break;
     }
 })  

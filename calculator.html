@@ -29,230 +29,210 @@
   </style>
 </head>
 <body>
-  <div class="calculator">
-	<div class="sub2display">
-	<input type="text" class="subdisplay" id="subdisplay" disabled>
-	</div>
-    <input type="text" class="display" id="display" disabled>     <!-- Input field to display the calculator results -->
-    <div class="buttons">
-     <button onclick="memory('sto')" class="mem">STO</button>
-      <button onclick="appendNumber('7')">7</button>
-      <button onclick="appendNumber('8')">8</button>
-      <button onclick="appendNumber('9')">9</button>
-      <button onclick="setOperator('/')" class="functions">÷</button>
-     <button onclick="memory('rcl')" class="mem">RCL</button>
-      <button onclick="appendNumber('4')">4</button>
-      <button onclick="appendNumber('5')">5</button>
-      <button onclick="appendNumber('6')">6</button>
-      <button onclick="setOperator('*')" class="functions">×</button>
-     <button onclick="memory('sum')" class="mem">SUM</button>
-      <button onclick="appendNumber('1')">1</button>
-      <button onclick="appendNumber('2')">2</button>
-      <button onclick="appendNumber('3')">3</button>
-      <button onclick="setOperator('-')" class="functions">-</button>
-     <button onclick="memory('exc')" class="mem">EXC</button>
-      <button onclick="appendNumber('0')">0</button>
-      <button onclick="appendNumber('.')">.</button>
-      <button onclick="trig('neg')">±</button>
-      <button onclick="setOperator('+')" class="functions">+</button>
-	  
-      <button onclick="clearEntry()" class="hot">CE</button>
-     <button onclick="brackOpen()">(</button>
-     <button onclick="brackClose()">)</button>
-      <button onclick="calculate()" class="equals">=</button>
-	  
-      <button onclick="clearDisplay()" class="hot">AC</button>
-     <button onclick="trig('inv')" class="functions">1/x</button>
-     <button onclick="trig('sq')" class="functions">x²</button>
-     <button onclick="trig('sqr')" class="functions">²√x</button>
-     <button onclick="trig('per')" class="functions">%</button>
-      
-      <button onclick="togdeg()" class="mode">ANG</button>
-     <button onclick="trig('sin')" class="functions" id="sinbut")>SIN</button>
-     <button onclick="trig('cos')" class="functions" id="cosbut">COS</button>
-     <button onclick="trig('tan')" class="functions" id="tanbut">TAN</button>
-     <button onclick="setOperator('^')" class="functions">xⁿ</button>
-	 
-     <button onclick="hypmode()" class="mode">HYP</button>
-     <button onclick="trig('asin')" class="functions" id="asinbut")>ASIN</button>
-     <button onclick="trig('acos')" class="functions" id="acosbut">ACOS</button>
-     <button onclick="trig('atan')" class="functions" id="atanbut">ATAN</button>
-     <button onclick="setOperator('r')" class="functions">ⁿ√x</button>
+<div class="calculator">
+<div class="sub2display"><input type="text" class="subdisplay" id="subdisplay" disabled></div>
+<input type="text" class="display" id="display" disabled>
+<div class="buttons">
+<button onclick="memory('sto')" class="mem">STO</button>
+<button onclick="appendNum('7')">7</button>
+<button onclick="appendNum('8')">8</button>
+<button onclick="appendNum('9')">9</button>
+<button onclick="setOperator('/')" class="functions">÷</button>
+<button onclick="memory('rcl')" class="mem">RCL</button>
+<button onclick="appendNum('4')">4</button>
+<button onclick="appendNum('5')">5</button>
+<button onclick="appendNum('6')">6</button>
+<button onclick="setOperator('*')" class="functions">×</button>
+<button onclick="memory('sum')" class="mem">SUM</button>
+<button onclick="appendNum('1')">1</button>
+<button onclick="appendNum('2')">2</button>
+<button onclick="appendNum('3')">3</button>
+<button onclick="setOperator('-')" class="functions">-</button>
+<button onclick="memory('exc')" class="mem">EXC</button>
+<button onclick="appendNum('0')">0</button>
+<button onclick="appendNum('.')">.</button>
+<button onclick="trig('neg')">±</button>
+<button onclick="setOperator('+')" class="functions">+</button>
+ 
+<button onclick="clearEntry()" class="hot">CE</button>
+<button onclick="brackOpen()">(</button>
+<button onclick="brackClose()">)</button>
+<button onclick="calculate()" class="equals">=</button>
+ 
+<button onclick="clearDisplay()" class="hot">AC</button>
+<button onclick="trig('inv')" class="functions">1/x</button>
+<button onclick="trig('sq')" class="functions">x²</button>
+<button onclick="trig('sqr')" class="functions">²√x</button>
+<button onclick="trig('per')" class="functions">%</button>
+ 
+<button onclick="togdeg()" class="mode">ANG</button>
+<button onclick="trig('sin')" class="functions" id="sinbut")>SIN</button>
+<button onclick="trig('cos')" class="functions" id="cosbut">COS</button>
+<button onclick="trig('tan')" class="functions" id="tanbut">TAN</button>
+<button onclick="setOperator('^')" class="functions">xⁿ</button>
 
-     <button onclick="trig('log')" class="functions">LOG</button>
-     <button onclick="trig('ilog')" class="functions">10ⁿ</button>
-     <button onclick="trig('ln')" class="functions">LN</button>
-     <button onclick="trig('iln')" class="functions">eⁿ</button>
-     <button onclick="trig('e')">e</button>
+<button onclick="hypmode()" class="mode">HYP</button>
+<button onclick="trig('asin')" class="functions" id="asinbut")>ASIN</button>
+<button onclick="trig('acos')" class="functions" id="acosbut">ACOS</button>
+<button onclick="trig('atan')" class="functions" id="atanbut">ATAN</button>
+<button onclick="setOperator('r')" class="functions">ⁿ√x</button>
 
-	<button onclick="trig('pi')">π</button>
-     <button onclick="trig('rnd')">RND</button>
-	<button onclick="trig('rnd1')" class="functions">1⇝x</button>
+<button onclick="trig('log')" class="functions">LOG</button>
+<button onclick="trig('ilog')" class="functions">10ⁿ</button>
+<button onclick="trig('ln')" class="functions">LN</button>
+<button onclick="trig('iln')" class="functions">eⁿ</button>
+<button onclick="trig('e')">e</button>
 
-    </div>
-  </div>
+<button onclick="trig('pi')">π</button>
+<button onclick="trig('rnd')">RND</button>
+<button onclick="trig('rnd1')" class="functions">1⇝x</button>
+</div></div>
+<script>
+let currentInput = '0';
+let operator = '';
+let prev_op = 0;
+let prevInput = '';
+let mem_reg = 0.0;
+let ang = 'DEG'
+let brackInput = '';
+let brackOp = '';
+let brackMode = 0;
+let hyp=0;
+document.getElementById('display').value = 0;
+document.getElementById('subdisplay').value = ang;
 
-  <script>
-    let currentInput = '0';
-    let operator = '';
-	let prev_op = 0;
-    let previousInput = '';
-	let memoryreg = 0.0;
-	let ang = 'DEG'
-	let brackInput = '';
-	let brackOp = '';
-	let brackMode = 0;
-	let hyp=0;
-	document.getElementById('display').value = 0;
-	document.getElementById('subdisplay').value = ang;
-	
-	document.addEventListener('keydown', function(event) {
-    if(event.defaultPrevented){ return;}
-	if(event.keyCode == 96 || event.keyCode == 48) { appendNumber('0'); }
-    else if(event.keyCode == 97 || event.keyCode == 49) { appendNumber('1'); }
-    else if(event.keyCode == 98 || event.keyCode == 50) { appendNumber('2'); }
-    else if(event.keyCode == 99 || event.keyCode == 51) { appendNumber('3'); }
-    else if(event.keyCode == 100 || event.keyCode == 52) { appendNumber('4'); }
-    else if(event.keyCode == 101 || event.keyCode == 53) { appendNumber('5'); }
-    else if(event.keyCode == 102 || event.keyCode == 54) { appendNumber('6'); }
-    else if(event.keyCode == 103 || event.keyCode == 55) { appendNumber('7'); }
-    else if(event.keyCode == 104 || event.keyCode == 56) { appendNumber('8'); }
-    else if(event.keyCode == 105 || event.keyCode == 57) { appendNumber('9'); }
-    else if(event.keyCode == 106) { setOperator('*'); }
-    else if(event.keyCode == 107) { setOperator('+'); }
-    else if(event.keyCode == 109) { setOperator('-'); }
-    else if(event.keyCode == 110) { appendNumber('.'); }
-    else if(event.keyCode == 111) { setOperator('/'); }
-    else if(event.keyCode == 13) { calculate(); }
-    else if(event.keyCode == 46) { clearDisplay() }
-	event.preventDefault();
-	}, true);
-	
-    function appendNumber(number) {
-	  if (currentInput === '0') currentInput = number;
-	  else currentInput += number; // Append the clicked number to current input
-      document.getElementById('display').value = currentInput; // Update the display
-    }
+document.addEventListener('keydown', function(event) {
+if(event.defaultPrevented){ return;}
+if(event.keyCode == 96 || event.keyCode == 48) { appendNum('0'); }
+else if(event.keyCode == 97 || event.keyCode == 49) { appendNum('1'); }
+else if(event.keyCode == 98 || event.keyCode == 50) { appendNum('2'); }
+else if(event.keyCode == 99 || event.keyCode == 51) { appendNum('3'); }
+else if(event.keyCode == 100 || event.keyCode == 52) { appendNum('4'); }
+else if(event.keyCode == 101 || event.keyCode == 53) { appendNum('5'); }
+else if(event.keyCode == 102 || event.keyCode == 54) { appendNum('6'); }
+else if(event.keyCode == 103 || event.keyCode == 55) { appendNum('7'); }
+else if(event.keyCode == 104 || event.keyCode == 56) { appendNum('8'); }
+else if(event.keyCode == 105 || event.keyCode == 57) { appendNum('9'); }
+else if(event.keyCode == 106) { setOperator('*'); }
+else if(event.keyCode == 107) { setOperator('+'); }
+else if(event.keyCode == 109) { setOperator('-'); }
+else if(event.keyCode == 110) { appendNum('.'); }
+else if(event.keyCode == 111) { setOperator('/'); }
+else if(event.keyCode == 13) { calculate(); }
+else if(event.keyCode == 46) { clearDisplay() }
+event.preventDefault();
+}, true);
 
-    function memory(op) {
-      let result;
-	  if(op === 'sto') {result = parseFloat(currentInput); memoryreg=parseFloat(currentInput);}
-	  else if (op === 'rcl') result = memoryreg;
-	  else if (op === 'sum') memoryreg += parseFloat(currentInput);
-	  else if (op === 'exc') {result = memoryreg; memoryreg = parseFloat(currentInput);}
-      document.getElementById('display').value = result; 
-      currentInput = result.toString(); 
-    }
+function appendNum(number) {
+  if (currentInput === '0') currentInput = number;
+  else currentInput += number; // Append the clicked number to current input
+  document.getElementById('display').value = currentInput; // Update the display
+}
 
-	function hypmode() {
-	if (hyp==1) {hyp = 0;
-		document.getElementById('sinbut').innerHTML = 'SIN';
-		document.getElementById('cosbut').innerHTML = 'COS';
-		document.getElementById('tanbut').innerHTML = 'TAN';
-		document.getElementById('asinbut').innerHTML = 'ASIN';
-		document.getElementById('acosbut').innerHTML = 'ACOS';
-		document.getElementById('atanbut').innerHTML = 'ATAN';
-		}
-	else {
-		hyp=1; 
-		document.getElementById('sinbut').innerHTML = 'SINH';
-		document.getElementById('cosbut').innerHTML = 'COSH';
-		document.getElementById('tanbut').innerHTML = 'TANH';
-		document.getElementById('asinbut').innerHTML = 'ASINH';
-		document.getElementById('acosbut').innerHTML = 'ACOSH';
-		document.getElementById('atanbut').innerHTML = 'ATANH';
-		}
+function memory(op) {
+  let result;
+  if(op === 'sto') {result = parseFloat(currentInput); mem_reg=parseFloat(currentInput);}
+  else if (op === 'rcl') result = mem_reg;
+  else if (op === 'sum') mem_reg += parseFloat(currentInput);
+  else if (op === 'exc') {result = mem_reg; mem_reg = parseFloat(currentInput);}
+  document.getElementById('display').value = result; 
+  currentInput = result.toString(); 
+}
+
+function hypmode() {
+if (hyp==1) {hyp = 0;
+	document.getElementById('sinbut').innerHTML = 'SIN';
+	document.getElementById('cosbut').innerHTML = 'COS';
+	document.getElementById('tanbut').innerHTML = 'TAN';
+	document.getElementById('asinbut').innerHTML = 'ASIN';
+	document.getElementById('acosbut').innerHTML = 'ACOS';
+	document.getElementById('atanbut').innerHTML = 'ATAN';
 	}
-	
-    function trig(op) {
-      let result;
-	  if(op === 'sin') {if(hyp==1){result = Math.sinh(inRad());} else {result = Math.sin(inRad());}}
-	  else if (op === 'cos') {if(hyp==1){result = Math.cosh(inRad());} else {result = Math.cos(inRad());}}
-	  else if (op === 'tan') {if(hyp==1){result = Math.tanh(inRad());} else {result = Math.tan(inRad());}}
-	  else if (op === 'asin') {if(hyp==1){result = Math.asinh(inRad());} else {result = Math.asin(inRad());}}
-	  else if (op === 'acos') {if(hyp==1){result = Math.acosh(inRad());} else {result = Math.acos(inRad());}}
-	  else if (op === 'atan') {if(hyp==1){result = Math.atanh(inRad());} else {result = Math.atan(inRad());}}
-	  else if (op === 'asinh') result = Math.asinh(inRad());
-	  else if (op === 'acosh') result = Math.acosh(inRad());
-	  else if (op === 'atanh') result = Math.atanh(inRad());
-	  else if (op === 'sinh') result = Math.sinh(inRad());
-	  else if (op === 'cosh') result = Math.cosh(inRad());
-	  else if (op === 'tanh') result = Math.tanh(inRad());
-	  else if (op === 'log') result = Math.log10( parseFloat(currentInput));
-	  else if (op === 'ilog') result = Math.pow( 10, parseFloat(currentInput));
-	  else if (op === 'ln') result = Math.log( parseFloat(currentInput));
-	  else if (op === 'iln') result = Math.pow( Math.E, parseFloat(currentInput));
-	  else if (op === 'inv') result = 1/parseFloat(currentInput);
-	  else if (op === 'neg') result = -1.0 * parseFloat(currentInput);
-	  else if (op === 'per') result = parseFloat(currentInput)/100.0;
-	  else if (op === 'sq') result = Math.pow( parseFloat(currentInput),2);
-	  else if (op === 'sqr') result = Math.sqrt( parseFloat(currentInput));
-	  else if (op === 'pi') result = Math.PI;
-	  else if (op === 'e') result = Math.E;
-	  else if (op === 'rnd') result = Math.random();
-	  else if (op === 'rnd1') result = Math.round(((currentInput-1)*Math.random())+1);
-      document.getElementById('display').value = result; 
-      currentInput = result.toString(); 
-    }
-
-    function setOperator(op) {
-      //prev_op = operator; 
-	  if (operator === '' || prev_op == 0)
-		{operator = op; previousInput = currentInput; prev_op = 1;} 
-	  else {calculate(); operator = op; previousInput = currentInput; prev_op = 1;}
-	  currentInput = ''; // Clear the current input for the next number
-    }
-
-    function calculate() {
-      let result;
-	  if (currentInput === '') { operator === ''; prev_op = 1; return;}
-      if (operator === '+') result = parseFloat(previousInput) + parseFloat(currentInput);
-      else if (operator === '-') result = parseFloat(previousInput) - parseFloat(currentInput);
-      else if (operator === '*') result = parseFloat(previousInput) * parseFloat(currentInput);
-      else if (operator === '/') result = parseFloat(previousInput) / parseFloat(currentInput);
-      else if (operator === '^') result = Math.pow(parseFloat(previousInput),parseFloat(currentInput));
-      else if (operator === 'r') result = Math.pow(parseFloat(previousInput),(1/parseFloat(currentInput)));
-      else result = parseFloat(currentInput);
-      document.getElementById('display').value = result; // Display the result
-      currentInput = result.toString(); // Store the result as the new current input
-      prev_op = 0; // Reset the operator
-    }
-
-	//.toString(16) for hex
-
-    function clearDisplay() {
-      currentInput = '0'; previousInput = ''; operator = '';
-      document.getElementById('display').value = 0; 
-    }
-
-    function clearEntry() {
-      currentInput = '0'; document.getElementById('display').value = 0; 
-    }
-	
-	function brackOpen() {
-	brackInput = previousInput; brackOp = operator; brackMode = 1; currentInput = ''; prev_op = 0;
-	document.getElementById('subdisplay').value = ang + "   ( )"; 
+else {
+	hyp=1; 
+	document.getElementById('sinbut').innerHTML = 'SINH';
+	document.getElementById('cosbut').innerHTML = 'COSH';
+	document.getElementById('tanbut').innerHTML = 'TANH';
+	document.getElementById('asinbut').innerHTML = 'ASINH';
+	document.getElementById('acosbut').innerHTML = 'ACOSH';
+	document.getElementById('atanbut').innerHTML = 'ATANH';
 	}
+}
 
-	function brackClose() {
-	calculate(); previousInput = brackInput; operator = brackOp; brackMode = 0; 
-	document.getElementById('subdisplay').value = ang; 
-	}
+function trig(op) {
+  let result;
+  if(op === 'sin') {if(hyp==1){result = Math.sinh(inRad());} else {result = Math.sin(inRad());}}
+  else if (op === 'cos') {if(hyp==1){result = Math.cosh(inRad());} else {result = Math.cos(inRad());}}
+  else if (op === 'tan') {if(hyp==1){result = Math.tanh(inRad());} else {result = Math.tan(inRad());}}
+  else if (op === 'asin') {if(hyp==1){result = Math.asinh(inRad());} else {result = Math.asin(inRad());}}
+  else if (op === 'acos') {if(hyp==1){result = Math.acosh(inRad());} else {result = Math.acos(inRad());}}
+  else if (op === 'atan') {if(hyp==1){result = Math.atanh(inRad());} else {result = Math.atan(inRad());}}
+  else if (op === 'asinh') result = Math.asinh(inRad());
+  else if (op === 'acosh') result = Math.acosh(inRad());
+  else if (op === 'atanh') result = Math.atanh(inRad());
+  else if (op === 'sinh') result = Math.sinh(inRad());
+  else if (op === 'cosh') result = Math.cosh(inRad());
+  else if (op === 'tanh') result = Math.tanh(inRad());
+  else if (op === 'log') result = Math.log10( parseFloat(currentInput));
+  else if (op === 'ilog') result = Math.pow( 10, parseFloat(currentInput));
+  else if (op === 'ln') result = Math.log( parseFloat(currentInput));
+  else if (op === 'iln') result = Math.pow( Math.E, parseFloat(currentInput));
+  else if (op === 'inv') result = 1/parseFloat(currentInput);
+  else if (op === 'neg') result = -1.0 * parseFloat(currentInput);
+  else if (op === 'per') result = parseFloat(currentInput)/100.0;
+  else if (op === 'sq') result = Math.pow( parseFloat(currentInput),2);
+  else if (op === 'sqr') result = Math.sqrt( parseFloat(currentInput));
+  else if (op === 'pi') result = Math.PI;
+  else if (op === 'e') result = Math.E;
+  else if (op === 'rnd') result = Math.random();
+  else if (op === 'rnd1') result = Math.round(((currentInput-1)*Math.random())+1);
+  document.getElementById('display').value = result; 
+  currentInput = result.toString(); 
+}
 
-    function togdeg() {
-	 let cresult;
-     if (ang === 'DEG') { ang = 'RAD'; cresult=parseFloat(currentInput)*Math.PI/180; }
-	 else { ang = 'DEG'; cresult=parseFloat(currentInput)*180/Math.PI; }
-	 document.getElementById('subdisplay').value = ang; 
-	 document.getElementById('display').value = cresult; 
-	 currentInput = cresult.toString(); 
-    }
-	
-	function inRad() { 
-		if (ang === 'DEG') return parseFloat(currentInput)*Math.PI/180; 
-		else return parseFloat(currentInput);
-	}
+function setOperator(op) {
+  //prev_op = operator; 
+  if (operator === '' || prev_op == 0)
+	{operator = op; prevInput = currentInput; prev_op = 1;} 
+  else {calculate(); operator = op; prevInput = currentInput; prev_op = 1;}
+  currentInput = ''; // Clear the current input for the next number
+}
 
-  </script>
-</body>
-</html>
+function calculate() {
+  let result;
+  if (currentInput === '') { operator === ''; prev_op = 1; return;}
+  if (operator === '+') result = parseFloat(prevInput) + parseFloat(currentInput);
+  else if (operator === '-') result = parseFloat(prevInput) - parseFloat(currentInput);
+  else if (operator === '*') result = parseFloat(prevInput) * parseFloat(currentInput);
+  else if (operator === '/') result = parseFloat(prevInput) / parseFloat(currentInput);
+  else if (operator === '^') result = Math.pow(parseFloat(prevInput),parseFloat(currentInput));
+  else if (operator === 'r') result = Math.pow(parseFloat(prevInput),(1/parseFloat(currentInput)));
+  else result = parseFloat(currentInput);
+  document.getElementById('display').value = result; // Display the result
+  currentInput = result.toString(); // Store the result as the new current input
+  prev_op = 0; // Reset the operator
+}
+//.toString(16) for hex
+
+function clearDisplay() { currentInput = '0'; prevInput = ''; operator = ''; document.getElementById('display').value = 0;}
+
+function clearEntry() { currentInput = '0'; document.getElementById('display').value = 0;}
+
+function brackOpen() { brackInput = prevInput; brackOp = operator; brackMode = 1; currentInput = ''; prev_op = 0; document.getElementById('subdisplay').value = ang + "   ( )";}
+
+function brackClose() {	calculate(); prevInput = brackInput; operator = brackOp; brackMode = 0; document.getElementById('subdisplay').value = ang;}
+
+function togdeg() {
+ let cresult;
+ if (ang === 'DEG') { ang = 'RAD'; cresult=parseFloat(currentInput)*Math.PI/180; }
+ else { ang = 'DEG'; cresult=parseFloat(currentInput)*180/Math.PI; }
+ document.getElementById('subdisplay').value = ang; 
+ document.getElementById('display').value = cresult; 
+ currentInput = cresult.toString(); 
+}
+
+function inRad() { 
+	if (ang === 'DEG') return parseFloat(currentInput)*Math.PI/180; 
+	else return parseFloat(currentInput);
+}
+</script></body></html>

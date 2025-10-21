@@ -1,34 +1,51 @@
 <!DOCTYPE html><html><head><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Amanda's Tetris</title><link rel="shortcut icon" href="combo.ico"><meta charset="UTF-8">
 <style>
-html, body { height: 100%; margin: 0; }
+html, body {height: 100%; margin: 0;}
 body { background: black; display: flex; align-items: center; justify-content: center; }
 canvas { border: 1px solid white; }
-.buttons { align-items: center; display: grid; grid-template-columns: repeat(6, 42px); gap: 20px; }
+.buttons { align-items: center; display: grid; grid-template-columns: repeat(5, 42px); gap: 20px; }
 .buttons button { width: 48px; height: 48px; font-size: 1.5em; border: none; background-color: white; color: black; border-radius: 16px; cursor: pointer; }
 .buttons button:hover { background-color: lightgray; }
-#scores { color: white; font-family: Arial, sans-serif; margin-left: 20px;  margin-bottom: 20px;  padding: 5px;  border-color: gray;  border-style: solid;  border-width: 1px;}
+#scores { color: white; font-family: Arial, sans-serif; padding: 5px; border: white solid 1px;}
 </style></head>
-<body><div><canvas width="320" height="640" id="game"></canvas>
-<br><div class="buttons">
+<body><div>
+<canvas width="320" height="640" id="game"></canvas>
+<div id="scores">
+<div id="nextpiece"><canvas width="80" height="80" id="next" onclick="swapTet()"></canvas></div>
+<div id="stuff">Score <span id="scoreDsp"></span> / High Score <span id="highScoreDsp"></span> / Level <span id="levelDsp"></span></div>
+</div>
+<div class="buttons">
   <button onclick="slide(37)" class="mem">←</button>
   <button onclick="rot()">↻</button>
   <button onclick="swapTet()">⇆</button>
   <button onclick="down()">↓</button>
   <button onclick="slide(39)">→</button>
   </div>
-<div id="scores">
-<div id="stuff">Level: <span id="levelDsp">0</span> Score: <span id="scoreDsp">0</span><br>
-High Score: <span id="highScoreDsp">0</span></div>
-<div id="nextpiece"><canvas width="80" height="80" id="next"></canvas></div>
-</div></div></div>
+</div></div>
 <script>
-//<div id="nextpiece"><canvas width="170" height="140" id="next"></canvas></div>
   //<button onclick="drop()">↡</button>
 let score = 0;
 let level = 0;
 let clears = 0;
 let totalClears = 0;
 // https://tetris.fandom.com/wiki/Tetris_Guideline
+let touchstartX = 0;
+let touchendX = 0;
+    
+function checkDirection() {
+  if (touchendX < touchstartX) slide(37);
+  if (touchendX > touchstartX) slide(39);
+  if (touchendX == touchstartX) rot();
+}
+const el = document.getElementById("game");
+el.addEventListener('touchstart', e => {
+  touchstartX = e.changedTouches[0].screenX
+})
+
+el.addEventListener('touchend', e => {
+  touchendX = e.changedTouches[0].screenX
+  checkDirection()
+})
 
 function getRandomInt(min, max) {
   min = Math.ceil(min);
@@ -100,11 +117,8 @@ function drop() {//hard drop
 
 function slide(dir){
     const col = dir === 37
-      ? tetromino.col - 1
-      : tetromino.col + 1;
-    if (isValidMove(tetromino.matrix, tetromino.row, col)) {
-      tetromino.col = col;
-    }
+      ? tetromino.col - 1 : tetromino.col + 1;
+    if (isValidMove(tetromino.matrix, tetromino.row, col)) {tetromino.col = col;}
 }
 
 function isValidMove(matrix, cellRow, cellCol) { // check to see if the new matrix/row/col is valid
@@ -115,9 +129,7 @@ function isValidMove(matrix, cellRow, cellCol) { // check to see if the new matr
           cellCol + col < 0 || cellCol + col >= playfield[0].length || cellRow + row >= playfield.length ||
           // collides with another piece
           playfield[cellRow + row][cellCol + col])
-        ) {
-        return false;
-      }
+        ) {return false;}
     }
   }
   return true;

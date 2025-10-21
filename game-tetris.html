@@ -11,8 +11,8 @@ canvas { border: 1px solid white; }
 <body><div>
 <canvas width="320" height="640" id="game"></canvas>
 <div id="scores">
-<div id="nextpiece"><canvas width="80" height="80" id="next" onclick="swapTet()"></canvas></div>
-<div id="stuff">Score <span id="scoreDsp"></span> / High Score <span id="highScoreDsp"></span> / Level <span id="levelDsp"></span></div>
+<div id="nextpiece"><canvas width="80" height="80" id="next" onclick="swapTet()"></canvas>
+SCORE <span id="scoreDsp"></span> / HI <span id="highScoreDsp"></span> / LEVEL <span id="levelDsp"></span></div>
 </div>
 <div class="buttons">
   <button onclick="slide(37)" class="mem">←</button>
@@ -31,11 +31,12 @@ let totalClears = 0;
 // https://tetris.fandom.com/wiki/Tetris_Guideline
 let touchstartX = 0;
 let touchendX = 0;
+const touchmin = 5;
     
 function checkDirection() {
-  if (touchendX < touchstartX) slide(37);
-  if (touchendX > touchstartX) slide(39);
-  if (touchendX == touchstartX) rot();
+  if (touchendX < touchstartX-touchmin) slide(37);
+  else if (touchendX > touchstartX+touchmin) slide(39);
+  else rot(); //tap
 }
 const el = document.getElementById("game");
 el.addEventListener('touchstart', e => {

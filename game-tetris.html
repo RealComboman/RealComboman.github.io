@@ -37,6 +37,7 @@ function checkDirection() {
   if (touchendX < touchstartX-touchmin) slide(37);
   else if (touchendX > touchstartX+touchmin) slide(39);
   else rot(); //tap
+  count=0; //reset timer
 }
 const el = document.getElementById("game");
 el.addEventListener('touchstart', e => {

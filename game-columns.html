@@ -2,10 +2,10 @@
 <style>
 body {display: flex; justify-content: center; align-items: center;height: 100vh; background-color: #222; margin: 0;}
 canvas { background-color: black; border: 2px solid white;}
-#scores { color: yellow; font-family: Times, serif; padding: 5px; border-color: gray; border-style: solid; border-width: 2px; text-align: center;}
+#scores { color: yellow; font-family: Times, serif; border-color: gray; border-style: solid; border-width: 2px; text-align: center;}
 </style></head>
 <body><div><canvas id="thegame"></canvas>
-<div id="scores"><H2>₪₪₪₪₪₪₪₪₪₪₪₪<br><span id="gameOver">---</span><br>₪₪₪₪₪₪₪₪₪₪₪₪</H2><H3><span id="scoreDsp">---</span></H3></div></div>
+<div id="scores"><H2><span id="gameOver"></span><br>₪₪₪₪₪₪₪₪₪₪₪₪</H2><H3><span id="scoreDsp"></span></H3></div></div>
 <script>
 const canvas = document.getElementById('thegame');
 const context = canvas.getContext('2d');   
@@ -47,24 +47,24 @@ function update(time = 0) {
     if (freeze) {return;}
     const deltaTime = time - lastTime; // elapsed time since previous time
     lastTime = time;
-	 gameOver.innerHTML="<⋄ㄥ∨ʍꈤ𐌔"
+	 gameOver.innerHTML="<⋄ㄥ∨ʍꈤ𐌔";
 	if(score>highScore) {highScore = score; localStorage.setItem("myHighScore", highScore);}
-	scoreDsp.innerHTML = " Score: "+score+" — High Score: "+highScore;
+	scoreDsp.innerHTML = "Score: "+score+" — High Score: "+highScore;
     dropTimer += deltaTime;
 	//removeBlocks ();
     // if drop timer is bigger than drop interval, it's time to make the column drop
     if (dropTimer > dropInterval) {
-        dropTimer = 0;// reset drop timer
+        dropTimer=0;// reset drop timer
 		if(checkFallingBlocks) {
 			fallBlocks();}
 		else {
-			columnPosition.row ++;// move column down
+			columnPosition.row++;// move column down
 			if (isColumnColliding()) {// is column colliding?
-				columnPosition.row --;// move column up
+				columnPosition.row--;// move column up
 				mergeColumn();// merge columns
 				clearBlocks();// clear lines if needed
 				randomColumn = getRandomColumn();// place a new column
-				columnPosition = { row     : -2, column  : 3};
+				columnPosition = { row : -2, column : 3};
 				if (isColumnColliding()) {// is newborn column already colliding?
 					GameOver();// GAME OVER!! (just clear the board in this case)
 				}
@@ -76,14 +76,14 @@ function update(time = 0) {
 }
 
 function GameOver(){
-gameOver.innerHTML = " GᗩᗰE OᐯEᖇ ";
+gameOver.innerHTML = "GᗩᗰE OᐯEᖇ";
 freeze=1;
 }
 
 // it's just an array with three random blocks
 function getRandomColumn() {
     const column = [];
-    for (let i = 0; i < columnHeight; i ++) {
+    for (let i = 0; i < columnHeight; i++) {
         column.push(Math.floor(Math.random() * blockColors.length));
     } 
     return column;
@@ -92,20 +92,20 @@ function getRandomColumn() {
 // function to shift a column
 function shiftColumn() {
     const head = randomColumn[0];
-    for (let i = 1; i < columnHeight; i ++) {randomColumn[i - 1] = randomColumn[i];}
+    for (let i = 1; i < columnHeight; i++) {randomColumn[i - 1] = randomColumn[i];}
     randomColumn[columnHeight - 1] = head;
 }
 
 // functions to merge a column with game board
 function mergeColumn() {
-    for (let i = 0; i < columnHeight; i ++) {
+    for (let i = 0; i < columnHeight; i++) {
         if (columnPosition.row + i >= 0) {board[columnPosition.row + i][columnPosition.column] = randomColumn[i] + 1;}
     }  
 }
 
 // function to check if a column is colliding
 function isColumnColliding() {
-    for (let i = 0; i < columnHeight; i ++) {
+    for (let i = 0; i < columnHeight; i++) {
         const row = columnPosition.row + i;
         if (row >= 0 && (columnPosition.column < 0 || row >= boardRows || columnPosition.column >= boardColumns || board[row][columnPosition.column] != 0)) {
             return true;
@@ -118,32 +118,32 @@ function isColumnColliding() {
 function clearBlocks() {
     itemsToRemove = [];
 	let combos=0;
-    for (let i = 0; i < boardRows; i ++) {
-        for (let j = 0; j < boardColumns; j ++) {
+    for (let i = 0; i < boardRows; i++) {
+        for (let j = 0; j < boardColumns; j++) {
             if (board[i][j] != 0) {
                 let value = board[i][j];
                 let combo = 1; // vertical
                 while (j + combo < boardColumns && board[i][j + combo] == value) {combo ++;}
                 if (combo >= 3) {
-                    for (let k = 0; k < combo; k ++) { itemsToRemove.push({row     : i, column  : j + k }); score += 10;}
+                    for (let k = 0; k < combo; k++) { itemsToRemove.push({row     : i, column  : j + k }); score += 10;}
 					combos++;
                 }
                 combo = 1; // horizontal
-                while (i + combo < boardRows && board[i + combo][j] == value) {combo ++;}
+                while (i + combo < boardRows && board[i + combo][j] == value) {combo++;}
                 if (combo >= 3) {
-                    for (let k = 0; k < combo; k ++) {itemsToRemove.push({ row     : i + k, column  : j }); score += 10;}
+                    for (let k = 0; k < combo; k++) {itemsToRemove.push({ row     : i + k, column  : j }); score += 10;}
 					combos++;
                 }
                 combo = 1; // diagonal 1 
-                while (i + combo < boardRows && j + combo < boardColumns  && board[i + combo][j + combo] == value) {combo ++;}
+                while (i + combo < boardRows && j + combo < boardColumns  && board[i + combo][j + combo] == value) {combo++;}
                 if (combo >= 3) {
-                    for (let k = 0; k < combo; k ++) { itemsToRemove.push({ row     : i + k, column  : j + k }); score += 10;}
+                    for (let k = 0; k < combo; k++) { itemsToRemove.push({ row     : i + k, column  : j + k }); score += 10;}
 					combos++;
                 }
                 combo = 1;  // diagonal 2
                 while (i - combo > 0 && j + combo < boardColumns  && board[i - combo][j + combo] == value) {combo ++;}
                 if (combo >= 3) {
-                    for (let k = 0; k < combo; k ++) {itemsToRemove.push({row     : i - k, column  : j + k}); score += 10;}
+                    for (let k = 0; k < combo; k++) {itemsToRemove.push({row     : i - k, column  : j + k}); score += 10;}
 					combos++;
                 }
             }
@@ -151,7 +151,7 @@ function clearBlocks() {
     }
     if (itemsToRemove.length > 0) {// do we have items to remove?
         // remove them
-        for (let i = 0; i < itemsToRemove.length; i ++) {
+        for (let i = 0; i < itemsToRemove.length; i++) {
             board[itemsToRemove[i].row][itemsToRemove[i].column] = 0;
         } 
 		if(combos<2) {score += 10;} else {score += combos*50;}
@@ -164,8 +164,8 @@ function clearBlocks() {
 function fallBlocks() {
         while (checkFallingBlocks)  {
             checkFallingBlocks = false;
-            for (let i = boardRows - 1; i > 0; i --) {
-                for (let j = 0; j < boardColumns; j ++) {
+            for (let i = boardRows - 1; i > 0; i--) {
+                for (let j = 0; j < boardColumns; j++) {
                     if (board[i][j] == 0 && board[i - 1][j] != 0) {
                         board[i][j] = board[i - 1][j];
                         board[i - 1][j] = 0;   
@@ -187,8 +187,8 @@ function delay(milliseconds) {
 
 // function to draw the board
 function drawBoard() {
-    for (let i = 0; i < boardRows; i ++) {
-        for (let j = 0; j < boardColumns; j ++) { 
+    for (let i = 0; i < boardRows; i++) {
+        for (let j = 0; j < boardColumns; j++) { 
             if (board[i][j] != 0) {
                 context.fillStyle = blockColors[board[i][j] - 1];
 				context.beginPath();context.arc(j+0.5,i+0.5,0.5,0,2*Math.PI);context.fill();
@@ -203,7 +203,7 @@ function drawBoard() {
 
 // function to draw the column
 function drawColumn() {
-    for (let i = 0; i < columnHeight; i ++) {
+    for (let i = 0; i < columnHeight; i++) {
         context.fillStyle = blockColors[randomColumn[i]];
 		//const grd = context.createRadialGradient(columnPosition.column+0.5,columnPosition.row+i+0.5,1,columnPosition.column+0.5,columnPosition.row+i+0.5,tileSize/2);
 		//grd.addColorStop(1, randomColumn[i]);
@@ -218,18 +218,18 @@ function drawColumn() {
 document.addEventListener('keydown', (event) => {
     switch (event.key) {
         case 'ArrowLeft' :
-            columnPosition.column --;
-            if (isColumnColliding()) {columnPosition.column ++;}
+            columnPosition.column--;
+            if (isColumnColliding()) {columnPosition.column++;}
             break;
         case 'ArrowRight' :
-            columnPosition.column ++;
-            if (isColumnColliding()) {columnPosition.column --;}
+            columnPosition.column++;
+            if (isColumnColliding()) {columnPosition.column--;}
             break;
         case 'ArrowUp' :
             shiftColumn();
             break;
         case 'ArrowDown' :
-            dropInterval = 50;
+            dropInterval=50;
             break;
 		case 'Enter' :
 			if(freeze){freeze=0; score=0; initializeBoard(); update();}

@@ -1,4 +1,4 @@
-<!DOCTYPE html><html><head><title>Amanda's Tetris</title><link rel="shortcut icon" href="combo.ico"><meta charset="UTF-8">
+<!DOCTYPE html><html><head><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Amanda's Tetris</title><link rel="shortcut icon" href="combo.ico"><meta charset="UTF-8">
 <style>
 html, body { height: 100%; margin: 0; }
 body { background: black; display: flex; align-items: center; justify-content: center; }
@@ -12,18 +12,20 @@ canvas { border: 1px solid white; }
 <br><br><div class="buttons">
   <button onclick="slide(37)" class="mem">←</button>
   <button onclick="rot()">↻</button>
+  <button onclick="swapTet()">⇆</button>
   <button onclick="down()">↓</button>
   <button onclick="slide(39)">→</button>
   </div>
 </div>
 <div id="scores">Next Piece<br>
-<div id="nextpiece"><canvas width="170" height="140" id="next"></canvas></div>
+<div id="nextpiece"><canvas width="120" height="100" id="next"></canvas></div>
 Amanda's Tetris<br>
-Level:  <span id="levelDsp">0</span><br>
-Score:  <span id="scoreDsp">0</span><br>
-High Score:  <span id="highScoreDsp">0</span><br>
+Level: <span id="levelDsp">0</span><br>
+Score: <span id="scoreDsp">0</span><br>
+High Score: <span id="highScoreDsp">0</span><br>
 </div></div>
 <script>
+//<div id="nextpiece"><canvas width="170" height="140" id="next"></canvas></div>
   //<button onclick="drop()">↡</button>
 let score = 0;
 let level = 0;
@@ -177,6 +179,7 @@ const context = canvas.getContext('2d');
 const canvas2 = document.getElementById('next');
 const context2 = canvas2.getContext('2d');
 const grid = 32;
+const smgrid = 20;
 const tetrominoSequence = [];
 
 // keep track of what is in every cell of the game using a 2d array
@@ -308,7 +311,7 @@ function drawNext(){
     for (let row = 0; row < nextTetromino.matrix.length; row++) {
       for (let col = 0; col < nextTetromino.matrix[row].length; col++) {
         if (nextTetromino.matrix[row][col]) {
-          context2.fillRect((1 + col) * grid, (1 + row) * grid, grid-1, grid-1); // drawing 1 px smaller than the grid creates a grid effect
+          context2.fillRect((1 + col) * smgrid, (1 + row) * smgrid, smgrid-1, smgrid-1); // drawing 1 px smaller than the grid creates a grid effect
         }
       }
     }

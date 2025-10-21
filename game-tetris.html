@@ -9,21 +9,18 @@ canvas { border: 1px solid white; }
 #scores { color: white; font-family: Arial, sans-serif; margin-left: 20px;  margin-bottom: 20px;  padding: 5px;  border-color: gray;  border-style: solid;  border-width: 1px;}
 </style></head>
 <body><div><canvas width="320" height="640" id="game"></canvas>
-<br><br><div class="buttons">
+<br><div class="buttons">
   <button onclick="slide(37)" class="mem">←</button>
   <button onclick="rot()">↻</button>
   <button onclick="swapTet()">⇆</button>
   <button onclick="down()">↓</button>
   <button onclick="slide(39)">→</button>
   </div>
-</div>
-<div id="scores">Next Piece<br>
-<div id="nextpiece"><canvas width="120" height="100" id="next"></canvas></div>
-Amanda's Tetris<br>
-Level: <span id="levelDsp">0</span><br>
-Score: <span id="scoreDsp">0</span><br>
-High Score: <span id="highScoreDsp">0</span><br>
-</div></div>
+<div id="scores">
+<div id="stuff">Level: <span id="levelDsp">0</span> Score: <span id="scoreDsp">0</span><br>
+High Score: <span id="highScoreDsp">0</span></div>
+<div id="nextpiece"><canvas width="80" height="80" id="next"></canvas></div>
+</div></div></div>
 <script>
 //<div id="nextpiece"><canvas width="170" height="140" id="next"></canvas></div>
   //<button onclick="drop()">↡</button>
@@ -311,7 +308,7 @@ function drawNext(){
     for (let row = 0; row < nextTetromino.matrix.length; row++) {
       for (let col = 0; col < nextTetromino.matrix[row].length; col++) {
         if (nextTetromino.matrix[row][col]) {
-          context2.fillRect((1 + col) * smgrid, (1 + row) * smgrid, smgrid-1, smgrid-1); // drawing 1 px smaller than the grid creates a grid effect
+          context2.fillRect((0+col) * smgrid, (0+row) * smgrid, smgrid-1, smgrid-1); // drawing 1 px smaller than the grid creates a grid effect
         }
       }
     }

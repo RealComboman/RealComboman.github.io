@@ -1,23 +1,23 @@
-<!DOCTYPE html><html><head><title>Minesweeper</title><link rel="shortcut icon" href="combo.ico">
+<!DOCTYPE html><html><head><title>Minesweeper</title><meta name="viewport" content="width=device-width, initial-scale=1.0"><link rel="shortcut icon" href="combo.ico">
 <style>
-body {font-family: Arial, sans-serif; text-align: center;}
+body {font-family: Arial, sans-serif; text-align: center;font-size: 20px;}
 .board {display: inline-block; margin: 20px;}
-.cell {width: 30px; height: 30px;  border: 1px solid #ccc;  display: inline-block; text-align: center; vertical-align: middle; font-size: 20px; cursor: pointer; background-color: #eee; color: #333;}
+.cell {width: 45px; height: 45px;  border: 1px solid #ccc;  display: inline-block; text-align: center; vertical-align: middle; font-size: 32px; cursor: pointer; background-color: #eee; color: #333;}
 .revealed { background-color: #ccc; color: blue;}
 .revealmid { background-color: #ccc; color: green;}
 .revealbig { background-color: #ccc; color: red;}
 .mine {background-color: #ff3333;}
 </style></head>
 <body>
-<h1>Minesweeper</h1>
+<h2>Minesweeper</h2>
 <div id="gameBoard"></div>
 <br><div id="score"></div>
-<br><select id="board_size"> 
+<br><select id="board_size" style="border-radius: 10px; font-size: 16px; padding: 5px"> 
 <option value="sm">Small (8x8)</option>
 <option value="md">Medium (10x10)</option>
 <option value="lr">Large (15x15)</option>
-</select><br><br>
-<input type="button" value="New Game" onclick="newGame()">
+</select><br>
+<input type="button" value="New Game" onclick="newGame()" style="border-radius: 10px; font-size: 16px; padding: 5px" >
 </body>
 <script>
 var numRows = 8;

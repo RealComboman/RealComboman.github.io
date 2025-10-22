@@ -176,7 +176,7 @@ fetch(apiUrl)
 .then(response => response.json())
 .then(data => {
 const{name, main, weather}=data;
-const temperature=Math.round(main.temp*10)/10, description=weather[0].description;
+const temperature=Math.round(main.temp*10)/10, description=weather[0].description,humidity=main.humidity,pres=main.pressure/10;
 var wicon="❓";
 if(data.weather[0].icon==="01d"){wicon="☀️";}
 if(data.weather[0].icon==="01n"){wicon="️🌙";}
@@ -187,7 +187,7 @@ if(data.weather[0].icon==="10d"||data.weather[0].icon==="10n"){wicon="️🌧";}
 if(data.weather[0].icon==="11d"||data.weather[0].icon==="11n"){wicon="🌩️";}
 if(data.weather[0].icon==="13d"||data.weather[0].icon==="13n"){wicon="❄️";}
 if(data.weather[0].icon==="50d"||data.weather[0].icon==="50n"){wicon="️🌫";}
-const weatherContent=`<b><a href="http://www.theweathernetwork.com" target="_blank" style="font-size:20px; color:black;">${name} &nbsp; ${wicon}</a></b><br>${temperature}°C<br>${description}</b>`;
+const weatherContent=`<b><a href="http://www.theweathernetwork.com" target="_blank" style="font-size:20px; color:black;">${name} &nbsp; ${wicon}</a></b><br>${temperature}°C<br>${description}<br>${humidity}%RH ${pres}kPa</b>`;
 weatherDiv.innerHTML=weatherContent;})
 .catch(error => {console.error('Err:', error); weatherDiv.innerHTML='<p>Failed to get weather data</p>';});
 }

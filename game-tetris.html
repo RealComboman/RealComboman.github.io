@@ -37,9 +37,7 @@ function checkDirection() {
 }
 const el = document.getElementById("game");
 el.addEventListener('touchstart', e => {touchstartX = e.changedTouches[0].screenX})
-
-el.addEventListener('touchend', e => {touchendX = e.changedTouches[0].screenX
-  checkDirection()})
+el.addEventListener('touchend', e => {touchendX = e.changedTouches[0].screenX; checkDirection()})
 
 function getRandomInt(min, max) {
   min = Math.ceil(min); max = Math.floor(max);

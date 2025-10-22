@@ -35,8 +35,7 @@ let touchendX = 0;
 const touchmin = 5;
 const el = document.getElementById("game");
 el.addEventListener('touchstart', e => {touchstartX = e.changedTouches[0].screenX})    
-el.addEventListener('touchend', e => {touchendX = e.changedTouches[0].screenX
-  checkDirection()})
+el.addEventListener('touchend', e => {touchendX = e.changedTouches[0].screenX; checkDirection()})
 initializeBoard();// initialize the board
 update();// call update method
 
@@ -44,7 +43,7 @@ function checkDirection() {
   if (touchendX < touchstartX-touchmin) shiftLeft();
   else if (touchendX > touchstartX+touchmin) shiftRight();
   else shiftColumn(); //tap
-  count=0; //reset timer
+  dropTimer=0; //reset timer
 }
 
 // function to initialize the board, setting all values to zero

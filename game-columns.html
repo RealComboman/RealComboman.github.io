@@ -4,10 +4,10 @@ body {display: flex; justify-content: center; align-items: center;height: 100vh;
 canvas { background-color: black; border: 2px solid white;}
 #scores { color: yellow; font-family: Times, serif; border-color: gray; border-style: solid; border-width: 2px; text-align: center;}
 </style></head>
-<body><div><canvas id="thegame"></canvas>
+<body><div><canvas id="game"></canvas>
 <div id="scores"><H2><span id="gameOver"></span><br>₪₪₪₪₪₪₪₪₪₪₪₪</H2><H3><span id="scoreDsp"></span></H3></div></div>
 <script>
-const canvas = document.getElementById('thegame');
+const canvas = document.getElementById('game');
 const context = canvas.getContext('2d');   
 const boardRows     = 13;   // board rows
 const boardColumns  = 7;    // board column
@@ -30,8 +30,22 @@ let randomColumn = getRandomColumn();
 let columnPosition = {row  : -2, column  : 3}; //column starts two tiles outside playable area
 let dropTimer = 0;
 let lastTime = 0; // time since previous frame
+let touchstartX = 0;
+let touchendX = 0;
+const touchmin = 5;
+const el = document.getElementById("game");
+el.addEventListener('touchstart', e => {touchstartX = e.changedTouches[0].screenX})    
+el.addEventListener('touchend', e => {touchendX = e.changedTouches[0].screenX
+  checkDirection()})
 initializeBoard();// initialize the board
 update();// call update method
+
+function checkDirection() {
+  if (touchendX < touchstartX-touchmin) shiftLeft();
+  else if (touchendX > touchstartX+touchmin) shiftRight();
+  else shiftColumn(); //tap
+  count=0; //reset timer
+}
 
 // function to initialize the board, setting all values to zero
 function initializeBoard() {
@@ -218,12 +232,10 @@ function drawColumn() {
 document.addEventListener('keydown', (event) => {
     switch (event.key) {
         case 'ArrowLeft' :
-            columnPosition.column--;
-            if (isColumnColliding()) {columnPosition.column++;}
+			shiftLeft();
             break;
         case 'ArrowRight' :
-            columnPosition.column++;
-            if (isColumnColliding()) {columnPosition.column--;}
+			shiftRight();
             break;
         case 'ArrowUp' :
             shiftColumn();
@@ -236,6 +248,10 @@ document.addEventListener('keydown', (event) => {
 			break;
     }
 })  
+
+function shiftRight(){columnPosition.column++; if (isColumnColliding()) {columnPosition.column--;}}
+
+function shiftLeft(){columnPosition.column--; if (isColumnColliding()) {columnPosition.column++;}}
 
 // keyup listener
 document.addEventListener('keyup', (event) => {

@@ -14,13 +14,9 @@ canvas { border: 1px solid white; }
 <div id="nextpiece"><canvas width="80" height="80" id="next" onclick="swapTet()"></canvas>
 SCORE <span id="scoreDsp"></span> / HI <span id="highScoreDsp"></span> / LEVEL <span id="levelDsp"></span></div>
 </div>
-<div class="buttons">
-  <button onclick="slide(37)" class="mem">←</button>
-  <button onclick="rot()">↻</button>
-  <button onclick="swapTet()">⇆</button>
-  <button onclick="down()">↓</button>
-  <button onclick="slide(39)">→</button>
-  </div>
+<!--div class="buttons"><button onclick="slide(37)" class="mem">←</button>
+  <button onclick="rot()">↻</button><button onclick="swapTet()">⇆</button>
+  <button onclick="down()">↓</button><button onclick="slide(39)">→</button></div-->
 </div></div>
 <script>
   //<button onclick="drop()">↡</button>
@@ -40,18 +36,13 @@ function checkDirection() {
   count=0; //reset timer
 }
 const el = document.getElementById("game");
-el.addEventListener('touchstart', e => {
-  touchstartX = e.changedTouches[0].screenX
-})
+el.addEventListener('touchstart', e => {touchstartX = e.changedTouches[0].screenX})
 
-el.addEventListener('touchend', e => {
-  touchendX = e.changedTouches[0].screenX
-  checkDirection()
-})
+el.addEventListener('touchend', e => {touchendX = e.changedTouches[0].screenX
+  checkDirection()})
 
 function getRandomInt(min, max) {
-  min = Math.ceil(min);
-  max = Math.floor(max);
+  min = Math.ceil(min); max = Math.floor(max);
   return Math.floor(Math.random() * (max - min + 1)) + min;
 } // get a random integer between the range of [min,max]
 
@@ -105,15 +96,16 @@ function down() {
 }
 
 function drop() {//hard drop
-    const row2 = tetromino.row+1;
-	for (let i = 0; i < 20; i++)
+    let row = tetromino.row;
+	while (row<21)
 	{
-		if (!isValidMove(tetromino.matrix, row2, tetromino.col)) {
-		  tetromino.row = row2 - 1;
+		row++;
+		if (!isValidMove(tetromino.matrix, row, tetromino.col)) {
+		  tetromino.row = row - 1;
 		  placeTetromino();
 		  return;
 		}
-		tetromino.row = row2; drawTetromino(); row2++;
+		tetromino.row = row;
 	}
 }
 
@@ -336,15 +328,17 @@ function swapTet(){
 	nextTetromino = tempTet;
 }
 
-// listen to keyboard events to move the active tetromino
+// listen to keyboard events
 document.addEventListener('keydown', function(e) {
   if (gameOver) return;
-  // left and right arrow keys (move)
+  // left and right arrows (move)
   if (e.which === 37 || e.which === 39) {slide(e.which);}
-  // up arrow key (rotate)
+  // up arrow (rotate)
   if (e.which === 38) {rot();}
-  // down arrow key (drop)
+  // down arrow (drop)
   if(e.which === 40) {down();}
+  // space (hard drop)
+  if(e.which === 32) {drop();}
   // Z key (swap)
   if(e.which === 90) {swapTet();}
 });

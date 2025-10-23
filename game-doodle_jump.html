@@ -1,4 +1,4 @@
-<!DOCTYPE html><html><head><title>Basic Doodle Jump HTML Game</title><link rel="shortcut icon" href="combo.ico"><meta charset="UTF-8">
+<!DOCTYPE html><html><head><title>Basic Doodle Jump HTML Game</title><link rel="shortcut icon" href="combo.ico"><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
 <style>
 html, body {height: 100%;margin: 0;}
 body {display: flex; align-items: center; justify-content: center;}
@@ -8,6 +8,9 @@ canvas {border: 1px solid black;}
 <script>
 const canvas = document.getElementById('game');
 const context = canvas.getContext('2d');
+const el = document.getElementById("game");
+el.addEventListener('touchstart', e => {touchstartX = e.changedTouches[0].screenX})    
+el.addEventListener('touchend', e => {touchendX = e.changedTouches[0].screenX; checkDirection()})
 
 // width and height of each platform and where platforms start
 const platformWidth = 65;
@@ -33,6 +36,11 @@ let platforms = [{
 // get a random number between the min (inclusive) and max (exclusive)
 function random(min, max) {
   return Math.random() * (max - min) + min;
+}
+
+function checkDirection() {
+  if (touchendX < touchstartX-touchmin) {playerDir= -1; doodle.dx = -3;}
+  else if (touchendX > touchstartX+touchmin) {playerDir= 1; doodle.dx = 3;}
 }
 
 // fill the initial screen with platforms

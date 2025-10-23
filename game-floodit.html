@@ -5,11 +5,11 @@
 .green {background-color: green;}
 .blue {background-color: blue;}
 .purple {background-color: purple;}
-.pink {background-color: pink;}
-#game-table {margin: 0px; border: 0px; padding: 0px; border-spacing: 0px; width: 392; height: 448; background: goldenrod; table-layout: fixed;}
-#status {width: 120px; height: 228px;}
-.piece {width: 28px; height: 30px; border: 0px; padding: 0px; margin: 0px;}
-.button {width: 30px; height: 30px; border: 0px; border-radius: 15px;}
+.cyan {background-color: cyan;}
+#game-table {margin: 0px; border: 0px; padding: 0px; border-spacing: 0px; width: 500; height: 500; background: goldenrod; table-layout: fixed;}
+#status {width: 120px; height: 300px;}
+.piece {width: 40px; height: 40px; border: 0px; padding: 0px; margin: 0px;}
+.button {width: 40px; height: 35px; border: 0px; border-radius: 15px;}
 #button-table {border-spacing: 4px; vertical-align: top;}
 #turn-counter {font-family: sans-serif;}
 @media screen and (min-width: 600px) {#game-board { display: grid;  grid-template-columns: 120px max-content;  grid-template-rows: 80px 140px max-content; }
@@ -17,7 +17,7 @@
     #colour-buttons { grid-column-start: 1; grid-column-end: 2; grid-row-start: 1; }
     #flood-controls { grid-column-start: 1; grid-column-end: 2; grid-row-start: 2; grid-row-end: 3; }
     #status { grid-column-start: 1;  grid-column-end: 2; grid-row-start: 3; grid-row-end: 4;  }}
-@media screen and (max-width: 600px) {#status { max-width: 100px; }
+@media screen and (max-width: 800px) {#status { max-width: 100px; }
     #game-board { display: grid; grid-template-columns: 24vmin 1fr 1fr; gap: 10px; margin: auto; }
     #game-table { grid-column-start: 1; grid-column-end: 4; grid-row-start: 1; width: 94.5vmin; height: 94.5vmin; }
     #colour-buttons { grid-column-start: 1; grid-row-start: 2;  }
@@ -37,7 +37,7 @@
  </tr>
  <tr>
    <td class="button yellow" onclick="choose('yellow')"></td>
-   <td class="button pink" onclick="choose('pink')"></td>
+   <td class="button cyan" onclick="choose('cyan')"></td>
    <td class="button purple" onclick="choose('purple')"></td>
  </tr>
 </table></div> <!-- colour-buttons -->
@@ -82,7 +82,7 @@ var start_table = new Array (n_rows);
 for (var row = 0; row < n_rows; row++) {
     start_table[row] = new Array (n_cols);
 }
-var colours = "blue red green yellow pink purple".split (/\s+/);
+var colours = "blue red green yellow cyan purple".split (/\s+/);
 var userReact = true;
 
 function create_node (type, parent)
@@ -620,7 +620,7 @@ function colourToNumber(colour) {
         return 2;
     case "yellow":
         return 3;
-    case "pink":
+    case "cyan":
         return 4;
     case "purple":
         return 5;
@@ -784,7 +784,7 @@ function letterToMove(letter) {
     switch (letter) {
         case "b": return "blue";
         case "g": return "green";
-        case "p": return "pink";
+        case "p": return "cyan";
         case "l": return "purple";
         case "r": return "red";
         case "y": return "yellow";

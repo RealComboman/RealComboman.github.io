@@ -1,13 +1,13 @@
 @charset "UTF-8";
-#game_content{width: 750px;height: 520px;margin: auto;background-color: rgba(51, 51, 85, 0.4);border: 3px solid rgba(34, 34, 238, 0.4);border-top: 15px solid rgba(34, 34, 238, 0.4);border-radius: 5px;}
+#game_content{width: 600px;height: 520px;margin: auto;background-color: rgba(51, 51, 85, 0.4);border: 3px solid rgba(34, 34, 238, 0.4);border-top: 15px solid rgba(34, 34, 238, 0.4);border-radius: 5px;}
 #grid{position: relative;width: 525px;height: 525px;background: url('../images/grid.png') rgba(32, 32, 32, 0.4);background-repeat: no-repeat;}
-#player_info{position: relative;float: right;top: 60px;width: 230px;text-align: center;}
+#player_info{position: relative;float: right;top: 60px;width: 80px;text-align: center;}
 #player_info p, #game_level{font-size: 18px;margin-left: 30px;color: #226622;}
-#total_score, #level{padding: 70px 0 20px 0;margin-left: 30px;margin-top: -70px;font-size: 20px;height: 130px;font-weight: bold;color: #FFF;background-image: url('../images/rose.png');background-repeat: no-repeat;background-position: top center;}
-#total_score{padding-top: 52px;}
+#total_score, #level{padding: 70px 0 20px 0;margin-left: 30px;margin-top: -70px;font-size: 20px;height: 50px;font-weight: bold;color: #FFF;}
+#total_score{padding-top: 5px;}
 #goal_score{font-size: 14px;}
-#level{margin-bottom: -60px;}
-#level_text{margin-top: 80px;}
+#level{margin-bottom: 10px;}
+#level_text{margin-top: 50px;}
 #time_gauge{position: absolute;border-radius: 20px;left: 30px;top: -10px;width: 15px;height: 400px;background-color: #666;}
 #current_gauge{position: absolute;border-radius: 20px;bottom: 0px;left: 2px;width: 11px;height: 100%;background-color: #00F000;}
 .score_gain{position: absolute;left: 112px;font-size: 15px;font-weight: bold;color: #222;}

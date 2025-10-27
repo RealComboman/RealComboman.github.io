@@ -219,6 +219,9 @@ fetch(
 const{data}=data1;
 const entContent=`🎬<u>Entertainment News</u><br><a href="${data[0].url}" style="color:black;">${data[0].title}</a> <i> — ${data[0].source}</i><br><a href="${data[1].url}"  style="color:black;">${data[1].title}</a> <i> — ${data[1].source}</i><br><a href="${data[2].url}"  style="color:black;">${data[2].title}</a> <i> — ${data[2].source}</i><br>`;
 entDiv.innerHTML=entContent;});}
+//const DEFAULT_FEEDS = ['https://www.makeuseof.com/feed/'];
+//fetch(`https://api.allorigins.win/get?url=${encodeURIComponent(DEFAULT_FEEDS[0])}`).then(res => res.json()).then(data => parseRSS(data.contents));
+
 function Smagic(arg) {var srchURL='';
 if(document.input_box.searchType.value==="null"){return;}
 else if(document.input_box.searchType.value==="pclk"){srchURL='https://picclick.ca/?q='+arg;}

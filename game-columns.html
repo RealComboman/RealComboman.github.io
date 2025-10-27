@@ -37,6 +37,7 @@ const el = document.getElementById("game");
 el.addEventListener('touchstart', e => {touchstartX = e.changedTouches[0].screenX})    
 el.addEventListener('touchend', e => {touchendX = e.changedTouches[0].screenX; checkDirection()})
 initializeBoard();// initialize the board
+alert("K̲e̲y̲b̲o̲a̲r̲d̲\n⇦ \tMove Left\n⇨ \tMove Right\n⇧ \tRotate Colours\n⇩ \tDrop\n\nT̲o̲u̲c̲h̲_S̲c̲r̲e̲e̲n̲\nSwipe Left/Right\nTap to Rotate Colours");
 update();// call update method
 
 function checkDirection() {

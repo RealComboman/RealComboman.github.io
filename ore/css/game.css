@@ -1,7 +1,7 @@
 @charset "UTF-8";
-#game_content{width: 600px;height: 520px;margin: auto;background-color: rgba(51, 51, 85, 0.4);border: 3px solid rgba(34, 34, 238, 0.4);border-top: 15px solid rgba(34, 34, 238, 0.4);border-radius: 5px;}
+#game_content{width: 560px;height: 520px;margin: auto;background-color: rgba(51, 51, 85, 0.4);border: 3px solid rgba(34, 34, 238, 0.4);border-top: 15px solid rgba(34, 34, 238, 0.4);border-radius: 5px;}
 #grid{position: relative;width: 525px;height: 525px;background: url('../images/grid.png') rgba(32, 32, 32, 0.4);background-repeat: no-repeat;}
-#player_info{position: relative;float: right;top: 60px;width: 70px;text-align: center;}
+#player_info{position: relative;float: right;top: 60px;width: 55px;text-align: center;}
 #player_info p, #game_level{font-size: 18px;margin-left: 30px;color: #226622;}
 #total_score, #level{padding: 70px 0 20px 0;margin-left: 50px;margin-top: -60px;font-size: 20px;height: 50px;font-weight: bold;color: #FFF;}
 #total_score{padding-top: 5px;}

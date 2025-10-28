@@ -37,20 +37,20 @@ Game.updateScore = function(destroyedGems) {
 	gainSpan.className  ='score_gain';
 	gainSpan.innerHTML = '+' + gain;
 	gainSpan.style.top = yOrigin + 'px';
-	get('#player_info').insertBefore(gainSpan, get('#total_score'));
+//	get('#player_info').insertBefore(gainSpan, get('#total_score'));
 
 	// The gain animation
-	var gainMove = setInterval(function() {
-		var y = parseInt(gainSpan.style.top.substring(0, gainSpan.style.top.indexOf('px')));
-		if (y >= yOrigin + 35) {
-			clearInterval(gainMove);
-			if (gainSpan.parentNode) {
-				get('#player_info').removeChild(gainSpan);
-			}
-			return;
-		}
-		gainSpan.style.top = (y+yShift) + 'px';
-	}, 60);
+///	var gainMove = setInterval(function() {
+	///	var y = parseInt(gainSpan.style.top.substring(0, gainSpan.style.top.indexOf('px')));
+///		if (y >= yOrigin + 35) {
+///			clearInterval(gainMove);
+///			if (gainSpan.parentNode) {
+///				get('#player_info').removeChild(gainSpan);
+///			}
+///			return;
+///		}
+///		gainSpan.style.top = (y+yShift) + 'px';
+///	}, 60);
 
 	get('#current_score').innerHTML = Game.score.current;
 };

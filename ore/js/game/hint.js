@@ -61,12 +61,12 @@ Game.showHint = function() {
 	// We place the arrow at the middle of the gems to swap
 	if (gems[0].x() == gems[1].x()) {	// If the gems are in the same column.
 		width = 19;
-		height = 65;
+		height = 50; ///65
 		arrow.style.backgroundImage = 'url("./ore/images/sprites/v_arrow.png")';
 		arrow.style.left = (left + Game.TILE_SIZE / 2 - (width / 2)) + 'px';
 		arrow.style.top = (top + Game.TILE_SIZE / 2 - (height - Game.TILE_SIZE) / 2) + 'px';
 	}else {
-		width = 65;
+		width = 50; ///65
 		height = 19;
 		arrow.style.backgroundImage = 'url("./ore/images/sprites/h_arrow.png")';
 		arrow.style.left = (left + Game.TILE_SIZE / 2 - (width - Game.TILE_SIZE) / 2) + 'px';

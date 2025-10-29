@@ -2,7 +2,7 @@
 
 var Game = {};	// The game instance
 Game.GRID_SIZE = 8;
-Game.TILE_SIZE = 65;
+Game.TILE_SIZE = 50; //65
 
 /**
  * Initializes the game

@@ -5,10 +5,10 @@ Game.Gem = function(x, y, value) {
 	if (this == window) {
 		throw new Error('Gem() is a constructor, you can only call it with the keyword "new"');
 	}
-	var left = ((60 * x) + (5 * (x + 1))) + 'px',
-		top = ((60 * y) + (5 * (y + 1))) + 'px',
+	var left = ((45 * x) + (5 * (x + 1))) + 'px',
+		top = ((45 * y) + (5 * (y + 1))) + 'px',
 		gem = document.createElement('span');
-
+///60 5 1 60 5 1
 	gem.className = 'gem item';
 	gem.val = value;
 	gem.id = 'tile' + y + '_' + x;

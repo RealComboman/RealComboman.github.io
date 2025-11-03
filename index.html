@@ -4,6 +4,7 @@
 h1 {font-family: 'Audiowide', Helvetica, sans-serif; font-size:36px;}
 h2 {font-size: 30px;}
 body {font-family:'Arial',Helvetica,sans-serif; font-size:16px;}
+button {border-radius: 10px; padding: 2px;}
 a:link {color:red; text-decoration:none;}
 a:visited {color:red; background-color:transparent; text-decoration:none;}
 a:hover{color:red; background-color:transparent; text-decoration:underline;}
@@ -212,8 +213,7 @@ fetch("https://api.thenewsapi.com/v1/news/top?api_token=dZaXaOu3iHCayAZKwcspB8U3
 const{data}=data1;
 const sciContent=`🧪<u>Science News</u><br><a href="${data[0].url}" style="color:black;">${data[0].title}</a> <i> — ${data[0].source}</i><br><a href="${data[1].url}"  style="color:black;">${data[1].title}</a> <i> — ${data[1].source}</i><br><a href="${data[2].url}"  style="color:black;">${data[2].title}</a> <i> — ${data[2].source}</i><br>`;
 sciDiv.innerHTML=sciContent;});
-fetch(
-"https://api.thenewsapi.com/v1/news/top?api_token=dZaXaOu3iHCayAZKwcspB8U3cvpsKhz0c3b4fXZt&locale=ca,us&limit=3&language=en&categories=entertainment", requestOptions)
+fetch("https://api.thenewsapi.com/v1/news/top?api_token=dZaXaOu3iHCayAZKwcspB8U3cvpsKhz0c3b4fXZt&locale=ca,us&limit=3&language=en&categories=entertainment", requestOptions)
 .then(response => response.json())
 .then(data1 => {
 const{data}=data1;

@@ -59,7 +59,7 @@ Game.createGrid = function() {
 
 	// We choose a random background
 	do {
-		bg = Math.floor(1 + Math.random() * 3);
+		bg = Math.floor(1 + Math.random() * 6);
 		get('#content').style.backgroundImage = 'url("./ore/images/background_hover.png"), url("./ore/images/background' + bg + '.jpg")';
 	} while (bg === Game.background);
 	Game.background = bg;

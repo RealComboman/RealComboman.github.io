@@ -128,15 +128,15 @@ const rndSeed='d94893f5d0fa394f6ec042550b4355db', weatherDiv=document.getElement
 let cityInput = localStorage.getItem("myCity"); //document.getElementById('city').value = cityInput; 
 let newsInput = localStorage.getItem("myNews");
 GetWeather(); if (newsInput!='0'){GetNews();}
-document.getElementById("Othm").innerHTML='X'; date=new Date(); //theme doodle
+document.getElementById("Othm").innerHTML='X'; date=new Date(); //theme 0=january/sunday
 if(date.getMonth()==0 && date.getDate()==1){document.getElementById("Othm").innerHTML='️🎇';}
 else if(date.getMonth()==0 && date.getDate()==13){document.getElementById("Othm").innerHTML='🎂';}
 else if(date.getMonth()==1 && date.getDate()==2){document.getElementById("Othm").innerHTML='🐹';} //ghog
 else if(date.getMonth()==1 && date.getDate()==14){document.getElementById("Othm").innerHTML='❤️';}
-else if(date.getMonth()==2 && date.getDate()==14){document.getElementById("Othm").innerHTML='️🥧';} //pi
-else if(date.getMonth()==2 && date.getDate()>7 && date.getDate()<15 && date.getDay()==0){document.getElementById("Othm").innerHTML='⏰⤸';} //fwd
+else if(date.getMonth()==2 && date.getDate()==14){document.getElementById("Othm").innerHTML='️<a href="https://www.timeanddate.com/holidays/fun/pi-day">🥧</a>';} //pi
+else if(date.getMonth()==2 && date.getDate()>7 && date.getDate()<15 && date.getDay()==0){document.getElementById("Othm").innerHTML='<a href="https://www.timeanddate.com/time/dst">⏰⤸</a>';} //fwd
 else if(date.getMonth()==2 && date.getDate()>18 && date.getDate()<22){document.getElementById("Othm").innerHTML='🌻';} //spr
-else if(date.getMonth()==4 && date.getDate()==4){document.getElementById("Othm").innerHTML='️🚀';}
+else if(date.getMonth()==4 && date.getDate()==4){document.getElementById("Othm").innerHTML='️<a href="https://www.starwars.com/star-wars-day">🪐</a>';}
 else if(date.getMonth()==4 && date.getDate()==5){document.getElementById("Othm").innerHTML='️🌮';}
 else if(date.getMonth()==4 && date.getDate()>17 && date.getDate()<25 && date.getDay()==1){document.getElementById("Othm").innerHTML='👑';}
 else if(date.getMonth()==5 && date.getDate()>19 && date.getDate()<22){document.getElementById("Othm").innerHTML='🌞';} //sum
@@ -149,9 +149,11 @@ else if(date.getMonth()==8 && date.getDate()<8 && date.getDay()==1){document.get
 else if(date.getMonth()==8 && date.getDate()>21 && date.getDate()<24){document.getElementById("Othm").innerHTML='🍂';} //fall
 else if(date.getMonth()==9 && date.getDate()>7 && date.getDate()<15 && date.getDay()==1){document.getElementById("Othm").innerHTML='🦃';}
 else if(date.getMonth()==9 && date.getDate()==31){document.getElementById("Othm").innerHTML='🎃';}
-else if(date.getMonth()==10 && date.getDate()<8 && date.getDay()==0){document.getElementById("Othm").innerHTML='⤹🕰';} //bk
+else if(date.getMonth()==10 && date.getDate()<8 && date.getDay()==0){document.getElementById("Othm").innerHTML='<a href="https://www.timeanddate.com/time/dst">⤹🕰</a>';} //bk
 else if(date.getMonth()==10 && date.getDate()==11){document.getElementById("Othm").innerHTML='🌸';}
-else if(date.getMonth()==10 && date.getDate()>1 && date.getDate()<9 && date.getDay()==2){document.getElementById("Othm").innerHTML='🗳';} //USel
+else if(date.getMonth()==10 && date.getDate()>21 && date.getDate()<29 && date.getDay()==4{document.getElementById("Othm").innerHTML='🦃';}//USthk
+else if(date.getMonth()==10 && date.getDate()>22 && date.getDate()<30 && date.getDay()==5{document.getElementById("Othm").innerHTML='🛍';}//blkfri
+else if(date.getMonth()==10 && date.getDate()>1 && date.getDate()<9 && date.getDay()==2){document.getElementById("Othm").innerHTML='<a href="https://www.usa.gov/election-day">🗳</a>';} //USel
 else if(date.getMonth()==11 && date.getDate()>19 && date.getDate()<22){document.getElementById("Othm").innerHTML='❄️';} //winter
 else if(date.getMonth()==11 && date.getDate()==25){document.getElementById("Othm").innerHTML='⛄';}
 else {document.getElementById("Othm").innerHTML='o';}

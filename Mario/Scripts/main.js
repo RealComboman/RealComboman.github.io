@@ -1,16 +1,8 @@
-﻿/*
- * *****
- * WRITTEN BY FLORIAN RAPPL, 2012.
+﻿/* WRITTEN BY FLORIAN RAPPL, 2012.
  * florian-rappl.de
- * mail@florian-rappl.de
- * *****
- */
+ * mail@florian-rappl.de */
 
-/*
- * -------------------------------------------
- * BASE CLASS
- * -------------------------------------------
- */
+/* BASE CLASS */
 var Base = Class.extend({
 	init: function(x, y) {
 		this.setPosition(x || 0, y || 0);
@@ -42,7 +34,6 @@ var Base = Class.extend({
 		if(id) {
 			if(this.frameID === id)
 				return true;
-			
 			this.frameID = id;
 		}
 		
@@ -61,13 +52,10 @@ var Base = Class.extend({
 	playFrame: function() {
 		if(this.frameTick && this.view) {
 			this.frameCount++;
-			
 			if(this.frameCount >= this.frameTick) {			
 				this.frameCount = 0;
-				
 				if(this.currentFrame === this.frames)
 					this.currentFrame = 0;
-					
 				var $el = this.view;
 				$el.css('background-position', '-' + (this.image.x + this.width * ((this.rewindFrames ? this.frames - 1 : 0) - this.currentFrame)) + 'px -' + this.image.y + 'px');
 				this.currentFrame++;
@@ -76,11 +64,7 @@ var Base = Class.extend({
 	},
 });
 
-/*
- * -------------------------------------------
- * GAUGE CLASS
- * -------------------------------------------
- */
+/* GAUGE CLASS*/
 var Gauge = Base.extend({
 	init: function(id, startImgX, startImgY, fps, frames, rewind) {
 		this._super(0, 0);
@@ -91,11 +75,7 @@ var Gauge = Base.extend({
 	},
 });
 
-/*
- * -------------------------------------------
- * LEVEL CLASS
- * -------------------------------------------
- */
+/* LEVEL CLASS*/
 var Level = Base.extend({
 	init: function(id) {
 		this.world = $('#' + id);
@@ -143,7 +123,6 @@ var Level = Base.extend({
 		if(this.active) {
 			if(this.loop)
 				this.pause();
-
 			this.reset();
 		}
 			
@@ -314,11 +293,7 @@ var Level = Base.extend({
 	},
 });
 
-/*
- * -------------------------------------------
- * FIGURE CLASS
- * -------------------------------------------
- */
+/* FIGURE CLASS*/
 var Figure = Base.extend({
 	init: function(x, y, level) {
 		this.view = $(DIV).addClass(CLS_FIGURE).appendTo(level.world);
@@ -499,11 +474,7 @@ var Figure = Base.extend({
 	},
 });
 
-/*
- * -------------------------------------------
- * MATTER CLASS
- * -------------------------------------------
- */
+/* MATTER CLASS*/
 var Matter = Base.extend({
 	init: function(x, y, blocking, level) {
 		this.blocking = blocking;
@@ -532,22 +503,14 @@ var Matter = Base.extend({
 	},
 });
 
-/*
- * -------------------------------------------
- * GROUND CLASS
- * -------------------------------------------
- */
+/* GROUND CLASS*/
 var Ground = Matter.extend({
 	init: function(x, y, blocking, level) {
 		this._super(x, y, blocking, level);
 	},
 });
 
-/*
- * -------------------------------------------
- * GRASS CLASSES
- * -------------------------------------------
- */
+/* GRASS CLASSES*/
 var TopGrass = Ground.extend({
 	init: function(x, y, level) {
 		var blocking = ground_blocking.top;
@@ -598,11 +561,7 @@ var TopLeftRoundedGrass = Ground.extend({
 	},
 }, 'grass_top_left_rounded');
 
-/*
- * -------------------------------------------
- * STONE CLASSES
- * -------------------------------------------
- */
+/* STONE CLASSES*/
 var Stone = Ground.extend({
 	init: function(x, y, level) {
 		var blocking = ground_blocking.all;
@@ -618,11 +577,7 @@ var BrownBlock = Ground.extend({
 	},
 }, 'brown_block');
 
-/*
- * -------------------------------------------
- * PIPE CLASSES
- * -------------------------------------------
- */
+/* PIPE CLASSES*/
 var RightTopPipe = Ground.extend({
 	init: function(x, y, level) {
 		var blocking = ground_blocking.all;
@@ -652,11 +607,7 @@ var LeftPipe = Ground.extend({
 	},
 }, 'pipe_left');
 
-/*
- * -------------------------------------------
- * DECORATION CLASS
- * -------------------------------------------
- */
+/* DECORATION CLASS*/
 var Decoration = Matter.extend({
 	init: function(x, y, level) {
 		this._super(x, y, ground_blocking.none, level);
@@ -678,11 +629,7 @@ var Decoration = Matter.extend({
 	},
 });
 
-/*
- * -------------------------------------------
- * DECORATION GRASS CLASSES
- * -------------------------------------------
- */
+/* DECORATION GRASS CLASSES*/
 var TopRightCornerGrass = Decoration.extend({
 	init: function(x, y, level) {
 		this._super(x, y, level);
@@ -696,11 +643,7 @@ var TopLeftCornerGrass = Decoration.extend({
 	},
 }, 'grass_top_left_corner');
 
-/*
- * -------------------------------------------
- * SOIL CLASSES
- * -------------------------------------------
- */
+/* SOIL CLASSES*/
 var Soil = Decoration.extend({
 	init: function(x, y, level) {
 		this._super(x, y, level);
@@ -720,11 +663,7 @@ var LeftSoil = Decoration.extend({
 	},
 }, 'soil_left');
 
-/*
- * -------------------------------------------
- * BUSH CLASSES
- * -------------------------------------------
- */
+/* BUSH CLASSES*/
 var RightBush = Decoration.extend({
 	init: function(x, y, level) {
 		this._super(x, y, level);
@@ -756,11 +695,7 @@ var LeftBush = Decoration.extend({
 	},
 }, 'bush_left');
 
-/*
- * -------------------------------------------
- * GRASS-SOIL CLASSES
- * -------------------------------------------
- */
+/* GRASS-SOIL CLASSES*/
 var TopRightGrassSoil = Decoration.extend({
 	init: function(x, y, level) {
 		this._super(x, y, level);
@@ -774,11 +709,7 @@ var TopLeftGrassSoil = Decoration.extend({
 	},
 }, 'grass_top_left_rounded_soil');
 
-/*
- * -------------------------------------------
- * PLANTED SOIL CLASSES
- * -------------------------------------------
- */
+/* PLANTED SOIL CLASSES*/
 var RightPlantedSoil = Decoration.extend({
 	init: function(x, y, level) {
 		this._super(x, y, level);
@@ -798,11 +729,7 @@ var LeftPlantedSoil = Decoration.extend({
 	},
 }, 'planted_soil_left');
 
-/*
- * -------------------------------------------
- * PIPE DECORATION
- * -------------------------------------------
- */
+/* PIPE DECORATION*/
 var RightPipeGrass = Decoration.extend({
 	init: function(x, y, level) {
 		this._super(x, y, level);
@@ -828,11 +755,7 @@ var LeftPipeSoil = Decoration.extend({
 	},
 }, 'pipe_left_soil');
 
-/*
- * -------------------------------------------
- * ITEM CLASS
- * -------------------------------------------
- */
+/* ITEM CLASS*/
 var Item = Matter.extend({
 	init: function(x, y, isBlocking, level) {
 		this.isBouncing = false;
@@ -882,11 +805,7 @@ var Item = Matter.extend({
 	},
 });
 
-/*
- * -------------------------------------------
- * COIN CLASSES
- * -------------------------------------------
- */
+/* COIN CLASSES*/
 var Coin = Item.extend({
 	init: function(x, y, level) {
 		this._super(x, y, false, level);
@@ -973,22 +892,14 @@ var MultipleCoinBox = CoinBox.extend({
 	},
 }, 'multiple_coinbox');
 
-/*
- * -------------------------------------------
- * ITEMFIGURE CLASS
- * -------------------------------------------
- */
+/* ITEMFIGURE CLASS*/
 var ItemFigure = Figure.extend({
 	init: function(x, y, level) {
 		this._super(x, y, level);
 	},
 });
 
-/*
- * -------------------------------------------
- * STARBOX CLASS
- * -------------------------------------------
- */
+/* STARBOX CLASS*/
 var StarBox = Item.extend({
 	init: function(x, y, level) {
 		this._super(x, y, true, level);
@@ -1043,11 +954,7 @@ var Star = ItemFigure.extend({
 	},
 });
 
-/*
- * -------------------------------------------
- * MUSHROOMBOX CLASS
- * -------------------------------------------
- */
+/* MUSHROOMBOX CLASS*/
 var MushroomBox = Item.extend({
 	init: function(x, y, level) {
 		this._super(x, y, true, level);
@@ -1121,11 +1028,7 @@ var Mushroom = ItemFigure.extend({
 	},
 });
 
-/*
- * -------------------------------------------
- * BULLET CLASS
- * -------------------------------------------
- */
+/* BULLET CLASS*/
 var Bullet = Figure.extend({
 	init: function(parent) {
 		this._super(parent.x + 31, parent.y + 14, parent.level);
@@ -1163,22 +1066,14 @@ var Bullet = Figure.extend({
 	},
 });
 
-/*
- * -------------------------------------------
- * HERO CLASS
- * -------------------------------------------
- */
+/* HERO CLASS*/
 var Hero = Figure.extend({
 	init: function(x, y, level) {
 		this._super(x, y, level);
 	},
 });
 
-/*
- * -------------------------------------------
- * MARIO CLASS
- * -------------------------------------------
- */
+/* MARIO CLASS*/
 var Mario = Hero.extend({
 	init: function(x, y, level) {
 		this.standSprites = [
@@ -1421,11 +1316,7 @@ var Mario = Hero.extend({
 	},
 }, 'mario');
 
-/*
- * -------------------------------------------
- * ENEMY CLASS
- * -------------------------------------------
- */
+/* ENEMY CLASS*/
 var Enemy = Figure.extend({
 	init: function(x, y, level) {
 		this._super(x, y, level);
@@ -1486,11 +1377,7 @@ var Enemy = Figure.extend({
 	},
 });
 
-/*
- * -------------------------------------------
- * GUMPA CLASS
- * -------------------------------------------
- */
+/* GUMPA CLASS*/
 var Gumpa = Enemy.extend({
 	init: function(x, y, level) {
 		this._super(x, y, level);
@@ -1543,11 +1430,7 @@ var Gumpa = Enemy.extend({
 	},
 }, 'ballmonster');
 
-/*
- * -------------------------------------------
- * TURTLESHELL CLASS
- * -------------------------------------------
- */
+/* TURTLESHELL CLASS*/
 var TurtleShell = Enemy.extend({
 	init: function(x, y, level) {
 		this._super(x, y, level);
@@ -1606,11 +1489,7 @@ var TurtleShell = Enemy.extend({
 	},
 }, 'shell');
 
-/*
- * -------------------------------------------
- * GREENTURTLE CLASS
- * -------------------------------------------
- */
+/* GREENTURTLE CLASS*/
 var GreenTurtle = Enemy.extend({
 	init: function(x, y, level) {
 		this.walkSprites = [
@@ -1699,11 +1578,7 @@ var GreenTurtle = Enemy.extend({
 	},
 }, 'greenturtle');
 
-/*
- * -------------------------------------------
- * SPIKEDTURTLE CLASS
- * -------------------------------------------
- */
+/* SPIKEDTURTLE CLASS*/
 var SpikedTurtle = Enemy.extend({
 	init: function(x, y, level) {
 		this._super(x, y, level);
@@ -1753,11 +1628,7 @@ var SpikedTurtle = Enemy.extend({
 	},
 }, 'spikedturtle');
 
-/*
- * -------------------------------------------
- * PLANT CLASS
- * -------------------------------------------
- */
+/* PLANT CLASS*/
 var Plant = Enemy.extend({
 	init: function(x, y, level) {
 		this._super(x, y, level);
@@ -1783,11 +1654,7 @@ var Plant = Enemy.extend({
 	},
 });
 
-/*
- * -------------------------------------------
- * STATICPLANT CLASS
- * -------------------------------------------
- */
+/* STATICPLANT CLASS*/
 var StaticPlant = Plant.extend({
 	init: function(x, y, level) {
 		this._super(x, y, level);
@@ -1814,11 +1681,7 @@ var StaticPlant = Plant.extend({
 	},
 }, 'staticplant');
 
-/*
- * -------------------------------------------
- * PIPEPLANT CLASS
- * -------------------------------------------
- */
+/* PIPEPLANT CLASS*/
 var PipePlant = Plant.extend({
 	init: function(x, y, level) {
 		this.bottom = y - 48;
@@ -1892,13 +1755,10 @@ var PipePlant = Plant.extend({
 	},
 }, 'pipeplant');
 
-/*
- * -------------------------------------------
- * DOCUMENT READY STARTUP METHOD
- * -------------------------------------------
- */
+/* DOCUMENT READY STARTUP METHOD*/
 $(document).ready(function() {
 	var level = new Level('world');
+alert("\t\t𝕊𝕌ℙ𝔼ℝ ℂ𝕆𝕄𝔹𝕆𝕋𝔼ℂℍ 𝕎𝕆ℝ𝕃𝔻\n\nK̲e̲y̲b̲o̲a̲r̲d̲\n🢀 \tMove Left\n🢂 \tMove Right\n🢃 \tDuck\n🇿 \tJump\n🇽\tRun/Fireball");
 	level.load(definedLevels[0]);
 	level.start();
 	keys.bind();

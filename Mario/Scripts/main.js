@@ -301,8 +301,8 @@ var Level = Base.extend({
 		var img = BASEPATH + 'backgrounds/' + ((index < 10 ? '0' : '') + index) + '.png';
 		this.world.parent().css({
 			backgroundImage : c2u(img),
-			backgroundPosition : '0 -380px'
-		});
+			backgroundPosition : '0 -10px'
+		}); //			backgroundPosition : '0 -380px'
 		this._super(img, 0, 0);
 	},
 	setSize: function(width, height) {
@@ -310,7 +310,7 @@ var Level = Base.extend({
 	},
 	setParallax: function(x) {
 		this.setPosition(x, this.y);
-		this.world.parent().css('background-position', '-' + Math.floor(x / 3) + 'px -380px');
+		this.world.parent().css('background-position', '-' + Math.floor(x / 3) + 'px -10px'); //'px -380px');
 	},
 });
 

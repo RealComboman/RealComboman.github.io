@@ -45,6 +45,7 @@
    z-index: 1000;
    font-family: 'SMB';
  }
+
  
  .gaugeSprite {
    margin: 0;
@@ -55,6 +56,10 @@
  
  #coinNumber {
    left: 0;
+ }
+ 
+ #titles {
+  left: 500px;
  }
  
  #liveNumber {

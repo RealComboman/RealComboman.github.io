@@ -173,6 +173,7 @@ function focus(){document.input_box.command.focus();}
 function SetCity(arg){cityInput = arg; localStorage.setItem("myCity", arg); GetWeather();}
 function SetNews(arg){newsInput = arg; localStorage.setItem("myNews", arg); GetNews();}
 
+
 function GetWeather(){
 const apiUrl=`https://api.openweathermap.org/data/2.5/weather?q=${cityInput}&appid=${rndSeed}&units=metric`;
 fetch(apiUrl)
@@ -190,7 +191,17 @@ if(data.weather[0].icon==="10d"||data.weather[0].icon==="10n"){wicon="️🌧";}
 if(data.weather[0].icon==="11d"||data.weather[0].icon==="11n"){wicon="🌩️";}
 if(data.weather[0].icon==="13d"||data.weather[0].icon==="13n"){wicon="❄️";}
 if(data.weather[0].icon==="50d"||data.weather[0].icon==="50n"){wicon="️🌫";}
-const weatherContent=`<b><a href="http://www.theweathernetwork.com" target="_blank" style="font-size:20px; color:black;">${name} &nbsp; ${wicon}</a></b><br>${temperature}°C<br>${description}<br>${humidity}%RH ${pres}kPa</b>`;
+date=new Date(); var m = Math.abs(((date.getTime() / 86400000) - 18256.8) / 29.53059);
+var phase = (m - Math.floor(m)); var micon="❓"; var mdesc="Error";
+if(phase<0.125){micon="🌑";mdesc="New Moon";}
+else if(phase<0.25){micon="🌒";mdesc="Waxing Crescent";}
+else if(phase<0.375){micon="🌓";mdesc="First Quarter";}
+else if(phase<0.5){micon="🌔";mdesc="Waxing Gibbous";}
+else if(phase<0.625){micon="🌕";mdesc="Full Moon";}
+else if(phase<0.75){micon="🌖";mdesc="Waning Gibbous";}
+else if(phase<0.875){micon="🌗";mdesc="Last Quarter";}
+else {micon="🌘";mdesc="Waning Crescent";}
+const weatherContent=`<b><a href="http://www.theweathernetwork.com" target="_blank" style="font-size:20px; color:black;">${name} &nbsp; ${wicon}</a></b><br>${temperature}°C<br>${description}<br>${humidity}%RH ${pres}kPa<br>Moon: ${micon} ${mdesc}</b>`;
 weatherDiv.innerHTML=weatherContent;})
 .catch(error => {console.error('Err:', error); weatherDiv.innerHTML='<p>Failed to get weather data</p>';});
 }

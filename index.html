@@ -201,7 +201,7 @@ else if(phase<0.625){micon="🌕";mdesc="Full Moon";}
 else if(phase<0.75){micon="🌖";mdesc="Waning Gibbous";}
 else if(phase<0.875){micon="🌗";mdesc="Last Quarter";}
 else {micon="🌘";mdesc="Waning Crescent";}
-const weatherContent=`<b><a href="http://www.theweathernetwork.com" target="_blank" style="font-size:20px; color:black;">${name} &nbsp; ${wicon}</a></b><br>${temperature}°C<br>${description}<br>${humidity}%RH ${pres}kPa<br>Moon: ${micon} ${mdesc}</b>`;
+const weatherContent=`<b><a href="http://www.theweathernetwork.com" target="_blank" style="font-size:20px; color:black;">${name} &nbsp; ${wicon}</a></b><br>${temperature}°C<br>${description}<br>${humidity}%RH ${pres}kPa<br>${micon} ${mdesc}</b>`;
 weatherDiv.innerHTML=weatherContent;})
 .catch(error => {console.error('Err:', error); weatherDiv.innerHTML='<p>Failed to get weather data</p>';});
 }

@@ -1,8 +1,6 @@
 const counterDOM = document.getElementById('counter');  
 const endDOM = document.getElementById('end');  
-
 const scene = new THREE.Scene();
-
 const distance = 500;
 const camera = new THREE.OrthographicCamera( window.innerWidth/-2, window.innerWidth/2, window.innerHeight / 2, window.innerHeight / -2, 0.1, 10000 );
 
@@ -15,21 +13,16 @@ const initialCameraPositionX = Math.tan(camera.rotation.y)*Math.sqrt(distance**2
 camera.position.y = initialCameraPositionY;
 camera.position.x = initialCameraPositionX;
 camera.position.z = distance;
-
 const zoom = 2;
-
 const chickenSize = 15;
-
 const positionWidth = 42;
 const columns = 17;
 const boardWidth = positionWidth*columns;
-
 const stepTime = 200; // Miliseconds it takes for the chicken to take a step forward, backward, left or right
 
 let lanes;
 let currentLane;
 let currentColumn;
-
 let previousTimestamp;
 let startMoving;
 let moves;
@@ -44,24 +37,12 @@ const truckFrontTexture = new Texture(30,30,[{x: 15, y: 0, w: 10, h: 30 }]);
 const truckRightSideTexture = new Texture(25,30,[{x: 0, y: 15, w: 10, h: 10 }]);
 const truckLeftSideTexture = new Texture(25,30,[{x: 0, y: 5, w: 10, h: 10 }]);
 
-const generateLanes = () => [-9,-8,-7,-6,-5,-4,-3,-2,-1,0,1,2,3,4,5,6,7,8,9].map((index) => {
-  const lane = new Lane(index);
-  lane.mesh.position.y = index*positionWidth*zoom;
-  scene.add( lane.mesh );
-  return lane;
-}).filter((lane) => lane.index >= 0);
+const generateLanes = () => [-9,-8,-7,-6,-5,-4,-3,-2,-1,0,1,2,3,4,5,6,7,8,9].map((index) => {const lane = new Lane(index); lane.mesh.position.y = index*positionWidth*zoom; scene.add( lane.mesh ); return lane;}).filter((lane) => lane.index >= 0);
 
-const addLane = () => {
-  const index = lanes.length;
-  const lane = new Lane(index);
-  lane.mesh.position.y = index*positionWidth*zoom;
-  scene.add(lane.mesh);
-  lanes.push(lane);
-}
+const addLane = () => {const index = lanes.length; const lane = new Lane(index); lane.mesh.position.y = index*positionWidth*zoom; scene.add(lane.mesh); lanes.push(lane);}
 
 const chicken = new Chicken();
 scene.add( chicken );
-
 hemiLight = new THREE.HemisphereLight(0xffffff, 0xffffff, 0.6);
 scene.add(hemiLight)
 
@@ -97,32 +78,23 @@ const threeHeights = [20,45,60];
 
 const initaliseValues = () => {
   lanes = generateLanes()
-
   currentLane = 0;
   currentColumn = Math.floor(columns/2);
-
   previousTimestamp = null;
-
   startMoving = false;
   moves = [];
   stepStartTimestamp;
-
   chicken.position.x = 0;
   chicken.position.y = 0;
-
   camera.position.y = initialCameraPositionY;
   camera.position.x = initialCameraPositionX;
-
   dirLight.position.x = initialDirLightPositionX;
   dirLight.position.y = initialDirLightPositionY;
 }
 
 initaliseValues();
 
-const renderer = new THREE.WebGLRenderer({
-  alpha: true,
-  antialias: true
-});
+const renderer = new THREE.WebGLRenderer({alpha: true, antialias: true});
 renderer.shadowMap.enabled = true;
 renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 renderer.setSize( window.innerWidth, window.innerHeight );
@@ -154,7 +126,6 @@ function Wheel() {
 function Car() {
   const car = new THREE.Group();
   const color = vechicleColors[Math.floor(Math.random() * vechicleColors.length)];
-  
   const main = new THREE.Mesh(
     new THREE.BoxBufferGeometry( 60*zoom, 30*zoom, 15*zoom ), 
     new THREE.MeshPhongMaterial( { color, flatShading: true } )
@@ -198,8 +169,6 @@ function Car() {
 function Truck() {
   const truck = new THREE.Group();
   const color = vechicleColors[Math.floor(Math.random() * vechicleColors.length)];
-
-
   const base = new THREE.Mesh(
     new THREE.BoxBufferGeometry( 100*zoom, 25*zoom, 5*zoom ), 
     new THREE.MeshLambertMaterial( { color: 0xb4c6fc, flatShading: true } )
@@ -233,25 +202,20 @@ function Truck() {
   cabin.castShadow = true;
   cabin.receiveShadow = true;
   truck.add( cabin );
-
   const frontWheel = new Wheel();
   frontWheel.position.x = -38*zoom;
   truck.add( frontWheel );
-
   const middleWheel = new Wheel();
   middleWheel.position.x = -10*zoom;
   truck.add( middleWheel );
-
   const backWheel = new Wheel();
   backWheel.position.x = 30*zoom;
   truck.add( backWheel );
-
   return truck;  
 }
 
 function Three() {
   const three = new THREE.Group();
-
   const trunk = new THREE.Mesh(
     new THREE.BoxBufferGeometry( 15*zoom, 15*zoom, 20*zoom ), 
     new THREE.MeshPhongMaterial( { color: 0x4d2926, flatShading: true } )
@@ -260,9 +224,7 @@ function Three() {
   trunk.castShadow = true;
   trunk.receiveShadow = true;
   three.add(trunk);
-
   height = threeHeights[Math.floor(Math.random()*threeHeights.length)];
-
   const crown = new THREE.Mesh(
     new THREE.BoxBufferGeometry( 30*zoom, 30*zoom, height*zoom ), 
     new THREE.MeshLambertMaterial( { color: 0x7aa21d, flatShading: true } )
@@ -271,13 +233,11 @@ function Three() {
   crown.castShadow = true;
   crown.receiveShadow = false;
   three.add(crown);
-
   return three;  
 }
 
 function Chicken() {
   const chicken = new THREE.Group();
-
   const body = new THREE.Mesh(
     new THREE.BoxBufferGeometry( chickenSize*zoom, chickenSize*zoom, 20*zoom ), 
     new THREE.MeshPhongMaterial( { color: 0xffffff, flatShading: true } )
@@ -286,7 +246,6 @@ function Chicken() {
   body.castShadow = true;
   body.receiveShadow = true;
   chicken.add(body);
-
   const rowel = new THREE.Mesh(
     new THREE.BoxBufferGeometry( 2*zoom, 4*zoom, 2*zoom ), 
     new THREE.MeshLambertMaterial( { color: 0xF0619A, flatShading: true } )
@@ -301,7 +260,6 @@ function Chicken() {
 
 function Road() {
   const road = new THREE.Group();
-
   const createSection = color => new THREE.Mesh(
     new THREE.PlaneBufferGeometry( boardWidth*zoom, positionWidth*zoom ), 
     new THREE.MeshPhongMaterial( { color } )
@@ -310,21 +268,17 @@ function Road() {
   const middle = createSection(0x454A59);
   middle.receiveShadow = true;
   road.add(middle);
-
   const left = createSection(0x393D49);
   left.position.x = - boardWidth*zoom;
   road.add(left);
-
   const right = createSection(0x393D49);
   right.position.x = boardWidth*zoom;
   road.add(right);
-
   return road;
 }
 
 function Grass() {
   const grass = new THREE.Group();
-
   const createSection = color => new THREE.Mesh(
     new THREE.BoxBufferGeometry( boardWidth*zoom, positionWidth*zoom, 3*zoom ), 
     new THREE.MeshPhongMaterial( { color } )
@@ -333,15 +287,12 @@ function Grass() {
   const middle = createSection(0xbaf455);
   middle.receiveShadow = true;
   grass.add(middle);
-
   const left = createSection(0x99C846);
   left.position.x = - boardWidth*zoom;
   grass.add(left);
-
   const right = createSection(0x99C846);
   right.position.x = boardWidth*zoom;
   grass.add(right);
-
   grass.position.z = 1.5*zoom;
   return grass;
 }
@@ -349,7 +300,6 @@ function Grass() {
 function Lane(index) {
   this.index = index;
   this.type = index <= 0 ? 'field' : laneTypes[Math.floor(Math.random()*laneTypes.length)];
-
   switch(this.type) {
     case 'field': {
       this.type = 'field';
@@ -358,7 +308,6 @@ function Lane(index) {
     }
     case 'forest': {
       this.mesh = new Grass();
-
       this.occupiedPositions = new Set();
       this.threes = [1,2,3,4].map(() => {
         const three = new Three();
@@ -376,7 +325,6 @@ function Lane(index) {
     case 'car' : {
       this.mesh = new Road();
       this.direction = Math.random() >= 0.5;
-
       const occupiedPositions = new Set();
       this.vechicles = [1,2,3].map(() => {
         const vechicle = new Car();
@@ -390,14 +338,12 @@ function Lane(index) {
         this.mesh.add( vechicle );
         return vechicle;
       })
-
       this.speed = laneSpeeds[Math.floor(Math.random()*laneSpeeds.length)];
       break;
     }
     case 'truck' : {
       this.mesh = new Road();
       this.direction = Math.random() >= 0.5;
-
       const occupiedPositions = new Set();
       this.vechicles = [1,2].map(() => {
         const vechicle = new Truck();
@@ -411,7 +357,6 @@ function Lane(index) {
         this.mesh.add( vechicle );
         return vechicle;
       })
-
       this.speed = laneSpeeds[Math.floor(Math.random()*laneSpeeds.length)];
       break;
     }
@@ -419,7 +364,6 @@ function Lane(index) {
 }
 
 document.querySelector("#retry").addEventListener("click", () => retry());
-
 document.getElementById('forward').addEventListener("click", () => move('forward'));
 document.getElementById('backward').addEventListener("click", () => move('backward'));
 document.getElementById('left').addEventListener("click", () => move('left'));
@@ -487,11 +431,9 @@ function move(direction) {
 
 function animate(timestamp) {
   requestAnimationFrame( animate );
-
   if(!previousTimestamp) previousTimestamp = timestamp;
   const delta = timestamp - previousTimestamp;
   previousTimestamp = timestamp;
-
   // Animate cars and trucks moving on the lane
   lanes.forEach(lane => {
     if(lane.type === 'car' || lane.type === 'truck') {
@@ -522,7 +464,6 @@ function animate(timestamp) {
         camera.position.y = initialCameraPositionY + positionY; 
         dirLight.position.y = initialDirLightPositionY + positionY; 
         chicken.position.y = positionY; // initial chicken position is 0
-
         chicken.position.z = jumpDeltaDistance;
         break;
       }
@@ -531,7 +472,6 @@ function animate(timestamp) {
         camera.position.y = initialCameraPositionY + positionY;
         dirLight.position.y = initialDirLightPositionY + positionY; 
         chicken.position.y = positionY;
-
         chicken.position.z = jumpDeltaDistance;
         break;
       }
@@ -548,7 +488,6 @@ function animate(timestamp) {
         camera.position.x = initialCameraPositionX + positionX;       
         dirLight.position.x = initialDirLightPositionX + positionX;
         chicken.position.x = positionX; 
-
         chicken.position.z = jumpDeltaDistance;
         break;
       }

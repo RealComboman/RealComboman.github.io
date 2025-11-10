@@ -192,7 +192,7 @@ if(data.weather[0].icon==="11d"||data.weather[0].icon==="11n"){wicon="🌩️";}
 if(data.weather[0].icon==="13d"||data.weather[0].icon==="13n"){wicon="❄️";}
 if(data.weather[0].icon==="50d"||data.weather[0].icon==="50n"){wicon="️🌫";}
 date=new Date(); var m = Math.abs(((date.getTime() / 86400000) - 18256.8) / 29.53059);
-var phase = (m - Math.floor(m)); var micon="❓"; var mdesc="Error";
+var phase = (m - Math.floor(m)); var micon; var mdesc;
 if(phase<0.125){micon="🌑";mdesc="New Moon";}
 else if(phase<0.25){micon="🌒";mdesc="Waxing Crescent";}
 else if(phase<0.375){micon="🌓";mdesc="First Quarter";}

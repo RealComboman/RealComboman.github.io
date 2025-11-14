@@ -1,12 +1,22 @@
 <!DOCTYPE html><html><head><title>Javascript Racer</title><link rel="shortcut icon" href="combo.ico"><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><meta name="viewport" content="width=device-width, initial-scale=0.95">
-  <link href="common.css" rel="stylesheet" type="text/css" />
+<style>
+body          {font-family: Arial, Helvetica, sans-serif; }
+#racer        { position: relative; z-index: 0; width: 800px; height: 600px; margin-left: 20em; border: 2px solid black; }
+#canvas       { position: absolute; z-index: 0; width: 800px; height: 600px; z-index: 0; background-color: #72D7EE; }
+#mute         { background-position:   0px 0px; width: 32px; height: 32px; background: url(images/mute.png); display: inline-block; cursor: pointer; position: absolute; margin-left: 20em; }
+#mute.on      { background-position: -32px 0px; }
+
+#hud                   { position: absolute; z-index: 1; width: 800px; padding: 5px 0; font-family: Verdana, Geneva, sans-serif; font-size: 0.8em; background-color: rgba(255,0,0,0.4); color: black; border-bottom: 2px solid black; box-sizing: border-box; -moz-box-sizing: border-box; -webkit-box-sizing: border-box; }
+#hud .hud              { background-color: rgba(255,255,255,0.6); padding: 5px; border: 1px solid black; margin: 0 5px; transition-property: background-color; transition-duration: 2s; -webkit-transition-property: background-color; -webkit-transition-duration: 2s; }
+#hud #speed            { float: right; }
+#hud #current_lap_time { float: left;  }
+#hud #last_lap_time    { float: left; display: none;  }
+#hud #fast_lap_time    { display: block; width: 12em;  margin: 0 auto; text-align: center; transition-property: background-color; transition-duration: 2s; -webkit-transition-property: background-color; -webkit-transition-duration: 2s; }
+#hud .value            { color: black; font-weight: bold; }
+#hud .fastest          { background-color: rgba(255,215,0,0.5); }
+</style>
 </head> 
-
 <body> 
-
-
-
-
   <div id="racer">
     <div id="hud">
       <span id="speed"            class="hud"><span id="speed_value" class="value">0</span> mph</span>
@@ -19,16 +29,10 @@
     </canvas>
     Loading...
   </div>
-
-
   <audio id='music'>
     <source src="music/racer.mp3">
   </audio>
   <span id="mute"></span>
-  <table id="controls">
-   <td id="fps" ></td>
-  </table>
-  <script src="stats.js"></script>
   <script src="common.js"></script>
   <script>
 
@@ -46,7 +50,6 @@
     var treeOffset     = 0;                       // current tree scroll offset
     var segments       = [];                      // array of road segments
     var cars           = [];                      // array of cars on the road
-    var stats          = Game.stats('fps');       // mr.doobs FPS counter
     var canvas         = Dom.get('canvas');       // our canvas...
     var ctx            = canvas.getContext('2d'); // ...and its drawing context
     var background     = null;                    // our background image (loaded below)
@@ -548,7 +551,7 @@
     //=========================================================================
 
     Game.run({
-      canvas: canvas, render: render, update: update, stats: stats, step: step,
+      canvas: canvas, render: render, update: update, step: step,
       images: ["background", "sprites"],
       keys: [
         { keys: [KEY.LEFT,  KEY.A], mode: 'down', action: function() { keyLeft   = true;  } },

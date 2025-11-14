@@ -1,12 +1,12 @@
 <!DOCTYPE html><html><head><title>Javascript Racer</title><link rel="shortcut icon" href="combo.ico"><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><meta name="viewport" content="width=device-width, initial-scale=0.95">
 <style>
 body          {font-family: Arial, Helvetica, sans-serif; }
-#racer        { position: relative; z-index: 0; width: 800px; height: 600px; margin-left: 20em; border: 2px solid black; }
-#canvas       { position: absolute; z-index: 0; width: 800px; height: 600px; z-index: 0; background-color: #72D7EE; }
-#mute         { background-position:   0px 0px; width: 32px; height: 32px; background: url(images/mute.png); display: inline-block; cursor: pointer; position: absolute; margin-left: 20em; }
+#racer        { position: relative; z-index: 0; width: 1024px; height: 768px; margin-left: 20em; border: 2px solid black; }
+#canvas       { position: absolute; z-index: 0; width: 1024px; height: 768px; z-index: 0; background-color: #72D7EE; }
+#mute         { background-position:   0px 0px; width: 1024px; height: 32px; background: url(images/mute.png); display: inline-block; cursor: pointer; position: absolute; margin-left: 20em; }
 #mute.on      { background-position: -32px 0px; }
 
-#hud                   { position: absolute; z-index: 1; width: 800px; padding: 5px 0; font-family: Verdana, Geneva, sans-serif; font-size: 0.8em; background-color: rgba(255,0,0,0.4); color: black; border-bottom: 2px solid black; box-sizing: border-box; -moz-box-sizing: border-box; -webkit-box-sizing: border-box; }
+#hud                   { position: absolute; z-index: 1; width: 1024px; padding: 5px 0; font-family: Verdana, Geneva, sans-serif; font-size: 0.8em; background-color: rgba(255,0,0,0.4); color: black; border-bottom: 2px solid black; box-sizing: border-box; -moz-box-sizing: border-box; -webkit-box-sizing: border-box; }
 #hud .hud              { background-color: rgba(255,255,255,0.6); padding: 5px; border: 1px solid black; margin: 0 5px; transition-property: background-color; transition-duration: 2s; -webkit-transition-property: background-color; -webkit-transition-duration: 2s; }
 #hud #speed            { float: right; }
 #hud #current_lap_time { float: left;  }
@@ -54,7 +54,7 @@ body          {font-family: Arial, Helvetica, sans-serif; }
     var ctx            = canvas.getContext('2d'); // ...and its drawing context
     var background     = null;                    // our background image (loaded below)
     var sprites        = null;                    // our spritesheet (loaded below)
-    var resolution     = 'high';                    // scaling factor to provide resolution independence (computed)
+    var resolution     = 'high';                  // scaling factor to provide resolution independence (computed)
     var roadWidth      = 2000;                    // actually half the roads width, easier math if the road spans from -roadWidth to +roadWidth
     var segmentLength  = 200;                     // length of a single segment
     var rumbleLength   = 3;                       // number of segments per red/white rumble strip
@@ -93,7 +93,6 @@ body          {font-family: Arial, Helvetica, sans-serif; }
 
     //=========================================================================
     // UPDATE THE GAME WORLD
-    //=========================================================================
 
     function update(dt) {
 
@@ -184,8 +183,6 @@ body          {font-family: Arial, Helvetica, sans-serif; }
       updateHud('current_lap_time', formatTime(currentLapTime));
     }
 
-    //-------------------------------------------------------------------------
-
     function updateCars(dt, playerSegment, playerW) {
       var n, car, oldSegment, newSegment;
       for(n = 0 ; n < cars.length ; n++) {
@@ -248,8 +245,6 @@ body          {font-family: Arial, Helvetica, sans-serif; }
         return 0;
     }
 
-    //-------------------------------------------------------------------------
-
     function updateHud(key, value) { // accessing DOM can be slow, so only do it if value has changed
       if (hud[key].value !== value) {
         hud[key].value = value;
@@ -269,62 +264,40 @@ body          {font-family: Arial, Helvetica, sans-serif; }
 
     //=========================================================================
     // RENDER THE GAME WORLD
-    //=========================================================================
 
     function render() {
-
       var baseSegment   = findSegment(position);
       var basePercent   = Util.percentRemaining(position, segmentLength);
       var playerSegment = findSegment(position+playerZ);
       var playerPercent = Util.percentRemaining(position+playerZ, segmentLength);
       var playerY       = Util.interpolate(playerSegment.p1.world.y, playerSegment.p2.world.y, playerPercent);
       var maxy          = height;
-
       var x  = 0;
       var dx = - (baseSegment.curve * basePercent);
-
       ctx.clearRect(0, 0, width, height);
-
       Render.background(ctx, background, width, height, BACKGROUND.SKY,   skyOffset,  resolution * skySpeed  * playerY);
       Render.background(ctx, background, width, height, BACKGROUND.HILLS, hillOffset, resolution * hillSpeed * playerY);
       Render.background(ctx, background, width, height, BACKGROUND.TREES, treeOffset, resolution * treeSpeed * playerY);
-
       var n, i, segment, car, sprite, spriteScale, spriteX, spriteY;
-
       for(n = 0 ; n < drawDistance ; n++) {
-
         segment        = segments[(baseSegment.index + n) % segments.length];
         segment.looped = segment.index < baseSegment.index;
         segment.fog    = Util.exponentialFog(n/drawDistance, fogDensity);
         segment.clip   = maxy;
-
         Util.project(segment.p1, (playerX * roadWidth) - x,      playerY + cameraHeight, position - (segment.looped ? trackLength : 0), cameraDepth, width, height, roadWidth);
         Util.project(segment.p2, (playerX * roadWidth) - x - dx, playerY + cameraHeight, position - (segment.looped ? trackLength : 0), cameraDepth, width, height, roadWidth);
-
         x  = x + dx;
         dx = dx + segment.curve;
-
         if ((segment.p1.camera.z <= cameraDepth)         || // behind us
             (segment.p2.screen.y >= segment.p1.screen.y) || // back face cull
             (segment.p2.screen.y >= maxy))                  // clip by (already rendered) hill
           continue;
-
-        Render.segment(ctx, width, lanes,
-                       segment.p1.screen.x,
-                       segment.p1.screen.y,
-                       segment.p1.screen.w,
-                       segment.p2.screen.x,
-                       segment.p2.screen.y,
-                       segment.p2.screen.w,
-                       segment.fog,
-                       segment.color);
-
+        Render.segment(ctx, width, lanes, segment.p1.screen.x,segment.p1.screen.y,segment.p1.screen.w,segment.p2.screen.x,segment.p2.screen.y,segment.p2.screen.w,segment.fog, segment.color);
         maxy = segment.p1.screen.y;
       }
 
       for(n = (drawDistance-1) ; n > 0 ; n--) {
         segment = segments[(baseSegment.index + n) % segments.length];
-
         for(i = 0 ; i < segment.cars.length ; i++) {
           car         = segment.cars[i];
           sprite      = car.sprite;
@@ -359,7 +332,6 @@ body          {font-family: Arial, Helvetica, sans-serif; }
 
     //=========================================================================
     // BUILD ROAD GEOMETRY
-    //=========================================================================
 
     function lastY() { return (segments.length == 0) ? 0 : segments[segments.length-1].p2.world.y; }
 
@@ -486,7 +458,6 @@ body          {font-family: Arial, Helvetica, sans-serif; }
 
     function resetSprites() {
       var n, i;
-
       addSprite(20,  SPRITES.BILLBOARD07, -1);
       addSprite(40,  SPRITES.BILLBOARD06, -1);
       addSprite(60,  SPRITES.BILLBOARD08, -1);
@@ -496,7 +467,6 @@ body          {font-family: Arial, Helvetica, sans-serif; }
       addSprite(140, SPRITES.BILLBOARD03, -1);
       addSprite(160, SPRITES.BILLBOARD04, -1);
       addSprite(180, SPRITES.BILLBOARD05, -1);
-
       addSprite(240,                  SPRITES.BILLBOARD07, -1.2);
       addSprite(240,                  SPRITES.BILLBOARD06,  1.2);
       addSprite(segments.length - 25, SPRITES.BILLBOARD07, -1.2);
@@ -548,7 +518,6 @@ body          {font-family: Arial, Helvetica, sans-serif; }
 
     //=========================================================================
     // THE GAME LOOP
-    //=========================================================================
 
     Game.run({
       canvas: canvas, render: render, update: update, step: step,
@@ -595,12 +564,10 @@ body          {font-family: Arial, Helvetica, sans-serif; }
 
     //=========================================================================
     // TWEAK UI HANDLERS
-    //=========================================================================
 
     Dom.on('resolution', 'change', function(ev) {
       var w, h, ratio;
       switch(ev.target.options[ev.target.selectedIndex].value) {
-        case 'fine':   w = 1280; h = 960;  ratio=w/width; break;
         case 'high':   w = 1024; h = 768;  ratio=w/width; break;
         case 'medium': w = 640;  h = 480;  ratio=w/width; break;
         case 'low':    w = 480;  h = 360;  ratio=w/width; break;
@@ -617,15 +584,5 @@ body          {font-family: Arial, Helvetica, sans-serif; }
     Dom.on('fogDensity',     'change', function(ev) { Dom.blur(ev); reset({ fogDensity:    Util.limit(Util.toInt(ev.target.value), Util.toInt(ev.target.getAttribute('min')), Util.toInt(ev.target.getAttribute('max'))) }); });
 
     function refreshTweakUI() {
-      //Dom.get('lanes').selectedIndex = lanes-1;
-      //Dom.get('currentRoadWidth').innerHTML      = Dom.get('roadWidth').value      = roadWidth;
-      //Dom.get('currentCameraHeight').innerHTML   = Dom.get('cameraHeight').value   = cameraHeight;
-      //Dom.get('currentDrawDistance').innerHTML   = Dom.get('drawDistance').value   = drawDistance;
-      //Dom.get('currentFieldOfView').innerHTML    = Dom.get('fieldOfView').value    = fieldOfView;
-      //Dom.get('currentFogDensity').innerHTML     = Dom.get('fogDensity').value     = fogDensity;
     }
-
-    //=========================================================================
-
-  </script>
-</body></html>
+</script></body></html>

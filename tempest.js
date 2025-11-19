@@ -400,7 +400,7 @@ class Game {
 class Tube {
     constructor(level) {
         this.segments = 15;
-        this.radius = 200;  // Reduced to fit better
+        this.radius = 250;  // Reduced to fit better
         this.depth = 300;//300
         this.angleStep = (Math.PI * 2) / this.segments;
         this.colors = {
@@ -612,7 +612,7 @@ class Player {
         }
         
         this.shootCooldown -= deltaTime;
-        if ((keys[' '] || keys['x'])&& this.shootCooldown <= 0) {
+        if ((keys[' '] || keys['x'] || keys['ArrowUp'])&& this.shootCooldown <= 0) {
             game.shoot();
             this.shootCooldown = 150; // Continuous fire rate
         }

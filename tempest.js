@@ -440,23 +440,23 @@ class Tube {
             ctx.strokeStyle = '#ff0';
             ctx.lineWidth = 3;
             ctx.beginPath();
-            ctx.moveTo(0, 0);
+            ctx.moveTo(Math.cos(angle1) * this.radius* 0.1, Math.sin(angle1) * this.radius* 0.1);
             ctx.lineTo(Math.cos(angle1) * this.radius, Math.sin(angle1) * this.radius);
             ctx.stroke();
             
             ctx.beginPath();
-            ctx.moveTo(0, 0);
+            ctx.moveTo(Math.cos(angle2) * this.radius* 0.1, Math.sin(angle2) * this.radius* 0.1);
             ctx.lineTo(Math.cos(angle2) * this.radius, Math.sin(angle2) * this.radius);
             ctx.stroke();
             
-            //Draw subtle gradient lines within the segment
+            /*/Draw subtle gradient lines within the segment
             ctx.strokeStyle = 'rgba(255, 255, 0, 0.9)';
             ctx.lineWidth = 1;
             const centerAngle = (angle1 + angle2) / 2;
             ctx.beginPath();
             ctx.moveTo(0, 0);
             ctx.lineTo(Math.cos(centerAngle) * this.radius, Math.sin(centerAngle) * this.radius);
-            ctx.stroke();
+            ctx.stroke(); //*/
         }
         
         // Draw normal tube structure
@@ -682,11 +682,11 @@ class Player {
         ctx.closePath();
         ctx.stroke();
         
-        // Draw center line (aiming line)
+        /*/ Draw center line (aiming line)
         ctx.beginPath();
         ctx.moveTo(backX, backY);
         ctx.lineTo(Math.cos(centerAngle) * r, Math.sin(centerAngle) * r);
-        ctx.stroke();
+        ctx.stroke(); //*/
         
         // Add flex animation details
         if (this.flexAmount > 0) {
@@ -1023,7 +1023,7 @@ class Spike {
     constructor(tube, segment) {
         this.tube = tube;
         this.segment = segment;
-        this.startDepth = 1;
+        this.startDepth = 0.9;
         this.endDepth = 1;
         this.health = 3;
         this.destroyed = false;

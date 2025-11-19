@@ -618,7 +618,7 @@ class Player {
         }
         
         // Superzapper
-        if (keys['z'] || keys['Z']) {
+        if (keys['z'] || keys['Z'] || keys['ArrowDown']) {
             game.useSuperzapper();
             keys['z'] = false;
             keys['Z'] = false;

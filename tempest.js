@@ -683,10 +683,7 @@ class Player {
         ctx.stroke();
         
         /*/ Draw center line (aiming line)
-        ctx.beginPath();
-        ctx.moveTo(backX, backY);
-        ctx.lineTo(Math.cos(centerAngle) * r, Math.sin(centerAngle) * r);
-        ctx.stroke(); //*/
+        ctx.beginPath(); ctx.moveTo(backX, backY); ctx.lineTo(Math.cos(centerAngle) * r, Math.sin(centerAngle) * r); ctx.stroke(); //*/
         
         // Add flex animation details
         if (this.flexAmount > 0) {
@@ -697,7 +694,6 @@ class Player {
             const flex1Y = Math.sin(centerAngle - this.tube.angleStep * 0.25) * (r - 5);
             const flex2X = Math.cos(centerAngle + this.tube.angleStep * 0.25) * (r - 5);
             const flex2Y = Math.sin(centerAngle + this.tube.angleStep * 0.25) * (r - 5);
-            
             ctx.beginPath();
             ctx.moveTo(flex1X, flex1Y);
             ctx.lineTo(centerX, centerY);
@@ -798,18 +794,13 @@ class Enemy {
             // Handle boundaries
             if (this.depth <= 0) {
                 this.depth = 0;
-                if (Math.random() < 0.02) {
-                    this.direction = 1;
-                }
+                if (Math.random() < 0.02) {this.direction = 1;}
             } else if (this.depth >= 0.95) {
                 if (Math.random() < 0.7) {
                     this.direction = -1;
-                } else {
-                    this.destroyed = true;
-                }
+                } else {this.destroyed = true;}
             }
         }
-        
         this.updatePosition();
     }
     
@@ -847,65 +838,56 @@ class Enemy {
         }
         
         if (this.type === 'flipper') {
-            ctx.strokeStyle = '#f0f';
+            ctx.strokeStyle = '#f00'; //f0f
             ctx.lineWidth = 2;
-            
-            // Spider-like body
-            ctx.beginPath();
-            ctx.ellipse(this.x, this.y, size/2, size/3, 0, 0, Math.PI * 2);
-            ctx.stroke();
             
             // Legs
             for (let i = 0; i < 4; i++) {
                 const angle = (i / 4) * Math.PI * 2 - Math.PI/2;
-                const legX = Math.cos(angle) * size * 0.8;
-                const legY = Math.sin(angle) * size * 0.8;
-                
+                const angle2 = ((i+0.5) / 4) * Math.PI * 2 - Math.PI/2;
+                const legX = Math.cos(angle) * size * 2.5;
+                const legY = Math.sin(angle) * size * 2.5;
+                const legX2 = Math.cos(angle2) * size * 1.0;
+                const legY2 = Math.sin(angle2) * size * 1.0;
                 ctx.beginPath();
                 ctx.moveTo(this.x, this.y);
                 ctx.lineTo(this.x + legX, this.y + legY);
-                ctx.lineTo(this.x + legX * 1.2, this.y + legY * 1.2 + size * 0.3);
+                ctx.lineTo(this.x + legX2, this.y + legY2);
                 ctx.stroke();
-                
                 ctx.beginPath();
                 ctx.moveTo(this.x, this.y);
                 ctx.lineTo(this.x - legX, this.y + legY);
-                ctx.lineTo(this.x - legX * 1.2, this.y + legY * 1.2 + size * 0.3);
+                ctx.lineTo(this.x - legX2, this.y + legY2);
                 ctx.stroke();
-            }
+            } 
             
-            // Eyes
-            ctx.fillStyle = '#f0f';
-            ctx.beginPath();
-            ctx.arc(this.x - size/6, this.y - size/6, 2, 0, Math.PI * 2);
-            ctx.arc(this.x + size/6, this.y - size/6, 2, 0, Math.PI * 2);
-            ctx.fill();
             
         } else if (this.type === 'tanker') {
             // Tanker - more mechanical/alien
-            ctx.strokeStyle = '#0ff';
+            ctx.strokeStyle = '#f00'; //0ff
             ctx.lineWidth = 2;
             
             // Main body segments
             ctx.beginPath();
-            ctx.moveTo(this.x - size/2, this.y);
-            ctx.lineTo(this.x - size/3, this.y - size/2);
-            ctx.lineTo(this.x + size/3, this.y - size/2);
-            ctx.lineTo(this.x + size/2, this.y);
-            ctx.lineTo(this.x + size/3, this.y + size/2);
-            ctx.lineTo(this.x - size/3, this.y + size/2);
+            ctx.moveTo(this.x - size*2.5, this.y);
+            ctx.lineTo(this.x - size*1.5, this.y - size);
+            ctx.lineTo(this.x + size*1.5, this.y - size);
+            ctx.lineTo(this.x + size*2.5, this.y);
+            ctx.lineTo(this.x + size*1.5, this.y + size);
+            ctx.lineTo(this.x - size*1.5, this.y + size);
             ctx.closePath();
             ctx.stroke();
             
             // Inner details
             ctx.beginPath();
-            ctx.moveTo(this.x, this.y - size/2);
-            ctx.lineTo(this.x, this.y + size/2);
-            ctx.moveTo(this.x - size/3, this.y);
-            ctx.lineTo(this.x + size/3, this.y);
+            ctx.moveTo(this.x, this.y - size*2);
+            ctx.lineTo(this.x, this.y + size*2);
+            ctx.moveTo(this.x - size*1.5, this.y);
+            ctx.lineTo(this.x + size*1.5, this.y);
             ctx.stroke();
             
             // Spikes
+            ctx.strokeStyle = '#0f0'; //none
             ctx.beginPath();
             ctx.moveTo(this.x, this.y);
             ctx.lineTo(this.x - size/4, this.y - size * 0.7);
@@ -919,7 +901,7 @@ class Enemy {
             ctx.lineWidth = 2;
             
             // Draw tendrils
-            const tendrilCount = 6;
+            const tendrilCount = 9;
             for (let i = 0; i < tendrilCount; i++) {
                 const angle = (i / tendrilCount) * Math.PI * 2 + Date.now() * 0.001;
                 const tendrilLength = size * 1.5;
@@ -1054,7 +1036,7 @@ class Spike {
         const end = this.tube.getPosition(this.segment, this.endDepth);
         
         // Draw the spike trail
-        ctx.strokeStyle = '#f0f';
+        ctx.strokeStyle = '#0f0'; //#f0f
         ctx.lineWidth = 3;
         ctx.beginPath();
         ctx.moveTo(start.x, start.y);

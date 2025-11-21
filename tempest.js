@@ -188,11 +188,11 @@ class Game {
         const segment = Math.floor(Math.random() * this.tube.segments);
         let type = 'flipper';
         const roll = Math.random();
-        if (roll < 0.6) {
+        if (roll < 0.5) {
             type = 'flipper';
-        } else if (roll < 0.75) {
+        } else if (roll < 0.65) {
             type = 'tanker';
-		} else if (roll < 0.85) {
+		} else if (roll < 0.95) {
 			type = 'spiker';
         } else {
             type = 'fuseball'; // 15% chance for fuseball
@@ -748,7 +748,6 @@ class Enemy {
                 this.targetSegment = (this.segment + (Math.random() < 0.5 ? 1 : -1) + this.tube.segments) % this.tube.segments;
                 this.jumpProgress = 0;
             }
-            
             // Animate jump
             if (this.jumping) {
                 this.jumpProgress += deltaTime / 300; // 300ms jump duration
@@ -758,21 +757,37 @@ class Enemy {
                     this.jumpTimer = 0;
                 }
             }
-            
             // Fuseballs move back and forth unpredictably
-            this.depth += this.direction * this.speed * deltaTime / 1000;
-            if (Math.random() < 0.02) {
-                this.direction *= -1;
-            }
-            
+			if (this.type === 'fuseball'){
+				this.depth += this.direction * this.speed * deltaTime / 1000;
+				if (Math.random() < 0.02) {this.direction *= -1;}
+			}
             // Keep within bounds
             this.depth = Math.max(0, Math.min(0.9, this.depth));
         } else {
-            // Normal enemy behavior
+         if (this.type === 'flipper' || this.type === 'tanker') {
+            this.jumpTimer += deltaTime;
+            // Jump between lanes unpredictably
+            if (this.jumpTimer > 500 && !this.jumping && Math.random() < 0.01) {
+                this.jumping = true;
+                this.targetSegment = (this.segment + (Math.random() < 0.5 ? 1 : -1) + this.tube.segments) % this.tube.segments;
+                this.jumpProgress = 0;
+            }
+            // Animate jump
+            if (this.jumping) {
+                this.jumpProgress += deltaTime / 200; // 200ms jump duration
+                if (this.jumpProgress >= 1) {
+                    this.segment = this.targetSegment;
+                    this.jumping = false;
+                    this.jumpTimer = 0;
+                }
+            }
+		 }
+			// Normal enemy behavior
             this.depth += this.direction * this.speed * deltaTime / 1000;
             
             // Track furthest point and manage spike (not for fuseballs)
-            if (this.type !== 'fuseball' && this.direction === -1 && this.depth < this.furthestDepth) {
+            if (this.type == 'spiker' && this.direction === -1 && this.depth < this.furthestDepth) {
                 this.furthestDepth = this.depth;
                 
                 if (!this.spike) {
@@ -789,7 +804,6 @@ class Enemy {
                     const oldSegment = this.segment;
                     this.segment = (this.segment + (Math.random() < 0.5 ? 1 : -1) + this.tube.segments) % this.tube.segments;
                     this.moveTimer = 0;
-                    
                     if (this.spike && oldSegment !== this.segment) {
                         this.spike = null;
                         this.furthestDepth = this.depth;
@@ -848,17 +862,17 @@ class Enemy {
             ctx.lineWidth = 2;
             ctx.beginPath();
             ctx.moveTo(this.x, this.y);
-			let inc=size/5;
-			let leg=inc;
-            for (let i = 0; i < 5; i++) {
+			let inc=size/10;
+			let leg=Math.random()*inc/2+inc;
+            for (let i = 0; i < 4; i++) {
                 ctx.lineTo(this.x +leg, this.y -leg);
-				leg += Math.random()*inc;
+				leg += Math.random()*inc/2+inc;
                 ctx.lineTo(this.x +leg, this.y +leg);
-				leg += Math.random()*inc;
+				leg += Math.random()*inc/2+inc;
                 ctx.lineTo(this.x -leg, this.y +leg);
-				leg += Math.random()*inc;
+				leg += Math.random()*inc/2+inc;
                 ctx.lineTo(this.x -leg, this.y -leg);
-				leg += Math.random()*inc;
+				leg += Math.random()*inc/2+inc;
             } 
             ctx.stroke();
 		}
@@ -886,19 +900,17 @@ class Enemy {
             } 
             
         } else if (this.type === 'tanker') {
-            // Tanker - more mechanical/alien
+            // Tanker 
             ctx.strokeStyle = '#f00'; //0ff
             ctx.lineWidth = 2;
-            // box
-            ctx.beginPath();
+            ctx.beginPath(); // box
             ctx.moveTo(this.x - size*3, this.y);
             ctx.lineTo(this.x           , this.y - size*3);
             ctx.lineTo(this.x + size*3, this.y);
             ctx.lineTo(this.x           , this.y+size*3);
             ctx.closePath();
             ctx.stroke();
-            // Inner details
-            ctx.beginPath();
+            ctx.beginPath(); // Inner details
             ctx.moveTo(this.x-size, this.y); //v
             ctx.lineTo(this.x, this.y - size*2.5); 
             ctx.lineTo(this.x, this.y + size*2.5); 
@@ -1056,8 +1068,12 @@ class Spike {
         
         // Draw sizzle effect
         if (Math.sin(this.sizzleTimer * 0.01) > 0) {
-            ctx.strokeStyle = '#fff';
-            ctx.lineWidth = 1;
+			const roll=Math.random;
+            if(roll < 0.25)	{ctx.strokeStyle = '#fff';}
+			else if(roll < 0.5)	{ctx.strokeStyle = '#f0f';}
+			else if(roll < 0.75) {ctx.strokeStyle = '#0ff';}
+			else {ctx.strokeStyle = '#ff0';}
+            ctx.lineWidth = 2;
             const sizzlePos = this.tube.getPosition(this.segment, this.endDepth + 0.1);
             ctx.beginPath();
             ctx.moveTo(end.x, end.y);

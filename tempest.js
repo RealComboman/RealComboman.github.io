@@ -137,12 +137,16 @@ class Game {
                             
                             // Tankers split into 2 flippers
                             if (enemy.type === 'tanker') {
-                                for (let i = 0; i < 2; i++) {
-                                    const newFlipper = new Enemy(this.tube, enemy.segment, 'flipper');
+                                //for (let i = 0; i < 2; i++) {  
+                                    const newFlipper = new Enemy(this.tube, (enemy.segment>this.tube.segments) ? 0 : enemy.segment+1, 'flipper');
                                     newFlipper.depth = enemy.depth;
                                     newFlipper.updatePosition();
                                     this.enemies.push(newFlipper);
-                                }
+                                    const newFlipper2 = new Enemy(this.tube, enemy.segment - 1, 'flipper');
+                                    newFlipper2.depth = enemy.depth;
+                                    newFlipper2.updatePosition();
+                                    this.enemies.push(newFlipper2);
+                                //}
                             }
                         }
                     }
@@ -845,8 +849,8 @@ class Enemy {
             for (let i = 0; i < 4; i++) {
                 const angle = (i / 4) * Math.PI * 2 - Math.PI/2;
                 const angle2 = ((i+0.5) / 4) * Math.PI * 2 - Math.PI/2;
-                const legX = Math.cos(angle) * size * 2.5;
-                const legY = Math.sin(angle) * size * 2.5;
+                const legX = Math.cos(angle) * size * 2.25;
+                const legY = Math.sin(angle) * size * 2.25;
                 const legX2 = Math.cos(angle2) * size * 1.0;
                 const legY2 = Math.sin(angle2) * size * 1.0;
                 ctx.beginPath();
@@ -869,21 +873,23 @@ class Enemy {
             
             // Main body segments
             ctx.beginPath();
-            ctx.moveTo(this.x - size*2.5, this.y);
-            ctx.lineTo(this.x - size*1.5, this.y - size);
-            ctx.lineTo(this.x + size*1.5, this.y - size);
-            ctx.lineTo(this.x + size*2.5, this.y);
-            ctx.lineTo(this.x + size*1.5, this.y + size);
-            ctx.lineTo(this.x - size*1.5, this.y + size);
+            ctx.moveTo(this.x - size*3, this.y);
+            ctx.lineTo(this.x           , this.y - size*3);
+            ctx.lineTo(this.x + size*3, this.y);
+            ctx.lineTo(this.x           , this.y+size*3);
             ctx.closePath();
             ctx.stroke();
             
             // Inner details
             ctx.beginPath();
-            ctx.moveTo(this.x, this.y - size*2);
-            ctx.lineTo(this.x, this.y + size*2);
-            ctx.moveTo(this.x - size*1.5, this.y);
-            ctx.lineTo(this.x + size*1.5, this.y);
+            ctx.moveTo(this.x-size, this.y); //v
+            ctx.lineTo(this.x, this.y - size*2.5); //v
+            ctx.lineTo(this.x, this.y + size*2.5); 
+            ctx.lineTo(this.x+size, this.y); 
+            ctx.moveTo(this.x, this.y-size); //h
+            ctx.lineTo(this.x - size*2.5, this.y); //h
+            ctx.lineTo(this.x + size*2.5, this.y); 
+            ctx.lineTo(this.x , this.y+size); 
             ctx.stroke();
             
             // Spikes

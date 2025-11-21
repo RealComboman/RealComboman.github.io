@@ -190,8 +190,10 @@ class Game {
         const roll = Math.random();
         if (roll < 0.6) {
             type = 'flipper';
-        } else if (roll < 0.85) {
+        } else if (roll < 0.75) {
             type = 'tanker';
+		} else if (roll < 0.85) {
+			type = 'spiker';
         } else {
             type = 'fuseball'; // 15% chance for fuseball
         }
@@ -841,11 +843,29 @@ class Enemy {
             }
         }
         
-        if (this.type === 'flipper') {
+        if (this.type === 'spiker') {
+            ctx.strokeStyle = '#0f0';
+            ctx.lineWidth = 2;
+            ctx.beginPath();
+            ctx.moveTo(this.x, this.y);
+			let inc=size/5;
+			let leg=inc;
+            for (let i = 0; i < 5; i++) {
+                ctx.lineTo(this.x +leg, this.y -leg);
+				leg += Math.random()*inc;
+                ctx.lineTo(this.x +leg, this.y +leg);
+				leg += Math.random()*inc;
+                ctx.lineTo(this.x -leg, this.y +leg);
+				leg += Math.random()*inc;
+                ctx.lineTo(this.x -leg, this.y -leg);
+				leg += Math.random()*inc;
+            } 
+            ctx.stroke();
+		}
+		
+        else if (this.type === 'flipper') {
             ctx.strokeStyle = '#f00'; //f0f
             ctx.lineWidth = 2;
-            
-            // Legs
             for (let i = 0; i < 4; i++) {
                 const angle = (i / 4) * Math.PI * 2 - Math.PI/2;
                 const angle2 = ((i+0.5) / 4) * Math.PI * 2 - Math.PI/2;
@@ -865,13 +885,11 @@ class Enemy {
                 ctx.stroke();
             } 
             
-            
         } else if (this.type === 'tanker') {
             // Tanker - more mechanical/alien
             ctx.strokeStyle = '#f00'; //0ff
             ctx.lineWidth = 2;
-            
-            // Main body segments
+            // box
             ctx.beginPath();
             ctx.moveTo(this.x - size*3, this.y);
             ctx.lineTo(this.x           , this.y - size*3);
@@ -879,15 +897,14 @@ class Enemy {
             ctx.lineTo(this.x           , this.y+size*3);
             ctx.closePath();
             ctx.stroke();
-            
             // Inner details
             ctx.beginPath();
             ctx.moveTo(this.x-size, this.y); //v
-            ctx.lineTo(this.x, this.y - size*2.5); //v
+            ctx.lineTo(this.x, this.y - size*2.5); 
             ctx.lineTo(this.x, this.y + size*2.5); 
             ctx.lineTo(this.x+size, this.y); 
             ctx.moveTo(this.x, this.y-size); //h
-            ctx.lineTo(this.x - size*2.5, this.y); //h
+            ctx.lineTo(this.x - size*2.5, this.y); 
             ctx.lineTo(this.x + size*2.5, this.y); 
             ctx.lineTo(this.x , this.y+size); 
             ctx.stroke();
@@ -963,17 +980,12 @@ class Projectile {
     
     updatePosition() {
         const pos = this.tube.getPosition(this.segment, this.depth);
-        this.x = pos.x;
-        this.y = pos.y;
-    }
+        this.x = pos.x; this.y = pos.y;}
     
     update(deltaTime) {
         this.depth += this.speed * deltaTime / 1000;
         this.updatePosition();
-        
-        if (this.depth > 1) {
-            this.destroyed = true;
-        }
+        if (this.depth > 1) {this.destroyed = true;}
     }
     
     render(ctx) {
@@ -984,8 +996,7 @@ class Projectile {
 
 class Explosion {
     constructor(x, y) {
-        this.x = x;
-        this.y = y;
+        this.x = x; this.y = y;
         this.radius = 5;
         this.maxRadius = 30;
         this.finished = false;
@@ -993,9 +1004,7 @@ class Explosion {
     
     update(deltaTime) {
         this.radius += 50 * deltaTime / 1000;
-        if (this.radius > this.maxRadius) {
-            this.finished = true;
-        }
+        if (this.radius > this.maxRadius) {this.finished = true;}
     }
     
     render(ctx) {
@@ -1019,9 +1028,7 @@ class Spike {
     }
     
     extend(newDepth) {
-        if (newDepth < this.endDepth) {
-            this.endDepth = newDepth;
-        }
+        if (newDepth < this.endDepth) {this.endDepth = newDepth;}
     }
     
     hit(damage) {
@@ -1033,9 +1040,7 @@ class Spike {
         }
     }
     
-    update(deltaTime) {
-        this.sizzleTimer += deltaTime;
-    }
+    update(deltaTime) {this.sizzleTimer += deltaTime;}
     
     render(ctx) {
         const start = this.tube.getPosition(this.segment, this.startDepth);
@@ -1053,7 +1058,7 @@ class Spike {
         if (Math.sin(this.sizzleTimer * 0.01) > 0) {
             ctx.strokeStyle = '#fff';
             ctx.lineWidth = 1;
-            const sizzlePos = this.tube.getPosition(this.segment, this.endDepth + 0.05);
+            const sizzlePos = this.tube.getPosition(this.segment, this.endDepth + 0.1);
             ctx.beginPath();
             ctx.moveTo(end.x, end.y);
             ctx.lineTo(sizzlePos.x, sizzlePos.y);

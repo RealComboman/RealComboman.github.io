@@ -19,7 +19,6 @@ class Game {
         this.level = 1;
         this.lives = 5;
         this.superzappers = 2; // 2 per level
-        
         this.tube = null;
         this.player = null;
         this.projectiles = [];
@@ -47,18 +46,15 @@ class Game {
         for (let i = 0; i < Math.min(3, this.maxEnemiesPerLevel); i++) {
             this.spawnEnemy();
         }
-        
     }
     
     setupInput() {
         document.addEventListener('keydown', (e) => {
             this.keys[e.key] = true;
-            
             // Restart game
             if (e.key.toLowerCase() === 'r' && this.state === GAME_STATE.GAME_OVER) {
                 this.restart();
             }
-            
             e.preventDefault();
         });
         
@@ -79,38 +75,29 @@ class Game {
     update(deltaTime) {
         if (this.state === GAME_STATE.PLAYING) {
             this.player.update(deltaTime, this.keys, this);
-            
             this.projectiles.forEach(projectile => projectile.update(deltaTime));
             this.projectiles = this.projectiles.filter(p => !p.destroyed);
-            
             this.enemies.forEach(enemy => enemy.update(deltaTime, this));
             this.enemies = this.enemies.filter(e => !e.destroyed);
-            
             this.spikes.forEach(spike => spike.update(deltaTime));
             this.spikes = this.spikes.filter(s => !s.destroyed);
-            
             this.effects.forEach(effect => effect.update(deltaTime));
             this.effects = this.effects.filter(e => !e.finished);
-            
             this.checkCollisions();
-            
             // Spawn enemies based on wave system
             this.enemySpawnTimer += deltaTime;
             if (this.enemySpawnTimer > 2000 && this.enemiesSpawned < this.maxEnemiesPerLevel) {
                 this.spawnEnemy();
                 this.enemySpawnTimer = 0;
             }
-            
             // Check for level completion
             if (this.enemiesSpawned >= this.maxEnemiesPerLevel && this.enemies.length === 0) {
                 this.state = GAME_STATE.LEVEL_COMPLETE;
                 this.levelCompleteTimer = 0;
             }
-            
             this.updateUI();
         } else if (this.state === GAME_STATE.LEVEL_COMPLETE) {
             this.levelCompleteTimer += deltaTime;
-            
             // Show level complete for 2 seconds then start warping
             if (this.levelCompleteTimer > 2000) {
                 this.startWarping();
@@ -129,15 +116,12 @@ class Game {
                         Math.abs(projectile.depth - enemy.depth) < 0.05) {
                         enemy.hit(projectile.damage);
                         projectile.destroyed = true;
-                        
                         // If enemy is destroyed
                         if (enemy.health <= 0) {
                             this.score += enemy.points;
                             this.effects.push(new Explosion(enemy.x, enemy.y));
-                            
                             // Tankers split into 2 flippers
                             if (enemy.type === 'tanker') {
-                                //for (let i = 0; i < 2; i++) {  
                                     const newFlipper = new Enemy(this.tube, (enemy.segment>this.tube.segments) ? 0 : enemy.segment+1, 'flipper');
                                     newFlipper.depth = enemy.depth;
                                     newFlipper.updatePosition();
@@ -146,12 +130,10 @@ class Game {
                                     newFlipper2.depth = enemy.depth;
                                     newFlipper2.updatePosition();
                                     this.enemies.push(newFlipper2);
-                                //}
                             }
                         }
                     }
                 });
-                
                 // Check collision with spikes
                 this.spikes.forEach(spike => {
                     if (projectile.segment === spike.segment &&
@@ -184,7 +166,6 @@ class Game {
     
     spawnEnemy() {
         if (this.enemiesSpawned >= this.maxEnemiesPerLevel) return;
-        
         const segment = Math.floor(Math.random() * this.tube.segments);
         let type = 'flipper';
         const roll = Math.random();
@@ -195,23 +176,20 @@ class Game {
 		} else if (roll < 0.95) {
 			type = 'spiker';
         } else {
-            type = 'fuseball'; // 15% chance for fuseball
+            type = 'fuseball'; // 5% chance for fuseball
         }
-        
         this.enemies.push(new Enemy(this.tube, segment, type));
         this.enemiesSpawned++;
     }
     
     shoot() {
-        // Limit to 8 shots on screen
+        // Limit to 4 shots on screen
         const playerProjectiles = this.projectiles.filter(p => p.owner === 'player');
-        if (playerProjectiles.length >= 8) return;
-        
+        if (playerProjectiles.length >= 4) return;
         // Shoot down the center of the segment the player is covering
         const segmentAngle = (this.player.segment + 0.5) * this.tube.angleStep;
         const startX = Math.cos(segmentAngle) * this.tube.radius * 0.9;
         const startY = Math.sin(segmentAngle) * this.tube.radius * 0.9;
-        
         const projectile = new Projectile(
             startX,
             startY,
@@ -224,15 +202,12 @@ class Game {
     
     useSuperzapper() {
         if (this.superzappers <= 0) return;
-        
         this.superzappers--;
-        
         // Flash effect
         this.screenFlash = true;
         setTimeout(() => {
             this.screenFlash = false;
         }, 200);
-        
         // Kill all enemies on screen one by one with delay
         let delay = 0;
         this.enemies.forEach((enemy, index) => {
@@ -250,7 +225,6 @@ class Game {
             }, delay);
             delay += 100; // 100ms between each enemy destruction
         });
-        
         // Also destroy all spikes
         this.spikes.forEach(spike => {
             spike.destroyed = true;
@@ -263,13 +237,11 @@ class Game {
         this.lives--;
         this.player.invulnerable = true;
         this.player.hitFlash = true;
-        
         // Flash the entire screen red
         this.screenFlash = true;
         setTimeout(() => {
             this.screenFlash = false;
         }, 100);
-        
         // Create a larger explosion at player position
         for (let i = 0; i < 3; i++) {
             this.effects.push(new Explosion(
@@ -277,12 +249,10 @@ class Game {
                 this.player.y + (Math.random() - 0.5) * 30
             ));
         }
-        
         setTimeout(() => {
             this.player.invulnerable = false;
             this.player.hitFlash = false;
         }, 2000);
-        
         if (this.lives <= 0) {
             this.state = GAME_STATE.GAME_OVER;
         }
@@ -292,7 +262,6 @@ class Game {
         document.getElementById('score').textContent = String(this.score).padStart(4, '0');
         document.getElementById('level').textContent = this.level;
         document.getElementById('lives').textContent = this.lives;
-        
         // Show superzapper count
         const superzapperText = 'Z'.repeat(this.superzappers);
         document.getElementById('superzappers').textContent = superzapperText;
@@ -301,14 +270,13 @@ class Game {
     startWarping() {
         this.state = GAME_STATE.WARPING;
         this.warpDepth = 0;
-        this.warpSpeed = 0.2;
+        this.warpSpeed = 0.5;
         // Clear projectiles but keep spikes for the warp sequence
         this.projectiles = [];
     }
     
     updateWarping(deltaTime) {
         this.warpDepth += this.warpSpeed * deltaTime / 1000;
-        
         // Check collision with spikes during warp
         const playerSegment = this.player.segment;
         this.spikes.forEach(spike => {
@@ -319,7 +287,6 @@ class Game {
                 spike.destroyed = true;
             }
         });
-        
         // Complete warp when reached the end
         if (this.warpDepth > 1) {
             this.level++;
@@ -406,7 +373,7 @@ class Game {
 class Tube {
     constructor(level) {
         this.segments = 15;
-        this.radius = 250;  // Reduced to fit better
+        this.radius = 260;  // Reduced to fit better
         this.depth = 300;//300
         this.angleStep = (Math.PI * 2) / this.segments;
         this.colors = {
@@ -862,16 +829,16 @@ class Enemy {
             ctx.lineWidth = 2;
             ctx.beginPath();
             ctx.moveTo(this.x, this.y);
-			let inc=size/10;
-			let leg=Math.random()*inc/2+inc;
+			let inc=size/9;
+			let leg=inc; //Math.random()*inc/2+inc;
             for (let i = 0; i < 4; i++) {
-                ctx.lineTo(this.x +leg, this.y -leg);
+                ctx.lineTo(this.x +leg, this.y -leg/(Math.random()+1));
 				leg += Math.random()*inc/2+inc;
-                ctx.lineTo(this.x +leg, this.y +leg);
+                ctx.lineTo(this.x +leg/(Math.random()+1), this.y +leg);
 				leg += Math.random()*inc/2+inc;
-                ctx.lineTo(this.x -leg, this.y +leg);
+                ctx.lineTo(this.x -leg, this.y +leg/(Math.random()+1));
 				leg += Math.random()*inc/2+inc;
-                ctx.lineTo(this.x -leg, this.y -leg);
+                ctx.lineTo(this.x -leg/(Math.random()+1), this.y -leg);
 				leg += Math.random()*inc/2+inc;
             } 
             ctx.stroke();
@@ -883,18 +850,18 @@ class Enemy {
             for (let i = 0; i < 4; i++) {
                 const angle = (i / 4) * Math.PI * 2 - Math.PI/2;
                 const angle2 = ((i+0.5) / 4) * Math.PI * 2 - Math.PI/2;
-                const legX = Math.cos(angle) * size * 2.25;
-                const legY = Math.sin(angle) * size * 2.25;
+                const legX = Math.cos(angle) * size * 2.5;
+                const legY = Math.sin(angle) * size * 2.5;
                 const legX2 = Math.cos(angle2) * size * 1.0;
                 const legY2 = Math.sin(angle2) * size * 1.0;
                 ctx.beginPath();
-                ctx.moveTo(this.x, this.y);
-                ctx.lineTo(this.x + legX, this.y + legY);
+                //ctx.moveTo(this.x, this.y);
+                ctx.moveTo(this.x + legX, this.y + legY);
                 ctx.lineTo(this.x + legX2, this.y + legY2);
                 ctx.stroke();
                 ctx.beginPath();
-                ctx.moveTo(this.x, this.y);
-                ctx.lineTo(this.x - legX, this.y + legY);
+                //ctx.moveTo(this.x, this.y);
+                ctx.moveTo(this.x - legX, this.y + legY);
                 ctx.lineTo(this.x - legX2, this.y + legY2);
                 ctx.stroke();
             } 
@@ -921,20 +888,11 @@ class Enemy {
             ctx.lineTo(this.x , this.y+size); 
             ctx.stroke();
             
-            // Spikes
-            ctx.strokeStyle = '#0f0'; //none
-            ctx.beginPath();
-            ctx.moveTo(this.x, this.y);
-            ctx.lineTo(this.x - size/4, this.y - size * 0.7);
-            ctx.moveTo(this.x, this.y);
-            ctx.lineTo(this.x + size/4, this.y - size * 0.7);
-            ctx.stroke();
         } else if (this.type === 'fuseball') {
             // Fuseball - white sphere with tendrils
-            ctx.strokeStyle = '#fff';
+            ctx.strokeStyle = this.jumping ? '#ff0' : '#fff';
             ctx.fillStyle = this.jumping ? '#ff0' : '#fff'; // Yellow when vulnerable
             ctx.lineWidth = 2;
-            
             // Draw tendrils
             const tendrilCount = 9;
             for (let i = 0; i < tendrilCount; i++) {
@@ -951,13 +909,10 @@ class Enemy {
                 ctx.quadraticCurveTo(wx, wy, tx, ty);
                 ctx.stroke();
             }
-            
             // Draw main sphere
             ctx.beginPath();
             ctx.arc(this.x, this.y, size * 0.6, 0, Math.PI * 2);
-            ctx.fill();
-            ctx.stroke();
-            
+            ctx.fill(); ctx.stroke();
             // Draw jump arc if jumping
             if (this.jumping) {
                 const startPos = this.tube.getPosition(this.segment, this.depth);
@@ -965,14 +920,12 @@ class Enemy {
                 const midX = (startPos.x + endPos.x) / 2;
                 const midY = (startPos.y + endPos.y) / 2;
                 const arcHeight = 30 * Math.sin(this.jumpProgress * Math.PI);
-                
                 ctx.strokeStyle = '#ff0';
                 ctx.setLineDash([5, 5]);
                 ctx.beginPath();
                 ctx.moveTo(startPos.x, startPos.y);
                 ctx.quadraticCurveTo(midX, midY - arcHeight, endPos.x, endPos.y);
-                ctx.stroke();
-                ctx.setLineDash([]);
+                ctx.stroke(); ctx.setLineDash([]);
             }
         }
     }
@@ -984,7 +937,7 @@ class Projectile {
         this.tube = tube;
         this.owner = owner;
         this.depth = 0;
-        this.speed = 1.5;
+        this.speed = 1; //1.5
         this.damage = 1;
         this.destroyed = false;
         this.updatePosition();
@@ -1057,7 +1010,6 @@ class Spike {
     render(ctx) {
         const start = this.tube.getPosition(this.segment, this.startDepth);
         const end = this.tube.getPosition(this.segment, this.endDepth);
-        
         // Draw the spike trail
         ctx.strokeStyle = '#0f0'; //#f0f
         ctx.lineWidth = 3;
@@ -1065,7 +1017,6 @@ class Spike {
         ctx.moveTo(start.x, start.y);
         ctx.lineTo(end.x, end.y);
         ctx.stroke();
-        
         // Draw sizzle effect
         if (Math.sin(this.sizzleTimer * 0.01) > 0) {
 			const roll=Math.random;
@@ -1080,7 +1031,6 @@ class Spike {
             ctx.lineTo(sizzlePos.x, sizzlePos.y);
             ctx.stroke();
         }
-        
         // Draw bright dot at the end
         ctx.fillStyle = '#fff';
         ctx.beginPath();
@@ -1095,10 +1045,8 @@ let lastTime = 0;
 function gameLoop(timestamp) {
     const deltaTime = timestamp - lastTime;
     lastTime = timestamp;
-    
     game.update(deltaTime);
     game.render();
-    
     requestAnimationFrame(gameLoop);
 }
 

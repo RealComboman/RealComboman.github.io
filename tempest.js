@@ -183,13 +183,13 @@ class Game {
     }
     
     shoot() {
-        // Limit to 4 shots on screen
+        // Limit to 5 shots on screen
         const playerProjectiles = this.projectiles.filter(p => p.owner === 'player');
-        if (playerProjectiles.length >= 4) return;
+        if (playerProjectiles.length >= 5) return;
         // Shoot down the center of the segment the player is covering
         const segmentAngle = (this.player.segment + 0.5) * this.tube.angleStep;
-        const startX = Math.cos(segmentAngle) * this.tube.radius * 0.9;
-        const startY = Math.sin(segmentAngle) * this.tube.radius * 0.9;
+        const startX = Math.cos(segmentAngle) * this.tube.radius * 0.95;
+        const startY = Math.sin(segmentAngle) * this.tube.radius * 0.95;
         const projectile = new Projectile(
             startX,
             startY,
@@ -261,9 +261,9 @@ class Game {
     updateUI() {
         document.getElementById('score').textContent = String(this.score).padStart(4, '0');
         document.getElementById('level').textContent = this.level;
-        document.getElementById('lives').textContent = this.lives;
-        // Show superzapper count
-        const superzapperText = 'Z'.repeat(this.superzappers);
+        const livesText = '➤'.repeat(this.lives);
+        document.getElementById('lives').textContent = livesText;
+        const superzapperText = '⁕'.repeat(this.superzappers);
         document.getElementById('superzappers').textContent = superzapperText;
     }
     
@@ -377,7 +377,7 @@ class Tube {
         this.depth = 300;//300
         this.angleStep = (Math.PI * 2) / this.segments;
         this.colors = {
-            edge: '#07f',  // Changed to cyan to be more visible #0ff
+            edge: '#07f', 
             line: '#07f'
         };
     }
@@ -496,7 +496,7 @@ class Player {
         this.targetSegment = 0;
         this.moveProgress = 1; // 0 = start of move, 1 = completed
         this.size = 20;
-        this.speed = 5;
+        this.speed = 7;
         this.shootCooldown = 0;
         this.invulnerable = false;
         this.flexAmount = 0; // For animation
@@ -509,7 +509,6 @@ class Player {
         if (this.moveProgress < 1) {
             // Handle wrapping when moving between last and first segment
             let diff = this.targetSegment - this.segment;
-            
             // If moving across the wrap boundary
             if (Math.abs(diff) > this.tube.segments / 2) {
                 if (diff > 0) {
@@ -570,26 +569,23 @@ class Player {
         
         // Animate movement
         if (this.moveProgress < 1) {
-            this.moveProgress += deltaTime / 100; // 100ms to move between segments
+            this.moveProgress += deltaTime / 80; // 100ms to move between segments
             if (this.moveProgress >= 1) {
                 this.moveProgress = 1;
                 this.segment = this.targetSegment;
             }
             this.updatePosition();
-            
             // Update flex animation
             this.flexAmount = Math.sin(this.moveProgress * Math.PI) * 0.3;
         } else {
             // Subtle idle animation
             this.flexAmount = Math.sin(Date.now() * 0.003) * 0.05;
         }
-        
         this.shootCooldown -= deltaTime;
         if ((keys[' '] || keys['x'] || keys['ArrowUp'])&& this.shootCooldown <= 0) {
             game.shoot();
-            this.shootCooldown = 150; // Continuous fire rate
+            this.shootCooldown = 75; // Continuous fire rate 150
         }
-        
         // Superzapper
         if (keys['z'] || keys['Z'] || keys['ArrowDown']) {
             game.useSuperzapper();
@@ -604,34 +600,19 @@ class Player {
     
     render(ctx) {
         // Flash when invulnerable
-        if (this.invulnerable && Math.floor(Date.now() / 100) % 2 === 0) {
-            ctx.strokeStyle = '#fff';
-            ctx.fillStyle = '#fff';
-        } else {
-            ctx.strokeStyle = '#ff0';
-            ctx.fillStyle = '#ff0';
-        }
+        if (this.invulnerable && Math.floor(Date.now() / 100) % 2 === 0) {ctx.strokeStyle = '#fff';ctx.fillStyle = '#fff';
+        } else {ctx.strokeStyle = '#ff0';ctx.fillStyle = '#ff0';}
         ctx.lineWidth = 3;
-        
         const r = this.tube.radius;
-        
         // Get the segment boundaries (player spans across a segment)
         const leftAngle = this.segment * this.tube.angleStep;
         let rightAngle = ((this.segment + 1) % this.tube.segments) * this.tube.angleStep;
-        
         // Handle wrap-around for rendering
-        if (rightAngle < leftAngle) {
-            rightAngle += Math.PI * 2;
-        }
-        
+        if (rightAngle < leftAngle) {rightAngle += Math.PI * 2;}
         const centerAngle = this.angle; // Middle of the segment
-        
         // Claw positioning with flex
-        //const innerR = r * (0.9 - this.flexAmount * 0.1);
         const innerR = r * (1.15 - this.flexAmount * 0.1);
-        //const clawDepth = r * (0.85 - this.flexAmount * 0.1);
         const clawDepth = r * (1.05 - this.flexAmount * 0.1);
-        
         // Calculate claw points
         const leftX = Math.cos(leftAngle) * r;
         const leftY = Math.sin(leftAngle) * r;
@@ -641,7 +622,6 @@ class Player {
         const centerY = Math.sin(centerAngle) * clawDepth;
         const backX = Math.cos(centerAngle) * innerR;
         const backY = Math.sin(centerAngle) * innerR;
-        
         // Draw the claw shape (similar to the reference image)
         ctx.beginPath();
         // Left edge
@@ -683,9 +663,9 @@ class Enemy {
         this.segment = segment;
         this.type = type;
         this.depth = 0.9;
-        this.speed = type === 'flipper' ? 0.3 : type === 'fuseball' ? 0.4 : 0.2;
+        this.speed = type === 'flipper' ? 0.35 : type === 'fuseball' ? 0.4 : 0.2;
         this.size = 15;
-        this.health = type === 'tanker' ? 2 : 1;
+        this.health = 1; //type === 'tanker' ? 2 : 1;
         this.points = type === 'tanker' ? 100 : type === 'fuseball' ? 150 : 50;
         this.destroyed = false;
         this.moveTimer = 0;
@@ -700,15 +680,12 @@ class Enemy {
     
     updatePosition() {
         const pos = this.tube.getPosition(this.segment, this.depth);
-        this.x = pos.x;
-        this.y = pos.y;
-    }
+        this.x = pos.x; this.y = pos.y; }
     
     update(deltaTime, game) {
         // Fuseball special behavior
         if (this.type === 'fuseball') {
             this.jumpTimer += deltaTime;
-            
             // Jump between lanes unpredictably
             if (this.jumpTimer > 500 && !this.jumping && Math.random() < 0.01) {
                 this.jumping = true;
@@ -780,8 +757,8 @@ class Enemy {
             
             // Handle boundaries
             if (this.depth <= 0) {
-                this.depth = 0;
-                if (Math.random() < 0.02) {this.direction = 1;}
+				this.depth = 0;
+				if (Math.random() < 0.02) {this.direction = 1;}
             } else if (this.depth >= 0.95) {
                 if (Math.random() < 0.7) {
                     this.direction = -1;
@@ -796,7 +773,6 @@ class Enemy {
         if (this.type === 'fuseball' && !this.jumping) {
             return; // Invulnerable unless jumping
         }
-        
         this.health -= damage;
         if (this.health <= 0) {
             this.destroyed = true;
@@ -806,7 +782,6 @@ class Enemy {
     render(ctx) {
         const scale = 0.2 + (1 - this.depth) * 0.8;
         const size = this.size * scale;
-        
         // Draw sizzle effect if enemy is extending a spike
         if (this.spike && this.direction === -1 && this.depth <= this.furthestDepth + 0.02) {
             ctx.strokeStyle = '#fff';
@@ -830,7 +805,7 @@ class Enemy {
             ctx.beginPath();
             ctx.moveTo(this.x, this.y);
 			let inc=size/9;
-			let leg=inc; //Math.random()*inc/2+inc;
+			let leg=inc; //Math.random()*inc/2+inc; //random size
             for (let i = 0; i < 4; i++) {
                 ctx.lineTo(this.x +leg, this.y -leg/(Math.random()+1));
 				leg += Math.random()*inc/2+inc;
@@ -845,22 +820,18 @@ class Enemy {
 		}
 		
         else if (this.type === 'flipper') {
-            ctx.strokeStyle = '#f00'; //f0f
+            ctx.strokeStyle = '#f00';
             ctx.lineWidth = 2;
             for (let i = 0; i < 4; i++) {
                 const angle = (i / 4) * Math.PI * 2 - Math.PI/2;
                 const angle2 = ((i+0.5) / 4) * Math.PI * 2 - Math.PI/2;
                 const legX = Math.cos(angle) * size * 2.5;
                 const legY = Math.sin(angle) * size * 2.5;
-                const legX2 = Math.cos(angle2) * size * 1.0;
-                const legY2 = Math.sin(angle2) * size * 1.0;
+                const legX2 = Math.cos(angle2) * size * 1.2;
+                const legY2 = Math.sin(angle2) * size * 1.2;
                 ctx.beginPath();
-                //ctx.moveTo(this.x, this.y);
                 ctx.moveTo(this.x + legX, this.y + legY);
                 ctx.lineTo(this.x + legX2, this.y + legY2);
-                ctx.stroke();
-                ctx.beginPath();
-                //ctx.moveTo(this.x, this.y);
                 ctx.moveTo(this.x - legX, this.y + legY);
                 ctx.lineTo(this.x - legX2, this.y + legY2);
                 ctx.stroke();
@@ -937,7 +908,7 @@ class Projectile {
         this.tube = tube;
         this.owner = owner;
         this.depth = 0;
-        this.speed = 1; //1.5
+        this.speed = 0.8; //1.5
         this.damage = 1;
         this.destroyed = false;
         this.updatePosition();
@@ -1011,7 +982,7 @@ class Spike {
         const start = this.tube.getPosition(this.segment, this.startDepth);
         const end = this.tube.getPosition(this.segment, this.endDepth);
         // Draw the spike trail
-        ctx.strokeStyle = '#0f0'; //#f0f
+        ctx.strokeStyle = '#0f0'; 
         ctx.lineWidth = 3;
         ctx.beginPath();
         ctx.moveTo(start.x, start.y);

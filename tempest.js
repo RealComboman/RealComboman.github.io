@@ -18,7 +18,7 @@ class Game {
         this.score = 0;
         this.level = 1;
         this.lives = 5;
-        this.superzappers = 2; // 2 per level
+        this.superzappers = 0; // none on 1st level
         this.tube = null;
         this.player = null;
         this.projectiles = [];
@@ -41,7 +41,6 @@ class Game {
         this.maxEnemiesPerLevel = 10 + (this.level * 2); // Increase enemies per level
         this.enemySpawnTimer = 0;
         this.levelCompleteTimer = 0;
-        
         // Spawn initial enemies
         for (let i = 0; i < Math.min(3, this.maxEnemiesPerLevel); i++) {
             this.spawnEnemy();
@@ -52,9 +51,7 @@ class Game {
         document.addEventListener('keydown', (e) => {
             this.keys[e.key] = true;
             // Restart game
-            if (e.key.toLowerCase() === 'r' && this.state === GAME_STATE.GAME_OVER) {
-                this.restart();
-            }
+            if (e.key.toLowerCase() === 'r' && this.state === GAME_STATE.GAME_OVER) {this.restart();}
             e.preventDefault();
         });
         
@@ -69,6 +66,7 @@ class Game {
         this.score = 0;
         this.level = 1;
         this.lives = 5;
+		this.superzappers = 0;
         this.init();
     }
     
@@ -112,10 +110,8 @@ class Game {
             if (projectile.owner === 'player') {
                 // Check collision with enemies
                 this.enemies.forEach(enemy => {
-                    if (projectile.segment === enemy.segment && 
-                        Math.abs(projectile.depth - enemy.depth) < 0.05) {
-                        enemy.hit(projectile.damage);
-                        projectile.destroyed = true;
+                    if (projectile.segment === enemy.segment && Math.abs(projectile.depth - enemy.depth) < 0.05 ) 
+						{ enemy.hit(projectile.damage); projectile.destroyed = true;
                         // If enemy is destroyed
                         if (enemy.health <= 0) {
                             this.score += enemy.points;
@@ -176,7 +172,7 @@ class Game {
 		} else if (roll < 0.95) {
 			type = 'spiker';
         } else {
-            type = 'fuseball'; // 5% chance for fuseball
+            if(this.level>1) {type = 'fuseball';} // 5% chance for fuseball
         }
         this.enemies.push(new Enemy(this.tube, segment, type));
         this.enemiesSpawned++;
@@ -416,7 +412,6 @@ class Tube {
             ctx.moveTo(Math.cos(angle1) * this.radius* 0.1, Math.sin(angle1) * this.radius* 0.1);
             ctx.lineTo(Math.cos(angle1) * this.radius, Math.sin(angle1) * this.radius);
             ctx.stroke();
-            
             ctx.beginPath();
             ctx.moveTo(Math.cos(angle2) * this.radius* 0.1, Math.sin(angle2) * this.radius* 0.1);
             ctx.lineTo(Math.cos(angle2) * this.radius, Math.sin(angle2) * this.radius);
@@ -506,22 +501,17 @@ class Player {
     updatePosition() {
         // Player sits between segments, shoots into the segment
         let currentSegment;
-        if (this.moveProgress < 1) {
-            // Handle wrapping when moving between last and first segment
+        if (this.moveProgress < 1) {// Handle wrapping when moving between last and first segment
             let diff = this.targetSegment - this.segment;
-            // If moving across the wrap boundary
-            if (Math.abs(diff) > this.tube.segments / 2) {
-                if (diff > 0) {
-                    // Moving from last to first segment
+            if (Math.abs(diff) > this.tube.segments / 2) { // If moving across the wrap boundary
+                if (diff > 0) {// Moving from last to first segment
                     diff = diff - this.tube.segments;
-                } else {
-                    // Moving from first to last segment
+                } else {// Moving from first to last segment
                     diff = diff + this.tube.segments;
                 }
             }
             
             currentSegment = this.segment + diff * this.moveProgress;
-            
             // Normalize to valid segment range
             while (currentSegment < 0) currentSegment += this.tube.segments;
             while (currentSegment >= this.tube.segments) currentSegment -= this.tube.segments;
@@ -552,8 +542,7 @@ class Player {
         this.angle = playerAngle;
     }
     
-    update(deltaTime, keys, game) {
-        // Handle movement input
+    update(deltaTime, keys, game) {  // Handle movement input
         if (this.moveProgress >= 1) {
             if (keys['ArrowLeft']) {
                 this.targetSegment = (this.segment - 1 + this.tube.segments) % this.tube.segments;
@@ -589,13 +578,12 @@ class Player {
         // Superzapper
         if (keys['z'] || keys['Z'] || keys['ArrowDown']) {
             game.useSuperzapper();
-            keys['z'] = false;
-            keys['Z'] = false;
+            keys['z'] = false; keys['Z'] = false;
         }
     }
     
     hit() {
-        console.log('Player hit!');
+        //console.log('Player hit!');
     }
     
     render(ctx) {
@@ -712,7 +700,7 @@ class Enemy {
          if (this.type === 'flipper' || this.type === 'tanker') {
             this.jumpTimer += deltaTime;
             // Jump between lanes unpredictably
-            if (this.jumpTimer > 500 && !this.jumping && Math.random() < 0.01) {
+            if (this.jumpTimer > 500 && !this.jumping && Math.random() < (this.type === 'tanker' ? 0.01 : 0.05)) { //flippers jump more than tankers
                 this.jumping = true;
                 this.targetSegment = (this.segment + (Math.random() < 0.5 ? 1 : -1) + this.tube.segments) % this.tube.segments;
                 this.jumpProgress = 0;

@@ -1,18 +1,15 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=0.9">
 <title>𐌕𐌵𐌁𐌄Ɀ</title><link rel="shortcut icon" href="combo.ico">
 <style>
-body {margin: 0;padding: 0;background-color: #000;display: flex;justify-content: center;align-items: center;height: 100vh;font-family: monospace;color: #0ff;}
+body {margin: 0;padding: 0;background-color: #000;display: flex;justify-content: center;align-items: center;font-family: monospace;color: #0ff;}
 canvas {display: block;}
-#ui {position: absolute;top: 20px;left: 20px;font-size: 20px;}
-#controls {position: absolute;bottom: 20px;left: 50%;transform: translateX(-50%);text-align: center;color: #0ff;
+#ui {position: absolute;top: 10px;justify-content: center;font-size: 24px;}
 }
 </style></head>
 <body>
 <div id="ui">
-<div style="color: #0f0">SCORE: <span id="score">0000</span></div>
-<div style="color: #0af">LEVEL: <span id="level">1</span></div>
-<div> <span id="lives" style="color: #ff0">⋀⋀⋀⋀⋀</span></div>
-<div> <span id="superzappers" style="color: #ff0">⁕⁕</span></div>
+<div style="color: #0f0">SCORE <span id="score">0000</span></div>
+<div style="color: #0af">LEVEL <span id="level">1</span> <span id="lives" style="color: #ff0">⋀⋀⋀⋀⋀</span> <span id="superzappers" style="color: #ff0">⁕⁕</span></div>
 </div>
 <canvas id="gameCanvas"></canvas>
 <!--div id="controls">
@@ -20,4 +17,4 @@ canvas {display: block;}
 </div-->
 <script src="tempest.js"></script>
 </body></html>
-<!-- canvas {border: 2px solid #0ff;display: block;} -->
+<!-- canvas {border: 2px solid #0ff;display: block;} #controls {position: absolute;bottom: 20px;left: 50%;transform: translateX(-50%);text-align: center;color: #0ff;-->

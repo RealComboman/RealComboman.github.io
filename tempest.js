@@ -1,7 +1,7 @@
 const canvas = document.getElementById('gameCanvas');
 const ctx = canvas.getContext('2d');
 canvas.width = 800;
-canvas.height = 600;
+canvas.height = 800;
 
 const GAME_STATE = {
     MENU: 'menu',
@@ -491,7 +491,7 @@ class Player {
         this.targetSegment = 0;
         this.moveProgress = 1; // 0 = start of move, 1 = completed
         this.size = 20;
-        this.speed = 7;
+        this.speed = 50;  // was 100ms to move between segments
         this.shootCooldown = 0;
         this.invulnerable = false;
         this.flexAmount = 0; // For animation
@@ -527,11 +527,8 @@ class Player {
         let playerAngle;
         if (Math.abs(angle2 - angle1) > Math.PI) {
             // We're wrapping around
-            if (angle1 > angle2) {
-                playerAngle = (angle1 + angle2 + Math.PI * 2) / 2;
-            } else {
-                playerAngle = (angle1 + Math.PI * 2 + angle2) / 2;
-            }
+            if (angle1 > angle2) {playerAngle = (angle1 + angle2 + Math.PI * 2) / 2;}
+			else {playerAngle = (angle1 + Math.PI * 2 + angle2) / 2;}
             if (playerAngle > Math.PI * 2) playerAngle -= Math.PI * 2;
         } else {
             playerAngle = (angle1 + angle2) / 2;
@@ -558,14 +555,13 @@ class Player {
         
         // Animate movement
         if (this.moveProgress < 1) {
-            this.moveProgress += deltaTime / 80; // 100ms to move between segments
+            this.moveProgress += deltaTime / this.speed;
             if (this.moveProgress >= 1) {
                 this.moveProgress = 1;
                 this.segment = this.targetSegment;
             }
             this.updatePosition();
-            // Update flex animation
-            this.flexAmount = Math.sin(this.moveProgress * Math.PI) * 0.3;
+            this.flexAmount = Math.sin(this.moveProgress * Math.PI) * 0.3; // Update flex animation
         } else {
             // Subtle idle animation
             this.flexAmount = Math.sin(Date.now() * 0.003) * 0.05;
@@ -718,7 +714,7 @@ class Enemy {
 			// Normal enemy behavior
             this.depth += this.direction * this.speed * deltaTime / 1000;
             
-            // Track furthest point and manage spike (not for fuseballs)
+            // Track furthest point and manage spike
             if (this.type == 'spiker' && this.direction === -1 && this.depth < this.furthestDepth) {
                 this.furthestDepth = this.depth;
                 
@@ -757,7 +753,6 @@ class Enemy {
     }
     
     hit(damage) {
-        // Fuseballs can only be hit when jumping
         if (this.type === 'fuseball' && !this.jumping) {
             return; // Invulnerable unless jumping
         }
@@ -792,7 +787,7 @@ class Enemy {
             ctx.lineWidth = 2;
             ctx.beginPath();
             ctx.moveTo(this.x, this.y);
-			let inc=size/9;
+			let inc=size/10;
 			let leg=inc; //Math.random()*inc/2+inc; //random size
             for (let i = 0; i < 4; i++) {
                 ctx.lineTo(this.x +leg, this.y -leg/(Math.random()+1));
@@ -946,7 +941,7 @@ class Spike {
         this.segment = segment;
         this.startDepth = 0.9;
         this.endDepth = 1;
-        this.health = 3;
+        this.health = 9; //was 3
         this.destroyed = false;
         this.sizzleTimer = 0;
     }

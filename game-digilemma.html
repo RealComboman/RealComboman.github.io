@@ -188,7 +188,7 @@ setInterval(o=>
     else // player controls
     {
         // player input
-        moveOffset = ((input[68]|0) - (input[65]|0)) || ((input[83]|0) - (input[87]|0))*size;
+        moveOffset = ((input[39]|0) - (input[37]|0)) || ((input[40]|0) - (input[38]|0))*size;
 
         // rewind, go back to start if first rewind
         if (input[90])
@@ -228,9 +228,9 @@ All puzzles are solvable!
 
 - Controls -
 
-WASD = Move
-Z = Undo
-R = Randomize
+←↑↓→ = Move
+   Z = Undo
+   R = Randomize
 `
 },
 33); // 30 fps update

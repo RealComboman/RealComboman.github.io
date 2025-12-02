@@ -1,33 +1,29 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Scientific Calculator</title>
-  <style>
-    body {font-family: Arial, sans-serif; display: flex; justify-content: center; align-items: center; height: 90vh; background-color: #f0f0f0; }
-    /* Style for the calculator container */
-    .calculator { background-color: black; padding: 15px; border-radius: 15px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); }
-    /* Style for the display area */
-	.subdisplay { background-color: yellow; width: 249px; height: 10px; text-align: left; margin-bottom: 0px; font-size: 0.6em; padding: 3px;}
-    .display { background-color: lightyellow; width: 245px; height: 40px; text-align: right; margin-bottom: 10px; font-size: 1.5em; padding: 5px; }
-    /* Grid layout for buttons */
-    .buttons { display: grid; grid-template-columns: repeat(5, 42px); gap: 10px; }
-    /* Style for the buttons */
-    .buttons button { width: 48px; height: 40px; font-size: 1.0em; border: none; background-color: white; color: black; border-radius: 16px; cursor: pointer; }
-    .buttons button:hover { background-color: lightgray; }
-    .buttons .equals {grid-column: span 2; width: 95px; background-color: lightgreen;  }
-    .buttons .equals:hover { background-color: green;  }
-    .buttons .functions { background-color: DeepSkyBlue; }
-    .buttons .functions:hover {background-color: CornflowerBlue; }
-    .buttons .hot { background-color: red; }
-    .buttons .hot:hover {background-color: darkred; }
-    .buttons .mem { background-color: lightgray; }
-    .buttons .mem:hover {background-color: gray; }
-    .buttons .mode { background-color: orange; }
-    .buttons .mode:hover {background-color: darkorange; }
-  </style>
-</head>
+<!DOCTYPE html><head><html lang="en"><meta charset="UTF-8"><link rel="shortcut icon" href="combo.ico">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Scientific Calculator</title>
+<style>
+body {font-family: Arial, sans-serif; display: flex; justify-content: center; align-items: center; height: 90vh; background-color: #f0f0f0; }
+/* Style for the calculator container */
+.calculator { background-color: black; padding: 15px; border-radius: 15px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); }
+/* Style for the display area */
+.subdisplay { background-color: yellow; width: 249px; height: 10px; text-align: left; margin-bottom: 0px; font-size: 0.6em; padding: 3px;}
+.display { background-color: lightyellow; width: 245px; height: 40px; text-align: right; margin-bottom: 10px; font-size: 1.5em; padding: 5px; }
+/* Grid layout for buttons */
+.buttons { display: grid; grid-template-columns: repeat(5, 42px); gap: 10px; }
+/* Style for the buttons */
+.buttons button { width: 48px; height: 40px; font-size: 1.0em; border: none; background-color: white; color: black; border-radius: 16px; cursor: pointer; }
+.buttons button:hover { background-color: lightgray; }
+.buttons .equals {grid-column: span 2; width: 95px; background-color: lightgreen;  }
+.buttons .equals:hover { background-color: green;  }
+.buttons .functions { background-color: DeepSkyBlue; }
+.buttons .functions:hover {background-color: CornflowerBlue; }
+.buttons .hot { background-color: red; }
+.buttons .hot:hover {background-color: darkred; }
+.buttons .mem { background-color: lightgray; }
+.buttons .mem:hover {background-color: gray; }
+.buttons .mode { background-color: orange; }
+.buttons .mode:hover {background-color: darkorange; }
+</style></head>
 <body>
 <div class="calculator">
 <div class="sub2display"><input type="text" class="subdisplay" id="subdisplay" disabled></div>

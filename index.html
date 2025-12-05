@@ -140,6 +140,7 @@ else if(getEaster(date.getYear())==date){document.getElementById("Othm").innerHT
 else if(date.getMonth()==2 && date.getDate()==14){document.getElementById("Othm").innerHTML='️<a href="https://www.timeanddate.com/holidays/fun/pi-day">🥧</a>';} //pi
 else if(date.getMonth()==2 && date.getDate()>7 && date.getDate()<15 && date.getDay()==0){document.getElementById("Othm").innerHTML='<a href="https://www.timeanddate.com/time/dst">⏰⤸</a>';} //fwd
 else if(date.getMonth()==2 && date.getDate()>18 && date.getDate()<22){document.getElementById("Othm").innerHTML='🌻';} //spr
+else if(date.getMonth()==2 && date.getDate()==17){document.getElementById("Othm").innerHTML='🍀';} 
 else if(date.getMonth()==4 && date.getDate()==4){document.getElementById("Othm").innerHTML='️<a href="https://www.starwars.com/star-wars-day">🪐</a>';}
 else if(date.getMonth()==4 && date.getDate()==5){document.getElementById("Othm").innerHTML='️🌮';}
 else if(date.getMonth()==4 && date.getDate()>17 && date.getDate()<25 && date.getDay()==1){document.getElementById("Othm").innerHTML='👑';}
@@ -185,7 +186,7 @@ fetch(apiUrl)
 .then(data => {
 const{name, main, weather}=data;
 const temperature=Math.round(main.temp*10)/10, description=weather[0].description,humidity=main.humidity,pres=main.pressure/10;
-var wicon="❓";
+var wicon="❓"; var moon;
 if(data.weather[0].icon==="01d"){wicon="☀️";}
 if(data.weather[0].icon==="01n"){wicon="️🌙";}
 if(data.weather[0].icon==="02d"||data.weather[0].icon==="02n"||data.weather[0].icon==="03d"||data.weather[0].icon==="03n"){wicon="⛅️";}
@@ -195,8 +196,6 @@ if(data.weather[0].icon==="10d"||data.weather[0].icon==="10n"){wicon="️🌧";}
 if(data.weather[0].icon==="11d"||data.weather[0].icon==="11n"){wicon="🌩️";}
 if(data.weather[0].icon==="13d"||data.weather[0].icon==="13n"){wicon="❄️";}
 if(data.weather[0].icon==="50d"||data.weather[0].icon==="50n"){wicon="️🌫";}
-//date=new Date(); var m = Math.abs(((date.getTime() / 86400000) - 18256.8) / 29.53059); var phase = (m - Math.floor(m)); 
-var moon;
 if(phase<0.125){moon="🌑 New Moon";}
 else if(phase<0.25){moon="🌒 Waxing Crescent";}
 else if(phase<0.375){moon="🌓 First Quarter";}

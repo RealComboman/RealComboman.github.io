@@ -1,0 +1,70 @@
+<!DOCTYPE html><html lang="en"><head>  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Time Convertions</title>
+<style>
+body {font-family: Arial, sans-serif; font-size: 0.8em; display: flex; justify-content: center; align-items: center; height: 70vh; background-color: #f0f0f0; }
+</style></head>
+<body>
+<divstyle="margin:0 -16px">
+<h2>Time Converter 🕑</h2>
+<p>Type a value in any of the fields to convert between Length measurements.</p>
+<div class="conversion" id="time"> 
+<h2 class="category-title">Time</h2> 
+<input type="number" id="timeInput" class="input" placeholder="Enter value"> 
+<select id="fromTimeUnit" class="unit-select" onClick="timeFn()"> 
+ <option value="second">Second</option> 
+ <option value="millisecond">Millisecond</option> 
+ <option value="hour">Hour</option> 
+ <option value="minute">Minute</option> 
+ <option value="day">Day</option> 
+ <option value="week">Week</option> 
+ <option value="month">Month</option> 
+ <option value="year">Year</option> 
+</select> 
+<span class="arrow"> ⟹ </span> 
+<select id="toTimeUnit" class="unit-select" onClick="timeFn()"> 
+ <option value="second">Second</option> 
+ <option value="millisecond">Millisecond</option> 
+ <option value="hour">Hour</option> 
+ <option value="minute">Minute</option> 
+ <option value="day">Day</option> 
+ <option value="week">Week</option> 
+ <option value="month">Month</option> 
+ <option value="year">Year</option> 				</select> 
+<!--button id="timeConvertBtn" class="convert-button" onClick="timeFn()">Convert</button--> 
+<div class="result"><p id="timeResult">Result will be displayed here</p></div> 
+</div> 
+
+<script>
+function timeFn() { 
+ let valInput = parseFloat( 
+ 	document.getElementById( 
+ 		"timeInput").value); 
+ let fromUnit = 
+ 	document.getElementById( 
+ 		"fromTimeUnit").value; 
+ let toUnit = 
+ 	document.getElementById( 
+ 		"toTimeUnit").value; 
+ let conversionFactors = { 
+ 	second: 1, 
+ 	millisecond: 1000, 
+ 	minute: 1 / 60, 
+ 	hour: 1 / 3600, 
+ 	day: 1 / 86400, 
+ 	week: 1 / 604800, 
+ 	month: 1 / 2628000, 
+ 	year: 1 / 31536000,}; 
+ let result = 
+ 	valInput * 
+ 	(conversionFactors[toUnit] / 
+ 		conversionFactors[ 
+ 			fromUnit]); 
+ document.getElementById( 
+ 	"timeResult"
+ ).textContent = `Result: ${result.toFixed( 
+ 	2 
+ )} ${toUnit}`; 
+}
+</script>
+</body>
+</html>

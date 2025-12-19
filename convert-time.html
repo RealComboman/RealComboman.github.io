@@ -1,40 +1,77 @@
 <!DOCTYPE html><html lang="en"><head>  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Time Convertions</title>
 <style>
-body {font-family: Arial, sans-serif; font-size: 0.8em; display: flex; justify-content: center; align-items: center; height: 70vh; background-color: #f0f0f0; }
+body {font-family: Arial, sans-serif; font-size: 1.0em; display: flex; justify-content: center; align-items: center; height: 70vh; background-color: #ffffff; }
 </style></head>
 <body>
 <divstyle="margin:0 -16px">
-<h2>Time Converter 🕑</h2>
-<p>Type a value in any of the fields to convert between Length measurements.</p>
+<h2>Time 🕑</h2>
 <div class="conversion" id="time"> 
-<h2 class="category-title">Time</h2> 
+<h3 class="category-title">Time Unit Conversion</h3> 
+<p>Type a value in to convert between measurements.</p>
 <input type="number" id="timeInput" class="input" placeholder="Enter value"> 
 <select id="fromTimeUnit" class="unit-select" onClick="timeFn()"> 
- <option value="second">Second</option> 
  <option value="millisecond">Millisecond</option> 
+ <option value="second">Second</option> 
+ <option value="minute" selected>Minute</option> 
  <option value="hour">Hour</option> 
- <option value="minute">Minute</option> 
+ <option value="beat">.Beat™</option> 
  <option value="day">Day</option> 
  <option value="week">Week</option> 
+ <option value="fortnight">Fortnight</option> 
  <option value="month">Month</option> 
- <option value="year">Year</option> 
+ <option value="year">Year (Common)</option>
+ <option value="jyear">Year (Julian)</option>
+ <option value="decade">Decade</option>
+ <option value="century">Century</option>
 </select> 
 <span class="arrow"> ⟹ </span> 
 <select id="toTimeUnit" class="unit-select" onClick="timeFn()"> 
- <option value="second">Second</option> 
  <option value="millisecond">Millisecond</option> 
- <option value="hour">Hour</option> 
+ <option value="second" selected>Second</option> 
  <option value="minute">Minute</option> 
+ <option value="hour">Hour</option> 
+ <option value="beat">.Beat™</option> 
  <option value="day">Day</option> 
  <option value="week">Week</option> 
+ <option value="fortnight">Fortnight</option> 
  <option value="month">Month</option> 
- <option value="year">Year</option> 				</select> 
+ <option value="year">Year (Common)</option>
+ <option value="jyear">Year (Julian)</option>
+ <option value="decade">Decade</option>
+ <option value="century">Century</option>
+</select> 
 <!--button id="timeConvertBtn" class="convert-button" onClick="timeFn()">Convert</button--> 
-<div class="result"><p id="timeResult">Result will be displayed here</p></div> 
+<div><p id="timeResult">Result will be displayed here</p></div> 
 </div> 
+<br>
+<h3 class="category-title">Current Time</h3> 
+<p>Current time based on your device's system clock:</p>
+<p id="demo"></p>
+Unix Epoch Time: <div id="epoc">NOT AVAILABLE</div> <div id="hexpoc">NOT AVAILABLE</div>
+<p id="moonp">MOON PHASE NOT AVAILABLE</p>
 
 <script>
+const d = new Date();
+document.getElementById("demo").innerHTML = d;
+const epoch= Date.now();
+document.getElementById("epoc").innerHTML = Date.now();
+const hexstring = epoch.toString(16);
+document.getElementById("hexpoc").innerHTML = hexstring;
+
+var m = Math.abs(((date.getTime() / 86400000) - 18256.8) / 29.53059); 
+var phase = (m - Math.floor(m));
+if(phase<0.125){const moon="🌑 New Moon";}
+else if(phase<0.25){const moon="🌒 Waxing Crescent";}
+else if(phase<0.375){const moon="🌓 First Quarter";}
+else if(phase<0.5){const moon="🌔 Waxing Gibbous";}
+else if(phase<0.625){const moon="🌕 Full Moon";}
+else if(phase<0.75){const moon="🌖 Waning Gibbous";}
+else if(phase<0.875){const moon="🌗 Last Quarter";}
+else {const moon="🌘 Waning Crescent";}
+const timeContent=`<b>${moon}</b>`;
+document.getElementById("moonp").innerHTML = timeContent;
+
 function timeFn() { 
  let valInput = parseFloat( 
  	document.getElementById( 
@@ -49,10 +86,15 @@ function timeFn() {
  	second: 1, 
  	millisecond: 1000, 
  	minute: 1 / 60, 
+ 	beat: 1 / 86.4, 
  	hour: 1 / 3600, 
  	day: 1 / 86400, 
+ 	fortnight: 1 / 1209600, 
  	week: 1 / 604800, 
  	month: 1 / 2628000, 
+ 	decade: 1 / 315360000, 
+ 	century: 1 / 3153600000, 
+ 	jyear: 1 / 31557600, 
  	year: 1 / 31536000,}; 
  let result = 
  	valInput * 
@@ -61,9 +103,7 @@ function timeFn() {
  			fromUnit]); 
  document.getElementById( 
  	"timeResult"
- ).textContent = `Result: ${result.toFixed( 
- 	2 
- )} ${toUnit}`; 
+ ).textContent = `Result: ${result.toFixed( 4 )} ${toUnit}`; 
 }
 </script>
 </body>

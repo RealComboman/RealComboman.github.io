@@ -2,6 +2,7 @@
 <title>Time Convertions</title>
 <style>
 body {font-family: Arial, sans-serif; font-size: 1.0em; display: flex; justify-content: center; align-items: center; height: 70vh; background-color: #ffffff; }
+#timeResult {font-style: bold;}
 </style></head>
 <body>
 <divstyle="margin:0 -16px">
@@ -21,7 +22,7 @@ body {font-family: Arial, sans-serif; font-size: 1.0em; display: flex; justify-c
  <option value="fortnight">Fortnight</option> 
  <option value="month">Month</option> 
  <option value="year">Year (Common)</option>
- <option value="jyear">Year (Julian)</option>
+ <option value="yearj">Year (Julian)</option>
  <option value="decade">Decade</option>
  <option value="century">Century</option>
 </select> 
@@ -37,12 +38,12 @@ body {font-family: Arial, sans-serif; font-size: 1.0em; display: flex; justify-c
  <option value="fortnight">Fortnight</option> 
  <option value="month">Month</option> 
  <option value="year">Year (Common)</option>
- <option value="jyear">Year (Julian)</option>
+ <option value="yearj">Year (Julian)</option>
  <option value="decade">Decade</option>
  <option value="century">Century</option>
 </select> 
 <!--button id="timeConvertBtn" class="convert-button" onClick="timeFn()">Convert</button--> 
-<div><p id="timeResult">Result will be displayed here</p></div> 
+<div><p id="timeResult" style="bold;">Result will be displayed here</p></div> 
 </div> 
 <br>
 <h3 class="category-title">Current Time</h3> 
@@ -51,7 +52,7 @@ body {font-family: Arial, sans-serif; font-size: 1.0em; display: flex; justify-c
 Unix Epoch Time: <div id="epoc">NOT AVAILABLE</div> <div id="hexpoc">NOT AVAILABLE</div>
 <p id="moonp">MOON PHASE NOT AVAILABLE</p>
 
-<script>
+<script type="text/javascript">
 const d = new Date();
 document.getElementById("demo").innerHTML = d;
 const epoch= Date.now();
@@ -59,18 +60,26 @@ document.getElementById("epoc").innerHTML = Date.now();
 const hexstring = epoch.toString(16);
 document.getElementById("hexpoc").innerHTML = hexstring;
 
+calcMoon();
+
+
+function calcMoon() {
+const moonDiv=document.getElementById("moonp");
 var m = Math.abs(((date.getTime() / 86400000) - 18256.8) / 29.53059); 
 var phase = (m - Math.floor(m));
-if(phase<0.125){const moon="🌑 New Moon";}
-else if(phase<0.25){const moon="🌒 Waxing Crescent";}
-else if(phase<0.375){const moon="🌓 First Quarter";}
-else if(phase<0.5){const moon="🌔 Waxing Gibbous";}
-else if(phase<0.625){const moon="🌕 Full Moon";}
-else if(phase<0.75){const moon="🌖 Waning Gibbous";}
-else if(phase<0.875){const moon="🌗 Last Quarter";}
-else {const moon="🌘 Waning Crescent";}
-const timeContent=`<b>${moon}</b>`;
-document.getElementById("moonp").innerHTML = timeContent;
+var moon;
+if(phase<0.125){moon="🌑 New Moon";}
+else if(phase<0.25){moon="🌒 Waxing Crescent";}
+else if(phase<0.375){moon="🌓 First Quarter";}
+else if(phase<0.5){moon="🌔 Waxing Gibbous";}
+else if(phase<0.625){moon="🌕 Full Moon";}
+else if(phase<0.75){moon="🌖 Waning Gibbous";}
+else if(phase<0.875){moon="🌗 Last Quarter";}
+else {moon="🌘 Waning Crescent";}
+var timeContent=`${moon}`;
+//document.getElementById("moonp").innerHTML = moon;
+moonDiv.innerHTML = timeContent;
+}
 
 function timeFn() { 
  let valInput = parseFloat( 
@@ -94,16 +103,10 @@ function timeFn() {
  	month: 1 / 2628000, 
  	decade: 1 / 315360000, 
  	century: 1 / 3153600000, 
- 	jyear: 1 / 31557600, 
+ 	yearj: 1 / 31557600, 
  	year: 1 / 31536000,}; 
- let result = 
- 	valInput * 
- 	(conversionFactors[toUnit] / 
- 		conversionFactors[ 
- 			fromUnit]); 
- document.getElementById( 
- 	"timeResult"
- ).textContent = `Result: ${result.toFixed( 4 )} ${toUnit}`; 
+ let result = valInput * (conversionFactors[toUnit] / conversionFactors[fromUnit]); 
+ document.getElementById("timeResult").textContent = `Result: ${result.toFixed( 4 )} ${toUnit}`; 
 }
 </script>
 </body>

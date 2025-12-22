@@ -1,0 +1,97 @@
+<!DOCTYPE html><html lang="en"><head>  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Weight/Mass Convertions</title>
+<style>
+body {font-family: Arial, sans-serif; font-size: 1.0em; display: flex; justify-content: center; align-items: center; height: 70vh; background-color: #ffffff; }
+#timeResult {font-style: bold;}
+</style></head>
+<body>
+<divstyle="margin:0 -16px">
+<h2>Weight/Mass ⚖️</h2>
+<div class="conversion" id="time"> 
+<h3 class="category-title">Weight/Mass Unit Conversion</h3> 
+<p>Type a value in to convert between measurements.</p>
+<input type="number" id="UnitInput" class="input" placeholder="Enter value"> 
+<select id="UnitFrom" class="unit-select" onClick="weightFn()"> 
+ <option value="g">gram</option> 
+ <option value="kg" selected>kilogram</option> 
+  <option value="mg">milligram</option> 
+ <option value="tonne">ton (metric)</option> 
+ <option value="ton_UK">long ton</option> 
+ <option value="ton_US">short ton</option> 
+ <option value="stone">stone</option> 
+ <option value="lb">pound</option> 
+ <option value="oz">ounce</option> 
+ <option value="ct">carat</option> 
+ <option value="dram">dram</option> 
+ <option value="grain">grain</option> 
+</select> 
+<span class="arrow"> ⟹ </span> 
+<select id="UnitTo" class="unit-select" onClick="weightFn()"> 
+ <option value="g">gram</option> 
+ <option value="kg" selected>kilogram</option> 
+ <option value="mg">milligram</option> 
+ <option value="tonne">ton (metric)</option> 
+ <option value="ton_UK">long ton</option> 
+ <option value="ton_US">short ton</option> 
+ <option value="stone">stone</option> 
+ <option value="lb">pound</option> 
+ <option value="oz">ounce</option> 
+ <option value="ct">carat</option> 
+ <option value="dram">dram</option> 
+ <option value="grain">grain</option> 
+</select> 
+<!--button id="timeConvertBtn" class="convert-button" onClick="timeFn()">Convert</button--> 
+<div><p id="UnitResult" style="bold;">Result will be displayed here</p></div> 
+</div> 
+<br>
+<h3 class="category-title">Approximate Average Weight of Common Items</h3> 
+<p style="white-space:pre">🔋 Alkaline AA battery: &#9;24g</p>
+<p style="white-space:pre">🔋 Alkaline C battery: &#9;75g</p>
+<p style="white-space:pre">🔋 Alkaline D battery: &#9;170g</p>
+<p style="white-space:pre">🧴 1 gal/4𝓁 water jug: &#9;10 lbs</p>
+<p style="white-space:pre">🧴 72 oz detergent bottle: &#9;5 lbs</p>
+<p style="white-space:pre">🥫 15 oz soup can: &#9;1 lb</p>
+<p style="white-space:pre">🚗 Automobile tire: &#9;22 lbs</p>
+<p style="white-space:pre">🪙 Euro coin: &#9; &#9;7.5g</p>
+<p style="white-space:pre">➉ Canadian dime: &#9;1.75g</p>
+<p style="white-space:pre">❶ US penny: &#9; &#9;2.5g</p>
+
+
+<script type="text/javascript">
+
+function weightFn() { 
+	let valInput = parseFloat( 
+		document.getElementById( 
+			"UnitInput").value); 
+	let fromUnit = 
+		document.getElementById( 
+			"UnitFrom").value; 
+	let toUnit = 
+		document.getElementById( 
+			"UnitTo").value; 
+	let conversionFactors = { 
+		g: 1, 
+		kg: 0.001, 
+		mg: 1000, 
+		tonne: 0.000001, 
+		ton_UK: 0.000000984207, 
+		ton_US: 0.00000110231, 
+		lb: 0.00220462, 
+		stone: 0.000157473, 
+		oz: 0.03527396, 
+		dram: 1.772, 
+		grain: 0.065, 
+		ct: 5,}; 
+	let result = 
+		valInput * 
+		(conversionFactors[toUnit] / 
+			conversionFactors[ 
+				fromUnit]); 
+	document.getElementById( 
+		"UnitResult"
+	).textContent = `Result: ${result.toFixed(3 
+	)} ${toUnit}`; 
+} 
+</script>
+</body>
+</html>

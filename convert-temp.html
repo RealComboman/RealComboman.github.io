@@ -1,0 +1,82 @@
+<!DOCTYPE html><html lang="en"><head>  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Temperature Convertions</title>
+<style>
+body {font-family: Arial, sans-serif; font-size: 1.0em; display: flex; justify-content: center; align-items: center; height: 70vh; background-color: #ffffff; }
+#timeResult {font-style: bold;}
+</style></head>
+<body>
+<divstyle="margin:0 -16px">
+<h2>Temperature 🌡</h2>
+<div class="conversion" id="time"> 
+<h3 class="category-title">Temperature Unit Conversion</h3> 
+<p>Type a value in to convert between measurements.</p>
+<input type="number" id="temperatureInput" class="input" placeholder="Enter value"> 
+<select id="fromTemperatureUnit" class="unit-select" onClick="tempFn()"> 
+ <option value="C" selected>Celsius</option> 
+ <option value="F">Fahrenheit</option> 
+ <option value="K">Kelvin</option> 
+</select> 
+<span class="arrow"> ⟹ </span> 
+<select id="toTemperatureUnit" class="unit-select" onClick="tempFn()"> 
+ <option value="C">Celsius</option> 
+ <option value="F" selected>Fahrenheit</option> 
+ <option value="K">Kelvin</option> 
+</select> 
+<!--button id="timeConvertBtn" class="convert-button" onClick="timeFn()">Convert</button--> 
+<div><p id="temperatureResult" style="bold;">Result will be displayed here</p></div> 
+</div> 
+<br>
+<h3 class="category-title">Standard Temperatures</h3> 
+<p style="white-space:pre">🫖 Boiling point of water: &#9;100°C &#9;(212°F , 375.15K)</p>
+<p style="white-space:pre">🧍 Human body temp: &#9; &#9;37°C &#9;(98.6°F , 310.15K)</p>
+<p style="white-space:pre">🏠 Room temperature: &#9; &#9;21°C &#9;(70°F , 294.15K)</p>
+<p style="white-space:pre">🧊 Freezing point of water: &#9;0°C &#9;(32°F , 273.15K)</p>
+<p style="white-space:pre">⓪ Absolute zero: &#9; &#9; &#9;-273.15°C &#9;(-459.67°F , 0K)</p>
+
+<script type="text/javascript">
+
+
+
+function tempFn() { 
+	let valInput = parseFloat( 
+		document.getElementById( 
+			"temperatureInput"
+		).value); 
+	let fromUnit = 
+		document.getElementById( 
+			"fromTemperatureUnit").value; 
+	let toUnit = 
+		document.getElementById( 
+			"toTemperatureUnit").value; 
+	let result; 
+	if (fromUnit === "C" && 
+		toUnit === "F") { 
+		result = 
+			(valInput * 9) / 5 + 32;} 
+	else if (fromUnit === "C" && 
+			toUnit === "K") { 
+		result = valInput + 273.15;} 
+	else if (fromUnit === "F" && 
+			toUnit === "C") { 
+		result = 
+			((valInput - 32) * 5) / 9;} 
+	else if (fromUnit === "F" && 
+			toUnit === "K") { 
+		result = 
+			((valInput - 32) * 5) / 9 + 
+			273.15;} 
+	else if (fromUnit === "K" && 
+			toUnit === "C") { 
+		result = valInput - 273.15;} 
+	else if (fromUnit === "K" && 
+			toUnit === "F") { 
+		result = 
+			((valInput - 273.15) * 9) / 
+				5 + 
+			32;} 
+	else { 	result = valInput;} 
+	document.getElementById("temperatureResult").textContent = `Result: ${result.toFixed(2)} ${toUnit}`;} 
+
+</script>
+</body>
+</html>

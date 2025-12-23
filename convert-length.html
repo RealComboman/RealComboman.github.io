@@ -1,0 +1,269 @@
+<!DOCTYPE html><html lang="en"><head>  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Length/Area/Volume Convertions</title>
+<style>
+body {font-family: Arial, sans-serif; font-size: 1.0em; display: flex; justify-content: center; align-items: center; height: 70vh; background-color: #ffffff; }
+#timeResult {font-style: bold;}
+</style></head>
+<body>
+<divstyle="margin:0 -16px">
+<h2>Length/Area/Volume 📏</h2>
+<div class="conversion"> 
+<h3 class="category-title">Length Unit Conversion</h3> 
+<p>Type a value in to convert between measurements.</p>
+<input type="number" id="UnitInput" class="input" placeholder="Enter value"> 
+<select id="UnitFrom" class="unit-select" onClick="lengthFn()"> 
+ <option value="m">meter</option> 
+ <option value="km">kilometer</option> 
+ <option value="mm">millimeter</option> 
+ <option value="cm" selected>centimeter</option> 
+ <option value="in">inch</option> 
+ <option value="ft">foot</option> 
+ <option value="yard">yard</option> 
+ <option value="mile">mile</option> 
+ <option value="thou">thou</option> 
+ <option value="fathom">fathom</option> 
+ <option value="furlong">furlong</option> 
+ <option value="cubit">cubit</option> 
+ <option value="league">league</option> 
+</select> 
+<span class="arrow"> ⟹ </span> 
+<select id="UnitTo" class="unit-select" onClick="lengthFn()"> 
+ <option value="m">meter</option> 
+ <option value="km">kilometer</option> 
+ <option value="mm">millimeter</option> 
+ <option value="cm">centimeter</option> 
+ <option value="in" selected>inch</option> 
+ <option value="ft">foot</option> 
+ <option value="yard">yard</option> 
+ <option value="mile">mile</option> 
+ <option value="thou">thou</option> 
+ <option value="fathom">fathom</option> 
+ <option value="furlong">furlong</option> 
+ <option value="cubit">cubit</option> 
+ <option value="league">league</option> 
+</select> 
+<div><p id="UnitResult" style="bold;">Result will be displayed here</p></div> 
+<br>
+<h3 class="category-title">Area Unit Conversion</h3> 
+<p>Type a value in to convert between measurements.</p>
+<input type="number" id="areaInput" class="input" placeholder="Enter value"> 
+<select id="fromAreaUnit" class="unit-select" onClick="areaFn()"> 
+ <option value="m2">square meters</option> 
+ <option value="km2">square kilometers</option> 
+ <option value="cm2">square centimeters</option> 
+ <option value="mm2">square millimeters</option> 
+ <option value="acre">acres</option> 
+ <option value="ha" selected>hectares</option> 
+ <option value="fields">football fields (US)</option> 
+ <option value="pitches">football pitches (UK)</option> 
+ <option value="mi2">square miles</option> 
+ <option value="yd2">square yards</option> 
+ <option value="ft2">square feet</option> 
+ <option value="in2">square inches</option> </select> 
+<span class="arrow"> ⟹ </span> 
+<select id="toAreaUnit" class="unit-select" onClick="areaFn()"> 
+ <option value="m2">square meters</option> 
+ <option value="km2" selected>square kilometers</option> 
+ <option value="cm2">square centimeters</option> 
+ <option value="mm2">square millimeters</option> 
+ <option value="acre">acres</option> 
+ <option value="ha">hectares</option> 
+ <option value="fields">football fields (US)</option> 
+ <option value="pitches">football pitches (UK)</option> 
+ <option value="mi2">square miles</option> 
+ <option value="yd2">square yards</option> 
+ <option value="ft2">square feet</option> 
+ <option value="in2">square inches</option> 
+</select> 
+<div><p id="areaResult" style="bold;">Result will be displayed here</p></div> 
+<br>
+<h3 class="category-title">Volume Unit Conversion</h3> 
+<p>Type a value in to convert between measurements.</p>
+<input type="number" id="volumeInput" class="input" placeholder="Enter value"> 
+<select id="fromVolUnit" class="unit-select" onClick="volumeFn()"> 
+ <option value="m3">cubic meter</option> 
+ <option value="cc">cubic centimeter</option> 
+ <option value="mm3">cubic millimeter</option> 
+ <option value="liters" selected>liter</option> 
+ <option value="ml">milliliter</option> 
+ <option value="gal_US">gallon (US)</option> 
+ <option value="gal_UK">gallon (UK)</option> 
+ <option value="qt_US">quart (US)</option> 
+ <option value="qt_UK">gallon (UK)</option> 
+ <option value="pt_US">pint (US)</option> 
+ <option value="pt_UK">pint (UK)</option> 
+ <option value="cup_US">cup (US)</option> 
+ <option value="cup_UK">cup (UK)</option> 
+ <option value="tbsp_US">tablespoon (US)</option> 
+ <option value="tbsp_UK">tablespoon (UK)</option> 
+ <option value="tsp_US">teaspoon (US)</option> 
+ <option value="tsp_UK">teaspoon (UK)</option> 
+ <option value="oz_US">fluid ounce (US)</option> 
+ <option value="oz_UK">fluid ounce (UK)</option> 
+ <option value="FBM">board feet</option> 
+ <option value="cord">cord</option> 
+ <option value="pools">swimming pool</option>
+ <option value="barrel">barrel</option> 
+ <option value="bushel">bushel</option> 
+ <option value="in3">cubic inch</option> 
+ <option value="yd3">cubic yard</option> 
+ <option value="ft3">cubic foot</option> 
+</select> 
+<span class="arrow"> ⟹ </span> 
+<select id="toVolUnit" class="unit-select" onClick="volumeFn()"> 
+ <option value="m3">cubic meter</option> 
+ <option value="cc" selected>cubic centimeter</option> 
+ <option value="mm3">cubic millimeter</option> 
+ <option value="liters">liter</option> 
+ <option value="ml">milliliter</option> 
+ <option value="gal_US">gallon (US)</option> 
+ <option value="gal_UK">gallon (UK)</option> 
+ <option value="qt_US">quart (US)</option> 
+ <option value="qt_UK">gallon (UK)</option> 
+ <option value="pt_US">pint (US)</option> 
+ <option value="pt_UK">pint (UK)</option> 
+ <option value="cup_US">cup (US)</option> 
+ <option value="cup_UK">cup (UK)</option> 
+ <option value="tbsp_US">tablespoon (US)</option> 
+ <option value="tbsp_UK">tablespoon (UK)</option> 
+ <option value="tsp_US">teaspoon (US)</option> 
+ <option value="tsp_UK">teaspoon (UK)</option> 
+ <option value="oz_US">fluid ounce (US)</option> 
+ <option value="oz_UK">fluid ounce (UK)</option> 
+ <option value="FBM">board feet</option> 
+ <option value="cord">cord</option> 
+ <option value="pools">swimming pool</option> 
+ <option value="barrel">barrel</option> 
+ <option value="bushel">bushel</option> 
+ <option value="in3">cubic inch</option> 
+ <option value="yd3">cubic yard</option> 
+ <option value="ft3">cubic foot</option> 
+</select> 
+<div><p id="volumeResult" style="bold;">Result will be displayed here</p></div> 
+</div> 
+
+<script type="text/javascript">
+
+function areaFn() { 
+	let valInput = parseFloat( 
+		document.getElementById( 
+			"areaInput"
+		).value); 
+	let fromUnit = 
+		document.getElementById( 
+			"fromAreaUnit").value; 
+	let toUnit = 
+		document.getElementById( 
+			"toAreaUnit").value; 
+	let conversionFactors = { 
+		m2: 1, 
+		km2: 0.000001, 
+		cm2: 10000, 
+		mm2: 1000000, 
+		acre: 0.000247105, 
+		ha: 0.0001, 
+		fields: 0.0001869158879, 
+		pitches: 0.000140056, 
+		mi2: 3.861e-7, 
+		yd2: 1.19599, 
+		ft2: 10.7639, 
+		in2: 1550.0031,}; 
+	let result = 
+		valInput * 
+		(conversionFactors[toUnit] / 
+			conversionFactors[ 
+				fromUnit]); 
+	document.getElementById( 
+		"areaResult") 
+		.textContent = `Result: ${result.toFixed(2 
+	)} ${toUnit}`;} 
+
+function volumeFn() { 
+	let valInput = parseFloat( 
+		document.getElementById( 
+			"volumeInput"
+		).value); 
+	let fromUnit = 
+		document.getElementById( 
+			"fromVolUnit").value; 
+	let toUnit = 
+		document.getElementById( 
+			"toVolUnit").value; 
+	let conversionFactors = { 
+		m3: 1, 
+		cc: 1000000, 
+		mm3: 1000000000, 
+		FBM: 423.776, 
+		qt_US: 1056.69, 
+		qt_UK: 879.877, 
+		gal_US: 264.172, 
+		gal_UK: 219.969, 
+		pt_US: 2113.38, 
+		pt_UK: 1759.75, 
+		cup_US: 4166.67, 
+		oz_US: 33814, 
+		tbsp_US: 67628, 
+		tsp_US: 202884, 
+		oz_UK: 35195.1, 
+		tbsp_UK: 56312.1, 
+		tsp_UK: 168936, 
+		cup_UK: 3519.51, 
+		liters: 1000.0, 
+		ml: 1000000.0, 
+		pools: 0.0004,
+		barrel: 6.28981, 
+		bushel: 28.3776, 
+		cord: 0.275896, 
+		yd3: 1.30795, 
+		ft3: 35.3147, 
+		in3: 61023.7,}; 
+	let result = 
+		valInput * 
+		(conversionFactors[toUnit] / 
+			conversionFactors[ 
+				fromUnit]); 
+	document.getElementById( 
+		"volumeResult") 
+		.textContent = `Result: ${result.toFixed(2 
+	)} ${toUnit}`;} 
+
+
+function lengthFn() { 
+	let valInput = parseFloat( 
+		document.getElementById( 
+			"UnitInput"
+		).value); 
+	let fromUnit = 
+		document.getElementById( 
+			"UnitFrom").value; 
+	let toUnit = 
+		document.getElementById( 
+			"UnitTo").value; 
+	let conversionFactors = { 
+		m: 1, 
+		km: 0.001, 
+		cm: 100, 
+		mm: 1000, 
+		furlong: 0.0004971, 
+		cubit: 2.25225, 
+		mile: 0.000621371, 
+		league: 0.000207124, 
+		yard: 1.09361, 
+		fathom: 0.546805, 
+		thou: 39370.1,
+		ft: 3.28084, 
+		in: 39.3701,}; 
+	let result = 
+		valInput * 
+		(conversionFactors[toUnit] / 
+			conversionFactors[ 
+				fromUnit]); 
+	document.getElementById( 
+		"UnitResult") 
+		.textContent = `Result: 
+		${result.toFixed(3)} ${toUnit}`;} 
+
+
+</script>
+</body>
+</html>

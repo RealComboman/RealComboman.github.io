@@ -1,0 +1,68 @@
+<!DOCTYPE html><html lang="en"><head>  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Random Generators</title>
+<style>
+body {font-family: Arial, sans-serif; font-size: 1.0em; display: flex; justify-content: center; align-items: center; height: 70vh; background-color: #ffffff; }
+#diceResult {font-size: 10;}
+</style></head>
+<body>
+<divstyle="margin:0 -5px">
+<h2>Random Generators 🎲</h2>
+<div class="conversion" id="time"> 
+<div class="conversion" id="rnd"> 
+<h3 class="category-title">Coin Flip 🪙</h3>
+<button onClick="flipFn()">Flip Coin</button>
+<div><h3><div id="flipResult">Result will be displayed here</div></h3></div>
+<br>
+<h3>Dice Toss 🎲</h3>
+<button onClick="diceFn()">Toss Die</button>
+<div><h1><p id="diceResult">Result will be displayed here</p></h1></div>
+<br>
+<h3 class="category-title">DND Dice</h3> 
+<select id="dNumber" class="unit-select" onClick="dndFn()"> 
+ <option value="4" selected>D4</option> 
+ <option value="6" selected>D6</option> 
+ <option value="8" selected>D8</option> 
+ <option value="10" selected>D10</option> 
+ <option value="12" selected>D12</option> 
+ <option value="20" selected>D20</option> 
+ <option value="100" selected>D100</option> 
+</select> 
+<button id="timeConvertBtn" class="convert-button" onClick="dndFn()">Roll</button> 
+<div><h4><p id="temperatureResult" style="bold;">Result will be displayed here</p></h4></div> 
+</div> 
+<br>
+</div><br>
+
+<script type="text/javascript">
+
+function flipFn(){
+if((Math.round(((2-1)*Math.random())+1))==1)
+	{document.getElementById("flipResult").textContent = `Heads (1, True, ♚)`;}
+else
+	{document.getElementById("flipResult").textContent = `Tails (0, False, ♔)`;}
+}
+
+function dndFn(){
+let sides = document.getElementById("dNumber").value;
+let dndRoll=Math.round(((sides-1)*Math.random())+1);
+document.getElementById("temperatureResult").textContent = `Result: ${dndRoll}`;
+}
+
+function diceFn(){
+let die=Math.round(((6-1)*Math.random())+1);
+if(die==1)
+{document.getElementById("diceResult").textContent = ` ⚀ [1] ⚓`;}
+else if (die==2)
+{document.getElementById("diceResult").textContent = ` ⚁ [2] 👑`;}
+else if (die==3)
+{document.getElementById("diceResult").textContent = ` ⚂ [3] ♦️`;}
+else if (die==4)
+{document.getElementById("diceResult").textContent = ` ⚃ [4] ♠️`;}
+else if (die==5)
+{document.getElementById("diceResult").textContent = ` ⚄ [5] ♣️`;}
+else
+{document.getElementById("diceResult").textContent = ` ⚅ [6] ♥️`;}
+}
+
+
+</script></body></html>

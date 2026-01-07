@@ -17,19 +17,23 @@ body {font-family: Arial, sans-serif; font-size: 1.0em; display: flex; justify-c
 <button onClick="diceFn()">Toss Die</button>
 <div><h1><p id="diceResult">Result</p></h1></div>
 <br>
-<h3 class="category-title">D&D Dice</h3> 
+<h3 class="category-title">D&D Dice ⚔️</h3> 
 <select id="dNumber" class="unit-select" onClick="dndFn()"> 
- <option value="4" selected>D4</option> 
- <option value="6" selected>D6</option> 
- <option value="8" selected>D8</option> 
- <option value="10" selected>D10</option> 
+ <option value="4" >D4</option> 
+ <option value="6" >D6</option> 
+ <option value="8" >D8</option> 
+ <option value="10" >D10</option> 
  <option value="12" selected>D12</option> 
- <option value="20" selected>D20</option> 
- <option value="100" selected>D100</option> 
+ <option value="20" >D20</option> 
+ <option value="100" >D100</option> 
 </select> 
 <button id="timeConvertBtn" class="convert-button" onClick="dndFn()">Roll</button> 
 <div><h4><p id="temperatureResult" style="bold;">Result will be displayed here</p></h4></div> 
 </div> 
+<br>
+<h3 class="category-title">Magic 8 Ball Simulator 🎱</h3>
+<button onClick="ballFn()">Flip 8 Ball</button>
+<div><h4><div id="ballResult">Result will be displayed here</div></h4></div>
 <br>
 </div><br>
 
@@ -37,9 +41,9 @@ body {font-family: Arial, sans-serif; font-size: 1.0em; display: flex; justify-c
 
 function flipFn(){
 if((Math.round(((2-1)*Math.random())+1))==1)
-	{document.getElementById("flipResult").textContent = `Heads (1, True, ♚)`;}
+	{document.getElementById("flipResult").textContent = `Heads (1, True)`;}
 else
-	{document.getElementById("flipResult").textContent = `Tails (0, False, ♔)`;}
+	{document.getElementById("flipResult").textContent = `Tails (0, False)`;}
 }
 
 function dndFn(){
@@ -64,5 +68,48 @@ else
 {document.getElementById("diceResult").textContent = ` ⚅ [6]`;}
 }
 
+function ballFn(){
+let die=Math.round(((20-1)*Math.random())+1);
+if(die==1)
+{document.getElementById("ballResult").textContent = `It is certain`;}
+else if (die==2)
+{document.getElementById("ballResult").textContent = `It is decidedly so`;}
+else if (die==3)
+{document.getElementById("ballResult").textContent = `Without a doubt`;}
+else if (die==4)
+{document.getElementById("ballResult").textContent = `Yes definitely`;}
+else if (die==5)
+{document.getElementById("ballResult").textContent = `You may rely on it`;}
+else if (die==6)
+{document.getElementById("ballResult").textContent = `As I see it, yes`;}
+else if (die==7)
+{document.getElementById("ballResult").textContent = `Most likely`;}
+else if (die==8)
+{document.getElementById("ballResult").textContent = `Outlook good`;}
+else if (die==9)
+{document.getElementById("ballResult").textContent = `Yes`;}
+else if (die==10)
+{document.getElementById("ballResult").textContent = `Signs point to yes`;}
+else if (die==11)
+{document.getElementById("ballResult").textContent = `Reply hazy, try again`;}
+else if (die==12)
+{document.getElementById("ballResult").textContent = `Ask again later`;}
+else if (die==13)
+{document.getElementById("ballResult").textContent = `Better not tell you now`;}
+else if (die==14)
+{document.getElementById("ballResult").textContent = `Cannot predict now`;}
+else if (die==15)
+{document.getElementById("ballResult").textContent = `Concentrate and ask again`;}
+else if (die==16)
+{document.getElementById("ballResult").textContent = `Don't count on it`;}
+else if (die==17)
+{document.getElementById("ballResult").textContent = `My reply is no`;}
+else if (die==18)
+{document.getElementById("ballResult").textContent = `My sources say no`;}
+else if (die==19)
+{document.getElementById("ballResult").textContent = `Outlook not so good`;}
+else
+{document.getElementById("ballResult").textContent = `Very doubtful`;}
+}
 
 </script></body></html>

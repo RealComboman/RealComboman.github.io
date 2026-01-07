@@ -1,7 +1,7 @@
-<!DOCTYPE html><html lang="en"><head>  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!DOCTYPE html><html lang="en"><head>  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=0.9">
 <title>Weight/Mass Convertions</title>
 <style>
-body {font-family: Arial, sans-serif; font-size: 1.0em; display: flex; justify-content: center; align-items: center; height: 70vh; background-color: #ffffff; }
+body {font-family: Arial, sans-serif; font-size: 1.0em; display: flex; justify-content: center; align-items: center; background-color: #ffffff; }
 #timeResult {font-style: bold;}
 </style></head>
 <body>
@@ -20,6 +20,7 @@ body {font-family: Arial, sans-serif; font-size: 1.0em; display: flex; justify-c
  <option value="ton_US">short ton</option> 
  <option value="stone">stone</option> 
  <option value="lb">pound</option> 
+ <option value="oz_troy">troy ounce</option> 
  <option value="oz">ounce</option> 
  <option value="ct">carat</option> 
  <option value="dram">dram</option> 
@@ -36,6 +37,7 @@ body {font-family: Arial, sans-serif; font-size: 1.0em; display: flex; justify-c
  <option value="stone">stone</option> 
  <option value="lb">pound</option> 
  <option value="oz">ounce</option> 
+ <option value="oz_troy">troy ounce</option> 
  <option value="ct">carat</option> 
  <option value="dram">dram</option> 
  <option value="grain">grain</option> 
@@ -45,16 +47,17 @@ body {font-family: Arial, sans-serif; font-size: 1.0em; display: flex; justify-c
 </div> 
 <br>
 <h3 class="category-title">Approximate Average Weight of Common Items</h3> 
+<p style="white-space:pre">➉ Canadian dime: &#9;1.75g</p>
+<p style="white-space:pre">❶ US penny: &#9; 2.5g</p>
+<p style="white-space:pre">🪙 Euro coin: &#9; &#9;7.5g</p>
+<p style="white-space:pre">🔋 Alkaline AAA battery: &#9;11g</p>
 <p style="white-space:pre">🔋 Alkaline AA battery: &#9;24g</p>
 <p style="white-space:pre">🔋 Alkaline C battery: &#9;75g</p>
 <p style="white-space:pre">🔋 Alkaline D battery: &#9;170g</p>
-<p style="white-space:pre">🧴 1 gal/4𝓁 water jug: &#9;10 lbs</p>
-<p style="white-space:pre">🧴 72 oz detergent bottle: &#9;5 lbs</p>
 <p style="white-space:pre">🥫 15 oz soup can: &#9;1 lb</p>
+<p style="white-space:pre">🧴 72 oz detergent bottle: &#9;5 lbs</p>
+<p style="white-space:pre">🧴 1 gal/4𝓁 water jug: &#9;10 lbs</p>
 <p style="white-space:pre">🚗 Automobile tire: &#9;22 lbs</p>
-<p style="white-space:pre">🪙 Euro coin: &#9; &#9;7.5g</p>
-<p style="white-space:pre">➉ Canadian dime: &#9;1.75g</p>
-<p style="white-space:pre">❶ US penny: &#9; &#9;2.5g</p>
 
 
 <script type="text/javascript">
@@ -79,6 +82,7 @@ function weightFn() {
 		lb: 0.00220462, 
 		stone: 0.000157473, 
 		oz: 0.03527396, 
+		oz_troy: 0.0321507,
 		dram: 1.772, 
 		grain: 0.065, 
 		ct: 5,}; 

@@ -1,7 +1,7 @@
 <!DOCTYPE html><html lang="en"><head>  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Random Generators</title>
 <style>
-body {font-family: Arial, sans-serif; font-size: 1.0em; display: flex; justify-content: center; align-items: center; height: 70vh; background-color: #ffffff; }
+body {font-family: Arial, sans-serif; font-size: 1.0em; display: flex; justify-content: center; align-items: center; background-color: #ffffff; }
 #diceResult {font-size: 10;}
 </style></head>
 <body>
@@ -15,7 +15,7 @@ body {font-family: Arial, sans-serif; font-size: 1.0em; display: flex; justify-c
 <br>
 <h3>Dice Toss 🎲</h3>
 <button onClick="diceFn()">Toss Die</button>
-<div><h1><p id="diceResult">Result will be displayed here</p></h1></div>
+<div><h1><p id="diceResult">Result</p></h1></div>
 <br>
 <h3 class="category-title">D&D Dice</h3> 
 <select id="dNumber" class="unit-select" onClick="dndFn()"> 
@@ -51,17 +51,17 @@ document.getElementById("temperatureResult").textContent = `Result: ${dndRoll}`;
 function diceFn(){
 let die=Math.round(((6-1)*Math.random())+1);
 if(die==1)
-{document.getElementById("diceResult").textContent = ` ⚀ [1] ⚓`;}
+{document.getElementById("diceResult").textContent = ` ⚀ [1]`;}
 else if (die==2)
-{document.getElementById("diceResult").textContent = ` ⚁ [2] 👑`;}
+{document.getElementById("diceResult").textContent = ` ⚁ [2]`;}
 else if (die==3)
-{document.getElementById("diceResult").textContent = ` ⚂ [3] ♦️`;}
+{document.getElementById("diceResult").textContent = ` ⚂ [3]️`;}
 else if (die==4)
-{document.getElementById("diceResult").textContent = ` ⚃ [4] ♠️`;}
+{document.getElementById("diceResult").textContent = ` ⚃ [4]️`;}
 else if (die==5)
-{document.getElementById("diceResult").textContent = ` ⚄ [5] ♣️`;}
+{document.getElementById("diceResult").textContent = ` ⚄ [5]`;}
 else
-{document.getElementById("diceResult").textContent = ` ⚅ [6] ♥️`;}
+{document.getElementById("diceResult").textContent = ` ⚅ [6]`;}
 }
 
 

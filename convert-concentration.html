@@ -1,0 +1,73 @@
+<!DOCTYPE html><html lang="en"><head>  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=0.9">
+<title>Concentration Convertions</title>
+<style>
+body {font-family: Arial, sans-serif; font-size: 1.0em; display: flex; justify-content: center; align-items: center; background-color: #ffffff; }
+#timeResult {font-style: bold;}
+</style></head>
+<body>
+<divstyle="margin:0 -16px">
+<h2>Concentration 📈</h2>
+<div class="conversion" id="time"> 
+<h3 class="category-title">Concentration Conversion</h3> 
+<p>Type a value in to convert between measurements.</p>
+<input type="number" id="UnitInput" class="input" placeholder="Enter value"> 
+<select id="UnitFrom" class="unit-select" onClick="concFn()"> 
+ <option value="percent" selected>percent (%, pph)</option> 
+ <option value="ppt">Per mille (‰, per mille, ppt)</option> 
+ <option value="pptt">Permyriad (‱)</option> 
+ <option value="pcm">Per cent mille (pcm)</option> 
+ <option value="ppm">Parts per million (ppm)</option> 
+ <option value="bp">Basis point</option> 
+ <option value="proof" >alcohol proof (°P)</option> 
+ <option value="ratio">decimal ratio</option> 
+</select> 
+<span class="arrow"> ⟹ </span> 
+<select id="UnitTo" class="unit-select" onClick="concFn()"> 
+ <option value="percent">percent (%, pph)</option> 
+ <option value="ppt">Per mille (‰, per mille, ppt)</option> 
+ <option value="pptt">Permyriad (‱)</option> 
+ <option value="pcm">Per cent mille (pcm)</option> 
+ <option value="ppm">Parts per million (ppm)</option> 
+ <option value="bp">Basis point</option> 
+ <option value="proof" selected>alcohol proof (°P)</option> 
+ <option value="ratio">decimal ratio</option> 
+</select> 
+<!--button id="timeConvertBtn" class="convert-button" onClick="timeFn()">Convert</button--> 
+<div><p id="UnitResult" style="bold;">Result will be displayed here</p></div> 
+</div> 
+<br>
+
+<script type="text/javascript">
+
+function concFn() { 
+	let valInput = parseFloat( 
+		document.getElementById( 
+			"UnitInput").value); 
+	let fromUnit = 
+		document.getElementById( 
+			"UnitFrom").value; 
+	let toUnit = 
+		document.getElementById( 
+			"UnitTo").value; 
+	let conversionFactors = { 
+		ratio: 1, 
+		percent: 100,
+		ppt: 1000, 
+		ppm: 1000000, 
+		bp: 10000,
+		pptt: 10000,
+		pcm: 100000,
+		proof: 200,}; 
+	let result = 
+		valInput * 
+		(conversionFactors[toUnit] / 
+			conversionFactors[ 
+				fromUnit]); 
+	document.getElementById( 
+		"UnitResult"
+	).textContent = `Result: ${result.toFixed(3 
+	)} ${toUnit}`; 
+} 
+</script>
+</body>
+</html>

@@ -1,0 +1,128 @@
+<!DOCTYPE html><html lang="en"><head>  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Power/Energy Convertions</title>
+<style>
+body {font-family: Arial, sans-serif; font-size: 1.0em; display: flex; justify-content: center; align-items: center; height: 70vh; background-color: #ffffff; }
+#timeResult {font-style: bold;}
+</style></head>
+<body>
+<divstyle="margin:0 -16px">
+<h2>Power/Energy</h2>
+<div class="conversion"> 
+<h3 class="category-title">Power Unit Conversion 🐎</h3> 
+<p>Type a value in to convert between measurements.</p>
+<input type="number" id="UnitInput" class="input" placeholder="Enter value"> 
+<select id="UnitFrom" class="unit-select" onClick="powerFn()"> 
+ <option value="W" selected>watts (Volt-Amps)</option> 
+ <option value="kW">kilowatts</option> 
+ <option value="MW">megawatts</option> 
+ <option value="mW" >milliwatts</option> 
+ <option value="hp">horsepower</option> 
+ <option value="BTU_p_h">BTU/hour</option> 
+ <option value="cal_p_s">calorie/second</option> 
+ <option value="j_p_h">joule/hour</option> 
+</select> 
+<span class="arrow"> ⟹ </span> 
+<select id="UnitTo" class="unit-select" onClick="powerFn()"> 
+ <option value="W">watts (Volt-Amps)</option> 
+ <option value="kW">kilowatts</option> 
+ <option value="MW">megawatts</option> 
+ <option value="mW" selected>milliwatts</option> 
+ <option value="hp">horsepower</option> 
+ <option value="BTU_p_h">BTU/hour</option> 
+ <option value="cal_p_s">calorie/second</option> 
+ <option value="j_p_h">joule/hour</option> 
+</select> 
+<div><p id="UnitResult" style="bold;">Result will be displayed here</p></div> 
+<br>
+<h3 class="category-title">Energy 🔋</h3> 
+<p>Type a value in to convert between measurements.</p>
+<input type="number" id="areaInput" class="input" placeholder="Enter value"> 
+<select id="fromAreaUnit" class="unit-select" onClick="energyFn()"> 
+ <option value="m2">square meters</option> 
+ <option value="km2">square kilometers</option> 
+ <option value="cm2">square centimeters</option> 
+ <option value="mm2">square millimeters</option> 
+ <option value="acre">acres</option> 
+ <option value="ha" selected>hectares</option> 
+ <option value="fields">football fields (US)</option> 
+ <option value="pitches">football pitches (UK)</option> 
+ <option value="mi2">square miles</option> 
+ <option value="yd2">square yards</option> 
+ <option value="ft2">square feet</option> 
+ <option value="in2">square inches</option> </select> 
+<span class="arrow"> ⟹ </span> 
+<select id="toAreaUnit" class="unit-select" onClick="energyFn()"> 
+ <option value="m2">square meters</option> 
+ <option value="km2" selected>square kilometers</option> 
+ <option value="cm2">square centimeters</option> 
+ <option value="mm2">square millimeters</option> 
+ <option value="acre">acres</option> 
+ <option value="ha">hectares</option> 
+ <option value="fields">football fields (US)</option> 
+ <option value="pitches">football pitches (UK)</option> 
+ <option value="mi2">square miles</option> 
+ <option value="yd2">square yards</option> 
+ <option value="ft2">square feet</option> 
+ <option value="in2">square inches</option> 
+</select> 
+<div><p id="areaResult" style="bold;">Result will be displayed here</p></div> 
+<br>
+</div> 
+
+<script type="text/javascript">
+
+function energyFn() { 
+	let valInput = parseFloat( 
+		document.getElementById( 
+			"areaInput"
+		).value); 
+	let fromUnit = 
+		document.getElementById( 
+			"fromAreaUnit").value; 
+	let toUnit = 
+		document.getElementById( 
+			"toAreaUnit").value; 
+	let conversionFactors = { 
+		m2: 1, 
+		km2: 0.000001, 
+		cm2: 10000, 
+		mm2: 1000000, 
+		acre: 0.000247105, 
+		ha: 0.0001, 
+		fields: 0.0001869158879, 
+		pitches: 0.000140056, 
+		mi2: 3.861e-7, 
+		yd2: 1.19599, 
+		ft2: 10.7639, 
+		in2: 1550.0031,}; 
+	let result = 
+		valInput * 
+		(conversionFactors[toUnit] / 
+			conversionFactors[ 
+				fromUnit]); 
+	document.getElementById( 
+		"areaResult") 
+		.textContent = `Result: ${result.toFixed(2 
+	)} ${toUnit}`;} 
+
+
+function powerFn() { 
+	let valInput = parseFloat( document.getElementById( "UnitInput").value); 
+	let fromUnit = document.getElementById( "UnitFrom").value; 
+	let toUnit = document.getElementById( "UnitTo").value; 
+	let conversionFactors = { 
+		W: 1, 
+		kW: 0.001, 
+		MW: 0.000001, 
+		mW: 1000, 
+		hp: 0.0013410221, 
+		BTU_p_h: 3.4121416331, 
+		cal_p_s: 0.2388458966, 
+		j_p_h: 3600, }; 
+	let result = valInput * (conversionFactors[toUnit] / conversionFactors[ fromUnit]); 
+	document.getElementById( "UnitResult").textContent 
+	= `Result: ${result.toFixed(3)} ${toUnit}`;} 
+
+</script>
+</body>
+</html>

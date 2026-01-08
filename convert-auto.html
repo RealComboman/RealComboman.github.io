@@ -1,0 +1,70 @@
+<!DOCTYPE html><html lang="en"><head>  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=0.9">
+<title>Automotive Convertions</title>
+<style>
+body {font-family: Arial, sans-serif; font-size: 1.0em; display: flex; justify-content: center; align-items: center; background-color: #ffffff; }
+#timeResult {font-style: bold;}
+</style></head>
+<body>
+<divstyle="margin:0 -16px">
+<h2>Automotive 🚗</h2>
+<div class="conversion" id="time"> 
+<h3 class="category-title">Mileage Conversion ⛽</h3> 
+<p>Type a value in to convert between measurements.</p>
+<input type="number" id="UnitInput" class="input" placeholder="Enter value"> 
+<select id="UnitFrom" class="unit-select" onClick="concFn()"> 
+ <option value="mpg_US" selected>Miles per gallon (US)</option> 
+ <option value="mpg_UK">Miles per gallon (UK)</option> 
+ <option value="lp100km">Litres per 100 km</option> 
+ <option value="kmpl">Kilometers per litre</option> 
+ <option value="mpge">MPGe (electric equivalent)</option> 
+ <option value="whpkm">Watthours per kilometer</option> 
+ <option value="whpm" >Watthours per mile</option> 
+</select> 
+<span class="arrow"> ⟹ </span> 
+<select id="UnitTo" class="unit-select" onClick="concFn()"> 
+ <option value="mpg_US">Miles per gallon (US)</option> 
+ <option value="mpg_UK">Miles per gallon (UK)</option> 
+ <option value="lp100km" selected>Litres per 100 km</option> 
+ <option value="kmpl">Kilometers per litre</option> 
+ <option value="mpge">MPGe (electric equivalent)</option> 
+ <option value="mpwh">Miles per watthour</option> 
+ <option value="kmpwh" >Kilometers per watthour</option>
+</select> 
+<!--button id="timeConvertBtn" class="convert-button" onClick="timeFn()">Convert</button--> 
+<div><p id="UnitResult" style="bold;">Result will be displayed here</p></div> 
+</div> 
+<br>🔌
+MPGe or Miles Per Gallon equivalent, is a U.S. EPA standard to compare the energy efficiency of electric vehicles (EVs)
+<br>and hybrids to traditional gasoline cars, measuring how far a car travels using the same energy as one gallon of gas
+<br>(about 33.7 kWh). A higher MPGe number means the vehicle uses less energy, making it easier to compare different cars
+<br>on a single, understandable scale.
+<script type="text/javascript">
+
+function concFn() { 
+	let result = 999;
+	let valInput = parseFloat( 
+		document.getElementById( 
+			"UnitInput").value); 
+	let fromUnit = 
+		document.getElementById( 
+			"UnitFrom").value; 
+	let toUnit = 
+		document.getElementById( 
+			"UnitTo").value; 
+	let conversionFactors = { 
+		mpg_US: 1, 
+		mpg_UK: 1.20095,
+		lp100km: 0, 
+		kmpl: 0.425144, 
+		mpge: 1,
+		whpkm: 20943,
+		mpwh: 0.029669,
+		kmpwh: 0.047749,}; 
+	if (conversionFactors[toUnit]==0) {result = 235.215/(valInput * conversionFactors[fromUnit]);}
+	else if (conversionFactors[fromUnit]==0) {result = 235.215/(valInput * conversionFactors[toUnit]);}
+	else {result = valInput * (conversionFactors[toUnit] / conversionFactors[fromUnit]); }
+	document.getElementById("UnitResult").textContent = `Result: ${result.toFixed(3)} ${toUnit}`; 
+} 
+</script>
+</body>
+</html>

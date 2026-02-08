@@ -135,12 +135,13 @@ if(date.getMonth()==0 && date.getDate()==1){document.getElementById("Othm").inne
 else if(date.getMonth()==0 && date.getDate()==13){document.getElementById("Othm").innerHTML='🎂';}
 else if((date.getMonth()==0 && date.getDate()>20) && (date.getMonth()==1 && date.getDate()<19) && phase<0.05 ){document.getElementById("Othm").innerHTML='🀄';} //ch-nwyr
 else if(date.getMonth()==1 && date.getDate()==2){document.getElementById("Othm").innerHTML='🐹';} //ghog
+else if(date.getMonth()==1 && date.getDate()>7 && date.getDate()<15 && date.getDay()==0){document.getElementById("Othm").innerHTML='🏈';} //sprbwl
 else if(date.getMonth()==1 && date.getDate()==14){document.getElementById("Othm").innerHTML='❤️';} //val
 else if(getEaster(date.getYear())==date){document.getElementById("Othm").innerHTML='🥚';} //estr
 else if(date.getMonth()==2 && date.getDate()==14){document.getElementById("Othm").innerHTML='️<a href="https://www.timeanddate.com/holidays/fun/pi-day">🥧</a>';} //pi
 else if(date.getMonth()==2 && date.getDate()>7 && date.getDate()<15 && date.getDay()==0){document.getElementById("Othm").innerHTML='<a href="https://www.timeanddate.com/time/dst">⏰⤸</a>';} //fwd
 else if(date.getMonth()==2 && date.getDate()>18 && date.getDate()<22){document.getElementById("Othm").innerHTML='🌻';} //spr
-else if(date.getMonth()==2 && date.getDate()==17){document.getElementById("Othm").innerHTML='🍀';} 
+else if(date.getMonth()==2 && date.getDate()==17){document.getElementById("Othm").innerHTML='🍀';} //stpat
 else if(date.getMonth()==4 && date.getDate()==4){document.getElementById("Othm").innerHTML='️<a href="https://www.starwars.com/star-wars-day">🪐</a>';}
 else if(date.getMonth()==4 && date.getDate()==5){document.getElementById("Othm").innerHTML='️🌮';}
 else if(date.getMonth()==4 && date.getDate()>17 && date.getDate()<25 && date.getDay()==1){document.getElementById("Othm").innerHTML='👑';}

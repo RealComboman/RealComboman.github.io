@@ -50,7 +50,8 @@ body {font-family: Arial, sans-serif; font-size: 1.0em; display: flex; justify-c
 <p>Current time based on your device's system clock:</p>
 <p id="demo"></p>
 Unix Epoch Time: <div id="epoc">NOT AVAILABLE</div> <div id="hexpoc">NOT AVAILABLE</div>
-<p id="moonp">MOON PHASE NOT AVAILABLE</p>
+<br>
+<div id="moonp">MOON PHASE NOT AVAILABLE</div>
 
 <script type="text/javascript">
 const d = new Date();
@@ -59,11 +60,27 @@ const epoch= Date.now();
 document.getElementById("epoc").innerHTML = Date.now();
 const hexstring = epoch.toString(16);
 document.getElementById("hexpoc").innerHTML = hexstring;
+var m = Math.abs(((date.getTime() / 86400000) - 18256.8) / 29.53059); 
+document.getElementById("moonp").innerHTML = m;
 
-calcMoon();
+//const moonDiv=document.getElementById("moonp");
+var phase = (m - Math.floor(m));
+var moon;
+if(phase<0.125){moon="🌑 New Moon";}
+else if(phase<0.25){moon="🌒 Waxing Crescent";}
+else if(phase<0.375){moon="🌓 First Quarter";}
+else if(phase<0.5){moon="🌔 Waxing Gibbous";}
+else if(phase<0.625){moon="🌕 Full Moon";}
+else if(phase<0.75){moon="🌖 Waning Gibbous";}
+else if(phase<0.875){moon="🌗 Last Quarter";}
+else {moon="🌘 Waning Crescent";}
+var timeContent=`${moon}`;
+moonDiv.innerHTML = timeContent;
 
 
-function calcMoon() {
+
+
+/*function calcMoon() {
 const moonDiv=document.getElementById("moonp");
 var m = Math.abs(((date.getTime() / 86400000) - 18256.8) / 29.53059); 
 var phase = (m - Math.floor(m));
@@ -77,9 +94,9 @@ else if(phase<0.75){moon="🌖 Waning Gibbous";}
 else if(phase<0.875){moon="🌗 Last Quarter";}
 else {moon="🌘 Waning Crescent";}
 var timeContent=`${moon}`;
-//document.getElementById("moonp").innerHTML = moon;
+document.getElementById("moonp").innerHTML = moon;
 moonDiv.innerHTML = timeContent;
-}
+}*/
 
 function timeFn() { 
  let valInput = parseFloat( 

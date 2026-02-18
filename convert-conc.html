@@ -19,6 +19,7 @@ body {font-family: Arial, sans-serif; font-size: 1.0em; display: flex; justify-c
  <option value="ppm">Parts per million (ppm)</option> 
  <option value="bp">Basis point</option> 
  <option value="proof" >alcohol proof (°P)</option> 
+ <option value="K" >gold karats (K)</option> 
  <option value="ratio">decimal ratio</option> 
 </select> 
 <span class="arrow"> ⟹ </span> 
@@ -30,6 +31,7 @@ body {font-family: Arial, sans-serif; font-size: 1.0em; display: flex; justify-c
  <option value="ppm">Parts per million (ppm)</option> 
  <option value="bp">Basis point</option> 
  <option value="proof" selected>alcohol proof (°P)</option> 
+ <option value="K" >gold karats (K)</option> 
  <option value="ratio">decimal ratio</option> 
 </select> 
 <!--button id="timeConvertBtn" class="convert-button" onClick="timeFn()">Convert</button--> 
@@ -57,6 +59,7 @@ function concFn() {
 		bp: 10000,
 		pptt: 10000,
 		pcm: 100000,
+		K: 24,
 		proof: 200,}; 
 	let result = 
 		valInput * 

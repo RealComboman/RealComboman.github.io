@@ -82,6 +82,7 @@ body {font-family: Arial, sans-serif; display: flex; justify-content: center; al
 <button onclick="trig('pi')">π</button>
 <button onclick="trig('rnd')">RND</button>
 <button onclick="trig('rnd1')" class="functions">1⇝x</button>
+<button onclick="trig('help')">?</button>
 </div></div>
 <script>
 let currentInput = '0';
@@ -182,6 +183,7 @@ function trig(op) {
   else if (op === 'e') result = Math.E;
   else if (op === 'rnd') result = Math.random();
   else if (op === 'rnd1') result = Math.round(((currentInput-1)*Math.random())+1);
+  else if (op === 'help') {result = currentInput; alert("\tH̲e̲l̲p̲\n\nSTO \tStore in memory\nRCL \tRecall from memory\nSUM \tAdd to memory\nEXC \tExchange with memory\nANG \tSwap between deg and rad\nRND \tRandom number from 0 to 1\n1⇝x \tRandom whole number from 1 to X");}
   document.getElementById('display').value = result; 
   currentInput = result.toString(); 
 }

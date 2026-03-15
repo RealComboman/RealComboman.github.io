@@ -48,23 +48,26 @@ body {font-family: Arial, sans-serif; font-size: 1.0em; display: flex; justify-c
 <br>
 <h3 class="category-title">Current Time</h3> 
 <p>Current time based on your device's system clock:</p>
-<p id="demo"></p>
-Unix Epoch Time: <div id="epoc">NOT AVAILABLE</div> <div id="hexpoc">NOT AVAILABLE</div>
-<br>
-<div id="moonp">MOON PHASE NOT AVAILABLE</div>
-
+<b><p id="demo"></p></b>
+<div id="weather" style="text-align:left;"></div><br>
+Unix Epoch Time: <b><div id="epoc">NOT AVAILABLE</div> <div id="hexpoc">NOT AVAILABLE</div></b>
+<br><hr>
+<a href="ref_timeline.html">Timeline of History</a>
+</body>
 <script type="text/javascript">
 const d = new Date();
+const weatherDiv=document.getElementById('weather');
 document.getElementById("demo").innerHTML = d;
 const epoch= Date.now();
 document.getElementById("epoc").innerHTML = Date.now();
 const hexstring = epoch.toString(16);
 document.getElementById("hexpoc").innerHTML = hexstring;
-var m = Math.abs(((date.getTime() / 86400000) - 18256.8) / 29.53059); 
-document.getElementById("moonp").innerHTML = m;
+GetMoon();
+var m = Math.abs(((date.getTime() / 86400000) - 18256.8) / 29.53059); var phase = (m - Math.floor(m));
 
-//const moonDiv=document.getElementById("moonp");
-var phase = (m - Math.floor(m));
+
+
+function GetMoon(){
 var moon;
 if(phase<0.125){moon="🌑 New Moon";}
 else if(phase<0.25){moon="🌒 Waxing Crescent";}
@@ -74,9 +77,9 @@ else if(phase<0.625){moon="🌕 Full Moon";}
 else if(phase<0.75){moon="🌖 Waning Gibbous";}
 else if(phase<0.875){moon="🌗 Last Quarter";}
 else {moon="🌘 Waning Crescent";}
-var timeContent=`${moon}`;
-moonDiv.innerHTML = timeContent;
-
+const weatherContent=`Current moon phase: <b>${moon}</b>`;
+weatherDiv.innerHTML=weatherContent;
+}
 
 
 
@@ -125,6 +128,4 @@ function timeFn() {
  let result = valInput * (conversionFactors[toUnit] / conversionFactors[fromUnit]); 
  document.getElementById("timeResult").textContent = `Result: ${result.toFixed( 4 )} ${toUnit}`; 
 }
-</script>
-</body>
-</html>
+</script></html>

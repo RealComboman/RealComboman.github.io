@@ -45,14 +45,15 @@ body {font-family: Arial, sans-serif; font-size: 1.0em; display: flex; justify-c
 <!--button id="timeConvertBtn" class="convert-button" onClick="timeFn()">Convert</button--> 
 <div><p id="timeResult" style="bold;">Result will be displayed here</p></div> 
 </div> 
-<br>
-<h3 class="category-title">Current Time</h3> 
-<p>Current time based on your device's system clock:</p>
-<b><p id="demo"></p></b>
-<div id="weather" style="text-align:left;"></div><br>
+<br><hr>
+<h3 class="category-title">Current Time ⏳</h3> 
+Current time based on your device's system clock: <br>
+<b><div id="demo"></div></b><br>
+Current moon phase: <br>
+<div id="weather"></div><br>
 Unix Epoch Time: <b><div id="epoc">NOT AVAILABLE</div> <div id="hexpoc">NOT AVAILABLE</div></b>
 <br><hr>
-<a href="ref_timeline.html">Timeline of History</a>
+<a href="ref_timeline.html">Timeline of History 🗓</a>
 </body>
 <script type="text/javascript">
 const d = new Date();
@@ -77,29 +78,9 @@ else if(phase<0.625){moon="🌕 Full Moon";}
 else if(phase<0.75){moon="🌖 Waning Gibbous";}
 else if(phase<0.875){moon="🌗 Last Quarter";}
 else {moon="🌘 Waning Crescent";}
-const weatherContent=`Current moon phase: <b>${moon}</b>`;
+const weatherContent=`<b>${moon}</b>`;
 weatherDiv.innerHTML=weatherContent;
 }
-
-
-
-/*function calcMoon() {
-const moonDiv=document.getElementById("moonp");
-var m = Math.abs(((date.getTime() / 86400000) - 18256.8) / 29.53059); 
-var phase = (m - Math.floor(m));
-var moon;
-if(phase<0.125){moon="🌑 New Moon";}
-else if(phase<0.25){moon="🌒 Waxing Crescent";}
-else if(phase<0.375){moon="🌓 First Quarter";}
-else if(phase<0.5){moon="🌔 Waxing Gibbous";}
-else if(phase<0.625){moon="🌕 Full Moon";}
-else if(phase<0.75){moon="🌖 Waning Gibbous";}
-else if(phase<0.875){moon="🌗 Last Quarter";}
-else {moon="🌘 Waning Crescent";}
-var timeContent=`${moon}`;
-document.getElementById("moonp").innerHTML = moon;
-moonDiv.innerHTML = timeContent;
-}*/
 
 function timeFn() { 
  let valInput = parseFloat( 

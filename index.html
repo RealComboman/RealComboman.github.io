@@ -205,7 +205,7 @@ else if(phase<0.625){moon="🌕 Full Moon";}
 else if(phase<0.75){moon="🌖 Waning Gibbous";}
 else if(phase<0.875){moon="🌗 Last Quarter";}
 else {moon="🌘 Waning Crescent";}
-const weatherContent=`<b><a href="http://www.theweathernetwork.com" target="_blank" style="font-size:20px; color:black;">${name} &nbsp; ${wicon}</a></b><br>${temperature}°C<br>${description}<br>${humidity}%RH ${pres}kPa<br>${moon}</b>`;
+const weatherContent=`<b><a href="http://www.theweathernetwork.com" target="_blank" style="font-size:20px; color:black;">${name} &nbsp; ${wicon}</a></b><br>${temperature}°C • ${description}<br>${humidity}%ʀʜ • ${pres}kPa<br>${moon}</b>`;
 weatherDiv.innerHTML=weatherContent;})
 .catch(error => {console.error('Err:', error); weatherDiv.innerHTML='<p>Failed to get weather data</p>';});
 }
@@ -280,7 +280,7 @@ else {return window.open(srchURL);}
 }
 function Sweb(arg) {var srchURL='';
 if(document.input_box.web.value==="ddg"){srchURL='https://duckduckgo.com/?q= '+arg;}
-else if(document.input_box.web.value==="goo"){srchURL='https://google.com/search?q='+arg;}
+else if(document.input_box.web.value==="goo"){srchURL='https://google.com/search?q='+arg+' -ai';}
 else if(document.input_box.web.value==="sx"){srchURL='https://metasearx.com/?q='+arg+'&categories=general&language=en-CA';}
 else {srchURL='https://www.qwant.com/?t=web&q='+arg;}
 if (document.input_box.Chk1.checked==false) {return window.location=srchURL;} 

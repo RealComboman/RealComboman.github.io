@@ -1,5 +1,13 @@
-<!DOCTYPE html><html><head><link href='https://fonts.googleapis.com/css?family=Audiowide' rel='stylesheet'>
-<title>Combotechni.ca</title><link rel="shortcut icon" href="combo.ico"><meta name="viewport" content="width=520px">
+<!DOCTYPE html><html lang="en-US" dir="ltr">
+<head><link href='https://fonts.googleapis.com/css?family=Audiowide' rel='stylesheet'>
+<link rel="shortcut icon" href="combo.ico"><!--meta name="viewport" content="width=520px"-->
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <link rel="icon" type="image/png" href="./CT512.png">
+    <!--link rel="stylesheet" href="./converter.css"-->
+    <link rel="manifest" href="./manifest.json">
+    <meta name="application-name" content="ComboTechnica">
+<title>ComboTechni.ca</title>
 <style>
 h1 {font-family: 'Audiowide', Helvetica, sans-serif; font-size:36px;}
 h2 {font-size: 30px;}
@@ -123,6 +131,8 @@ News (ca/us/gb/0): <input type="text" name="newsloc" value=""> <input type="butt
 <a href="https://events.viewbid.ca" target="_blank"><img src="i\viewbid.png" alt="ViewBid"></a> <a href="http://picclick.ca" target="_blank"><img src="i\pic.png" al="PicClick"></a> 
 </div></div></div></div></form></div></body>
 <script type="text/javascript">
+if('serviceWorker' in navigator) {navigator.serviceWorker.register('./sw.js', { scope: './' }); }
+
 var modal=document.getElementById("myModal");
 const rndSeed='d94893f5d0fa394f6ec042550b4355db', weatherDiv=document.getElementById('weather'); newsDiv=document.getElementById('news'); news2Div=document.getElementById('news2'); sciDiv=document.getElementById('sci'); entDiv=document.getElementById('ent');
 let cityInput = localStorage.getItem("myCity"); //document.getElementById('city').value = cityInput; 

@@ -216,7 +216,7 @@ if(data.weather[0].icon==="13d"||data.weather[0].icon==="13n"){wicon="❄️";}
 if(data.weather[0].icon==="50d"||data.weather[0].icon==="50n"){wicon="️🌫";}
 const weatherContent=`<b><a href="http://www.theweathernetwork.com" target="_blank" style="font-size:20px; color:black;">${name} &nbsp; ${wicon}</a></b><br>${temperature}°C • ${description}<br>${humidity}%ʀʜ • ${pres}kPa<br>${moon}</b>`;
 weatherDiv.innerHTML=weatherContent;})
-.catch(error => {console.error('Err:', error); weatherDiv.innerHTML='Failed to get weather data<br><b>${moon}</b>';});
+.catch(error => {console.error('Err:', error); const weatherContent='Failed to get weather data<br><b>${moon}</b>';weatherDiv.innerHTML=weatherContent;});
 }
 function GetNews(){ //general,science,sports,business,health,entertainment,tech,politics,food,travel
 var requestOptions = {method: 'GET'};

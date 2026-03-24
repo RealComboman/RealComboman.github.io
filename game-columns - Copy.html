@@ -1,5 +1,5 @@
-<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Colmuns</title><link rel="shortcut icon" href="combo.ico">
-<style>
+<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=0.95"><title>Colmuns</title><link rel="shortcut icon" href="combo.ico">
+<style><!-- initial-scale=0.95 -->
 body {display: flex; justify-content: center; align-items: center;height: 100vh; background-color: #222; margin: 0;}
 canvas { background-color: black; border: 2px solid white;}
 #scores { color: yellow; font-family: Times, serif; border-color: gray; border-style: solid; border-width: 2px; text-align: center;}
@@ -11,7 +11,7 @@ const canvas = document.getElementById('game');
 const context = canvas.getContext('2d');   
 const boardRows     = 13;   // board rows
 const boardColumns  = 7;    // board column
-const tileSize      = 38; //32;   // tile size, in pixels 
+const tileSize      = 40; //32;   // tile size, in pixels 
 const columnHeight  = 3     // column height
 const board         = [];   // game board 
 let itemsToRemove=[];
@@ -32,7 +32,7 @@ let dropTimer = 0;
 let lastTime = 0; // time since previous frame
 let touchstartX = 0;
 let touchendX = 0;
-const touchmin = 5;
+const touchmin = 4;  //5
 const el = document.getElementById("game");
 el.addEventListener('touchstart', e => {touchstartX = e.changedTouches[0].screenX})    
 el.addEventListener('touchend', e => {touchendX = e.changedTouches[0].screenX; checkDirection()})
@@ -208,11 +208,7 @@ function drawBoard() {
 				context.beginPath();context.arc(j+0.5,i+0.5,0.5,0,2*Math.PI);context.fill();
             }
             else {
-				const my_grad = context.createLinearGradient(0,0,0,15);
-                //context.fillStyle = (i * boardColumns + j) % 2 == 0 ? '#000' : '#222';
-				my_grad.addColorStop(0,(i * boardColumns + j) % 2 == 0 ? "black" : "grey");
-				my_grad.addColorStop(1,(i * boardColumns + j) % 2 == 0 ? '#500' : "dimgrey");
-                context.fillStyle = my_grad;
+                context.fillStyle = (i * boardColumns + j) % 2 == 0 ? '#000' : '#222';
                 context.fillRect(j, i, 1, 1);
             }
         }
@@ -223,7 +219,12 @@ function drawBoard() {
 function drawColumn() {
     for (let i = 0; i < columnHeight; i++) {
         context.fillStyle = blockColors[randomColumn[i]];
+		//const grd = context.createRadialGradient(columnPosition.column+0.5,columnPosition.row+i+0.5,1,columnPosition.column+0.5,columnPosition.row+i+0.5,tileSize/2);
+		//grd.addColorStop(1, randomColumn[i]);
+		//grd.addColorStop(0, "white");
+		//context.fillStyle = grd;
 		context.beginPath();context.arc( columnPosition.column+0.5,columnPosition.row+i+0.5,0.5,0,2*Math.PI);context.fill();
+        //context.fillRect(columnPosition.column, columnPosition.row + i, 1, 1);
     }
 }
 

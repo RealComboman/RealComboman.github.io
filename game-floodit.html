@@ -10,7 +10,7 @@ body {display: flex; justify-content: center; align-items: center;height: 100vh;
 #game-table {margin: 0px; border: 0px; padding: 0px; border-spacing: 0px; width: 500; height: 500; background: goldenrod; table-layout: fixed;}
 #status {width: 120px; height: 300px;}
 .piece {width: 40px; height: 40px; border: 0px; padding: 0px; margin: 0px;}
-.button {width: 40px; height: 35px; border: 0px; border-radius: 15px;}
+.button {width: 40px; height: 35px; border: 0px; border-radius: 18px;}
 #button-table {border-spacing: 4px; vertical-align: top;}
 #turn-counter {font-family: sans-serif;}
 @media screen and (min-width: 600px) {#game-board { display: grid;  grid-template-columns: 120px max-content;  grid-template-rows: 80px 140px max-content; }
@@ -65,7 +65,6 @@ body {display: flex; justify-content: center; align-items: center;height: 100vh;
     </tr>
     <tr valign="top">
       <td valign="top">
-        <input type="submit" value="Solve" onclick="solve()">
         <input type="submit" value="Save" onclick="save()">
       </td>
     </tr>
@@ -483,27 +482,6 @@ function sleep(delay) {
     return new Promise(resolve => setTimeout(resolve, delay));
 }
 
-/* Show the user the solver's solution, with a delay between each
-   move. */
-async function solution(response) {
-    var sol = JSON.parse(response)
-    if (! sol.ok) {
-        setStatus("Solver complained as follows: " + sol.status)
-        return
-    }
-    if (! sol.solved) {
-        setStatus("The computer was not smart enough to solve this!")
-        return
-    }
-    setDifficulty(sol.difficulty)
-    userReact = false
-    for (var i = 0; i < sol.choices.length; i++) {
-        flood({colour: sol.choices[i], move: i+1}, false)
-        await sleep(500);
-    }
-    userReact = true
-}
-
 function setDifficulty(d) {
     switch (d) {
     case 0:
@@ -528,40 +506,6 @@ function setDifficulty(d) {
 }
 
 
-/* Send this board to the solver. */
-function solve() {
-    if (finished) {
-        setStatus("The game is already solved!");
-        return;
-    }
-    var board = new Array(n_rows);
-    for (var i = 0; i < n_rows; i++) {
-        board[i] = new Array(n_cols);
-        for (var j = 0; j < n_cols; j++) {
-            var sq = game_table[i][j]
-            board[i][j] = {
-                c: sq.colour,
-                f: sq.flooded,
-            }
-        }
-    }
-    var game = {
-        moves: moves,
-        board: board,
-    };
-    var sender = new XMLHttpRequest();
-    sender.onreadystatechange = function() {
-        if (this.readyState == 4) {
-            if (this.status == 200) {
-                solution(sender.responseText);
-            } else {
-                setStatus("Failed to get a solution, you'll have to do it yourself!");
-            }
-        }
-    }
-    sender.open("POST", "/floodsolver/", true);
-    sender.send(JSON.stringify(game));
-}
 
 function startAgain() {
     if (moves == 0) {

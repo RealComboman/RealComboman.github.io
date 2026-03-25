@@ -1,5 +1,5 @@
 <!DOCTYPE html><html><head><meta name="viewport" content="width=device-width, initial-scale=1"><title>Amanda's Tetris</title><meta charset="UTF-8">
-<link rel="icon" type="image/png" href="./CT-tet.png">
+<link rel="icon" type="image/png" href="./CT-tet.png"><link rel="manifest" href="./manifest-tet.json"><meta name="application-name" content="ComboTetris">
 <style>
 html, body {height: 100%; margin: 0;}
 body { background: black; display: flex; align-items: center; justify-content: center; }
@@ -21,6 +21,7 @@ Score <span id="scoreDsp"></span> / Hi <span id="highScoreDsp"></span> / Level <
 </div></div>
 <script>
   //<button onclick="drop()">↡</button>
+if('serviceWorker' in navigator) {navigator.serviceWorker.register('./sw-tet.js', { scope: './' }); }
 let score = 0;
 let level = 0;
 let clears = 0;

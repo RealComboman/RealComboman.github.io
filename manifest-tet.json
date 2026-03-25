@@ -1,0 +1,17 @@
+{
+  "lang": "en-us",
+  "name": "ComboTetris",
+  "short_name": "ComboTetris",
+  "description": "Just a simple game",
+  "start_url": "./",
+  "background_color": "#ffffff",
+  "theme_color": "#0000ff",
+  "orientation": "any",
+  "display": "standalone",
+  "icons": [
+      {
+          "src": "./CT-tet.png",
+          "sizes": "512x512"
+      }
+  ]
+}

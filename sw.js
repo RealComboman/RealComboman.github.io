@@ -20,7 +20,7 @@ self.addEventListener('install', event => {
       './convert-time.html',
       './calculator.html',
       './exit0.html',
-      './game0.html.html'
+      './game0.html'
     ]);
   })());
 });

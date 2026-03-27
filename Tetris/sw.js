@@ -6,7 +6,7 @@ self.addEventListener('install', event => {
     const cache = await caches.open(CACHE_NAME);
     cache.addAll([
       './',
-      './game-tetris.html'
+      './index.html'
       './CT-tet.png'
     ]);
   })());

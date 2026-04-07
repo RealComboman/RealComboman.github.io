@@ -2,7 +2,8 @@
 <head><link href='https://fonts.googleapis.com/css?family=Audiowide' rel='stylesheet'>
 <link rel="shortcut icon" href="combo.ico">
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<link rel="icon" type="image/png" href="./CT512.png"><link rel="manifest" href="./manifest.json"><meta name="application-name" content="ComboTechnica">
+<link rel="icon" type="image/png" href="./CT512.png">
+<!--link rel="manifest" href="./manifest.json"><meta name="application-name" content="ComboTechnica"-->
 <title>ComboTechni.ca</title>
 <style>
 h1 {font-family: 'Audiowide', Helvetica, sans-serif; font-size:36px;}
@@ -182,19 +183,6 @@ function closeModal() {modal.style.display="none";}
 function focus(){document.input_box.command.focus();}
 function SetCity(arg){cityInput = arg; localStorage.setItem("myCity", arg); GetWeather();}
 function SetNews(arg){newsInput = arg; localStorage.setItem("myNews", arg); GetNews();}
-
-//curl -H "Accept: text/plain" https://icanhazdadjoke.com
-
-async function GetJoke() {
-    let response = await fetch('https://icanhazdadjoke.com');
-    let responseText = await response.text();
-    document.getElementById('joke').innerHTML = responseText;
-}
-
-/*(async() => {
-    await fetchTest();
-})();*/
-
 
 function GetWeather(){
 const apiUrl=`https://api.openweathermap.org/data/2.5/weather?q=${cityInput}&appid=${rndSeed}&units=metric`;

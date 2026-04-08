@@ -54,11 +54,11 @@ background-color: rgb(0,0,0); background-color:rgba(0,0,0,0.4);
 <div id="mdCfg" class="modal"><div class="modal-content"><div class="modal-body"><span class="close" onClick="closeModal()">❎</span>
 <h3>⚙️ Configuration 🛠</h3>
 Open search in new window: <input type="checkbox" name="Chk1" value="yes" CHECKED size="34" class="button2" style=""> <br>
- Web search: <input type="radio" id="w1" name="web" value="goo"><label>Google </label> <input type="radio" id="w2" name="web" value="ddg" checked><label>DuckDuckGo </label> <input type="radio" id="w3" name="web" value="quant"><label>Quant </label> <input type="radio" id="w4" name="web" value="sx"><label>Searx </label> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <br>
- Map search: <input type="radio" id="m1" name="map" value="goo" checked><label>Google </label> <input type="radio" id="m2" name="map" value="ddg"><label>DuckDuckGo </label> <input type="radio" id="m3" name="map" value="open"><label>OpenStreet</label> <input type="radio" id="m4" name="map" value="sx"><label>Searx </label><br>
-News search: <input type="radio" id="n1" name="nws" value="goo" checked><label>Google </label> <input type="radio" id="n2" name="nws" value="ddg"><label>DuckDuckGo </label> <input type="radio" id="n3" name="nws" value="quant"><label>Quant </label> <input type="radio" id="n4" name="nws" value="sx"><label>Searx </label> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <br>
-Image search: <input type="radio" id="i1" name="img" value="goo" checked><label>Google </label> <input type="radio" id="i2" name="img" value="ddg"><label>DuckDuckGo </label> <input type="radio" id="i3" name="img" value="quant"><label>Quant </label> <input type="radio" id="i4" name="img" value="sx"><label>Searx </label> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <br>
-Shopping search: <input type="radio" id="s1" name="shp" value="goo" checked><label>Google </label> <input type="radio" id="s2" name="shp" value="ddg"><label>DuckDuckGo </label> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <br>
+ Web search: <input type="radio" id="w1" name="web" value="goo"><label>Google </label> <input type="radio" id="w2" name="web" value="ddg" checked><label>DuckDuckGo </label> <input type="radio" id="w3" name="web" value="quant"><label>Quant </label> &nbsp; &nbsp; &nbsp; &nbsp; <br>
+ Map search: <input type="radio" id="m1" name="map" value="goo" checked><label>Google </label> <input type="radio" id="m2" name="map" value="ddg"><label>DuckDuckGo </label> <input type="radio" id="m3" name="map" value="open"><label>OpenStreet</label><br>
+News search: <input type="radio" id="n1" name="nws" value="goo" checked><label>Google </label> <input type="radio" id="n2" name="nws" value="ddg"><label>DuckDuckGo </label> <input type="radio" id="n3" name="nws" value="quant"><label>Quant </label> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <br>
+Image search: <input type="radio" id="i1" name="img" value="goo" checked><label>Google </label> <input type="radio" id="i2" name="img" value="ddg"><label>DuckDuckGo </label> <input type="radio" id="i3" name="img" value="quant"><label>Quant </label> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <br>
+Shopping search: <input type="radio" id="s1" name="shp" value="goo" checked><label>Google </label> <input type="radio" id="s2" name="shp" value="ddg"><label>DuckDuckGo </label> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <br>
 Weather location: <input type="text" name="city" value=""> <input type="button" value="Set City" align="texttop" onClick="SetCity(document.input_box.city.value)"><br>
 News (ca/us/gb/0): <input type="text" name="newsloc" value=""> <input type="button" value="Set Country" align="texttop" onClick="SetNews(document.input_box.newsloc.value)"><br><br>
 </div></div></div>
@@ -267,7 +267,6 @@ else {return window.open(srchURL);}
 function Simg(arg) {var srchURL='';
 if(document.input_box.img.value==="ddg"){srchURL='https://duckduckgo.com/?q='+arg+'&ia=images&iax=images';}
 else if(document.input_box.img.value==="goo"){srchURL='https://www.google.com/search?q='+arg+'&udm=2';}
-else if(document.input_box.img.value==="sx"){srchURL='https://metasearx.com/?q='+arg+'&categories=images&language=en-CA';}
 else {srchURL='https://www.qwant.com/?t=images&q='+arg;}
 if (document.input_box.Chk1.checked==false) {return window.location=srchURL;} 
 else {return window.open(srchURL);}
@@ -282,7 +281,6 @@ else {return window.open(srchURL);}
 function Smap(arg) {var srchURL='';
 if(document.input_box.map.value==="ddg"){srchURL='https://duckduckgo.com/?q='+arg+'&ia=web&iaxm=maps&source=places';}
 else if(document.input_box.map.value==="goo"){srchURL='https://www.google.com/maps?output=search&q='+arg+'&entry=mc';}
-else if(document.input_box.map.value==="sx"){srchURL='https://metasearx.com/?q='+arg+'&categories=map&language=en-CA';}
 else {srchURL='https://www.openstreetmap.org/search?query='+arg;}
 if (document.input_box.Chk1.checked==false) {return window.location=srchURL;} 
 else {return window.open(srchURL);}
@@ -290,7 +288,6 @@ else {return window.open(srchURL);}
 function Snews(arg) {var srchURL='';
 if(document.input_box.nws.value==="ddg"){srchURL='https://duckduckgo.com/?q='+arg+'&ia=news&iar=news';}
 else if(document.input_box.nws.value==="goo"){srchURL='https://news.google.com/search?q='+arg+'&tbm=nws';}
-else if(document.input_box.nws.value==="sx"){srchURL='https://metasearx.com/?q='+arg+'&categories=news&language=en-CA';}
 else {srchURL='https://www.qwant.com/?t=news&q= '+arg;}
 if (document.input_box.Chk1.checked==false) {return window.location=srchURL;} 
 else {return window.open(srchURL);}
@@ -298,7 +295,6 @@ else {return window.open(srchURL);}
 function Sweb(arg) {var srchURL='';
 if(document.input_box.web.value==="ddg"){srchURL='https://duckduckgo.com/?q= '+arg;}
 else if(document.input_box.web.value==="goo"){srchURL='https://google.com/search?q='+arg+' -ai';}
-else if(document.input_box.web.value==="sx"){srchURL='https://metasearx.com/?q='+arg+'&categories=general&language=en-CA';}
 else {srchURL='https://www.qwant.com/?t=web&q='+arg;}
 if (document.input_box.Chk1.checked==false) {return window.location=srchURL;} 
 else {return window.open(srchURL);}

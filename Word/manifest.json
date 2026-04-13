@@ -1,0 +1,17 @@
+{
+  "lang": "en-us",
+  "name": "ClassicWordle",
+  "short_name": "ClassicWordle",
+  "description": "Just a simple word game",
+  "start_url": "./",
+  "background_color": "#ffffff",
+  "theme_color": "#0000ff",
+  "orientation": "any",
+  "display": "standalone",
+  "icons": [
+      {
+          "src": "./CT-word.png",
+          "sizes": "512x512"
+      }
+  ]
+}

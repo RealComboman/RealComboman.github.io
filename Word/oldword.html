@@ -1,0 +1,15 @@
+<!DOCTYPE html><html lang="en-US" dir="ltr">
+<link rel="icon" type="image/png" href="./CT-word.png"><link rel="manifest" href="./manifest.json"><meta name="application-name" content="ClassicWordle">
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<style>
+h1 {font-family: Helvetica, sans-serif; font-size:36px;}
+h2 {font-family: Helvetica, sans-serif; font-size: 30px;}
+a:link {font-family: Helvetica, sans-serif; font-size:24px;}
+</style>
+<script>
+if('serviceWorker' in navigator) {navigator.serviceWorker.register('./sw.js', { scope: './' }); }
+</script>
+<BODY><H1>Classic Wordle</H1>
+<a href="game-oldword.html">🔠 ClassicWordle </a> — Classic version guessing 5 letter words.<br> 
+<a href="game-oldword-1.html">🔠 YesterWordle </a> — Yesterday's ClassicWordle (if you missed it).<br> 
+</H1></BODY></HTML>

@@ -1,4 +1,4 @@
-const CACHE_NAME = `combotetris`;
+const CACHE_NAME = `classicwordle`;
     
 // Use the install event to pre-cache all initial resources.
 self.addEventListener('install', event => {
@@ -6,7 +6,10 @@ self.addEventListener('install', event => {
     const cache = await caches.open(CACHE_NAME);
     cache.addAll([
       './',
-      './game-tetris.html.html'
+      './game-oldword.html'
+      './game-oldword1.html'
+      './oldword.html'
+      './CT-word.png'
     ]);
   })());
 });

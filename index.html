@@ -27,10 +27,9 @@ background-color: rgb(0,0,0); background-color:rgba(0,0,0,0.4);
 @keyframes slideIn{from{bottom:-300px; opacity:0}to{bottom:0; opacity:1}}
 @-webkit-keyframes fadeIn{from{opacity:0}to{opacity:1}}
 @keyframes fadeIn{from{opacity:0}to{opacity:1}}
-</style>
-</head>
-<body bgcolor=white><div class="close";><!--☰-->
-<h2><b> <span id="test" onClick="mailopen()">✉</span> <span id="test" onClick="infopen()">🕮</span> <span id="test" onClick="finopen()">$</span> <span id="test" onClick="prodopen()">✎</span> <span id="test" onClick="techopen()">⌘</span> <span id="test" onClick="entopen()">☊</span> <span id="test" onClick="configopen()">⚙</span> <a href="exit0.html"  target="_blank" style="color:black;">⁝⁝⁝</a> </b></h2></div>
+</style></head>
+<body bgcolor=white><div class="close";><!--⚙☰-->
+<h2><b> <span id="test" onClick="mailopen()">✉</span> <span id="test" onClick="infopen()">🕮</span> <span id="test" onClick="finopen()">$</span> <span id="test" onClick="prodopen()">✎</span> <span id="test" onClick="techopen()">⌘</span> <span id="test" onClick="entopen()">☊</span> <span id="test" onClick="configopen()">☰</span> <a href="exit0.html"  target="_blank" style="color:black;">⁝⁝⁝</a> </b></h2></div>
 <div id="weather" style="text-align:left;"></div><br><br><br><br>
 <div style="text-align:center;margin:0;">
 <h1><span style="color:blue;">C<span style="color:red;"><span id="Othm"></span><span style="color:orange;">m<span style="color:fuchsia;">b<span style="color:red;"><a href="txt.html" target="_blank">o</a><span style="color:green;">T<span style="color:red;">e<span style="color:blue;">c<span style="color:turquoise;">h<span style="color:orange;">n<span style="color:lime;">i<a href="game-0.html" target="_blank">.</a><span style="color:blue;">c<span style="color:red;">a</h1>
@@ -51,7 +50,7 @@ background-color: rgb(0,0,0); background-color:rgba(0,0,0,0.4);
 <option value="y ">Yahoo!</option>
 <option value="walf ">Wolfram</option>
 <option value="groups ">Usenet</option>
-</select></div><br><br><br><div id="joke"><br><div id="news"></div><div id="news2"></div><br><div id="sci"></div><br><div id="ent"></div>
+</select></div><br><br><br><br><div id="news"></div><div id="news2"></div><br><div id="sci"></div><br><div id="ent"></div>
 <div id="mdCfg" class="modal"><div class="modal-content"><div class="modal-body"><span class="close" onClick="closeModal()">❎</span>
 <h3>⚙️ Configuration 🛠</h3>
 Open search in new window: <input type="checkbox" name="Chk1" value="yes" CHECKED size="34" class="button2" style=""> <br>
@@ -210,7 +209,8 @@ if(data.weather[0].icon==="10d"||data.weather[0].icon==="10n"){wicon="️🌧";}
 if(data.weather[0].icon==="11d"||data.weather[0].icon==="11n"){wicon="🌩️";}
 if(data.weather[0].icon==="13d"||data.weather[0].icon==="13n"){wicon="❄️";}
 if(data.weather[0].icon==="50d"||data.weather[0].icon==="50n"){wicon="️🌫";}
-const weatherContent=`<b><a href="http://www.theweathernetwork.com" target="_blank" style="font-size:20px; color:black;">${name} &nbsp; ${wicon}</a></b><br>${temperature}°C • ${description}<br>${humidity}%ʀʜ • ${pres}kPa<br>${moon}</b>`;
+//const weatherContent=`<b><a href="http://www.theweathernetwork.com" target="_blank" style="font-size:20px; color:black;">${name} &nbsp; ${wicon}</a></b><br>${temperature}°C • ${description}<br>${humidity}%ʀʜ • ${pres}kPa<br>${moon}</b>`;
+const weatherContent=`<b><a href="https://noadsweather.com/?q=Halifax&lat=44.6427&lon=-63.5769&name=Halifax&region=Nova%20Scotia&country=Canada" target="_blank" style="font-size:20px; color:black;">${name} &nbsp; ${wicon}</a></b><br>${temperature}°C • ${description}<br>${humidity}%ʀʜ • ${pres}kPa<br>${moon}</b>`;
 weatherDiv.innerHTML=weatherContent;})
 .catch(error => {console.error('Err:', error); const weatherContent='Failed to get weather data<br><b>${moon}</b>';weatherDiv.innerHTML=weatherContent;});
 }

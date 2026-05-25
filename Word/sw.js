@@ -8,7 +8,7 @@ self.addEventListener('install', event => {
       './',
       './game-oldword.html'
       './game-oldword1.html'
-      './oldword.html'
+      './index.html'
       './CT-word.png'
     ]);
   })());

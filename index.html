@@ -54,7 +54,7 @@ background-color: rgb(0,0,0); background-color:rgba(0,0,0,0.4);
 <div id="mdCfg" class="modal"><div class="modal-content"><div class="modal-body"><span class="close" onClick="closeModal()">❎</span>
 <h3>⚙️ Configuration 🛠</h3>
 Open search in new window: <input type="checkbox" name="Chk1" value="yes" CHECKED size="34" class="button2" style=""> <br>
- Web search: <input type="radio" id="w1" name="web" value="goo"><label>Google </label> <input type="radio" id="w2" name="web" value="ddg" checked><label>DuckDuckGo </label> <input type="radio" id="w3" name="web" value="quant"><label>Quant </label> &nbsp; &nbsp; &nbsp; &nbsp; <br>
+ Web search: <input type="radio" id="w1" name="web" value="goo"><label>Google </label> <input type="radio" id="w2" name="web" value="ddg" checked><label>DuckDuckGo </label> <input type="radio" id="w3" name="web" value="stp"><label>StartPage </label> <input type="radio" id="w3" name="web" value="brv"><label>Brave </label> <input type="radio" id="w3" name="web" value="quant"><label>Quant </label> <input type="radio" id="w3" name="web" value="all"><label>ALL</label><br>
  Map search: <input type="radio" id="m1" name="map" value="goo" checked><label>Google </label> <input type="radio" id="m2" name="map" value="ddg"><label>DuckDuckGo </label> <input type="radio" id="m3" name="map" value="open"><label>OpenStreet</label><br>
 News search: <input type="radio" id="n1" name="nws" value="goo" checked><label>Google </label> <input type="radio" id="n2" name="nws" value="ddg"><label>DuckDuckGo </label> <input type="radio" id="n3" name="nws" value="quant"><label>Quant </label> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <br>
 Image search: <input type="radio" id="i1" name="img" value="goo" checked><label>Google </label> <input type="radio" id="i2" name="img" value="ddg"><label>DuckDuckGo </label> <input type="radio" id="i3" name="img" value="quant"><label>Quant </label> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <br>
@@ -282,8 +282,17 @@ else {return window.open(srchURL);}
 function Sweb(arg) {var srchURL='';
 if(document.input_box.web.value==="ddg"){srchURL='https://duckduckgo.com/?q= '+arg;}
 else if(document.input_box.web.value==="goo"){srchURL='https://google.com/search?q='+arg+' -ai';}
-else {srchURL='https://www.qwant.com/?t=web&q='+arg;}
-if (document.input_box.Chk1.checked==false) {return window.location=srchURL;} 
+else if(document.input_box.web.value==="brv"){srchURL='https://search.brave.com/search?q='+arg+'&source=web&lang=en-ca';} //https://search.brave.com/search?q=test%20plus&source=web&lang=en-ca
+else if(document.input_box.web.value==="stp"){srchURL='https://www.startpage.com/sp/search?query='+arg+'&lui=english&language=english';} //&sc=2sbbv9Ind9t9wJLFxwGeutDUHRxkXgOzG7wjLGUlyRlhFB0i89dfWwaJjS7yJae2MYhSn3BVcJeVgOJ9xGG59DdI7nF4wG1T&t=device&cat=web&segment=startpage.udog&abd=1&abe=1&qsr=all&qadf=none&with_date=
+else if(document.input_box.web.value==="quant") {srchURL='https://www.qwant.com/?t=web&q='+arg;}
+if (document.input_box.web.value==="all") {
+	srchURL='https://duckduckgo.com/?q= '+arg; window.open(srchURL);
+	srchURL='https://google.com/search?q='+arg+' -ai'; window.open(srchURL);
+	srchURL='https://search.brave.com/search?q='+arg+'&source=web&lang=en-ca'; window.open(srchURL);
+	srchURL='https://www.startpage.com/sp/search?query='+arg+'&lui=english&language=english'; window.open(srchURL);
+	srchURL='https://www.qwant.com/?t=web&q='+arg; window.open(srchURL);
+	}
+else if (document.input_box.Chk1.checked==false) {return window.location=srchURL;} 
 else {return window.open(srchURL);}
 }
 </script></html>
